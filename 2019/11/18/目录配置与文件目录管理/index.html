@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>目录配置与文件目录管理 | blog of themasterplan</title>
+  <meta name="description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目录配置与文件目录管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;filematch.jpg">
+<meta property="og:updated_time" content="2019-11-17T16:33:05.292Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;filematch.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13px;">JAVA</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" class="title">文件权限与用户组管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-17T16:16:20.000Z" itemprop="datePublished">2019-11-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" class="title">文件链接</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-17T16:15:31.000Z" itemprop="datePublished">2019-11-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="title">目录配置与文件目录管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">2019-11-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" class="title">磁盘与文件系统简介</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-17T16:12:54.000Z" itemprop="datePublished">2019-11-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" class="title">常用命令入门</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-17T16:11:48.000Z" itemprop="datePublished">2019-11-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录配置与文件目录管理"><span class="toc-number">1.</span> <span class="toc-text">目录配置与文件目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#使用符号形式"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">使用符号形式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#使用数字形式"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">使用数字形式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#exec-选项中的-符号"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">-exec 选项中的 + 符号</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#显示文件信息"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">显示文件信息</span></a></li></ol></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-目录配置与文件目录管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      目录配置与文件目录管理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="article-date">
+	  <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">2019-11-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.2k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 12(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="目录配置与文件目录管理"><a href="#目录配置与文件目录管理" class="headerlink" title="目录配置与文件目录管理"></a>目录配置与文件目录管理</h3><ul>
+<li><p>目录配置：可参考FHS标准</p>
+<ul>
+<li><code>/bin</code>:存放二进制文件，常用命令</li>
+<li><code>/boot</code>：系统启动项文件,内核</li>
+<li><code>/dev</code>:设备文件，硬盘等</li>
+<li><code>/etc</code>：配置文件</li>
+<li><code>/home</code>:用户家目录，每一个用户在/home下都有一个文件夹</li>
+<li><code>/lib</code>：链接库文件</li>
+<li><code>/media</code>：媒体自动挂载点，比如U盘，光盘等</li>
+<li><code>/mnt</code>：媒体挂载点，手动挂载</li>
+<li><code>/opt</code>：自定义软件安装处，默认安装处为/usr/local</li>
+<li><code>/root</code>：超级用户目录</li>
+<li><code>/sbin</code>：存放系统管理员所能执行的命令</li>
+<li><code>/tmp</code>：临时文件</li>
+<li><code>/usr</code>：类似于二层根目录</li>
+<li><code>/var</code>:存放缓存，日志，数据库文件；该文件夹需要分配的空间较大，因此在磁盘分区时挂载在/var的分区要大一些。</li>
+<li><code>/proc</code>：内存中的进程信息</li>
+<li><code>/sys</code>：硬件相关信息</li>
+</ul>
+</li>
+<li><p>文件与目录管理</p>
+<ul>
+<li><p>常用命令：</p>
+<ul>
+<li><code>cd ~</code>:切换到home;<code>cd -</code>:切换到上一次所在目录</li>
+<li><code>pwd</code>：打印当前目录</li>
+<li><code>basename 和 dirname</code>：分别获取当前路径的文件名和目录名</li>
+<li><code>touch xx</code>:若xx不存在，则创建一个新文件xx。若xx存在，把xx的修改时间改为当前。</li>
+<li><code>&gt; xx</code>：若文件不存在，则创建一个空文件xx；若文件存在，则清空现有文件xx(可用于清空大文件)。</li>
+<li><code>mkdir 目录名 目录名 目录名 ...</code></li>
+<li><code>mkdir -p test/{a,b,c}/{d,e}</code>:递归创建目录，分别在a,b,c三个目录下创建d,e两个目录。</li>
+<li><code>rmdir 目录名</code>:只能删除空目录</li>
+<li><code>rm -rf</code>目录:删除目录下所有东西（慎用<code>rm</code>）</li>
+<li><code>cp [选项] /PATH1/xx /PATH2/yy</code>:若yy是一个目录，则把文件xx拷贝到yy下；若yy不是一个目录，则把文件xx拷贝到PATH2目录下并<strong>重命名</strong>为yy。cp不能直接拷贝目录，需要加选项参数，<code>cp -rfp /目录1 /目录2 == cp -a /目录1 /目录2</code>：将目录1及其所有子目录及文件拷贝到目录2。参数：-r即递归，-f即强制,-p同时复制属性信息。</li>
+<li><code>mv [选项] /PATH1/xx /PATH2/yy</code>：若yy是一个目录，则把文件xx剪切到yy下；若yy不是一个目录，则把文件xx剪切到PATH2目录下并<strong>重命名</strong>为yy。例如<code>mv xx yy</code>:就是把xx重命名为yy。</li>
+<li><code>rename .log .logabc *</code>：重命名，把所有文件名中的<code>.log</code>改为<code>.logabc</code></li>
+</ul>
+</li>
+<li><p>关于执行文件路径的变量：执行程序必须在其所在目录下才能执行，亦可使用绝对路径调用，若要直接敲命令就可以执行，则需要设置PATH，把命令所在目录添加在PATH后面。</p>
+</li>
+<li><p>文件的三个时间属性:</p>
+<ul>
+<li><code>atime</code>:access time</li>
+<li><code>mtime</code>:modify time</li>
+<li><code>ctime</code>:change time</li>
+</ul>
+</li>
+<li><p>文件名规则：</p>
+<ul>
+<li>文件名最长255字节</li>
+<li>蓝色–&gt;目录；绿色–&gt;可执行文件；红色–&gt;压缩文件；浅蓝色–&gt;链接文件；黄色–&gt;设备文件；粉色–&gt;套接字文件；棕色–&gt;管道文件；灰色–&gt;其他文件</li>
+</ul>
+</li>
+<li><p>文件通配符：</p>
+<ul>
+<li><code>*</code>：匹配0个或多个字符</li>
+</ul>
+</li>
+<li><p><code>?</code>：匹配任意一个字符</p>
+<ul>
+<li><code>[1-5]</code>：匹配字符1,2,3,4,5</li>
+<li><code>[a-c]</code>：匹配字符a、A、b、B、c(没有C)。</li>
+<li><code>[A-C]</code>：匹配A，b，B，c，C</li>
+<li><code>[^abcd]</code>：匹配除abcd外的所有单个字母</li>
+<li><img src="filematch.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>文件内容查阅</p>
+<ul>
+<li><code>cat 文件名</code>:显示所有文件内容，适合查看小文件，参数-n显示行数。<code>cat -n 文件名== nl 文件名</code>。</li>
+<li><code>tac</code>：从最后一行显示，倒数显示。</li>
+<li><code>more/less 文件名</code>:按空格一屏一屏地显示，按回车一行一行地显示。同时在文档下方输入<code>/字符串</code>即可查找文档中的字符串。</li>
+<li><code>head -n 21 文件名</code>:查看文件的前21行</li>
+<li><code>tail -n 21 文件名</code>:查看文件的尾21行；参数-f,监测日志，实时监测日志的变化。</li>
+<li><code>od</code>:查看非文本文档，比如二进制文件。</li>
+</ul>
+</li>
+<li><p>命令与文件的查询：</p>
+<ul>
+<li><p><code>which -a 命令</code>:在PATH路径中搜寻命令位置</p>
+</li>
+<li><p><code>whereis 命令</code>:返回命令路径及其帮助文档的路径；参数-b只返回命令路径。</p>
+</li>
+<li><p><code>locate 字符串</code>:在<code>/var/lib/mlocate/mlocate.db</code>中查询所有文件名中包含该字符串的文件并返回，该数据库每天定时更新，亦可通过<code>updatedb</code>更新。</p>
+</li>
+<li><p><code>find [paths] [expression] [actions]</code>:</p>
+<ul>
+<li><p>若不写paths则默认在当前目录下递归查找；</p>
+</li>
+<li><p>expression:</p>
+<ol>
+<li>根据文件名检索</li>
+</ol>
+<p>find 命令中的 <code>-name</code> 选项可以根据文件名称进行检索（<strong>区分大小写</strong>）。如需要忽略文件名中的大小写，可以使用 <code>-iname</code> 选项。</p>
+<p><code>-name</code> 和 <code>-iname</code> 两个选项都支持 <strong>wildcards</strong> 。如：</p>
+<ul>
+<li><code>?</code> 可以表示任意一个单一的符号</li>
+<li><code>*</code> 可以表示任意数量（包括 0）的未知符号</li>
+</ul>
+<p><code>find /usr -name &#39;*.txt&#39;</code> 查找 /usr 目录下所有文件名以 <code>.txt</code> 结尾的文件<br><code>find /usr -name &#39;????&#39;</code> 查找 /usr 目录下所有文件名刚好为 4 个字符的文件</p>
+<p>有些时候，你需要在搜索时匹配某个文件或目录的<strong>完整路径</strong>，而不仅仅是匹配文件名。可以使用 <code>-path</code> 或 <code>-ipath</code> 选项。</p>
+<p>如查找 /usr 下所有文件名以 <code>.txt</code> 结尾的文件或目录，且该文件的父目录必须是 <code>src</code>。可以使用以下命令：<br> <code>find /usr -path &#39;*/src/*.txt&#39;</code></p>
+<ol start="2">
+<li>根据文件类型检索</li>
+</ol>
+<p>如果只想搜索得到文件<strong>或</strong>目录，即不想它们同时出现在结果中。可以使用 <code>-type</code> 选项指定文件类型。</p>
+<p><code>-type</code> 选项最常用的参数如下：</p>
+<ul>
+<li>f: 文件</li>
+<li>d: 目录</li>
+<li>l: 符号链接</li>
+</ul>
+<p><code>find /usr -type d -name &#39;python*&#39;</code> 检索 /usr 下所有文件名以 <code>python</code> 开头的<strong>目录</strong></p>
+<ol start="3">
+<li>检索空文件</li>
+</ol>
+<p>find 命令支持 <code>-empty</code> 选项用来检索<strong>为空</strong>的文件或目录。空文件即文件里没有任何内容，空目录即目录中没有任何文件或子目录。</p>
+<p><code>find ~ -type d -empty</code> 检索用户主目录下所有的空目录</p>
+<ol start="4">
+<li>反义匹配</li>
+</ol>
+<p>find 命令也允许用户对当前的匹配条件进行<strong>“反义”</strong>（类似于<strong>逻辑非</strong>操作）。</p>
+<p>如需要检索 /usr 下所有文件名<strong>不</strong>以 <code>.txt</code> 为后缀的文件。可以使用以下命令：<br> <code>find /usr -type f ! -name &#39;*.txt&#39;</code></p>
+<p>也可以“翻转”任何其他的筛选条件，如：<br> <code>find /usr -type f ! -empty</code> 检索 /usr 下所有内容不为空的文件</p>
+<ol start="5">
+<li>根据文件的所属权检索</li>
+</ol>
+<p>为了检索归属于特定用户的文件或目录，可以使用 <code>-user</code> 选项。</p>
+<p><code>find / -type f -user starky</code> 检索根目录下所有属主为 starky 的文件</p>
+<p>类似于 <code>-user</code>选项，<code>-group</code> 选项则可以根据文件或目录的<strong>属组</strong>进行检索。</p>
+<ol start="6">
+<li>根据时间日期进行检索</li>
+</ol>
+<p>有些时候，需要根据文件创建或修改的时间进行检索。</p>
+<p>Linux 系统中，与文件相关联的时间参数有以下三种：</p>
+<ul>
+<li>修改时间（Modification time）：最后一次文件内容有过更改的时间点</li>
+<li>访问时间（Access time）：最后一次文件有被读取过的时间点</li>
+<li>变更时间（Change time）：最后一次文件有被<strong>变更</strong>过的时间点（如内容被修改，或权限等 metadata 被修改）</li>
+</ul>
+<p>与此对应的是 find 命令中的 <code>-mtime</code>，<code>-atime</code> 和 <code>-ctime</code> 三个选项。</p>
+<p>这三个选项的使用遵循以下示例中的规则：</p>
+<ul>
+<li><code>-mtime 2</code>：该文件 2 天前被修改过</li>
+<li><code>-mtime -2</code>：该文件 2 天<strong>以内</strong>被修改过</li>
+<li><code>-mtime +2</code>：该文件距离上次修改已经<strong>超过</strong> 2 天时间</li>
+</ul>
+<p><code>find /usr -type f -mtime 2</code> 检索 /usr 下两天前被修改过的文件</p>
+<p>如果觉得 <code>-mtime</code> 等选项以<strong>天</strong>为单位时间有点长，还可以使用 <code>-mmin</code>，<code>-amin</code>，<code>-cmin</code> 三个选项：<br> <code>find /usr -type f -mtime +50 -mtime -100</code> 检索 /usr 下 50 到 100 天之前修改过的文件<br> <code>find /usr -type f -mtime 2 -amin 5</code> 检索 /usr 下两天前被修改过且 5 分钟前又读取过的文件</p>
+<ol start="7">
+<li>根据文件大小检索</li>
+</ol>
+<p><code>-size</code> 选项允许用户通过文件大小进行搜索（只适用于文件，目录没有大小……）。</p>
+<p>表示文件大小的单位由以下字符组成：</p>
+<ul>
+<li><code>c</code>：字节</li>
+<li><code>k</code>：Kb</li>
+<li><code>M</code>：Mb</li>
+<li><code>G</code>：Gb</li>
+</ul>
+<p>另外，还可以使用 <code>+</code> 或 <code>-</code> 符号表示<strong>大于</strong>或<strong>小于</strong>当前条件。</p>
+<p><code>find / -size +1G</code> 检索文件大小高于 1 GB 的文件</p>
+<ol start="8">
+<li>根据文件权限检索</li>
+</ol>
+<p>find 命令可以使用 <code>-perm</code> 选项以文件权限为依据进行搜索。</p>
+<h6 id="使用符号形式"><a href="#使用符号形式" class="headerlink" title="使用符号形式"></a>使用符号形式</h6><p>如需要检索 /usr 目录下权限为 <code>rwxr-xr-x</code> 的文件，可以使用以下命令：<br> <code>find /usr -perm u=rwx,g=rx,o=rx</code></p>
+<p>搜索 /usr 目录下所有权限为 <code>r-xr-xr-x</code>（即系统中的所有用户都只有读写权限）的文件和目录，可以使用以下命令：<br> <code>find /usr -perm a=rx</code></p>
+<p>很多时候，我们只想匹配文件权限的一个<strong>子集</strong>。比如，检索可以直接被任何用户执行的文件，即只关心文件的执行权限，而不用管其读写权限是什么。</p>
+<p>上述的需求可以通过以下命令实现：<code>find / -type f -perm /a=x</code><br> 其中 <code>a=x</code> 前面的 <code>/</code> 符号即用来表示只匹配权限的某个子集（执行权限），而不用关心其他权限的具体设置。</p>
+<h6 id="使用数字形式"><a href="#使用数字形式" class="headerlink" title="使用数字形式"></a>使用数字形式</h6><p><code>-perm</code> 选项也支持数字形式的文件权限标记。</p>
+<p><code>find /usr -perm 644</code> 搜索 /usr 目录下权限为 <strong>644</strong>（即 <code>rwxr-xr-x</code>）的文件</p>
+<ol start="9">
+<li>限制遍历的层数</li>
+</ol>
+<p>find 命令默认是以<strong>递归</strong>的方式检索项目的，这有时候会导致得到的结果数量非常巨大。可以使用 <code>-maxdepth</code> 限制 find 命令递归的层数。</p>
+<p><code>find / -maxdepth 3</code> 搜索时向下递归的层数最大为 3</p>
+<ol start="10">
+<li>逻辑组合</li>
+</ol>
+<p>在之前的例子中有出现多个搜索条件的<strong>组合</strong>以及对某个搜索条件的<strong>反转</strong>。<br> 实际上 find 命令支持 <strong>“and”</strong> 和 <strong>“or”</strong> 两种逻辑运算，对应的命令选项分别是 <code>-a</code> 和 <code>-o</code>。通过这两个选项可以对搜索条件进行更复杂的组合。</p>
+<p>此外还可以使用<strong>小括号</strong>对搜索条件进行<strong>分组</strong>。注意 <code>find</code> 命令中的小括号常需要用<strong>单引号</strong>包裹起来。因小括号在 Shell 中有特殊的含义。</p>
+<p>如检索 /usr 下文件名以 <code>python</code> 开头且类型为目录的文件<br> <code>find /usr -type d -name &#39;python*&#39;</code></p>
+<p>该命令等同于：<br> <code>find /usr -type d -a -name &#39;python*&#39;</code></p>
+<p>更复杂的组合形式如：<br> <code>find / &#39;(&#39; -mmin -5 -o -mtime +50 &#39;)&#39; -a -type f</code></p>
+</li>
+<li><p>对搜索结果执行actions：</p>
+<ol>
+<li>删除文件</li>
+</ol>
+<p><code>-delete</code> 选项可以用来删除搜索到的文件和目录。</p>
+<p>如删除 home 目录下所有的空目录：<br> <code>find ~ -type d -empty -delete</code></p>
+<ol start="2">
+<li>执行自定义命令</li>
+</ol>
+<p><code>-exec</code> 选项可以对搜索到的结果执行特定的命令。</p>
+<p>如需要将 home 目录下所有的 MP3 音频文件复制到移动存储设备（假设路径是 <code>/media/MyDrive</code>），可使用下面的命令：<br> <code>find ~ -type f -name &#39;*.mp3&#39; -exec cp {} /media/MyDrive &#39;;&#39;</code></p>
+<p>其中的<strong>大括号</strong>（<code>{}</code>）作为检索到的文件的 <strong>占位符</strong> ，而分号（ <code>;</code>）作为命令结束的标志。因为分号是 Shell 中有特殊含义的符号，所以需要使用单引号括起来。<br> 每当 find 命令检索到一个符合条件的文件，会使用其完整路径取代命令中的 <code>{}</code>，然后执行 <code>-exec</code> 后面的命令一次。</p>
+<p>另一个很重要的用法是，在多个文件中检索某个指定的字符串。<br> 如在用户主目录下的所有文件中检索字符串 <code>hello</code> ，可以使用如下命令：<br> <code>find ~ -type f -exec grep -l hello {} &#39;;&#39;</code></p>
+<h6 id="exec-选项中的-符号"><a href="#exec-选项中的-符号" class="headerlink" title="-exec 选项中的 + 符号"></a>-exec 选项中的 + 符号</h6><p>创建 Gzip 格式的压缩文件的命令为：<code>tar -czvf filename.tar.gz</code></p>
+<p>现在假设需要将用户主目录下所有的 MP3 文件添加到压缩包 <code>music.tar.gz</code> 中，直观的感觉是，其命令应为如下形式：<br> <code>find ~ -type f -name &#39;*.mp3&#39; -exec tar -czvf music.tar.gz {} &#39;;&#39;</code></p>
+<p>实际情况是，这样得到的 <code>music.tar.gz</code> 其实只包含一个 MP3 文件。<br> 原因是 find 命令<strong>每次</strong>发现一个音频文件，都会再执行一次 <code>-exec</code> 选项后面的压缩命令。导致先前生成的压缩包被覆盖。</p>
+<p>可以先让 find 命令检索出所有符合条件的音频文件，再将得到的<strong>文件列表</strong>传递给后面的压缩命令。完整的命令如下：<br> <code>find ~ -type f -name &#39;*.mp3&#39; -exec tar -czvf music.tar.gz {} +</code></p>
+<h6 id="显示文件信息"><a href="#显示文件信息" class="headerlink" title="显示文件信息"></a>显示文件信息</h6><p>如果想浏览搜索到的文件（目录）的详细信息（如权限和大小等），可以直接使用 <code>-ls</code> 选项。</p>
+<p><code>find / -type file -size +1G -ls</code> 浏览所有 1G 以上大小的文件的详细信息</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" title="目录配置与文件目录管理" target="_blank" rel="external">http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" title="文件链接"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" title="磁盘与文件系统简介"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2019 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
