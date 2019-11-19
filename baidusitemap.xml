@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/2019/11/19/Java%E9%AB%98%E7%BA%A7/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/2019/11/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8ASHELL%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2019-11-19</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2019-11-19</lastmod>
   </url>  <url>
@@ -20,9 +26,6 @@
     <lastmod>2019-11-17</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/2019/11/18/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2019-11-17</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/2019/11/17/Java-final%E5%85%B3%E9%94%AE%E5%AD%97/</loc>
     <lastmod>2019-11-17</lastmod>
   </url>
 </urlset>
