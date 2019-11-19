@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2019-11-19T10:26:32.451Z</updated>
+  <updated>2019-11-19T10:32:40.714Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://thmasterplan.cn/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     <id>http://thmasterplan.cn/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/</id>
     <published>2019-11-19T10:25:55.000Z</published>
-    <updated>2019-11-19T10:26:32.451Z</updated>
+    <updated>2019-11-19T10:32:40.714Z</updated>
     
     <content type="html"><![CDATA[<h3 id="JAVA位运算符"><a href="#JAVA位运算符" class="headerlink" title="JAVA位运算符"></a>JAVA位运算符</h3><ol><li>&amp; ：按位与。同时为1才为1，否则为0。</li><li>| ：按位或。有一个为1则为1。</li><li>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</li><li>^ ：按位异或。不同为1，相同为0。<ul><li>一个数据对相同的数据异或两次，值不变,常应用于加密。即a^b^b == a。</li><li>使用异或实现两个变量值交换。a = a^b; b = a^b; a = a^b。</li></ul></li><li>&lt;&lt; ：左移。左操作数乘以2的n次幂。n是右操作数，即左移的位数。右边空出两位补0，左边两位被挤掉。</li><li><strong>&gt;&gt;</strong> ：右移。左操作数除以2的n次幂。n是右操作数，即右移的位数。左边空出两位用符号位填充，右边两位被挤掉。<ul><li>例如：-32 &gt;&gt; 2 ：原码：10000000000000000000000000100000，反码：11111111111111111111111111011111，补码：11111111111111111111111111100000。右移后为：11111111111111111111111111111000。求得原码为：10000000000000000000000000001000。得-8。</li></ul></li><li><strong>&gt;&gt;&gt;</strong> ：<strong>无符号右移</strong>。左边空出的位置用0补全。例如-32 &gt;&gt;&gt; 2变成一个很大的正数。</li><li>位运算均针对<strong>补码</strong>进行。正数的符号位为0，原、反、补码均为其本身；负数的符号位为1，其反码为对原码除符号位其余所有位求反，补码为对反码+1。</li><li>对于有符号数，计算机中存储的是<strong>补码</strong>。</li></ol>]]></content>
     
@@ -36,6 +36,8 @@
     
     </summary>
     
+    
+      <category term="Java" scheme="http://thmasterplan.cn/categories/Java/"/>
     
     
       <category term="Java" scheme="http://thmasterplan.cn/tags/Java/"/>
