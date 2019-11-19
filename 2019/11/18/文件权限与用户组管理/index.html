@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="Linux的文件权限与用户组管理 文件权限：-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log:  第1位： -：表示普通文件； d：目录 b：设备文件（块文件，即可以用来存储的设备文件） c：设备文件（字符文件，不能用来存储的设备文件） l：软链接（快捷方式）   p：管道文件pipe s：套接字文件socket   后9位：r可读，w可写，x可执行。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-17T16:32:16.227Z">
+<meta property="og:updated_time" content="2019-11-19T05:04:52.858Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/index.html">
@@ -455,10 +455,7 @@
 </ul>
 </li>
 <li>1表示该文件的硬链接数</li>
-</ul>
-</li>
-<li><p>第一个root表示该文件的所有者</p>
-<ul>
+<li>第一个root表示该文件的所有者</li>
 <li>第二个root表示该文件所属的组</li>
 <li>4.0K表示该文件的大小</li>
 <li>后面为最后一次修改的时间戳和文件名</li>
@@ -494,7 +491,7 @@
 <li><p>Linux组的类别：</p>
 <ul>
 <li>用户的主要组：用户必须属于一个且只有一个主组，组名同用户名，且仅包含用户自己。</li>
-<li>用户的附加组：一个用户可用属于0或多个附加组。</li>
+<li>用户的附加组：一个用户可属于0或多个附加组。</li>
 <li><code>id 用户名</code>：查看用户的uid、gid（主组）、groups的id。管理员root的uid和gid为0。</li>
 </ul>
 </li>
@@ -504,6 +501,13 @@
 <li><code>/etc/group</code>：组及其属性信息。</li>
 <li><code>/etc/shadow</code>：用户密码及其相关属性。</li>
 <li><code>/etc/gshadow</code>：组密码及其相关信息。</li>
+</ul>
+</li>
+<li><p>用户、组的增删改：</p>
+<ul>
+<li><code>useradd</code>，<code>userdel</code>，<code>usermod</code></li>
+<li><code>groupadd</code>，<code>groupdel</code>，<code>groupmod</code></li>
+<li><code>/etc/default/useradd</code>：创建用户时的默认设置</li>
 </ul>
 </li>
 <li><p>文件与目录的默认权限与隐藏权限</p>
