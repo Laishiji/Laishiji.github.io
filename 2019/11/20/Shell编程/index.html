@@ -19,14 +19,14 @@
   
   <title>Shell编程 | Blog Of TheMasterplan</title>
   <meta name="description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
-<meta name="keywords" content="shell编程,Linux">
+<meta name="keywords" content="Linux,shell编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell编程">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;20&#x2F;Shell%E7%BC%96%E7%A8%8B&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-21T08:04:56.116Z">
+<meta property="og:updated_time" content="2019-11-21T12:05:03.432Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/20/Shell%E7%BC%96%E7%A8%8B/index.html">
@@ -46,7 +46,7 @@
 </head>
 
 
-<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -423,10 +423,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 708(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 984(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
 	
 
       </div>
@@ -511,7 +511,43 @@
 <ul>
 <li>短路与：<code>cmd1 &amp;&amp; cmd2</code>：如果<code>cmd1</code>结果失败，不执行<code>cmd2</code>；如果<code>cmd1</code>成功，执行<code>cmd2</code>。</li>
 <li>短路或：<code>cmd1 || cmd 2</code>：如果<code>cmd1</code>成功，不执行<code>cmd2</code>；如果<code>cmd1</code>失败，执行<code>cmd2</code>。</li>
-<li><code>cmd1 &amp;&amp; cmd2 || cmd3</code>，<code>cmd1</code>失败，则执行<code>cmd3</code>；<code>cmd1</code>成功，则执行<code>cmd2</code>，根据<code>cmd2</code>的结果进一步判断是否执行<code>cmd3</code>。</li>
+<li><code>cmd1 &amp;&amp; cmd2 || cmd3</code>，<code>cmd1</code>失败，则执行<code>cmd3</code>；<code>cmd1</code>成功，则执行<code>cmd2</code>，根据<code>cmd2</code>的结果进一步判断是否执行<code>cmd3</code>，一般来说<code>cmd2</code>是执行成功的所有不会再进一步执行<code>cmd3</code>，因而该写法类似于其他语言中的<code>x ? y : z</code>。</li>
+</ul>
+</li>
+<li><p>条件测试：</p>
+<ul>
+<li><p><code>test EXPRESSION</code>或者<code>[ EXPRESSION ]</code>或者<code>[[ EXPRESSION ]]</code>，<code>EXPRESSION</code><strong>前后必须要有空格</strong>，其中<strong><code>[[]]</code>语法支持正则表达式</strong>。</p>
+</li>
+<li><p><code>help test</code>：查看相关选项</p>
+</li>
+<li><p>脚本练习：查看磁盘最大使用率</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var=`df | grep '/dev/sda' | sort -rn | head -1 | tr -s ' ' % | cut -d% -f5`</span><br><span class="line">test $var -gt 80 &amp;&amp; echo "disk is almost full" || echo "the use rate of the disk is $var"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bash的数值测试：</p>
+<ul>
+<li><code>-v VAR</code>：变量VAR是否设置</li>
+<li><code>-gt</code>：是否&gt;</li>
+<li><code>-ge</code>：是否&gt;=</li>
+<li><code>-eq</code>：是否=</li>
+<li><code>-ne</code>：是否!=</li>
+<li><code>-lt</code>：是否&lt;</li>
+<li><code>-le</code>：是否&lt;=</li>
+</ul>
+</li>
+<li><p>bash的字符串测试：</p>
+<ul>
+<li><code>=</code>：是否等于</li>
+<li><code>&gt;</code>：ASCII码值是否大于</li>
+<li><code>&lt;</code></li>
+<li><code>!=</code></li>
+<li><code>=~</code>：左侧字符串是否能够被右侧的PATTERN所匹配，例如<code>[[ &#39;abcde&#39; =~ [[:digit:]] ]]</code>，返回<code>false</code>，因为左侧字符串不包含数字。</li>
+</ul>
+</li>
+<li><p>bash的组合测试条件</p>
+<ul>
+<li>判断某文件是否是<code>.sh</code>结尾并且可执行，<code>file=./test.sh; [[ $file =~ \.sh$ ]] &amp;&amp; [ -x $file ]</code> ，也可以这样写<code>[ &quot;$file =~ \.sh$&quot; -a &quot;-x $file&quot; ]</code>即使用<code>-a</code>选项。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
