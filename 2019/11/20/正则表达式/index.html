@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="元字符分类：字符匹配、匹配次数、位置锚定、分组字符匹配 .：匹配任意单个字符 \：转义字符，例如\.表示匹配.本身而非任意单个字符。 []：匹配指定范围内任意单个字符 [^]：匹配指定范围外的任意单个字符 [:alnum:]：字母和数字 [:alpha:]：任何英文大小写字符 [:lower:]：小写字母 [:upper:]：大写字母 [:digit:]：十进制数字 [:xdigit:]：十六进制">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-20T09:04:26.161Z">
+<meta property="og:updated_time" content="2019-11-22T06:19:03.720Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
@@ -372,7 +372,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符分类：字符匹配、匹配次数、位置锚定、分组"><span class="toc-number">1.</span> <span class="toc-text">元字符分类：字符匹配、匹配次数、位置锚定、分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符匹配"><span class="toc-number">1.1.</span> <span class="toc-text">字符匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数"><span class="toc-number">1.2.</span> <span class="toc-text">匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置锚定：定位出现的位置"><span class="toc-number">1.3.</span> <span class="toc-text">位置锚定：定位出现的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组："><span class="toc-number">1.4.</span> <span class="toc-text">分组：\(\)</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符分类：字符匹配、匹配次数、位置锚定、分组"><span class="toc-number">1.</span> <span class="toc-text">元字符分类：字符匹配、匹配次数、位置锚定、分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符匹配"><span class="toc-number">1.1.</span> <span class="toc-text">字符匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数"><span class="toc-number">1.2.</span> <span class="toc-text">匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置锚定：定位出现的位置"><span class="toc-number">1.3.</span> <span class="toc-text">位置锚定：定位出现的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组："><span class="toc-number">1.4.</span> <span class="toc-text">分组：\(\)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展的正则表达式：-去掉"><span class="toc-number">1.5.</span> <span class="toc-text">扩展的正则表达式： 去掉\</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -423,7 +423,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 458(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 468(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -472,7 +472,7 @@
 <li>示例：<code>\(string1\(string2\)\)</code>：<code>\1</code>：<code>string1\(string2\)</code>；<code>\2</code>：<code>string2</code>。</li>
 <li>例如：<code>\(root\)\{1,3\}</code>：可匹配1-3个<code>root</code>字符串。</li>
 </ul>
-
+<h4 id="扩展的正则表达式：-去掉"><a href="#扩展的正则表达式：-去掉" class="headerlink" title="扩展的正则表达式： 去掉\"></a>扩展的正则表达式： 去掉<code>\</code></h4>
       
     </div>
     <div class="article-footer">

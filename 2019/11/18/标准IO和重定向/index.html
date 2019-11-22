@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&amp;gt;；例如hostname &amp;gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&amp;gt;&amp;gt;则">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-17T16:30:58.678Z">
+<meta property="og:updated_time" content="2019-11-22T05:58:12.301Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
@@ -423,7 +423,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 374(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 397(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -457,6 +457,7 @@
 <li>使用管道<ul>
 <li>管道<code>命令1 | 命令2 | 命令3 | ...</code>：将命令1的STDOUT发送给命令2的STDIN，再将命令2的STDOUT发送给命令3的STDIN。。。</li>
 <li>STDERR默认不能通过管道转发，可利用<code>|&amp;</code>实现。</li>
+<li>管道线后面的命令在一个subbash中执行，执行完就退出该subbash。</li>
 <li>例子：<code>echo {1..100} | tr &#39; &#39; + | bc</code>：计算1到100的和。</li>
 </ul>
 </li>

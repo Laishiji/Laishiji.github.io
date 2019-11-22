@@ -19,14 +19,14 @@
   
   <title>Shell编程 | Blog Of TheMasterplan</title>
   <meta name="description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
-<meta name="keywords" content="Linux,shell编程">
+<meta name="keywords" content="shell编程,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell编程">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;20&#x2F;Shell%E7%BC%96%E7%A8%8B&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-21T12:05:03.432Z">
+<meta property="og:updated_time" content="2019-11-22T07:36:04.470Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/20/Shell%E7%BC%96%E7%A8%8B/index.html">
@@ -372,7 +372,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、条件分支"><span class="toc-number">4.</span> <span class="toc-text">四、条件分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、脚本安全"><span class="toc-number">5.</span> <span class="toc-text">五、脚本安全</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -423,10 +423,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 984(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4(minutes)</span>
 	
 
       </div>
@@ -459,7 +459,7 @@
 </li>
 <li><p><code>变量BASHPID</code>：当前bash进程的pid</p>
 </li>
-<li><p><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>。</p>
+<li><p><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>，当命令列表执行完毕，将会退出subbash。要想退出当前进程，则需使用<code>{命令列表}</code>。</p>
 </li>
 <li><p>环境变量：子进程，父进程均可访问</p>
 <ul>
@@ -546,10 +546,48 @@
 <li><p>bash的组合测试条件</p>
 <ul>
 <li>判断某文件是否是<code>.sh</code>结尾并且可执行，<code>file=./test.sh; [[ $file =~ \.sh$ ]] &amp;&amp; [ -x $file ]</code> ，也可以这样写<code>[ &quot;$file =~ \.sh$&quot; -a &quot;-x $file&quot; ]</code>即使用<code>-a</code>选项。</li>
+<li><code>[ EXPRESSION1 -a EXPRESSION2 ]</code>表示与，<code>[ EXPRESSION1 -o EXPRESSION2 ]</code>表示或。</li>
 </ul>
 </li>
 </ul>
 </li>
+<li><p><code>read</code>：从标准输入读一行，例如<code>read -p &quot; Please input your name&quot; NAME</code>，则用户输入的值赋给<code>NAME</code>变量。</p>
+<ul>
+<li><code>-p</code>：指定要显示的提示</li>
+<li><code>-s</code>：静默输入，一般用于密码</li>
+<li><code>-n N</code>：指定输入的字符长度N</li>
+<li><code>-d &#39;字符&#39;</code>：输入中出现该字符即结束输入。</li>
+<li><code>-t N</code>：超时时长N秒</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、条件分支"><a href="#四、条件分支" class="headerlink" title="四、条件分支"></a>四、条件分支</h3><ul>
+<li><pre><code class="shell">if [ EXPRESSION ];then
+    条件为真的分支代码
+else
+    条件为假的分支代码
+fi
+
+<span class="meta">#</span><span class="bash">或者</span>
+
+if [  ];then
+   xxxxx
+elif [  ];then
+   xxxxx
+elif [  ];then
+   xxxxx
+.......
+else 
+   yyyyy
+fi
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```shell</span><br><span class="line">  case $NUM in</span><br><span class="line">  1|3|5)</span><br><span class="line">     cmd1</span><br><span class="line">     ;;</span><br><span class="line">  2|4|6)</span><br><span class="line">     cmd2</span><br><span class="line">     ;;</span><br><span class="line">  ...</span><br><span class="line">  *)</span><br><span class="line">     cmdN</span><br><span class="line">     ;;</span><br><span class="line">  esac</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h3 id="五、脚本安全"><a href="#五、脚本安全" class="headerlink" title="五、脚本安全"></a>五、脚本安全</h3><ul>
+<li><code>set -u</code>：在脚本前加上该语句，在引用一个未设置的变量时，显示错误信息，并且不执行含有未设置变量的语句。</li>
+<li><code>set -e</code>：如果一个命令执行失败就退出脚本。</li>
 </ul>
 
       
