@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>文本处理sed | Blog Of TheMasterplan</title>
-  <meta name="description" content="[TOC] 一、介绍二、用法三、高级用法">
-<meta name="keywords" content="Linux,文本处理">
+  <title>压缩与解压缩 | Blog Of TheMasterplan</title>
+  <meta name="description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容    .gz后缀  gzip： -c：同compress">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文本处理sed">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed&#x2F;index.html">
+<meta property="og:title" content="压缩与解压缩">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="[TOC] 一、介绍二、用法三、高级用法">
+<meta property="og:description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容    .gz后缀  gzip： -c：同compress">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-23T02:55:24.730Z">
+<meta property="og:updated_time" content="2019-11-23T02:50:24.218Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -235,7 +235,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -249,7 +249,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -260,7 +260,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -274,7 +274,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -285,7 +285,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -299,7 +299,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -310,7 +310,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -324,7 +324,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -335,7 +335,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -349,7 +349,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -368,16 +368,25 @@
 
   
   
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、压缩、解压缩工具"><span class="toc-number">1.</span> <span class="toc-text">一、压缩、解压缩工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、打包-存档-和解包工具"><span class="toc-number">2.</span> <span class="toc-text">二、打包(存档)和解包工具</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
-  <article id="post-文本处理sed" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-压缩与打包" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      文本处理sed
+      压缩与解压缩
     </h1>
   
 
@@ -385,8 +394,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="article-date">
-	  <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
+	<a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="article-date">
+	  <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
 	</a>
 </span>
         
@@ -398,7 +407,7 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link" href="/tags/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/" rel="tag">文本处理</a>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
   </span>
 
 
@@ -411,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 12(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 396(words)</span>
 	
 	
 
@@ -422,8 +431,106 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><h3 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h3><h3 id="三、高级用法"><a href="#三、高级用法" class="headerlink" title="三、高级用法"></a>三、高级用法</h3>
+        <h3 id="一、压缩、解压缩工具"><a href="#一、压缩、解压缩工具" class="headerlink" title="一、压缩、解压缩工具"></a>一、压缩、解压缩工具</h3><ul>
+<li><p><code>.Z</code>后缀</p>
+<ul>
+<li><p><code>compress</code>：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道</p>
+<ul>
+<li><code>-c</code>：结果输出至标准输出，不删除原文件。常见用法：<code>compress -c file &gt; file.Z</code></li>
+<li><code>-v</code>：显示详情</li>
+</ul>
+</li>
+<li><p><code>uncompress file.Z</code></p>
+</li>
+<li><p><code>zcat file.Z</code>：不显示解压缩的前提下查看文本文件内容</p>
+</li>
+</ul>
+</li>
+<li><p><code>.gz</code>后缀</p>
+<ul>
+<li><code>gzip</code>：<ul>
+<li><code>-c</code>：同<code>compress -c</code></li>
+<li><code>-#</code>：#取1-9，指定压缩比，值越大压缩比越大</li>
+</ul>
+</li>
+<li><code>gunzip file.gz</code></li>
+<li><code>zcat file.Z</code></li>
+</ul>
+</li>
+<li><p><code>.bz2</code>后缀</p>
+<ul>
+<li><p><code>bzip2</code>：</p>
+<ul>
+<li><code>-k</code>：</li>
+<li><code>-#</code>：默认为9</li>
+</ul>
+</li>
+<li><p><code>bunzip2 file.bz2</code></p>
+</li>
+<li><p><code>bzcat file.bz2</code></p>
+</li>
+</ul>
+</li>
+<li><p><code>.xz</code></p>
+<ul>
+<li><p><code>xz</code>：</p>
+<ul>
+<li><code>-k</code>：</li>
+<li><code>-#</code>：默认为6</li>
+</ul>
+</li>
+<li><p><code>unxz</code></p>
+</li>
+<li><p><code>xzcat</code></p>
+</li>
+</ul>
+</li>
+<li><p>一般来说压缩比：<code>xz &gt; bzip2 &gt; gz &gt; compress</code>，均不能压缩目录</p>
+</li>
+<li><p><code>.zip</code></p>
+<ul>
+<li><code>zip</code>：支持压缩目录</li>
+<li><code>unzip</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="二、打包-存档-和解包工具"><a href="#二、打包-存档-和解包工具" class="headerlink" title="二、打包(存档)和解包工具"></a>二、打包(存档)和解包工具</h3><ul>
+<li><p><code>tar</code>常见用法：具体选项见man帮助</p>
+<ul>
+<li><p>打包，保留权限：<code>tar -cpvf xxx.tar file1 file2 file3...</code></p>
+</li>
+<li><p>追加文件至xxx.tar：<code>tar -rf xxx.tar file1 file2..</code>注：不支持对压缩文件追加</p>
+</li>
+<li><p>查看包中的文件列表：<code>tar -tf xxx.tar</code></p>
+</li>
+<li><p>解包<code>tar -xf xxx.tar [可选：-C /PATH]</code></p>
+</li>
+<li><p>结合压缩工具，打包并压缩：</p>
+<ul>
+<li><code>tar zcvf xxx.tar.gz [可选：/PATH]</code>；<code>.tar.gz</code>也可写成<code>.tgz</code></li>
+<li><code>tar jcvf xxx.tar.bz2 [可选：/PATH]</code></li>
+<li><code>tar Jcvf xxx.tar.xz [可选：/PATH]</code></li>
+</ul>
+</li>
+<li><p><code>--eclude=/PATH/文件名</code>：打包时排除某文件：<code>tar -zcvf xxx.tgz --exclude=/a/b/abc.txt</code></p>
+</li>
+<li><p><code>-T</code>：指定打包列表；<code>-X</code>：指定排除列表</p>
+<ul>
+<li><code>tar -zcvf xxx.tgz -T /a/list -X /a/excludeList</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>split</code>：分割一个文件为多份小文件</p>
+<ul>
+<li><code>split -b SIZE  xxx.tgz yyy</code>：<code>yyy</code>为切割后的文件前缀，SIZE为每份大小</li>
+<li>合并：<code>cat yyy* &gt; xxx.tgz</code></li>
+</ul>
+</li>
+<li><p><code>cpio</code>：一种老的存档格式。</p>
+</li>
+</ul>
+
       
     </div>
     <div class="article-footer">
@@ -433,7 +540,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" title="文本处理sed" target="_blank" rel="external">http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/</a>
+      <a href="http://thmasterplan.cn/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" title="压缩与解压缩" target="_blank" rel="external">http://thmasterplan.cn/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html</a>
     </li>
 
     
@@ -482,11 +589,24 @@
   
   <ul class="pager pull-left">
     
-    
-    <li class="next">
-      <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" title="压缩与解压缩"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    <li class="prev">
+      <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" title="文本处理sed"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
+    
+    <li class="next">
+      <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" title="文件查找工具"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
     
   </ul>
   

@@ -17,19 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>java位运算 | Blog Of TheMasterplan</title>
-  <meta name="description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
-<meta name="keywords" content="java">
+  <title>磁盘与文件系统简介 | Blog Of TheMasterplan</title>
+  <meta name="description" content="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4) 文件系统特性  索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。 superblock:记录此filesystem的整体信息，包括inode&#x2F;block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。 inode:记录文件的属性，一个文件占">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java位运算">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;19&#x2F;java%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
+<meta property="og:title" content="磁盘与文件系统简介">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
+<meta property="og:description" content="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4) 文件系统特性  索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。 superblock:记录此filesystem的整体信息，包括inode&#x2F;block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。 inode:记录文件的属性，一个文件占">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-19T10:52:44.589Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;ext2.jpg">
+<meta property="og:updated_time" content="2019-11-17T17:49:39.647Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;ext2.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -235,7 +237,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -249,7 +251,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -260,7 +262,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -274,7 +276,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -285,7 +287,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -299,7 +301,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -310,7 +312,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -324,7 +326,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -335,7 +337,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -349,7 +351,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -372,21 +374,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA位运算符"><span class="toc-number">1.</span> <span class="toc-text">JAVA位运算符</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4"><span class="toc-number">1.</span> <span class="toc-text">Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-java位运算" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-磁盘与文件系统简介" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      java位运算
+      磁盘与文件系统简介
     </h1>
   
 
@@ -394,20 +396,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="article-date">
-	  <time datetime="2019-11-19T10:25:55.000Z" itemprop="datePublished">2019-11-19</time>
+	<a href="/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html" class="article-date">
+	  <time datetime="2019-11-17T16:12:54.000Z" itemprop="datePublished">2019-11-18</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/java/">java</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/java/" rel="tag">java</a>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
   </span>
 
 
@@ -420,10 +422,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 360(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 614(words)</span>
 	
 	
 
@@ -431,24 +433,78 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="JAVA位运算符"><a href="#JAVA位运算符" class="headerlink" title="JAVA位运算符"></a>JAVA位运算符</h3><ol>
-<li>&amp; ：按位与。同时为1才为1，否则为0。</li>
-<li>| ：按位或。有一个为1则为1。</li>
-<li>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</li>
-<li>^ ：按位异或。不同为1，相同为0。<ul>
-<li>一个数据对相同的数据异或两次，值不变,常应用于加密。即a^b^b == a。</li>
-<li>使用异或实现两个变量值交换。a = a^b; b = a^b; a = a^b。</li>
+        <h3 id="Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4"><a href="#Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4" class="headerlink" title="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)"></a>Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)</h3><ul>
+<li><p>文件系统特性</p>
+<ul>
+<li>索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。<ul>
+<li>superblock:记录此filesystem的整体信息，包括inode/block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。</li>
+<li>inode:记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的block号码。</li>
+<li>block:实际记录文件的内容，若文件过大一般会占用多个block。</li>
 </ul>
 </li>
-<li>&lt;&lt; ：左移。左操作数乘以2的n次幂。n是右操作数，即左移的位数。右边空出两位补0，左边两位被挤掉。</li>
-<li><strong>&gt;&gt;</strong> ：右移。左操作数除以2的n次幂。n是右操作数，即右移的位数。左边空出两位用符号位填充，右边两位被挤掉。<ul>
-<li>例如：-32 &gt;&gt; 2 ：原码：10000000000000000000000000100000，反码：11111111111111111111111111011111，补码：11111111111111111111111111100000。右移后为：11111111111111111111111111111000。求得原码为：10000000000000000000000000001000。得-8。</li>
 </ul>
 </li>
-<li><strong>&gt;&gt;&gt;</strong> ：<strong>无符号右移</strong>。左边空出的位置用0补全。例如-32 &gt;&gt;&gt; 2变成一个很大的正数。</li>
-<li>位运算均针对<strong>补码</strong>进行。正数的符号位为0，原、反、补码均为其本身；负数的符号位为1，其反码为对原码除符号位其余所有位求反，补码为对反码+1。</li>
-<li>对于有符号数，计算机中存储的是<strong>补码</strong>。</li>
-</ol>
+<li><p>linux的EXT2</p>
+<ul>
+<li><p>ext2文件系统示意图</p>
+<p><img src="ext2.jpg" alt=""></p>
+</li>
+<li><p>data clock：ext2文件系统所支持的block大小有1K,2K和4K三种</p>
+<table>
+<thead>
+<tr>
+<th align="center">Block大小</th>
+<th>1KB</th>
+<th>2KB</th>
+<th>4KB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">最大单一文件限制</td>
+<td>16GB</td>
+<td>256GB</td>
+<td>2TB</td>
+</tr>
+<tr>
+<td align="center">最大文件系统总容量</td>
+<td>2TB</td>
+<td>8TB</td>
+<td>16TB</td>
+</tr>
+</tbody></table>
+<ul>
+<li>除非重新格式化，block的大小与数量在格式化完就不能再改变</li>
+<li>每个blcok内最多只能放置一个文件的数据</li>
+<li>若文件大于block,则一个文件占用多个block；若文件小于block，则该blcok的剩余容量就不能再被使用。</li>
+</ul>
+</li>
+<li><p>inode table:记录文件的权限，拥有者与群组，容量，建立、最近一次读取、更改的时间。。。</p>
+<ul>
+<li>每个inode大小均为固定128字节（ext4和xfs可设定到256字节）</li>
+<li>每个文件仅占用一个inode</li>
+<li>系统读取文件时需要先找到inode，并分析inode所记录的权限与用户是否符合。</li>
+</ul>
+</li>
+<li><p>superblock：一般为1024字节</p>
+</li>
+<li><p><code>dumpe2fs</code>：查询EXT系列superblock信息的指令</p>
+</li>
+</ul>
+</li>
+<li><p>文件系统与目录树的关系</p>
+<ul>
+<li>目录：当在linux下的文件系统建立一个目录时，文件系统会分配一个inode与至少一块block给该目录，其中inode记录该目录的相关权限和属性，并记录分配的那块block号码，而block则记录在这个目录下的文件名与该文件名占用的inode号；<code>ls -i</code>查询当前目录下文件的inode号码。</li>
+<li>文件:在ext2建立一个文件时，ext2会分配一个inode和相对于该文件大小的block数量。</li>
+<li>目录树:例如读取/etc/passwd过程:<code>/的inode -&gt; /的block -&gt; etc/的inode -&gt; etc/的block -&gt; passwd的inode -&gt; passwd的block</code>。</li>
+</ul>
+</li>
+<li><p>日志式文件系统</p>
+</li>
+<li><p>挂载点的意义：挂载点一定是目录，该目录为进入该文件系统的入口。</p>
+</li>
+<li><p>Linux VFS用于管理所有类型的filesystem</p>
+</li>
+</ul>
 
       
     </div>
@@ -459,7 +515,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/" title="java位运算" target="_blank" rel="external">http://thmasterplan.cn/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/</a>
+      <a href="http://thmasterplan.cn/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html" title="磁盘与文件系统简介" target="_blank" rel="external">http://thmasterplan.cn/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html</a>
     </li>
 
     
@@ -509,12 +565,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/19/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" title="常见文本处理命令"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html" title="目录配置与文件目录管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/19/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" title="网络安全总结"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8.html" title="常用命令入门"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

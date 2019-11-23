@@ -17,19 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>文件链接 | Blog Of TheMasterplan</title>
-  <meta name="description" content="文件链接 硬链接：一个inode号对应多个文件名，硬链接也即同一个文件使用了多个别名，由命令ln oldfile newfile创建。 文件有相同的inode和data block 只能对已存在的文件进行创建，链接计数加1 不能交叉文件系统进行硬链接的创建 不能对目录进行创建，只可对文件创建 删除一个硬链接文件并不影响其他有相同inode号的文件   软链接（符号链接）：软链接的data bloc">
+  <title>目录配置与文件目录管理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件链接">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5&#x2F;index.html">
+<meta property="og:title" content="目录配置与文件目录管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="文件链接 硬链接：一个inode号对应多个文件名，硬链接也即同一个文件使用了多个别名，由命令ln oldfile newfile创建。 文件有相同的inode和data block 只能对已存在的文件进行创建，链接计数加1 不能交叉文件系统进行硬链接的创建 不能对目录进行创建，只可对文件创建 删除一个硬链接文件并不影响其他有相同inode号的文件   软链接（符号链接）：软链接的data bloc">
+<meta property="og:description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-17T16:32:05.287Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;filematch.jpg">
+<meta property="og:updated_time" content="2019-11-22T07:46:09.942Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;filematch.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -235,7 +237,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -249,7 +251,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -260,7 +262,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -274,7 +276,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -285,7 +287,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -299,7 +301,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -310,7 +312,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -324,7 +326,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -335,7 +337,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -349,7 +351,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -372,21 +374,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件链接"><span class="toc-number">1.</span> <span class="toc-text">文件链接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录配置与文件目录管理"><span class="toc-number">1.</span> <span class="toc-text">目录配置与文件目录管理</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-文件链接" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-目录配置与文件目录管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      文件链接
+      目录配置与文件目录管理
     </h1>
   
 
@@ -394,8 +396,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" class="article-date">
-	  <time datetime="2019-11-17T16:15:31.000Z" itemprop="datePublished">2019-11-18</time>
+	<a href="/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html" class="article-date">
+	  <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">2019-11-18</time>
 	</a>
 </span>
         
@@ -420,10 +422,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 369(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
 	
 	
 
@@ -431,22 +433,94 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="文件链接"><a href="#文件链接" class="headerlink" title="文件链接"></a>文件链接</h3><ul>
-<li>硬链接：一个inode号对应多个文件名，硬链接也即同一个文件使用了多个别名，由命令<code>ln oldfile newfile</code>创建。<ul>
-<li>文件有相同的inode和data block</li>
-<li>只能对<strong>已存在的文件</strong>进行创建，链接计数加1</li>
-<li><strong>不能交叉文件系统</strong>进行硬链接的创建</li>
-<li>不能对目录进行创建，只可对文件创建</li>
-<li>删除一个硬链接文件并不影响其他有相同inode号的文件</li>
+        <h3 id="目录配置与文件目录管理"><a href="#目录配置与文件目录管理" class="headerlink" title="目录配置与文件目录管理"></a>目录配置与文件目录管理</h3><ul>
+<li><p>目录配置：可参考FHS标准</p>
+<ul>
+<li><code>/bin</code>:存放二进制文件，常用命令</li>
+<li><code>/boot</code>：系统启动项文件,内核</li>
+<li><code>/dev</code>:设备文件，硬盘等</li>
+<li><code>/etc</code>：配置文件</li>
+<li><code>/home</code>:用户家目录，每一个用户在/home下都有一个文件夹</li>
+<li><code>/lib</code>：链接库文件</li>
+<li><code>/media</code>：媒体自动挂载点，比如U盘，光盘等</li>
+<li><code>/mnt</code>：媒体挂载点，手动挂载</li>
+<li><code>/opt</code>：自定义软件安装处，默认安装处为/usr/local</li>
+<li><code>/root</code>：超级用户目录</li>
+<li><code>/sbin</code>：存放系统管理员所能执行的命令</li>
+<li><code>/tmp</code>：临时文件</li>
+<li><code>/usr</code>：类似于二层根目录</li>
+<li><code>/var</code>:存放缓存，日志，数据库文件；该文件夹需要分配的空间较大，因此在磁盘分区时挂载在/var的分区要大一些。</li>
+<li><code>/proc</code>：内存中的进程信息</li>
+<li><code>/sys</code>：硬件相关信息</li>
 </ul>
 </li>
-<li>软链接（符号链接）：软链接的data block中存放的内容是另一文件的路径名的指向。软链接有自己的inode号和data block。由命令<code>ln -s oldfile newfile</code>创建，其中<code>oldfile</code>的相对路径为相对于<code>newfile</code>的，而<code>newfile</code>的相对路径是相对于当前工作目录的。<code>rm -rf a.link/</code>删除的是链接指向的文件，而<code>rm -rf a.link</code>删除的才是链接。<ul>
-<li>软链接有自己的文件属性及权限</li>
-<li>可对不存在的文件或目录创建软链接</li>
-<li>软链接可交叉文件系统</li>
-<li>软链接可对文件或目录创建</li>
-<li>创建软链接时，链接计数不会增加</li>
-<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）</li>
+<li><p>文件与目录管理</p>
+<ul>
+<li><p>常用命令：</p>
+<ul>
+<li><code>cd ~</code>:切换到home;<code>cd -</code>:切换到上一次所在目录</li>
+<li><code>pwd</code>：打印当前目录</li>
+<li><code>basename 和 dirname</code>：分别获取当前路径的文件名和目录名</li>
+<li><code>touch xx</code>:若xx不存在，则创建一个新文件xx。若xx存在，把xx的修改时间改为当前。</li>
+<li><code>&gt; xx</code>：若文件不存在，则创建一个空文件xx；若文件存在，则清空现有文件xx(可用于清空大文件)。</li>
+<li><code>mkdir 目录名 目录名 目录名 ...</code></li>
+<li><code>mkdir -p test/{a,b,c}/{d,e}</code>:递归创建目录，分别在a,b,c三个目录下创建d,e两个目录。</li>
+<li><code>rmdir 目录名</code>:只能删除空目录</li>
+<li><code>rm -rf</code>目录:删除目录下所有东西（慎用<code>rm</code>）</li>
+<li><code>cp [选项] /PATH1/xx /PATH2/yy</code>:若yy是一个目录，则把文件xx拷贝到yy下；若yy不是一个目录，则把文件xx拷贝到PATH2目录下并<strong>重命名</strong>为yy。cp不能直接拷贝目录，需要加选项参数，<code>cp -rfp /目录1 /目录2 == cp -a /目录1 /目录2</code>：将目录1及其所有子目录及文件拷贝到目录2。参数：-r即递归，-f即强制,-p同时复制属性信息。</li>
+<li><code>mv [选项] /PATH1/xx /PATH2/yy</code>：若yy是一个目录，则把文件xx剪切到yy下；若yy不是一个目录，则把文件xx剪切到PATH2目录下并<strong>重命名</strong>为yy。例如<code>mv xx yy</code>:就是把xx重命名为yy。</li>
+<li><code>rename .log .logabc *</code>：重命名，把所有文件名中的<code>.log</code>改为<code>.logabc</code></li>
+</ul>
+</li>
+<li><p>关于执行文件路径的变量：执行程序必须在其所在目录下才能执行，亦可使用绝对路径调用，若要直接敲命令就可以执行，则需要设置PATH，把命令所在目录添加在PATH后面。</p>
+</li>
+<li><p>文件的三个时间属性:</p>
+<ul>
+<li><code>atime</code>:access time</li>
+<li><code>mtime</code>:modify time</li>
+<li><code>ctime</code>:change time</li>
+</ul>
+</li>
+<li><p>文件名规则：</p>
+<ul>
+<li>文件名最长255字节</li>
+<li>蓝色–&gt;目录；绿色–&gt;可执行文件；红色–&gt;压缩文件；浅蓝色–&gt;链接文件；黄色–&gt;设备文件；粉色–&gt;套接字文件；棕色–&gt;管道文件；灰色–&gt;其他文件</li>
+</ul>
+</li>
+<li><p>文件通配符：</p>
+<ul>
+<li><code>*</code>：匹配0个或多个字符</li>
+</ul>
+</li>
+<li><p><code>?</code>：匹配任意一个字符</p>
+<ul>
+<li><code>[1-5]</code>：匹配字符1,2,3,4,5</li>
+<li><code>[a-c]</code>：匹配字符a、A、b、B、c(没有C)。</li>
+<li><code>[A-C]</code>：匹配A，b，B，c，C</li>
+<li><code>[^abcd]</code>：匹配除abcd外的所有单个字母</li>
+<li><img src="filematch.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>文件内容查阅</p>
+<ul>
+<li><code>cat 文件名</code>:显示所有文件内容，适合查看小文件，参数-n显示行数。<code>cat -n 文件名== nl 文件名</code>。</li>
+<li><code>tac</code>：从最后一行显示，倒数显示。</li>
+<li><code>more/less 文件名</code>:按空格一屏一屏地显示，按回车一行一行地显示。同时在文档下方输入<code>/字符串</code>即可查找文档中的字符串。</li>
+<li><code>head -n 21 文件名</code>:查看文件的前21行</li>
+<li><code>tail -n 21 文件名</code>:查看文件的尾21行；参数-f,监测日志，实时监测日志的变化。</li>
+<li><code>od</code>:查看非文本文档，比如二进制文件。</li>
+</ul>
+</li>
+<li><p>命令与文件的查询：</p>
+<ul>
+<li><p><code>which -a 命令</code>:在PATH路径中搜寻命令位置</p>
+</li>
+<li><p><code>whereis 命令</code>:返回命令路径及其帮助文档的路径；参数-b只返回命令路径。</p>
+</li>
+<li><p><code>locate 字符串</code>:在<code>/var/lib/mlocate/mlocate.db</code>中查询所有文件名中包含该字符串的文件并返回，该数据库每天定时更新，亦可通过<code>updatedb</code>更新。</p>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -460,7 +534,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" title="文件链接" target="_blank" rel="external">http://thmasterplan.cn/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/</a>
+      <a href="http://thmasterplan.cn/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html" title="目录配置与文件目录管理" target="_blank" rel="external">http://thmasterplan.cn/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86.html</a>
     </li>
 
     
@@ -510,12 +584,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" title="文件权限与用户组管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5.html" title="文件链接"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" title="目录配置与文件目录管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B.html" title="磁盘与文件系统简介"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

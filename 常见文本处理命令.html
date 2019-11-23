@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>标准IO和重定向 | Blog Of TheMasterplan</title>
-  <meta name="description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&amp;gt;；例如hostname &amp;gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&amp;gt;&amp;gt;则">
+  <title>常见文本处理命令 | Blog Of TheMasterplan</title>
+  <meta name="description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;messages，即时显示日志追加文本的变化。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="标准IO和重定向">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91&#x2F;index.html">
+<meta property="og:title" content="常见文本处理命令">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&amp;gt;；例如hostname &amp;gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&amp;gt;&amp;gt;则">
+<meta property="og:description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;messages，即时显示日志追加文本的变化。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-22T05:58:12.301Z">
+<meta property="og:updated_time" content="2019-11-23T02:51:52.955Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -235,7 +235,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -249,7 +249,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -260,7 +260,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -274,7 +274,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -285,7 +285,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -299,7 +299,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -310,7 +310,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -324,7 +324,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -335,7 +335,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -349,7 +349,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -372,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#标准IO和重定向"><span class="toc-number">1.</span> <span class="toc-text">标准IO和重定向</span></a></li></ol>
+      
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-标准IO和重定向" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-常见文本处理命令" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      标准IO和重定向
+      常见文本处理命令
     </h1>
   
 
@@ -394,8 +394,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/" class="article-date">
-	  <time datetime="2019-11-17T16:09:31.000Z" itemprop="datePublished">2019-11-18</time>
+	<a href="/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html" class="article-date">
+	  <time datetime="2019-11-19T11:49:20.000Z" itemprop="datePublished">2019-11-19</time>
 	</a>
 </span>
         
@@ -420,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 397(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 403(words)</span>
 	
 	
 
@@ -431,32 +431,85 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="标准IO和重定向"><a href="#标准IO和重定向" class="headerlink" title="标准IO和重定向"></a>标准IO和重定向</h3><ul>
-<li>三种I/O设备<ul>
-<li>标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入</li>
-<li>标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口</li>
-<li>标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口</li>
+        <ul>
+<li><p>查看文本内容：</p>
+<ul>
+<li><p><code>cat</code>：适合查看小文本</p>
+<ul>
+<li><code>-E</code>：显示行结束符<code>$</code></li>
+<li><code>-n</code>：对显示的每一行编号</li>
+<li><code>-A</code>：显示所有控制符</li>
 </ul>
 </li>
-<li>I/O重定向至文件<ul>
-<li>标准输出重定向：<code>&gt;</code>；例如<code>hostname &gt; /dev/pts/2</code>将输出重定向至另一设备；若为文件，则清空文件再写入。<code>&gt;&gt;</code>则是追加，而不清空原文件；例如<code>hostname &gt;&gt; /data/abc.log</code>。</li>
-<li>标准错误重定向：<code>2&gt;</code>；<code>&gt;&gt;</code>则是追加。</li>
-<li><code>&amp;&gt;</code>：标准输出和标准错误一起重定向。</li>
-<li>标准输入重定向：<code>&lt;</code>；例如<code>bc &lt; bc.txt</code>，将bc.txt文件作为输入用bc计算。</li>
-<li><code>tr [选项] set1 set2</code> ：将输入的文本中所有的s1替换为s2。·<ul>
-<li><code>-d</code>：删除所有属于set1的字符。</li>
-<li><code>-s</code>：把连续重复的字符以单独一个字符表示。</li>
-<li><code>-t</code>：把set1对应字符转换为set2对应字符。</li>
+<li><p><code>tac</code>：反向显示</p>
+</li>
+<li><p><code>more、less</code>：分页查看</p>
+</li>
 </ul>
 </li>
-<li><code>cat &gt; abc.log</code>：标准输入单行重定向到文件；<code>cat &lt;&lt;EOF &gt;abc.log</code>标准输入多行重定向至文件，输入EOF才写入文件。</li>
+<li><p>文本截取：</p>
+<ul>
+<li><code>head</code><ul>
+<li><code>-c#</code>：获取前<code>#</code>字节</li>
+<li><code>-#</code>：获取前<code>#</code>行</li>
 </ul>
 </li>
-<li>使用管道<ul>
-<li>管道<code>命令1 | 命令2 | 命令3 | ...</code>：将命令1的STDOUT发送给命令2的STDIN，再将命令2的STDOUT发送给命令3的STDIN。。。</li>
-<li>STDERR默认不能通过管道转发，可利用<code>|&amp;</code>实现。</li>
-<li>管道线后面的命令在一个subbash中执行，执行完就退出该subbash。</li>
-<li>例子：<code>echo {1..100} | tr &#39; &#39; + | bc</code>：计算1到100的和。</li>
+<li><code>tail</code><ul>
+<li><code>-c#</code>：获取后<code>#</code>字节</li>
+<li><code>-#</code>：获取后<code>#</code>行</li>
+<li><code>-f</code>：可用于日志监控，例如<code>tail -f /var/log/messages</code>，即时显示日志追加文本的变化。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>按列抽取：</p>
+<ul>
+<li><code>cut</code>：<code>cut -d# -f1,3</code>：以<code>#</code>作为分隔符，截取第1列和第3列<ul>
+<li><code>-d</code>：指明分隔符</li>
+<li><code>-f</code>：指明字段</li>
+</ul>
+</li>
+<li>练习：获取网卡ip地址：<code>ifconfig ens33  | head -2 | tail -1 | tr -s &quot; &quot; | cut -d&quot; &quot; -f3</code></li>
+</ul>
+</li>
+<li><p>排序和统计：</p>
+<ul>
+<li><p>文本排序<code>sort</code>：把排序后的文本显示在STDOUT，不改变原始文件</p>
+<ul>
+<li><p><code>-n</code>：按照数字大小排序</p>
+</li>
+<li><p><code>-r</code>：反向排序</p>
+</li>
+<li><p><code>-u</code>：删除重复行</p>
+</li>
+<li><p><code>-t#</code>：<code>#</code>作为字段界定符</p>
+</li>
+<li><p><code>-kX</code>：选项按照使用<code>#</code>分隔的第<code>X</code>列来排序</p>
+</li>
+</ul>
+</li>
+<li><p><code>uniq</code>：删除连续重复的行</p>
+<ul>
+<li><code>-c</code>：显示重复出现的行的次数，常与<code>sort</code>命令一起使用；<code>sort a.txt| uniq -c</code>。</li>
+</ul>
+</li>
+<li><p>文本数据统计<code>wc</code>：</p>
+<ul>
+<li><code>wc test.txt</code>：依次输出行数，单词数，字节数</li>
+<li><code>-l</code>：只计数行数</li>
+<li><code>-w</code>：只计数单词数</li>
+<li><code>-c</code>：只计数字节数</li>
+<li><code>-m</code>：只计数字符总数</li>
+<li><code>-L</code>：显示文件中最长行的长度</li>
+</ul>
+</li>
+<li><p>比较文件：<code>diff和patch</code></p>
+</li>
+</ul>
+</li>
+<li><p>按关键字抽取：</p>
+<ul>
+<li><code>grep</code>：<code>grep [选项] 模式 file</code>文本搜索工具，根据指定<code>模式[由正则表达式字符及文本字符所编写的过滤条件]</code>对目标文本逐行进行匹配检查，打印匹配到的行。</li>
 </ul>
 </li>
 </ul>
@@ -470,7 +523,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/" title="标准IO和重定向" target="_blank" rel="external">http://thmasterplan.cn/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/</a>
+      <a href="http://thmasterplan.cn/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html" title="常见文本处理命令" target="_blank" rel="external">http://thmasterplan.cn/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4.html</a>
     </li>
 
     
@@ -520,12 +573,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" title="常用命令入门"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" title="正则表达式"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/18/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="VIM的简单使用"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/java%E4%BD%8D%E8%BF%90%E7%AE%97.html" title="java位运算"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

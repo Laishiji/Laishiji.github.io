@@ -17,21 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>目录配置与文件目录管理 | Blog Of TheMasterplan</title>
-  <meta name="description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
+  <title>文件权限与用户组管理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="Linux的文件权限与用户组管理 文件权限：-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log:  第1位： -：表示普通文件； d：目录 b：设备文件（块文件，即可以用来存储的设备文件） c：设备文件（字符文件，不能用来存储的设备文件） l：软链接（快捷方式）   p：管道文件pipe s：套接字文件socket   后9位：r可读，w可写，x可执行。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="目录配置与文件目录管理">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:title" content="文件权限与用户组管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="目录配置与文件目录管理 目录配置：可参考FHS标准  &#x2F;bin:存放二进制文件，常用命令 &#x2F;boot：系统启动项文件,内核 &#x2F;dev:设备文件，硬盘等 &#x2F;etc：配置文件 &#x2F;home:用户家目录，每一个用户在&#x2F;home下都有一个文件夹 &#x2F;lib：链接库文件 &#x2F;media：媒体自动挂载点，比如U盘，光盘等 &#x2F;mnt：媒体挂载点，手动挂载 &#x2F;opt：自定义软件安装处，默认安装处为&#x2F;usr&#x2F;local">
+<meta property="og:description" content="Linux的文件权限与用户组管理 文件权限：-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log:  第1位： -：表示普通文件； d：目录 b：设备文件（块文件，即可以用来存储的设备文件） c：设备文件（字符文件，不能用来存储的设备文件） l：软链接（快捷方式）   p：管道文件pipe s：套接字文件socket   后9位：r可读，w可写，x可执行。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;filematch.jpg">
-<meta property="og:updated_time" content="2019-11-22T07:46:09.942Z">
+<meta property="og:updated_time" content="2019-11-19T05:04:52.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86&#x2F;filematch.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -237,7 +235,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -251,7 +249,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -262,7 +260,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -276,7 +274,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -287,7 +285,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -301,7 +299,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -312,7 +310,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -326,7 +324,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -337,7 +335,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -351,7 +349,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -374,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录配置与文件目录管理"><span class="toc-number">1.</span> <span class="toc-text">目录配置与文件目录管理</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的文件权限与用户组管理"><span class="toc-number">1.</span> <span class="toc-text">Linux的文件权限与用户组管理</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-目录配置与文件目录管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-文件权限与用户组管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      目录配置与文件目录管理
+      文件权限与用户组管理
     </h1>
   
 
@@ -396,8 +394,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="article-date">
-	  <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">2019-11-18</time>
+	<a href="/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html" class="article-date">
+	  <time datetime="2019-11-17T16:16:20.000Z" itemprop="datePublished">2019-11-18</time>
 	</a>
 </span>
         
@@ -422,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.5k(words)</span>
 	
 	
 
@@ -433,92 +431,175 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="目录配置与文件目录管理"><a href="#目录配置与文件目录管理" class="headerlink" title="目录配置与文件目录管理"></a>目录配置与文件目录管理</h3><ul>
-<li><p>目录配置：可参考FHS标准</p>
+        <h3 id="Linux的文件权限与用户组管理"><a href="#Linux的文件权限与用户组管理" class="headerlink" title="Linux的文件权限与用户组管理"></a>Linux的文件权限与用户组管理</h3><ul>
+<li><p>文件权限：<code>-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log</code>:</p>
 <ul>
-<li><code>/bin</code>:存放二进制文件，常用命令</li>
-<li><code>/boot</code>：系统启动项文件,内核</li>
-<li><code>/dev</code>:设备文件，硬盘等</li>
-<li><code>/etc</code>：配置文件</li>
-<li><code>/home</code>:用户家目录，每一个用户在/home下都有一个文件夹</li>
-<li><code>/lib</code>：链接库文件</li>
-<li><code>/media</code>：媒体自动挂载点，比如U盘，光盘等</li>
-<li><code>/mnt</code>：媒体挂载点，手动挂载</li>
-<li><code>/opt</code>：自定义软件安装处，默认安装处为/usr/local</li>
-<li><code>/root</code>：超级用户目录</li>
-<li><code>/sbin</code>：存放系统管理员所能执行的命令</li>
-<li><code>/tmp</code>：临时文件</li>
-<li><code>/usr</code>：类似于二层根目录</li>
-<li><code>/var</code>:存放缓存，日志，数据库文件；该文件夹需要分配的空间较大，因此在磁盘分区时挂载在/var的分区要大一些。</li>
-<li><code>/proc</code>：内存中的进程信息</li>
-<li><code>/sys</code>：硬件相关信息</li>
+<li>第1位：<ul>
+<li>-：表示普通文件；</li>
+<li>d：目录</li>
+<li>b：设备文件（块文件，即可以用来存储的设备文件）</li>
+<li>c：设备文件（字符文件，不能用来存储的设备文件）</li>
+<li>l：软链接（快捷方式）</li>
 </ul>
 </li>
-<li><p>文件与目录管理</p>
-<ul>
-<li><p>常用命令：</p>
-<ul>
-<li><code>cd ~</code>:切换到home;<code>cd -</code>:切换到上一次所在目录</li>
-<li><code>pwd</code>：打印当前目录</li>
-<li><code>basename 和 dirname</code>：分别获取当前路径的文件名和目录名</li>
-<li><code>touch xx</code>:若xx不存在，则创建一个新文件xx。若xx存在，把xx的修改时间改为当前。</li>
-<li><code>&gt; xx</code>：若文件不存在，则创建一个空文件xx；若文件存在，则清空现有文件xx(可用于清空大文件)。</li>
-<li><code>mkdir 目录名 目录名 目录名 ...</code></li>
-<li><code>mkdir -p test/{a,b,c}/{d,e}</code>:递归创建目录，分别在a,b,c三个目录下创建d,e两个目录。</li>
-<li><code>rmdir 目录名</code>:只能删除空目录</li>
-<li><code>rm -rf</code>目录:删除目录下所有东西（慎用<code>rm</code>）</li>
-<li><code>cp [选项] /PATH1/xx /PATH2/yy</code>:若yy是一个目录，则把文件xx拷贝到yy下；若yy不是一个目录，则把文件xx拷贝到PATH2目录下并<strong>重命名</strong>为yy。cp不能直接拷贝目录，需要加选项参数，<code>cp -rfp /目录1 /目录2 == cp -a /目录1 /目录2</code>：将目录1及其所有子目录及文件拷贝到目录2。参数：-r即递归，-f即强制,-p同时复制属性信息。</li>
-<li><code>mv [选项] /PATH1/xx /PATH2/yy</code>：若yy是一个目录，则把文件xx剪切到yy下；若yy不是一个目录，则把文件xx剪切到PATH2目录下并<strong>重命名</strong>为yy。例如<code>mv xx yy</code>:就是把xx重命名为yy。</li>
-<li><code>rename .log .logabc *</code>：重命名，把所有文件名中的<code>.log</code>改为<code>.logabc</code></li>
+<li>p：管道文件pipe<ul>
+<li>s：套接字文件socket</li>
 </ul>
 </li>
-<li><p>关于执行文件路径的变量：执行程序必须在其所在目录下才能执行，亦可使用绝对路径调用，若要直接敲命令就可以执行，则需要设置PATH，把命令所在目录添加在PATH后面。</p>
-</li>
-<li><p>文件的三个时间属性:</p>
-<ul>
-<li><code>atime</code>:access time</li>
-<li><code>mtime</code>:modify time</li>
-<li><code>ctime</code>:change time</li>
+<li>后9位：r可读，w可写，x可执行。<ul>
+<li>2-4位：用户的权限范围</li>
+<li>5-7位：组的权限范围</li>
+<li>8-10位：其余人的权限范围</li>
 </ul>
 </li>
-<li><p>文件名规则：</p>
-<ul>
-<li>文件名最长255字节</li>
-<li>蓝色–&gt;目录；绿色–&gt;可执行文件；红色–&gt;压缩文件；浅蓝色–&gt;链接文件；黄色–&gt;设备文件；粉色–&gt;套接字文件；棕色–&gt;管道文件；灰色–&gt;其他文件</li>
+<li>1表示该文件的硬链接数</li>
+<li>第一个root表示该文件的所有者</li>
+<li>第二个root表示该文件所属的组</li>
+<li>4.0K表示该文件的大小</li>
+<li>后面为最后一次修改的时间戳和文件名</li>
 </ul>
 </li>
-<li><p>文件通配符：</p>
+<li><p>r/w/x权限对于目录的意义：</p>
 <ul>
-<li><code>*</code>：匹配0个或多个字符</li>
+<li>r权限：可读取目录结构列表，即可查看目录下的文件名和子目录名。[注：不能查看文件内容]</li>
+<li>w权限：可创建文件和目录，可删除，可重命名，可转移</li>
+<li>x权限：可进入该目录。</li>
 </ul>
 </li>
-<li><p><code>?</code>：匹配任意一个字符</p>
+<li><p>更改权限：<code>chmod</code></p>
 <ul>
-<li><code>[1-5]</code>：匹配字符1,2,3,4,5</li>
-<li><code>[a-c]</code>：匹配字符a、A、b、B、c(没有C)。</li>
-<li><code>[A-C]</code>：匹配A，b，B，c，C</li>
-<li><code>[^abcd]</code>：匹配除abcd外的所有单个字母</li>
-<li><img src="filematch.jpg" alt=""></li>
+<li><code>chmod u+x,g+w,o-r abc.log</code>：abc.log权限由<code>-rw-r--r--</code>变为：<code>-rwxrw----</code></li>
+<li><code>chmod a=r file</code>或者<code>chmod +r file</code>:表示对file的u,g,o同时都赋予可读权限</li>
+<li>另一种更简单的权限赋予方式，令r = 4, w = 2, x = 1,则u,g,o的权限分别可用一个整数表示，例如<code>chmod 741 file</code>表示file的u,g,o权限为<code>-rwxr----x</code></li>
+<li>参数-R：R及recursive（递归）；<code>chmod -R 741 directory</code>，表示改变目录及目录下所有文件的权限为741。</li>
 </ul>
 </li>
-<li><p>文件内容查阅</p>
+<li><p>更改文件的所有者：<code>chown</code></p>
 <ul>
-<li><code>cat 文件名</code>:显示所有文件内容，适合查看小文件，参数-n显示行数。<code>cat -n 文件名== nl 文件名</code>。</li>
-<li><code>tac</code>：从最后一行显示，倒数显示。</li>
-<li><code>more/less 文件名</code>:按空格一屏一屏地显示，按回车一行一行地显示。同时在文档下方输入<code>/字符串</code>即可查找文档中的字符串。</li>
-<li><code>head -n 21 文件名</code>:查看文件的前21行</li>
-<li><code>tail -n 21 文件名</code>:查看文件的尾21行；参数-f,监测日志，实时监测日志的变化。</li>
-<li><code>od</code>:查看非文本文档，比如二进制文件。</li>
+<li><code>chown user file</code>:将file的所有者改为user</li>
+<li><code>chown user.group file</code>:将file的所有者改为user,同时更改其组为group</li>
+<li><code>chown -R user directory</code>：若要更改目录的权限，则需要加-R才能将其里面所有内容的权限更改</li>
 </ul>
 </li>
-<li><p>命令与文件的查询：</p>
+<li><p>更改文件的所有组：<code>chgrp</code></p>
 <ul>
-<li><p><code>which -a 命令</code>:在PATH路径中搜寻命令位置</p>
+<li><code>chgrp root file</code>: 将file的所有组改为root</li>
+</ul>
 </li>
-<li><p><code>whereis 命令</code>:返回命令路径及其帮助文档的路径；参数-b只返回命令路径。</p>
+<li><p>Linux组的类别：</p>
+<ul>
+<li>用户的主要组：用户必须属于一个且只有一个主组，组名同用户名，且仅包含用户自己。</li>
+<li>用户的附加组：一个用户可属于0或多个附加组。</li>
+<li><code>id 用户名</code>：查看用户的uid、gid（主组）、groups的id。管理员root的uid和gid为0。</li>
+</ul>
 </li>
-<li><p><code>locate 字符串</code>:在<code>/var/lib/mlocate/mlocate.db</code>中查询所有文件名中包含该字符串的文件并返回，该数据库每天定时更新，亦可通过<code>updatedb</code>更新。</p>
+<li><p>用户和组的配置文件：</p>
+<ul>
+<li><code>/etc/passwd</code>：用户及其属性信息(名称、UID、主组ID)。</li>
+<li><code>/etc/group</code>：组及其属性信息。</li>
+<li><code>/etc/shadow</code>：用户密码及其相关属性。</li>
+<li><code>/etc/gshadow</code>：组密码及其相关信息。</li>
+</ul>
 </li>
+<li><p>用户、组的增删改：</p>
+<ul>
+<li><code>useradd</code>，<code>userdel</code>，<code>usermod</code></li>
+<li><code>groupadd</code>，<code>groupdel</code>，<code>groupmod</code></li>
+<li><code>/etc/default/useradd</code>：创建用户时的默认设置</li>
+</ul>
+</li>
+<li><p>文件与目录的默认权限与隐藏权限</p>
+<ul>
+<li><p>文件预设权限:在没有umask的情况下，目录默认权限为777，文件默认权限为666；<code>umask 022</code>，表示创建文件和目录，g和o都过滤掉写(2)权限。</p>
+</li>
+<li><p><code>lsattr -a</code>:显示所有隐藏属性</p>
+</li>
+<li><p><code>chattr [-RV][-v][+/-/=&lt;属性&gt;] [文件或目录]</code>:</p>
+<ul>
+<li><p>-R：递归处理，将指定目录下的所有文件及子目录一并处理</p>
+</li>
+<li><p>-v：&lt;版本编号&gt; 设置文件或目录版本</p>
+</li>
+<li><p>-V： 显示指令执行过程</p>
+</li>
+<li><p>+&lt;属性&gt;： 开启文件或目录的该项属性</p>
+</li>
+<li><p>-&lt;属性&gt; ：关闭文件或目录的该项属</p>
+</li>
+<li><p>=&lt;属性&gt;： 指定文件或目录的该项属性</p>
+</li>
+<li><p>属性：</p>
+<ul>
+<li><strong>a：让文件或目录只能加数据</strong>。</li>
+<li><strong>i：不得任意更动文件或目录</strong>。</li>
+<li>b：不更新文件或目录的最后存取时间。</li>
+<li>c：将文件或目录压缩后存放。</li>
+<li>d：将文件或目录排除在倾倒操作之外。</li>
+<li>s：保密性删除文件或目录。</li>
+<li>S：即时更新文件或目录。</li>
+<li>u：预防意外删除。</li>
+</ul>
+</li>
+<li><p>例如<code>chattr +a /var/log/messages</code>:让某个文件只能往里面追加数据，但不能删除，适用于各种日志文件</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文件特殊权限</p>
+<ul>
+<li><p><strong>SUID</strong>（最常用）：<code>chmod u+s file</code>：使file文件x权限上显示为s，非用户(u)执行者可以获得u的所有权限</p>
+<ul>
+<li>SUID权限仅对二进制程序有效，不能用在脚本和目录上</li>
+<li>执行者对于该程序有x的可执行权限</li>
+<li>SUID权限仅在执行程序的过程中有效</li>
+<li>让本没有相应权限的用户运行该程序时，可以获得其原本没有权限访问的资源</li>
+</ul>
+</li>
+<li><p>SGID：非组(g)成员获得该组的权限</p>
+<ul>
+<li>非组成员对于该程序需要具备x的权限</li>
+<li>SGID<strong>主要用于目录, 在该目录下创建的任何文件及子目录属于该目录所拥有的组</strong> 。</li>
+</ul>
+</li>
+<li><p>SBIT: 目前只针对目录有效，切只能分配给其他人（o）;对于目录的作用是：当用户在该目录下建立文件或目录时，仅有<strong>自己与 root</strong>才有权力<strong>删除</strong>，例如/tmp。</p>
+</li>
+<li><p><strong>SUID/SGID/SBIT权限设置</strong> ：</p>
+<ul>
+<li><strong>文字法</strong> ：SUID: <strong>u+s</strong> ，SGID: <strong>g+s</strong>，SBIT: <strong>o+t</strong></li>
+<li><em>数字法*</em>：将原来的三位数扩展为四位数即可，SUID为4，SGID为2，SBIT为1，把它们放在权限数字的最开头。例如设置SUID，可以写成<strong>4777</strong>，设置SGID可以写成，<strong>2777</strong> 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ACL(Access Control List)实现灵活权限控制：</p>
+<ul>
+<li><p><code>setfacl -m u/g:用户名/组名:权限 file</code>。例如<code>setfacl -m u:Tom:rw abc.txt</code>，即Tom对abc.txt具有r和w权限，若不给权限则权限写<code>0</code>。</p>
+</li>
+<li><p><code>setfacl -x u/g:用户名/组名 file</code>：删除权限。</p>
+</li>
+<li><p><code>setfacl -R -b dir/</code>：删除dir下所有的ACL权限。</p>
+</li>
+<li><p><code>getfacl file</code>：显示file的ACL权限。</p>
+</li>
+<li><p>权限优先级：所有者&gt;ACL权限(用户&gt;组&gt;other)</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>权限与指令间的关系(在用户模式下)</p>
+<ul>
+<li><p>用户能进入某目录：需要权限x</p>
+<ul>
+<li>进入目录后能利用ls查阅:需要权限r</li>
+<li>进入目录后能够创建文件和目录:需要权限w</li>
+</ul>
+</li>
+<li><p>用户在目录内打开读取文件：</p>
+<ul>
+<li>目录需要权限x</li>
+<li>文件需要权限r</li>
 </ul>
 </li>
 </ul>
@@ -534,7 +615,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" title="目录配置与文件目录管理" target="_blank" rel="external">http://thmasterplan.cn/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/</a>
+      <a href="http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html" title="文件权限与用户组管理" target="_blank" rel="external">http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86.html</a>
     </li>
 
     
@@ -584,12 +665,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" title="文件链接"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/Java%E9%AB%98%E7%BA%A7.html" title="Java高级"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" title="磁盘与文件系统简介"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5.html" title="文件链接"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

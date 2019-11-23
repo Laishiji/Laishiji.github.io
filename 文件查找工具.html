@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Shell编程 | Blog Of TheMasterplan</title>
-  <meta name="description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
-<meta name="keywords" content="Linux,shell编程">
+  <title>文件查找工具 | Blog Of TheMasterplan</title>
+  <meta name="description" content="文件查找 在文件系统上查找符合条件的文件  非实时查找（数据库查找）：locate  查询系统上预建的文件索引数据库&#x2F;var&#x2F;lib&#x2F;mlocate&#x2F;mlocate.db  索引构建过程需要遍历整个根文件系统，极消耗资源  查找速度快，模糊查找，非实时，搜索的是文件的全路径，可手动更新updatedb  选项：  -i：不区分大小写  -n N：只列举前N个匹配项目  -r：使用基本正则表达式">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell编程">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;20&#x2F;Shell%E7%BC%96%E7%A8%8B&#x2F;index.html">
+<meta property="og:title" content="文件查找工具">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
+<meta property="og:description" content="文件查找 在文件系统上查找符合条件的文件  非实时查找（数据库查找）：locate  查询系统上预建的文件索引数据库&#x2F;var&#x2F;lib&#x2F;mlocate&#x2F;mlocate.db  索引构建过程需要遍历整个根文件系统，极消耗资源  查找速度快，模糊查找，非实时，搜索的是文件的全路径，可手动更新updatedb  选项：  -i：不区分大小写  -n N：只列举前N个匹配项目  -r：使用基本正则表达式">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-22T07:36:04.470Z">
+<meta property="og:updated_time" content="2019-11-23T02:29:18.783Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/20/Shell%E7%BC%96%E7%A8%8B/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -235,7 +235,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -249,7 +249,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -260,7 +260,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -274,7 +274,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -285,7 +285,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -299,7 +299,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -310,7 +310,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -324,7 +324,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -335,7 +335,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -349,7 +349,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -372,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、条件分支"><span class="toc-number">4.</span> <span class="toc-text">四、条件分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、脚本安全"><span class="toc-number">5.</span> <span class="toc-text">五、脚本安全</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件查找"><span class="toc-number">1.</span> <span class="toc-text">文件查找</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Shell编程" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-文件查找工具" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Shell编程
+      文件查找工具
     </h1>
   
 
@@ -394,20 +394,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="article-date">
-	  <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
+	<a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="article-date">
+	  <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
   </span>
 
 
@@ -420,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
 	
 	
 
@@ -431,161 +431,133 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="一、shell脚本基础"><a href="#一、shell脚本基础" class="headerlink" title="一、shell脚本基础"></a>一、shell脚本基础</h3><ul>
-<li>shell：解释型语言</li>
-<li>在脚本首行需注释使用的解释器类型，比如<code>#!/bin/bash</code>，<code>#!/usr/bin/python</code>等。</li>
-<li><code>bash -n xxx.sh</code>：执行语法检查</li>
-<li><code>bash -x xxx.sh</code>：解释执行的同时一边执行一边打印执行结果。</li>
-<li>变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。</li>
-<li>变量命名规则：<ul>
-<li>只能使用数字、字母及下划线，且不能以数字开头。</li>
-<li>shell中命名建议：<ul>
-<li>变量名大写</li>
-<li>局部变量小写</li>
-<li>函数名小写</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>显示已定义的所有变量：<code>set</code></li>
-<li>注意脚本中定义别名不生效。</li>
-</ul>
-<h3 id="二、特殊位置变量"><a href="#二、特殊位置变量" class="headerlink" title="二、特殊位置变量"></a>二、特殊位置变量</h3><ul>
-<li><p><code>pstree -p</code>：查看进程树</p>
-</li>
-<li><p><code>getent</code>：查看系统数据库的相关记录，例如<code>getent passwd root</code>，查看passwd库中root的信息。</p>
-</li>
-<li><p><code>变量BASHPID</code>：当前bash进程的pid</p>
-</li>
-<li><p><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>，当命令列表执行完毕，将会退出subbash。要想退出当前进程，则需使用<code>{命令列表}</code>。</p>
-</li>
-<li><p>环境变量：子进程，父进程均可访问</p>
+        <h3 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h3><ul>
+<li><p>在文件系统上查找符合条件的文件</p>
 <ul>
-<li>定义方式：<code>export NAME=abc</code>、<code>declare -x NAME=abc</code></li>
-<li>变量引用：<code>$NAME</code>、<code>${NAME}</code></li>
-<li>显示所有环境变量：<code>env</code>、<code>export</code>、<code>declare -x</code>、<code>printenv</code></li>
-<li>删除变量：<code>unset</code></li>
-<li>子进程更改环境变量，父进程访问相同环境变量不变。</li>
-</ul>
-</li>
-<li><p>只读和位置变量：</p>
+<li><p>非实时查找（数据库查找）：<code>locate</code></p>
 <ul>
-<li><p>只读变量（常量）：只能声明，但不能修改和删除</p>
+<li><p>查询系统上预建的文件索引数据库<code>/var/lib/mlocate/mlocate.db</code></p>
+</li>
+<li><p>索引构建过程需要遍历整个根文件系统，极消耗资源</p>
+</li>
+<li><p>查找速度快，模糊查找，非实时，搜索的是文件的全路径，可手动更新<code>updatedb</code></p>
+</li>
+<li><p>选项：</p>
 <ul>
-<li>声明：<code>readonly NAME</code>、<code>declare -r NAME</code></li>
-<li>查看：<code>readonly -p</code></li>
-<li>退出当前bash自动删除</li>
+<li><p><code>-i</code>：不区分大小写</p>
+</li>
+<li><p><code>-n N</code>：只列举前N个匹配项目</p>
+</li>
+<li><p><code>-r</code>：使用<strong>基本</strong>正则表达式</p>
+</li>
 </ul>
 </li>
-<li><p>位置变量：</p>
+</ul>
+</li>
+<li><p>实时查找：<code>find</code></p>
 <ul>
-<li><code>$1</code>代表脚本的第一个参数，<code>$2</code>代表脚本的第二个参数。。。</li>
-<li><code>$*或者$@</code>：脚本的所有参数；前者全部参数合为一个字符串，后者每个参数为独立字符串。</li>
-<li><code>$#</code>：脚本的参数个数</li>
-<li><code>$0</code>：脚本的路径及脚本名</li>
-<li><code>set --</code>：清空所有位置变量</li>
-<li>例如<code>rm a b c</code>：则<code>$1</code>在脚本中代表a；<code>$*</code>为a，b，c；<code>$#</code>为3。</li>
-</ul>
+<li><p>通过遍历指定路径完成文件查找</p>
 </li>
-</ul>
+<li><p>查找速度略慢，精确，实时</p>
 </li>
-<li><p>退出状态：进程使用退出状态来报告成功或失败，0代表成功，1-255代表失败。<code>$?</code>变量保存最近的命令退出状态。 </p>
-</li>
-</ul>
-<h3 id="三、算术逻辑运算和条件测试"><a href="#三、算术逻辑运算和条件测试" class="headerlink" title="三、算术逻辑运算和条件测试"></a>三、算术逻辑运算和条件测试</h3><ul>
-<li><p>算术运算：<code>+,-,*,/,%,**（乘方）</code>，乘法符号有些场景需要转义。</p>
+<li><p>语法：<code>find [选项] [查找路径] [查找条件] [处理动作]</code></p>
 <ul>
-<li><code>let var=算术表达式</code></li>
-<li><code>var=$[算术表达式]</code></li>
-<li><code>var=$((算术表达式))</code></li>
-<li><code>var=$(expr arg1 arg2 arg3...)</code></li>
-<li><code>declare -i var = xxx</code></li>
-<li><code>echo &#39;算术表达式&#39;|bc</code></li>
-</ul>
-</li>
-<li><p><code>RANDOM</code>：系统随机数变量，随机生成0-32767之间的数。</p>
-</li>
-<li><p>逻辑运算：</p>
+<li><p>选项：</p>
 <ul>
-<li>短路与：<code>cmd1 &amp;&amp; cmd2</code>：如果<code>cmd1</code>结果失败，不执行<code>cmd2</code>；如果<code>cmd1</code>成功，执行<code>cmd2</code>。</li>
-<li>短路或：<code>cmd1 || cmd 2</code>：如果<code>cmd1</code>成功，不执行<code>cmd2</code>；如果<code>cmd1</code>失败，执行<code>cmd2</code>。</li>
-<li><code>cmd1 &amp;&amp; cmd2 || cmd3</code>，<code>cmd1</code>失败，则执行<code>cmd3</code>；<code>cmd1</code>成功，则执行<code>cmd2</code>，根据<code>cmd2</code>的结果进一步判断是否执行<code>cmd3</code>，一般来说<code>cmd2</code>是执行成功的所有不会再进一步执行<code>cmd3</code>，因而该写法类似于其他语言中的<code>x ? y : z</code>。</li>
+<li><code>-maxdepth level</code>：最大搜索目录深度，指定目录下的文件为第1级</li>
+<li><code>-mindepth level</code>：最小搜索目录深度</li>
+<li><code>-depth</code>：先搜索文件，再搜索目录；不加该选项时默认为先搜目录再搜文件</li>
 </ul>
 </li>
-<li><p>条件测试：</p>
+<li><p>查找路径：默认为当前目录</p>
+</li>
+<li><p>查找条件：可以查找文件名，大小，类型，权限等，默认为找出指定路径的所有文件</p>
 <ul>
-<li><p><code>test EXPRESSION</code>或者<code>[ EXPRESSION ]</code>或者<code>[[ EXPRESSION ]]</code>，<code>EXPRESSION</code><strong>前后必须要有空格</strong>，其中<strong><code>[[]]</code>语法支持正则表达式</strong>。</p>
-</li>
-<li><p><code>help test</code>：查看相关选项</p>
-</li>
-<li><p>脚本练习：查看磁盘最大使用率</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var=`df | grep '/dev/sda' | sort -rn | head -1 | tr -s ' ' % | cut -d% -f5`</span><br><span class="line">test $var -gt 80 &amp;&amp; echo "disk is almost full" || echo "the use rate of the disk is $var"</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>bash的数值测试：</p>
+<li><p>根据<strong>文件名和inode</strong></p>
 <ul>
-<li><code>-v VAR</code>：变量VAR是否设置</li>
-<li><code>-gt</code>：是否&gt;</li>
-<li><code>-ge</code>：是否&gt;=</li>
-<li><code>-eq</code>：是否=</li>
-<li><code>-ne</code>：是否!=</li>
-<li><code>-lt</code>：是否&lt;</li>
-<li><code>-le</code>：是否&lt;=</li>
+<li><code>-name 文件名</code>：支持文件通配符</li>
+<li><code>-iname 文件名</code>：不区分字母大小写</li>
+<li><code>-inum n</code>：按inode号查找</li>
+<li><code>-samefile 文件名</code>：相同inode号的文件</li>
+<li><code>-links n</code>：链接数为n的文件</li>
+<li><code>-regex &#39;PATTERN&#39;</code>：匹配整个文件路径而非文件名</li>
 </ul>
 </li>
-<li><p>bash的字符串测试：</p>
+<li><p>根据<strong>owner,group</strong></p>
 <ul>
-<li><code>=</code>：是否等于</li>
-<li><code>&gt;</code>：ASCII码值是否大于</li>
-<li><code>&lt;</code></li>
-<li><code>!=</code></li>
-<li><code>=~</code>：左侧字符串是否能够被右侧的PATTERN所匹配，例如<code>[[ &#39;abcde&#39; =~ [[:digit:]] ]]</code>，返回<code>false</code>，因为左侧字符串不包含数字。</li>
+<li><code>-user 用户名</code></li>
+<li><code>-group 组名</code></li>
+<li><code>-uid UID</code></li>
+<li><code>-gid GID</code></li>
+<li><code>-nouser</code>：比如某个用户被删除，但其文件还存在</li>
+<li><code>-nogroup</code></li>
 </ul>
 </li>
-<li><p>bash的组合测试条件</p>
+<li><p>根据<strong>文件类型</strong></p>
 <ul>
-<li>判断某文件是否是<code>.sh</code>结尾并且可执行，<code>file=./test.sh; [[ $file =~ \.sh$ ]] &amp;&amp; [ -x $file ]</code> ，也可以这样写<code>[ &quot;$file =~ \.sh$&quot; -a &quot;-x $file&quot; ]</code>即使用<code>-a</code>选项。</li>
-<li><code>[ EXPRESSION1 -a EXPRESSION2 ]</code>表示与，<code>[ EXPRESSION1 -o EXPRESSION2 ]</code>表示或。</li>
+<li><code>-type TYPE</code>：TYPE包括<code>f,d,l,s,b,c,p</code></li>
+<li>空文件或目录：<code>-empty</code>，例如<code>find /usr -type d -empty</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><code>read</code>：从标准输入读一行，例如<code>read -p &quot; Please input your name&quot; NAME</code>，则用户输入的值赋给<code>NAME</code>变量。</p>
+<li><p>根据<strong>文件大小</strong></p>
 <ul>
-<li><code>-p</code>：指定要显示的提示</li>
-<li><code>-s</code>：静默输入，一般用于密码</li>
-<li><code>-n N</code>：指定输入的字符长度N</li>
-<li><code>-d &#39;字符&#39;</code>：输入中出现该字符即结束输入。</li>
-<li><code>-t N</code>：超时时长N秒</li>
+<li><code>-size SIZE</code>，常用单位k,M,G</li>
+<li>对于SIZE的写法，<code>-6k</code>代表[0,5k]，<code>6k</code>代表(5k,6k]，<code>+6k</code>代表(6k,+∞)</li>
+</ul>
+</li>
+<li><p>根据<strong>时间</strong></p>
+<ul>
+<li><code>-atime</code>/<code>-mtime</code>/<code>-ctime</code></li>
+<li><code>-amin</code>/<code>-mmin</code>/<code>-cmin</code></li>
+<li><code>find ./ -mtime -3</code>，代表[0,3）天内被修改，<code>find ./ -mtime 3</code>代表第3天被修改，<code>find ./ -mtime +3</code>代表被修改3天以上。</li>
+</ul>
+</li>
+<li><p>根据<strong>权限</strong></p>
+<ul>
+<li><code>-perm (/|-) MODE</code>0配<ul>
+<li>MODE：精确权限匹配</li>
+<li>/MODE：u,g,o中只要匹配到一个即可</li>
+<li>-MODE：u,g,o必须同时满足指定权限</li>
+<li>例如<code>find ./ -perm -222</code>指u,g,o均要有写权限才满足条件</li>
 </ul>
 </li>
 </ul>
-<h3 id="四、条件分支"><a href="#四、条件分支" class="headerlink" title="四、条件分支"></a>四、条件分支</h3><ul>
-<li><pre><code class="shell">if [ EXPRESSION ];then
-    条件为真的分支代码
-else
-    条件为假的分支代码
-fi
-
-<span class="meta">#</span><span class="bash">或者</span>
-
-if [  ];then
-   xxxxx
-elif [  ];then
-   xxxxx
-elif [  ];then
-   xxxxx
-.......
-else 
-   yyyyy
-fi
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```shell</span><br><span class="line">  case $NUM in</span><br><span class="line">  1|3|5)</span><br><span class="line">     cmd1</span><br><span class="line">     ;;</span><br><span class="line">  2|4|6)</span><br><span class="line">     cmd2</span><br><span class="line">     ;;</span><br><span class="line">  ...</span><br><span class="line">  *)</span><br><span class="line">     cmdN</span><br><span class="line">     ;;</span><br><span class="line">  esac</span><br></pre></td></tr></table></figure>
-</code></pre>
+</li>
+<li><p>不想搜索某目录时：使用<code>-path &#39;目录&#39; -a -prune</code>，例如<code>find / -path &#39;/etc&#39; -a -prune -o -name passwd</code>在根目录下除<code>/etc</code>外搜索文件名为<code>passwd</code>的文件。</p>
+</li>
+<li><p>组合条件：与：<code>-a</code>；或：<code>-o</code>；非：<code>-not</code>/<code>!</code>。即将以上各种条件组合使用查找。当需要使用括号时要转义。例如<code>find /usr \(-name &quot;f*&quot; -o -type f\) -ls</code>。</p>
 </li>
 </ul>
-<h3 id="五、脚本安全"><a href="#五、脚本安全" class="headerlink" title="五、脚本安全"></a>五、脚本安全</h3><ul>
-<li><code>set -u</code>：在脚本前加上该语句，在引用一个未设置的变量时，显示错误信息，并且不执行含有未设置变量的语句。</li>
-<li><code>set -e</code>：如果一个命令执行失败就退出脚本。</li>
+</li>
+<li><p>处理动作：对符合条件的文件做操作，默认输出至屏幕</p>
+<ul>
+<li><code>-print</code>：默认的处理动作，显示至屏幕</li>
+<li><code>-ls</code>：类似于对查找到的文件执行<code>ls -l</code>命令</li>
+<li><code>-delete</code>：删除查找到的文件</li>
+<li><code>-fls file</code>：查找到的所有文件的长格式信息保存至指定文件中。等价于<code>-ls &gt; file</code></li>
+<li><code>-ok cmd {} \;</code>：对查找到的每个文件执行由<code>cmd</code>指定的命令，对于每个文件执行命令之前，都会交互式要求用户确认</li>
+<li><code>-exec cmd {} \;</code>：对查找到的每个文件执行由<code>cmd</code>指定的命令</li>
+<li><code>{}</code>用于引用查找到的文件名称自身，包含路径名。</li>
+</ul>
+</li>
+<li><p><code>xargs</code>：<code>cmd1 | xargs [选项] cmd2</code></p>
+<ul>
+<li>xargs 是给命令传递参数的一个过滤器，也是组合多个命令的一个工具。</li>
+<li>xargs 可以将管道或标准输入（stdin）数据转换成命令行参数，也能够从文件的输出中读取数据。</li>
+<li>xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。</li>
+<li>xargs 默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。</li>
+<li>xargs 是一个强有力的命令，它能够捕获一个命令的输出，然后传递给另外一个命令。</li>
+<li>之所以能用到这个命令，关键是由于很多命令不支持|管道来传递参数，而日常工作中有有这个必要，所以就有了 xargs 命令</li>
+<li>具体选项见man帮助</li>
+<li>举例：<code>find linux-5.1.4/ -name &quot;*.c&quot; | xargs -n1 cat | wc -l</code>统计出linux内核一共有多少行c代码；<code>cat `find linux-5.1.4/ -name &quot;*.c&quot;`|wc -l</code>实际运行更快。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
       
@@ -597,7 +569,7 @@ fi
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" title="Shell编程" target="_blank" rel="external">http://thmasterplan.cn/2019/11/20/Shell%E7%BC%96%E7%A8%8B/</a>
+      <a href="http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" title="文件查找工具" target="_blank" rel="external">http://thmasterplan.cn/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html</a>
     </li>
 
     
@@ -647,12 +619,12 @@ fi
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" title="文件查找工具"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" title="压缩与解压缩"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="正则表达式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/Shell%E7%BC%96%E7%A8%8B.html" title="Shell编程"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

@@ -17,21 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>磁盘与文件系统简介 | Blog Of TheMasterplan</title>
-  <meta name="description" content="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4) 文件系统特性  索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。 superblock:记录此filesystem的整体信息，包括inode&#x2F;block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。 inode:记录文件的属性，一个文件占">
-<meta name="keywords" content="Linux">
+  <title>Shell编程 | Blog Of TheMasterplan</title>
+  <meta name="description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
+<meta name="keywords" content="Linux,shell编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="磁盘与文件系统简介">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B&#x2F;index.html">
+<meta property="og:title" content="Shell编程">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Shell%E7%BC%96%E7%A8%8B.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4) 文件系统特性  索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。 superblock:记录此filesystem的整体信息，包括inode&#x2F;block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。 inode:记录文件的属性，一个文件占">
+<meta property="og:description" content="一、shell脚本基础 shell：解释型语言 在脚本首行需注释使用的解释器类型，比如#!&#x2F;bin&#x2F;bash，#!&#x2F;usr&#x2F;bin&#x2F;python等。 bash -n xxx.sh：执行语法检查 bash -x xxx.sh：解释执行的同时一边执行一边打印执行结果。 变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。 变量命名规则： 只能使用">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B&#x2F;ext2.jpg">
-<meta property="og:updated_time" content="2019-11-17T17:49:39.647Z">
+<meta property="og:updated_time" content="2019-11-23T04:31:15.992Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B&#x2F;ext2.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/Shell%E7%BC%96%E7%A8%8B.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -237,7 +235,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="thumb">
+              <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -251,7 +249,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="title">文本处理sed</a>
+                <a href="/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed.html" class="title">文本处理sed</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
@@ -262,7 +260,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="thumb">
+              <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -276,7 +274,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" class="title">压缩与解压缩</a>
+                <a href="/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85.html" class="title">压缩与解压缩</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-23T00:43:05.000Z" itemprop="datePublished">2019-11-23</time>
@@ -287,7 +285,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="thumb">
+              <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -301,7 +299,7 @@
                 <a class="category-link" href="/categories/Linux/">Linux</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/" class="title">文件查找工具</a>
+                <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" class="title">文件查找工具</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-22T07:44:54.000Z" itemprop="datePublished">2019-11-22</time>
@@ -312,7 +310,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="thumb">
+              <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -326,7 +324,7 @@
                 <a class="category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/Shell%E7%BC%96%E7%A8%8B/" class="title">Shell编程</a>
+                <a href="/Shell%E7%BC%96%E7%A8%8B.html" class="title">Shell编程</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
@@ -337,7 +335,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="thumb">
+              <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -351,7 +349,7 @@
                 <a class="category-link" href="/categories/regex/">regex</a>
               </p>
               <p class="item-title">
-                <a href="/2019/11/20/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="title">正则表达式</a>
+                <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="title">正则表达式</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-11-20T07:16:10.000Z" itemprop="datePublished">2019-11-20</time>
@@ -374,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4"><span class="toc-number">1.</span> <span class="toc-text">Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、条件分支"><span class="toc-number">4.</span> <span class="toc-text">四、条件分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、脚本安全"><span class="toc-number">5.</span> <span class="toc-text">五、脚本安全</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-磁盘与文件系统简介" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Shell编程" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      磁盘与文件系统简介
+      Shell编程
     </h1>
   
 
@@ -396,20 +394,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" class="article-date">
-	  <time datetime="2019-11-17T16:12:54.000Z" itemprop="datePublished">2019-11-18</time>
+	<a href="/Shell%E7%BC%96%E7%A8%8B.html" class="article-date">
+	  <time datetime="2019-11-20T09:05:48.000Z" itemprop="datePublished">2019-11-20</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a>
   </span>
 
 
@@ -422,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Shell%E7%BC%96%E7%A8%8B.html#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 614(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
 	
 	
 
@@ -433,77 +431,160 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4"><a href="#Linux磁盘与文件系统简介-centOS7之后使用xfs，centOS6使用ext4" class="headerlink" title="Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)"></a>Linux磁盘与文件系统简介(centOS7之后使用xfs，centOS6使用ext4)</h3><ul>
-<li><p>文件系统特性</p>
+        <h3 id="一、shell脚本基础"><a href="#一、shell脚本基础" class="headerlink" title="一、shell脚本基础"></a>一、shell脚本基础</h3><ul>
+<li>shell：解释型语言</li>
+<li>在脚本首行需注释使用的解释器类型，比如<code>#!/bin/bash</code>，<code>#!/usr/bin/python</code>等。</li>
+<li><code>bash -n xxx.sh</code>：执行语法检查</li>
+<li><code>bash -x xxx.sh</code>：解释执行的同时一边执行一边打印执行结果。</li>
+<li>变量不用事先声明，可随时改变类型；不同数据类型之间可直接运算而不用做类型转换；常用类型为字符，整型，浮点型。</li>
+<li>变量命名规则：<ul>
+<li>只能使用数字、字母及下划线，且不能以数字开头。</li>
+<li>shell中命名建议：<ul>
+<li>变量名大写</li>
+<li>局部变量小写</li>
+<li>函数名小写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>显示已定义的所有变量：<code>set</code></li>
+<li>注意脚本中定义别名不生效。</li>
+</ul>
+<h3 id="二、特殊位置变量"><a href="#二、特殊位置变量" class="headerlink" title="二、特殊位置变量"></a>二、特殊位置变量</h3><ul>
+<li><p><code>pstree -p</code>：查看进程树</p>
+</li>
+<li><p><code>getent</code>：查看系统数据库的相关记录，例如<code>getent passwd root</code>，查看passwd库中root的信息。</p>
+</li>
+<li><p><code>变量BASHPID</code>：当前bash进程的pid</p>
+</li>
+<li><p><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>，当命令列表执行完毕，将会退出subbash。要想退出当前进程，则需使用<code>{命令列表}</code>。</p>
+</li>
+<li><p>环境变量：子进程，父进程均可访问</p>
 <ul>
-<li>索引式文件系统：对于linux，文件的权限和属性放置到inode中，文件的实际数据放在data block中。<ul>
-<li>superblock:记录此filesystem的整体信息，包括inode/block的总量、使用量、剩余量,以及文件系统的格式与相关信息等。</li>
-<li>inode:记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的block号码。</li>
-<li>block:实际记录文件的内容，若文件过大一般会占用多个block。</li>
+<li>定义方式：<code>export NAME=abc</code>、<code>declare -x NAME=abc</code></li>
+<li>变量引用：<code>$NAME</code>、<code>${NAME}</code></li>
+<li>显示所有环境变量：<code>env</code>、<code>export</code>、<code>declare -x</code>、<code>printenv</code></li>
+<li>删除变量：<code>unset</code></li>
+<li>子进程更改环境变量，父进程访问相同环境变量不变。</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>linux的EXT2</p>
+<li><p>只读和位置变量：</p>
 <ul>
-<li><p>ext2文件系统示意图</p>
-<p><img src="ext2.jpg" alt=""></p>
-</li>
-<li><p>data clock：ext2文件系统所支持的block大小有1K,2K和4K三种</p>
-<table>
-<thead>
-<tr>
-<th align="center">Block大小</th>
-<th>1KB</th>
-<th>2KB</th>
-<th>4KB</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">最大单一文件限制</td>
-<td>16GB</td>
-<td>256GB</td>
-<td>2TB</td>
-</tr>
-<tr>
-<td align="center">最大文件系统总容量</td>
-<td>2TB</td>
-<td>8TB</td>
-<td>16TB</td>
-</tr>
-</tbody></table>
+<li><p>只读变量（常量）：只能声明，但不能修改和删除</p>
 <ul>
-<li>除非重新格式化，block的大小与数量在格式化完就不能再改变</li>
-<li>每个blcok内最多只能放置一个文件的数据</li>
-<li>若文件大于block,则一个文件占用多个block；若文件小于block，则该blcok的剩余容量就不能再被使用。</li>
+<li>声明：<code>readonly NAME</code>、<code>declare -r NAME</code></li>
+<li>查看：<code>readonly -p</code></li>
+<li>退出当前bash自动删除</li>
 </ul>
 </li>
-<li><p>inode table:记录文件的权限，拥有者与群组，容量，建立、最近一次读取、更改的时间。。。</p>
+<li><p>位置变量：</p>
 <ul>
-<li>每个inode大小均为固定128字节（ext4和xfs可设定到256字节）</li>
-<li>每个文件仅占用一个inode</li>
-<li>系统读取文件时需要先找到inode，并分析inode所记录的权限与用户是否符合。</li>
+<li><code>$1</code>代表脚本的第一个参数，<code>$2</code>代表脚本的第二个参数。。。</li>
+<li><code>$*或者$@</code>：脚本的所有参数；前者全部参数合为一个字符串，后者每个参数为独立字符串。</li>
+<li><code>$#</code>：脚本的参数个数</li>
+<li><code>$0</code>：脚本的路径及脚本名</li>
+<li><code>set --</code>：清空所有位置变量</li>
+<li>例如<code>rm a b c</code>：则<code>$1</code>在脚本中代表a；<code>$*</code>为a，b，c；<code>$#</code>为3。</li>
 </ul>
 </li>
-<li><p>superblock：一般为1024字节</p>
-</li>
-<li><p><code>dumpe2fs</code>：查询EXT系列superblock信息的指令</p>
-</li>
 </ul>
 </li>
-<li><p>文件系统与目录树的关系</p>
+<li><p>退出状态：进程使用退出状态来报告成功或失败，0代表成功，1-255代表失败。<code>$?</code>变量保存最近的命令退出状态。 </p>
+</li>
+</ul>
+<h3 id="三、算术逻辑运算和条件测试"><a href="#三、算术逻辑运算和条件测试" class="headerlink" title="三、算术逻辑运算和条件测试"></a>三、算术逻辑运算和条件测试</h3><ul>
+<li><p>算术运算：<code>+,-,*,/,%,**（乘方）</code>，乘法符号有些场景需要转义。</p>
 <ul>
-<li>目录：当在linux下的文件系统建立一个目录时，文件系统会分配一个inode与至少一块block给该目录，其中inode记录该目录的相关权限和属性，并记录分配的那块block号码，而block则记录在这个目录下的文件名与该文件名占用的inode号；<code>ls -i</code>查询当前目录下文件的inode号码。</li>
-<li>文件:在ext2建立一个文件时，ext2会分配一个inode和相对于该文件大小的block数量。</li>
-<li>目录树:例如读取/etc/passwd过程:<code>/的inode -&gt; /的block -&gt; etc/的inode -&gt; etc/的block -&gt; passwd的inode -&gt; passwd的block</code>。</li>
+<li><code>let var=算术表达式</code></li>
+<li><code>var=$[算术表达式]</code></li>
+<li><code>var=$((算术表达式))</code></li>
+<li><code>var=$(expr arg1 arg2 arg3...)</code></li>
+<li><code>declare -i var = xxx</code></li>
+<li><code>echo &#39;算术表达式&#39;|bc</code></li>
 </ul>
 </li>
-<li><p>日志式文件系统</p>
+<li><p><code>RANDOM</code>：系统随机数变量，随机生成0-32767之间的数。</p>
 </li>
-<li><p>挂载点的意义：挂载点一定是目录，该目录为进入该文件系统的入口。</p>
+<li><p>逻辑运算：</p>
+<ul>
+<li>短路与：<code>cmd1 &amp;&amp; cmd2</code>：如果<code>cmd1</code>结果失败，不执行<code>cmd2</code>；如果<code>cmd1</code>成功，执行<code>cmd2</code>。</li>
+<li>短路或：<code>cmd1 || cmd 2</code>：如果<code>cmd1</code>成功，不执行<code>cmd2</code>；如果<code>cmd1</code>失败，执行<code>cmd2</code>。</li>
+<li><code>cmd1 &amp;&amp; cmd2 || cmd3</code>，<code>cmd1</code>失败，则执行<code>cmd3</code>；<code>cmd1</code>成功，则执行<code>cmd2</code>，根据<code>cmd2</code>的结果进一步判断是否执行<code>cmd3</code>，一般来说<code>cmd2</code>是执行成功的所有不会再进一步执行<code>cmd3</code>，因而该写法类似于其他语言中的<code>x ? y : z</code>。</li>
+</ul>
 </li>
-<li><p>Linux VFS用于管理所有类型的filesystem</p>
+<li><p>条件测试：</p>
+<ul>
+<li><p><code>test EXPRESSION</code>或者<code>[ EXPRESSION ]</code>或者<code>[[ EXPRESSION ]]</code>，<code>EXPRESSION</code><strong>前后必须要有空格</strong>，其中<strong><code>[[]]</code>语法支持正则表达式</strong>。</p>
 </li>
+<li><p><code>help test</code>：查看相关选项</p>
+</li>
+<li><p>脚本练习：查看磁盘最大使用率</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">var=`df | grep '/dev/sda' | sort -rn | head -1 | tr -s ' ' % | cut -d% -f5`</span><br><span class="line">test $var -gt 80 &amp;&amp; echo "disk is almost full" || echo "the use rate of the disk is $var"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bash的数值测试：</p>
+<ul>
+<li><code>-v VAR</code>：变量VAR是否设置</li>
+<li><code>-gt</code>：是否&gt;</li>
+<li><code>-ge</code>：是否&gt;=</li>
+<li><code>-eq</code>：是否=</li>
+<li><code>-ne</code>：是否!=</li>
+<li><code>-lt</code>：是否&lt;</li>
+<li><code>-le</code>：是否&lt;=</li>
+</ul>
+</li>
+<li><p>bash的字符串测试：</p>
+<ul>
+<li><code>=</code>：是否等于</li>
+<li><code>&gt;</code>：ASCII码值是否大于</li>
+<li><code>&lt;</code></li>
+<li><code>!=</code></li>
+<li><code>=~</code>：左侧字符串是否能够被右侧的PATTERN所匹配，例如<code>[[ &#39;abcde&#39; =~ [[:digit:]] ]]</code>，返回<code>false</code>，因为左侧字符串不包含数字。</li>
+</ul>
+</li>
+<li><p>bash的组合测试条件</p>
+<ul>
+<li>判断某文件是否是<code>.sh</code>结尾并且可执行，<code>file=./test.sh; [[ $file =~ \.sh$ ]] &amp;&amp; [ -x $file ]</code> ，也可以这样写<code>[ &quot;$file =~ \.sh$&quot; -a &quot;-x $file&quot; ]</code>即使用<code>-a</code>选项。</li>
+<li><code>[ EXPRESSION1 -a EXPRESSION2 ]</code>表示与，<code>[ EXPRESSION1 -o EXPRESSION2 ]</code>表示或。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>read</code>：从标准输入读一行，例如<code>read -p &quot; Please input your name&quot; NAME</code>，则用户输入的值赋给<code>NAME</code>变量。</p>
+<ul>
+<li><code>-p</code>：指定要显示的提示</li>
+<li><code>-s</code>：静默输入，一般用于密码</li>
+<li><code>-n N</code>：指定输入的字符长度N</li>
+<li><code>-d &#39;字符&#39;</code>：输入中出现该字符即结束输入。</li>
+<li><code>-t N</code>：超时时长N秒</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、条件分支"><a href="#四、条件分支" class="headerlink" title="四、条件分支"></a>四、条件分支</h3><ul>
+<li><pre><code>if [ EXPRESSION ];then
+    条件为真的分支代码
+else
+    条件为假的分支代码
+fi
+
+#或者
+
+if [  ];then
+   xxxxx
+elif [  ];then
+   xxxxx
+elif [  ];then
+   xxxxx
+.......
+else 
+   yyyyy
+fi
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```shell</span><br><span class="line">  case $NUM in</span><br><span class="line">  1|3|5)</span><br><span class="line">     cmd1</span><br><span class="line">     ;;</span><br><span class="line">  2|4|6)</span><br><span class="line">     cmd2</span><br><span class="line">     ;;</span><br><span class="line">  ...</span><br><span class="line">  *)</span><br><span class="line">     cmdN</span><br><span class="line">     ;;</span><br><span class="line">  esac</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<h3 id="五、脚本安全"><a href="#五、脚本安全" class="headerlink" title="五、脚本安全"></a>五、脚本安全</h3><ul>
+<li><code>set -u</code>：在脚本前加上该语句，在引用一个未设置的变量时，显示错误信息，并且不执行含有未设置变量的语句。</li>
+<li><code>set -e</code>：如果一个命令执行失败就退出脚本。</li>
 </ul>
 
       
@@ -515,7 +596,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" title="磁盘与文件系统简介" target="_blank" rel="external">http://thmasterplan.cn/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/</a>
+      <a href="http://thmasterplan.cn/Shell%E7%BC%96%E7%A8%8B.html" title="Shell编程" target="_blank" rel="external">http://thmasterplan.cn/Shell%E7%BC%96%E7%A8%8B.html</a>
     </li>
 
     
@@ -565,12 +646,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" title="目录配置与文件目录管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7.html" title="文件查找工具"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" title="常用命令入门"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" title="正则表达式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
