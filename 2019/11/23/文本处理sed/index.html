@@ -17,15 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;page&#x2F;2&#x2F;index.html">
+  <title>文本处理sed | Blog Of TheMasterplan</title>
+  <meta name="description" content="[TOC] 一、介绍二、用法三、高级用法">
+<meta name="keywords" content="Linux,文本处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本处理sed">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="[TOC] 一、介绍二、用法三、高级用法">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-23T02:55:24.730Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/page/2/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -363,323 +367,189 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-文本处理sed" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/">文件权限与用户组管理</a>
+    <h1 class="article-title" itemprop="name">
+      文本处理sed
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" class="article-date">
-	  <time datetime="2019-11-17T16:16:20.000Z" itemprop="datePublished">Nov 18</time>
+	<a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" class="article-date">
+	  <time datetime="2019-11-23T02:52:42.000Z" itemprop="datePublished">2019-11-23</time>
 	</a>
 </span>
-    
+        
   <span class="article-category">
     <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </span>
 
-    
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link" href="/tags/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/" rel="tag">文本处理</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
-    
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/#comments" class="article-comment-link">Comments</a></span>
+        
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.5k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 12(words)</span>
 	
 	
 
-  </p>
-</article>
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><h3 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h3><h3 id="三、高级用法"><a href="#三、高级用法" class="headerlink" title="三、高级用法"></a>三、高级用法</h3>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/" title="文本处理sed" target="_blank" rel="external">http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/</a>
+    </li>
 
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/">文件链接</a>
-    </h1>
-  
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/" class="article-date">
-	  <time datetime="2019-11-17T16:15:31.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
     
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
+  </section>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 369(words)</span>
-	
-	
-
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">目录配置与文件目录管理</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" title="压缩与解压缩"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="article-date">
-	  <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
-	
-	
-
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/">磁盘与文件系统简介</a>
-    </h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
   
-
-  </div>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" class="article-date">
-	  <time datetime="2019-11-17T16:12:54.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
+  <div class="bar-right">
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 614(words)</span>
-	
-	
-
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/">常用命令入门</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" class="article-date">
-	  <time datetime="2019-11-17T16:11:48.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 846(words)</span>
-	
-	
-
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/">标准IO和重定向</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/" class="article-date">
-	  <time datetime="2019-11-17T16:09:31.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 397(words)</span>
-	
-	
-
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">VIM的简单使用</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/11/18/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="article-date">
-	  <time datetime="2019-11-17T16:08:02.000Z" itemprop="datePublished">Nov 18</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/18/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">Comments</a></span>
-    
-	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 256(words)</span>
-	
-	
-
-  </p>
-</article>
-
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
     
   </div>
-
+  </div>
+</nav>
   
-    
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <div class="pager pull-left">
-            
-            <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-            
-            <a class="next disabled" href="javascript:;" target="_blank" rel="noopener">Next</a>
-            
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="total-article bar-right">Page 2 of 2</div>
-        </div>
-    </nav>
-    
+      </div>
+    </div>
+  </div>
+</div>
 
- 
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -733,6 +603,24 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 
