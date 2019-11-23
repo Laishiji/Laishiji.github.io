@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="文件查找 在文件系统上查找符合条件的文件  非实时查找（数据库查找）：locate  查询系统上预建的文件索引数据库&#x2F;var&#x2F;lib&#x2F;mlocate&#x2F;mlocate.db  索引构建过程需要遍历整个根文件系统，极消耗资源  查找速度快，模糊查找，非实时，搜索的是文件的全路径，可手动更新updatedb  选项：  -i：不区分大小写  -n N：只列举前N个匹配项目  -r：使用基本正则表达式">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-22T14:17:32.008Z">
+<meta property="og:updated_time" content="2019-11-23T00:41:27.738Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/index.html">
@@ -423,10 +423,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/22/%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 826(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4(minutes)</span>
 	
 
       </div>
@@ -540,6 +540,17 @@
 <li><code>-ok cmd {} \;</code>：对查找到的每个文件执行由<code>cmd</code>指定的命令，对于每个文件执行命令之前，都会交互式要求用户确认</li>
 <li><code>-exec cmd {} \;</code>：对查找到的每个文件执行由<code>cmd</code>指定的命令</li>
 <li><code>{}</code>用于引用查找到的文件名称自身，包含路径名。</li>
+</ul>
+</li>
+<li><p><code>xargs</code>：<code>cmd1 | xargs [选项] cmd2</code></p>
+<ul>
+<li>xargs 是给命令传递参数的一个过滤器，也是组合多个命令的一个工具。</li>
+<li>xargs 可以将管道或标准输入（stdin）数据转换成命令行参数，也能够从文件的输出中读取数据。</li>
+<li>xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。</li>
+<li>xargs 默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。</li>
+<li>xargs 是一个强有力的命令，它能够捕获一个命令的输出，然后传递给另外一个命令。</li>
+<li>之所以能用到这个命令，关键是由于很多命令不支持|管道来传递参数，而日常工作中有有这个必要，所以就有了 xargs 命令</li>
+<li>具体选项见man帮助</li>
 </ul>
 </li>
 </ul>
