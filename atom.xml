@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2019-11-23T00:41:27.738Z</updated>
+  <updated>2019-11-23T00:44:12.589Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>压缩与解压缩</title>
+    <link href="http://thmasterplan.cn/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
+    <id>http://thmasterplan.cn/2019/11/23/%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9/</id>
+    <published>2019-11-23T00:43:05.000Z</published>
+    <updated>2019-11-23T00:44:12.589Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://thmasterplan.cn/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://thmasterplan.cn/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>文件查找工具</title>
