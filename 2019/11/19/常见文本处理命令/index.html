@@ -18,15 +18,15 @@
   
   
   <title>常见文本处理命令 | Blog Of TheMasterplan</title>
-  <meta name="description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;messages，即时显示日志追加文本的变化。">
+  <meta name="description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：从最后一行向前反向显示  rev：每一行都是反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;m">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见文本处理命令">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;messages，即时显示日志追加文本的变化。">
+<meta property="og:description" content="查看文本内容：  cat：适合查看小文本  -E：显示行结束符$ -n：对显示的每一行编号 -A：显示所有控制符   tac：从最后一行向前反向显示  rev：每一行都是反向显示  more、less：分页查看    文本截取：  head -c#：获取前#字节 -#：获取前#行   tail -c#：获取后#字节 -#：获取后#行 -f：可用于日志监控，例如tail -f &#x2F;var&#x2F;log&#x2F;m">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-23T13:24:13.007Z">
+<meta property="og:updated_time" content="2019-11-26T14:20:37.984Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/19/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
@@ -423,7 +423,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/19/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 403(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 420(words)</span>
 	
 	
 
@@ -441,7 +441,9 @@
 <li><code>-A</code>：显示所有控制符</li>
 </ul>
 </li>
-<li><p><code>tac</code>：反向显示</p>
+<li><p><code>tac</code>：从最后一行向前反向显示</p>
+</li>
+<li><p><code>rev</code>：每一行都是反向显示</p>
 </li>
 <li><p><code>more、less</code>：分页查看</p>
 </li>

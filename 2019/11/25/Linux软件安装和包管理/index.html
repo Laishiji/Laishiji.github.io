@@ -18,15 +18,15 @@
   
   
   <title>Linux软件安装和包管理 | Blog Of TheMasterplan</title>
-  <meta name="description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。  软件包基础rpm包管理yum管理定制yum仓库dnf管理编译安装">
+  <meta name="description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。  rpm包管理 rpm: redhat package manager  yum管理定制yum仓库dnf管理编译安装">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux软件安装和包管理">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;25&#x2F;Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。  软件包基础rpm包管理yum管理定制yum仓库dnf管理编译安装">
+<meta property="og:description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。  rpm包管理 rpm: redhat package manager  yum管理定制yum仓库dnf管理编译安装">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T12:41:02.968Z">
+<meta property="og:updated_time" content="2019-11-26T14:22:13.692Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/2019/11/25/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/index.html">
@@ -372,7 +372,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#软件运行环境"><span class="toc-number">1.</span> <span class="toc-text">软件运行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件包基础"><span class="toc-number">2.</span> <span class="toc-text">软件包基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm包管理"><span class="toc-number">3.</span> <span class="toc-text">rpm包管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum管理"><span class="toc-number">4.</span> <span class="toc-text">yum管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制yum仓库"><span class="toc-number">5.</span> <span class="toc-text">定制yum仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dnf管理"><span class="toc-number">6.</span> <span class="toc-text">dnf管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译安装"><span class="toc-number">7.</span> <span class="toc-text">编译安装</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#软件运行环境"><span class="toc-number">1.</span> <span class="toc-text">软件运行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm包管理"><span class="toc-number">2.</span> <span class="toc-text">rpm包管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum管理"><span class="toc-number">3.</span> <span class="toc-text">yum管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制yum仓库"><span class="toc-number">4.</span> <span class="toc-text">定制yum仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dnf管理"><span class="toc-number">5.</span> <span class="toc-text">dnf管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译安装"><span class="toc-number">6.</span> <span class="toc-text">编译安装</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -435,7 +435,10 @@
 <li>静态链接：<code>libxxx.a</code>，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。</li>
 <li>动态链接：<code>libxxx.so</code>，只把依赖做一个动态链接，占用空间少。</li>
 </ul>
-<h3 id="软件包基础"><a href="#软件包基础" class="headerlink" title="软件包基础"></a>软件包基础</h3><h3 id="rpm包管理"><a href="#rpm包管理" class="headerlink" title="rpm包管理"></a>rpm包管理</h3><h3 id="yum管理"><a href="#yum管理" class="headerlink" title="yum管理"></a>yum管理</h3><h3 id="定制yum仓库"><a href="#定制yum仓库" class="headerlink" title="定制yum仓库"></a>定制yum仓库</h3><h3 id="dnf管理"><a href="#dnf管理" class="headerlink" title="dnf管理"></a>dnf管理</h3><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3>
+<h3 id="rpm包管理"><a href="#rpm包管理" class="headerlink" title="rpm包管理"></a>rpm包管理</h3><ul>
+<li><code>rpm: redhat package manager</code></li>
+</ul>
+<h3 id="yum管理"><a href="#yum管理" class="headerlink" title="yum管理"></a>yum管理</h3><h3 id="定制yum仓库"><a href="#定制yum仓库" class="headerlink" title="定制yum仓库"></a>定制yum仓库</h3><h3 id="dnf管理"><a href="#dnf管理" class="headerlink" title="dnf管理"></a>dnf管理</h3><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3>
       
     </div>
     <div class="article-footer">
