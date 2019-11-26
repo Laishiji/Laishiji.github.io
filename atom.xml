@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2019-11-23T13:24:57.444Z</updated>
+  <updated>2019-11-26T12:41:02.968Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux软件安装和包管理</title>
+    <link href="http://thmasterplan.cn/2019/11/25/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/"/>
+    <id>http://thmasterplan.cn/2019/11/25/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/</id>
+    <published>2019-11-25T04:47:01.000Z</published>
+    <updated>2019-11-26T12:41:02.968Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="软件运行环境"><a href="#软件运行环境" class="headerlink" title="软件运行环境"></a>软件运行环境</h3><ul><li>静态链接：<code>libxxx.a</code>，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。</li><li>动态链接：<code>libxxx.so</code>，只把依赖做一个动态链接，占用空间少。</li></ul><h3 id="软件包基础"><a href="#软件包基础" class="headerlink" title="软件包基础"></a>软件包基础</h3><h3 id="rpm包管理"><a href="#rpm包管理" class="headerlink" title="rpm包管理"></a>rpm包管理</h3><h3 id="yum管理"><a href="#yum管理" class="headerlink" title="yum管理"></a>yum管理</h3><h3 id="定制yum仓库"><a href="#定制yum仓库" class="headerlink" title="定制yum仓库"></a>定制yum仓库</h3><h3 id="dnf管理"><a href="#dnf管理" class="headerlink" title="dnf管理"></a>dnf管理</h3><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;软件运行环境&quot;&gt;&lt;a href=&quot;#软件运行环境&quot; class=&quot;headerlink&quot; title=&quot;软件运行环境&quot;&gt;&lt;/a&gt;软件运行环境&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;静态链接：&lt;code&gt;libxxx.a&lt;/code&gt;，程序对应的依赖库复制到程序包，占用空间多,
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://thmasterplan.cn/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://thmasterplan.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文本处理sed</title>
     <link href="http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/"/>
     <id>http://thmasterplan.cn/2019/11/23/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86sed/</id>
     <published>2019-11-23T02:52:42.000Z</published>
-    <updated>2019-11-23T13:24:57.444Z</updated>
+    <updated>2019-11-24T13:00:13.491Z</updated>
     
     <content type="html"><![CDATA[<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><ul><li>简介：一种流编辑器，一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为模式空间，接着处理缓冲区中的行，处理完成后，输出至标准输出，读入下行，如此循环。如果没有使用’D’的特殊命令，sed会在两个循环之间清空缓存，但不会清空保留空间。这样不断重复，直至文件末尾。文件内容并不变。</li><li>功能：主要用来自动编辑一个或多个文件，简化对文件的反复操作，编写转换程序等。</li></ul><h3 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h3><h3 id="三、高级用法"><a href="#三、高级用法" class="headerlink" title="三、高级用法"></a>三、高级用法</h3>]]></content>
     
