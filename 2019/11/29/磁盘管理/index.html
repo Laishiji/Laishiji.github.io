@@ -18,17 +18,18 @@
   
   
   <title>磁盘管理 | Blog Of TheMasterplan</title>
-  <meta name="description" content="磁盘工作原理 不同硬盘标识：a-z，aa，ab… ​      &#x2F;dev&#x2F;sda，&#x2F;dev&#x2F;sdb  同一磁盘的不同分区：1，2，… ​     &#x2F;dev&#x2F;sda1，&#x2F;dev&#x2F;sda2，…  磁盘存储术语：head(磁头)，track(磁道)，cylinder(柱面)，sector(扇区)   分区管理 分区原因  隔离系统和程序，可安装多个OS  采用不同文件系统  优化I&#x2F;O性能  实现磁盘空">
+  <meta name="description" content="磁盘工作原理 不同硬盘标识：a-z，aa，ab… ​      &#x2F;dev&#x2F;sda，&#x2F;dev&#x2F;sdb  同一磁盘的不同分区：1，2，… ​     &#x2F;dev&#x2F;sda1，&#x2F;dev&#x2F;sda2，…  磁盘存储术语：head(磁头)，track(磁道)，cylinder(柱面)，sector(扇区)  磁盘使用步骤：磁盘分区 -&amp;gt; 分区上创建文件系统 -&amp;gt; 将分区挂载到目录   分区管理 分区原">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="磁盘管理">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="磁盘工作原理 不同硬盘标识：a-z，aa，ab… ​      &#x2F;dev&#x2F;sda，&#x2F;dev&#x2F;sdb  同一磁盘的不同分区：1，2，… ​     &#x2F;dev&#x2F;sda1，&#x2F;dev&#x2F;sda2，…  磁盘存储术语：head(磁头)，track(磁道)，cylinder(柱面)，sector(扇区)   分区管理 分区原因  隔离系统和程序，可安装多个OS  采用不同文件系统  优化I&#x2F;O性能  实现磁盘空">
+<meta property="og:description" content="磁盘工作原理 不同硬盘标识：a-z，aa，ab… ​      &#x2F;dev&#x2F;sda，&#x2F;dev&#x2F;sdb  同一磁盘的不同分区：1，2，… ​     &#x2F;dev&#x2F;sda1，&#x2F;dev&#x2F;sda2，…  磁盘存储术语：head(磁头)，track(磁道)，cylinder(柱面)，sector(扇区)  磁盘使用步骤：磁盘分区 -&amp;gt; 分区上创建文件系统 -&amp;gt; 将分区挂载到目录   分区管理 分区原">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86&#x2F;MBR.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86&#x2F;GPT.jpg">
-<meta property="og:updated_time" content="2019-11-29T13:39:30.775Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86&#x2F;mount.jpg">
+<meta property="og:updated_time" content="2019-11-30T14:53:52.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86&#x2F;MBR.jpg">
   <!-- Canonical links -->
@@ -426,7 +427,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/29/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 354(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
 	
 	
 
@@ -442,6 +443,8 @@
 <p>​     /dev/sda1，/dev/sda2，…</p>
 </li>
 <li><p>磁盘存储术语：head(磁头)，track(磁道)，cylinder(柱面)，sector(扇区)</p>
+</li>
+<li><p>磁盘使用步骤：磁盘分区 -&gt; 分区上创建文件系统 -&gt; 将分区挂载到目录</p>
 </li>
 </ul>
 <h3 id="分区管理"><a href="#分区管理" class="headerlink" title="分区管理"></a>分区管理</h3><ul>
@@ -472,7 +475,7 @@
 </li>
 <li><p>GPT分区管理</p>
 <ul>
-<li><p>支持128个分区</p>
+<li><p>支持128个分区，分区可达ZB级别</p>
 </li>
 <li><p>GPT分区结构</p>
 <p><img src="GPT.jpg" alt=""></p>
@@ -481,12 +484,28 @@
 </li>
 <li><p>分区管理命令</p>
 <ul>
-<li><p>列出块设备：<code>lsblk</code></p>
+<li>列出块设备：<code>lsblk</code></li>
+<li><code>df</code>：查看文件系统和磁盘空间使用情况，常用选项<code>-T,-h</code></li>
+<li>创建分区：<ul>
+<li>创建MBR分区：<code>fdisk</code><ul>
+<li><code>fdisk -l</code>查看当前分区情况</li>
+<li><code>fdisk [device]</code>，管理分区，常用子命令：<ul>
+<li>p：分区列表</li>
+<li>t：更改分区ID（输入L查询，不同的ID标识分区的类型）</li>
+<li>n：创建新分区</li>
+<li>d：删除分区</li>
+<li>v：校验分区</li>
+</ul>
 </li>
-<li><p>创建分区：</p>
-<ul>
-<li>创建MBR分区：<code>fdisk</code>，可用<code>fdisk -l</code>查看当前分区情况</li>
-<li>创建GPT分区：<code>gdisk</code></li>
+<li>u：转换单位</li>
+<li>w：保存退出<ul>
+<li>q：不保存退出</li>
+<li>fdisk实时更改硬盘的分区，分区完成后注意与内存分区表同步（partprobe），查看内核是否已经识别新的分区<code>cat /proc/partitions</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建GPT分区：<code>gdisk</code>，用法与<code>fdisk</code>相似</li>
 <li>高级分区操作：<code>parted</code><ul>
 <li><code>parted</code>命令操作都是实时生效，需谨慎操作</li>
 <li><code>parted /dev/sdb mklabel gpt</code>：设置<code>/dev/sdb</code>这块磁盘为gpt类型</li>
@@ -498,12 +517,110 @@
 </li>
 </ul>
 </li>
-<li><p>重新设置内存中的内核分区表版本：<code>partprobe</code></p>
-</li>
+<li>重新设置内存中的内核分区表版本：<code>partprobe</code></li>
 </ul>
 </li>
 </ul>
-<h3 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h3><h3 id="挂载设备"><a href="#挂载设备" class="headerlink" title="挂载设备"></a>挂载设备</h3><h3 id="管理虚拟内存"><a href="#管理虚拟内存" class="headerlink" title="管理虚拟内存"></a>管理虚拟内存</h3><h3 id="RAID管理"><a href="#RAID管理" class="headerlink" title="RAID管理"></a>RAID管理</h3><h3 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h3>
+<h3 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h3><ul>
+<li><p>查看当前OS支持的文件系统：<code>cat /proc/filesystems</code></p>
+</li>
+<li><p>创建文件系统：<code>mkfs -t [type] [device]</code>：例如<code>mkfs -t xfs /dev/sdb2</code>，若要创建swap类型，使用<code>mkswap /dev/xxx</code>命令</p>
+</li>
+<li><p>管理文件系统：</p>
+<ul>
+<li><p><code>tune2fs</code>：重新设定ext系列文件系统参数的值</p>
+<ul>
+<li><code>-l</code>：查看指定文件系统superblock信息</li>
+<li><code>-L &#39;LABEL&#39;</code>：修改卷标</li>
+<li><code>-O</code>：文件系统属性的启用或禁用</li>
+</ul>
+</li>
+<li><p><code>dumpe2fs</code>：显示ext文件系统信息，将磁盘块分组管理</p>
+</li>
+<li><p><code>xfs_info 挂载点</code>：显示已挂载的xfs文件系统信息</p>
+</li>
+</ul>
+</li>
+<li><p>文件系统检测和修复：</p>
+<ul>
+<li>文件系统故障常发生于死机或非正常关机后，注意一定要取消挂载后执行修复命令</li>
+<li><code>fsck</code> 、<code>e2fsck</code>、<code>xfs_repair</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="挂载设备"><a href="#挂载设备" class="headerlink" title="挂载设备"></a>挂载设备</h3><ul>
+<li><p>将分区挂载到目录，则该目录下的文件都存储于该分区中；若有其他分区挂载在该目录的子目录下，则子目录下的文件存储与另一分区中。</p>
+</li>
+<li><p>挂载点下原有文件在挂载完成后会被临时隐藏，因此挂载点目录一般为空。</p>
+</li>
+<li><p>一个分区可以同时挂载在多个目录下，一个目录只能与一个分区关联</p>
+</li>
+<li><p><strong>实现永久挂载需要写入配置文件<code>/etc/fstab</code></strong>，使用<code>blkid</code>查看UUID（也可使用设备分区名例如<code>/dev/sda2</code>）并按格式写入配置文件；若需要更改挂载点所属文件系统属性（是否启用acl，suid，exec等），亦可在该配置文件中更改，默认为defaults，然后<code>mount -o remount /dev/xxx</code>重新挂载使更改生效</p>
+</li>
+<li><p>swap的挂载：写入<code>/etc/fstab</code>，挂载点和文件系统均为<code>swap</code>，保存退出后键入<code>swapon -a</code></p>
+</li>
+<li><p><code>mount /dev/sda2 /mnt</code>：将分区sda2挂载在/mnt目录下</p>
+<ul>
+<li><p><code>-r</code>：只读挂载</p>
+</li>
+<li><p><code>-w</code>：读写挂载，默认</p>
+</li>
+<li><p><code>mount -B 目录1 目录2</code>：类似与软连接的效果，两个目录的文件共享。</p>
+</li>
+<li><p><code>-o options</code>：挂载文件系统的选项</p>
+<p><img src="mount.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><code>umount /mnt</code>：取消挂载</p>
+</li>
+<li><p><code>cat /etc/mtab</code>：查看目前的挂载情况</p>
+</li>
+<li><p>查看挂载情况：<code>findmnt 挂载点/设备分区</code></p>
+</li>
+<li><p>查看正在访问指定挂载点的进程：<code>lsof 挂载点</code>、<code>fuser -v 挂载点</code></p>
+</li>
+<li><p>终止所有正在访问指定挂载点的进程：<code>fuser -km 挂载点</code></p>
+</li>
+</ul>
+<h3 id="管理虚拟内存"><a href="#管理虚拟内存" class="headerlink" title="管理虚拟内存"></a>管理虚拟内存</h3><ul>
+<li><p>swap交换分区是系统内存的补充，支持虚拟内存，当没有足够的内存保存系统处理的数据时会将数据写入swap分区</p>
+</li>
+<li><p>推荐系统swap空间</p>
+<table>
+<thead>
+<tr>
+<th align="center">系统RAM</th>
+<th align="center">推荐的swap空间</th>
+<th align="center">允许机器休眠的swap建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">低于2GB</td>
+<td align="center">RAM的倍数</td>
+<td align="center">RAM的三倍</td>
+</tr>
+<tr>
+<td align="center">2GB - 8GB</td>
+<td align="center">等于RAM</td>
+<td align="center">RAM的倍数</td>
+</tr>
+<tr>
+<td align="center">8GB - 64GB</td>
+<td align="center">8GB</td>
+<td align="center">RAM的1.5倍</td>
+</tr>
+<tr>
+<td align="center">&gt; 64GB</td>
+<td align="center">16GB</td>
+<td align="center">不建议使用休眠功能</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><code>free</code>：查看内存使用情况</p>
+</li>
+</ul>
+<h3 id="RAID管理"><a href="#RAID管理" class="headerlink" title="RAID管理"></a>RAID管理</h3><h3 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h3>
       
     </div>
     <div class="article-footer">
