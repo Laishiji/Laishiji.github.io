@@ -17,15 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: JAVA | Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;categories&#x2F;JAVA&#x2F;index.html">
+  <title>Fuzzy CMeans | Blog Of TheMasterplan</title>
+  <meta name="description" content="Fuzzy C-Means Clustering 算法原理 FCM基于以下目标函数的最小化：$$J_m=\sum_{i=1}^N\sum_{j=1}^Cu_{ij}^m|x_i-c_j|^2, 1\leq m&amp;lt;\propto，约束条件为\sum_{j=1}^Cu_{ij}=1,i=1,2,3,…,n$$$x_i$表示第$i$个样本点，$c_j$表示簇心，$j$表示簇的个数，$m$是任意大于1">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fuzzy CMeans">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;12&#x2F;04&#x2F;Fuzzy-CMeans&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="Fuzzy C-Means Clustering 算法原理 FCM基于以下目标函数的最小化：$$J_m=\sum_{i=1}^N\sum_{j=1}^Cu_{ij}^m|x_i-c_j|^2, 1\leq m&amp;lt;\propto，约束条件为\sum_{j=1}^Cu_{ij}=1,i=1,2,3,…,n$$$x_i$表示第$i$个样本点，$c_j$表示簇心，$j$表示簇的个数，$m$是任意大于1">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-04T08:03:39.735Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/categories/JAVA/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -363,72 +367,221 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: JAVA</h1>
-      <p class="hidden-xs">Total 2 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/机器学习/">机器学习</a></li>
-          
-          <li><a href="/categories/JAVA/">JAVA</a></li>
-          
-          <li><a href="/categories/git/">git</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/shell编程/">shell编程</a></li>
-          
-          <li><a href="/categories/regex/">regex</a></li>
-          
-          <li><a href="/categories/安全/">安全</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseJAVA" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              JAVA
-            </a>
-            <small class="text-muted">(Total 2 articles)</small>
-        </h4>
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fuzzy-C-Means-Clustering"><span class="toc-number">1.</span> <span class="toc-text">Fuzzy C-Means Clustering</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Fuzzy-CMeans" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Fuzzy CMeans
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/12/04/Fuzzy-CMeans/" class="article-date">
+	  <time datetime="2019-12-04T08:01:31.000Z" itemprop="datePublished">2019-12-04</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/04/Fuzzy-CMeans/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 266(words)</span>
+	
+	
+
+      </div>
     </div>
-    <div id="collapseJAVA" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingJAVA">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2019/11/19/java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-19T10:25:55.000Z" itemprop="datePublished">2019-11-19</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> java位运算
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="Fuzzy-C-Means-Clustering"><a href="#Fuzzy-C-Means-Clustering" class="headerlink" title="Fuzzy C-Means Clustering"></a>Fuzzy C-Means Clustering</h3><ul>
+<li><p>算法原理</p>
+<p>FCM基于以下目标函数的最小化：<br>$$<br>J_m=\sum_{i=1}^N\sum_{j=1}^Cu_{ij}^m|x_i-c_j|^2, 1\leq m&lt;\propto，约束条件为\sum_{j=1}^Cu_{ij}=1,i=1,2,3,…,n<br>$$<br>$x_i$表示第$i$个样本点，$c_j$表示簇心，$j$表示簇的个数，$m$是任意大于1的实数，$u_{ij}$表示$x_i$属于簇$j$的概率。</p>
+<p>通过对上述目标函数的迭代优化实现模糊划分，同时更新$u_{ij}$和簇心$c_j$：<br>$$<br>u_{ij}=\cfrac{1}{\sum_{k=1}^C(\cfrac{|x_i-c_j|}{|x_i-c_k|})^\cfrac{2}{m-1}},    c_j=\cfrac{\sum_{i=1}^Nu_{ij}^m.x_i}{\sum_{i=1}^Nu_{ij}^m}<br>$$</p>
+<p>当$max_{ij}{|u_{ij}^{k+1}-u_{ij}^k| &lt; \varepsilon}$时迭代终止，$0&lt;\varepsilon&lt;1$，$k$为迭代次数，此过程收敛到局部最小值或$J_m$的鞍点。</p>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>初始化 矩阵$U=[u_{ij}],U^{(0)}$</li>
+<li>在第$k$次迭代过程中，用$U^{(k)}$计算簇心向量$C^{(k)}=[c_j]$</li>
+<li>更新$U^{(k)},U^{(k+1)}$</li>
+<li>如果满足$|U^{(k+1)}-U^{(k)}| &lt; \varepsilon$则停止，否则返回步骤2</li>
+</ol>
+</li>
+</ul>
 
-
-              
-                
-<a href="/2019/11/19/Java%E9%AB%98%E7%BA%A7/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-19T09:33:47.000Z" itemprop="datePublished">2019-11-19</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java高级
-</a>
-
-
-              
-            </div>
-        </div>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/" title="Fuzzy CMeans" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
   
- 
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/12/02/Linux%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" title="Linux网络管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -476,6 +629,30 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 
