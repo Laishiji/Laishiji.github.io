@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2019-12-04T08:23:35.452Z</updated>
+  <updated>2019-12-04T14:23:44.217Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/"/>
     <id>http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/</id>
     <published>2019-12-04T08:01:31.000Z</published>
-    <updated>2019-12-04T08:23:35.452Z</updated>
+    <updated>2019-12-04T14:23:44.217Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Fuzzy-C-Means-Clustering"><a href="#Fuzzy-C-Means-Clustering" class="headerlink" title="Fuzzy C-Means Clustering"></a>Fuzzy C-Means Clustering</h3><ul><li><p>算法原理</p><p>FCM基于以下目标函数的最小化：</p><script type="math/tex; mode=display">J_m=\sum_{i=1}^N\sum_{j=1}^Cu_{ij}^m\|x_i-c_j\|^2, 1\leq m<\propto，约束条件为\sum_{j=1}^Cu_{ij}=1,i=1,2,3,...,n</script><p>$x_i$表示第$i$个样本点，$c_j$表示簇心，$j$表示簇的个数，$m$是任意大于1的实数，$u_{ij}$表示$x_i$属于簇$j$的概率。</p><p>通过对上述目标函数的迭代优化实现模糊划分，同时更新$u_{ij}$和簇心$c_j$：</p><script type="math/tex; mode=display">u_{ij}=\cfrac{1}{\sum_{k=1}^C(\cfrac{\|x_i-c_j\|}{\|x_i-c_k\|})^\cfrac{2}{m-1}},    c_j=\cfrac{\sum_{i=1}^Nu_{ij}^m.x_i}{\sum_{i=1}^Nu_{ij}^m}</script><p>当$max_{ij}{|u_{ij}^{k+1}-u_{ij}^k| &lt; \varepsilon}$时迭代终止，$0&lt;\varepsilon&lt;1$，$k$为迭代次数，此过程收敛到局部最小值或$J_m$的鞍点。</p></li><li><p>步骤：</p><ol><li>初始化 矩阵$U=[u_{ij}],U^{(0)}$</li><li>在第$k$次迭代过程中，用$U^{(k)}$计算簇心向量$C^{(k)}=[c_j]$</li><li>更新$U^{(k)},U^{(k+1)}$</li><li>如果满足$|U^{(k+1)}-U^{(k)}| &lt; \varepsilon$则停止，否则返回步骤2</li></ol></li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="Fuzzy-C-Means-Clustering"><a href="#Fuzzy-C-Means-Clustering" class="headerlink" title="Fuzzy C-Means Clustering"></a>Fuzzy C-Means Clustering</h3><ul><li><p>算法原理</p><p>FCM基于以下目标函数的最小化：</p><script type="math/tex; mode=display">J_m=\sum_{i=1}^N\sum_{j=1}^Cu_{ij}^m\|x_i-c_j\|^2, 1\leq m<\propto，约束条件为\sum_{j=1}^Cu_{ij}=1,i=1,2,3,...,n</script><p>$x_i$表示第$i$个样本点，$c_j$表示簇心，$j$表示簇的个数，$m$是任意大于1的实数，$u_{ij}$表示$x_i$属于簇$j$的概率。</p><p>通过对上述目标函数的迭代优化实现模糊划分，同时更新$u_{ij}$和簇心$c_j$：</p><script type="math/tex; mode=display">u_{ij}=\cfrac{1}{\sum_{k=1}^C(\cfrac{\|x_i-c_j\|}{\|x_i-c_k\|})^\cfrac{2}{m-1}},    c_j=\cfrac{\sum_{i=1}^Nu_{ij}^m.x_i}{\sum_{i=1}^Nu_{ij}^m}</script><p>当$max_{ij}{|u_{ij}^{k+1}-u_{ij}^k| &lt; \varepsilon}$时迭代终止，$0&lt;\varepsilon&lt;1$，$k$为迭代次数，此过程收敛到局部最小值或$J_m$的鞍点。</p></li><li><p>步骤：</p><ol><li>初始化 矩阵$U=[u_{ij}],U^{(0)}$</li><li>在第$k$次迭代过程中，用$U^{(k)}$计算簇心向量$C^{(k)}=[c_j]$</li><li>更新$U^{(k)},U^{(k+1)}$</li><li>如果满足$|U^{(k+1)}-U^{(k)}| &lt; \varepsilon$则停止，否则返回步骤2</li></ol></li><li><p>[参考链接]: <a href="https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/cmeans.html" target="_blank" rel="noopener">https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/cmeans.html</a></p></li></ul>]]></content>
     
     <summary type="html">
     
