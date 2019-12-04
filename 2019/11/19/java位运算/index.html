@@ -18,13 +18,13 @@
   
   
   <title>java位运算 | Blog Of TheMasterplan</title>
-  <meta name="description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
+  <meta name="description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
 <meta name="keywords" content="JAVA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java位运算">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;19&#x2F;java%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
+<meta property="og:description" content="JAVA位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。 | ：按位或。有一个为1则为1。 ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b100000000000000000000">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-11-24T12:45:33.112Z">
 <meta name="twitter:card" content="summary">
@@ -434,7 +434,7 @@
         <h3 id="JAVA位运算符"><a href="#JAVA位运算符" class="headerlink" title="JAVA位运算符"></a>JAVA位运算符</h3><ol>
 <li>&amp; ：按位与。同时为1才为1，否则为0。</li>
 <li>| ：按位或。有一个为1则为1。</li>
-<li>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3–&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</li>
+<li>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</li>
 <li>^ ：按位异或。不同为1，相同为0。<ul>
 <li>一个数据对相同的数据异或两次，值不变,常应用于加密。即a^b^b == a。</li>
 <li>使用异或实现两个变量值交换。a = a^b; b = a^b; a = a^b。</li>
@@ -696,6 +696,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

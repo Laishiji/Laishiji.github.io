@@ -18,13 +18,13 @@
   
   
   <title>压缩与解压缩 | Blog Of TheMasterplan</title>
-  <meta name="description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容    .gz后缀  gzip： -c：同compress">
+  <meta name="description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容   .gz后缀  gzip： -c：同compress">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="压缩与解压缩">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容    .gz后缀  gzip： -c：同compress">
+<meta property="og:description" content="一、压缩、解压缩工具 .Z后缀  compress：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道  -c：结果输出至标准输出，不删除原文件。常见用法：compress -c file &amp;gt; file.Z -v：显示详情   uncompress file.Z  zcat file.Z：不显示解压缩的前提下查看文本文件内容   .gz后缀  gzip： -c：同compress">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-11-23T13:25:30.409Z">
 <meta name="twitter:card" content="summary">
@@ -442,8 +442,7 @@
 </li>
 <li><p><code>uncompress file.Z</code></p>
 </li>
-<li><p><code>zcat file.Z</code>：不显示解压缩的前提下查看文本文件内容</p>
-</li>
+<li><code>zcat file.Z</code>：不显示解压缩的前提下查看文本文件内容</li>
 </ul>
 </li>
 <li><p><code>.gz</code>后缀</p>
@@ -467,8 +466,7 @@
 </li>
 <li><p><code>bunzip2 file.bz2</code></p>
 </li>
-<li><p><code>bzcat file.bz2</code></p>
-</li>
+<li><code>bzcat file.bz2</code></li>
 </ul>
 </li>
 <li><p><code>.xz</code></p>
@@ -481,14 +479,12 @@
 </li>
 <li><p><code>unxz</code></p>
 </li>
-<li><p><code>xzcat</code></p>
-</li>
+<li><code>xzcat</code></li>
 </ul>
 </li>
 <li><p>一般来说压缩比：<code>xz &gt; bzip2 &gt; gz &gt; compress</code>，均不能压缩目录</p>
 </li>
-<li><p><code>.zip</code></p>
-<ul>
+<li><code>.zip</code><ul>
 <li><code>zip</code>：支持压缩目录</li>
 <li><code>unzip</code></li>
 </ul>
@@ -497,14 +493,10 @@
 <h3 id="二、打包-存档-和解包工具"><a href="#二、打包-存档-和解包工具" class="headerlink" title="二、打包(存档)和解包工具"></a>二、打包(存档)和解包工具</h3><ul>
 <li><p><code>tar</code>常见用法：具体选项见man帮助</p>
 <ul>
-<li><p>打包，保留权限：<code>tar -cpvf xxx.tar file1 file2 file3...</code></p>
-</li>
-<li><p>追加文件至xxx.tar：<code>tar -rf xxx.tar file1 file2..</code>注：不支持对压缩文件追加</p>
-</li>
-<li><p>查看包中的文件列表：<code>tar -tf xxx.tar</code></p>
-</li>
-<li><p>解包<code>tar -xf xxx.tar [可选：-C /PATH]</code></p>
-</li>
+<li>打包，保留权限：<code>tar -cpvf xxx.tar file1 file2 file3...</code></li>
+<li>追加文件至xxx.tar：<code>tar -rf xxx.tar file1 file2..</code>注：不支持对压缩文件追加</li>
+<li>查看包中的文件列表：<code>tar -tf xxx.tar</code></li>
+<li>解包<code>tar -xf xxx.tar [可选：-C /PATH]</code></li>
 <li><p>结合压缩工具，打包并压缩：</p>
 <ul>
 <li><code>tar zcvf xxx.tar.gz [可选：/PATH]</code>；<code>.tar.gz</code>也可写成<code>.tgz</code></li>
@@ -514,8 +506,7 @@
 </li>
 <li><p><code>--eclude=/PATH/文件名</code>：打包时排除某文件：<code>tar -zcvf xxx.tgz --exclude=/a/b/abc.txt</code></p>
 </li>
-<li><p><code>-T</code>：指定打包列表；<code>-X</code>：指定排除列表</p>
-<ul>
+<li><code>-T</code>：指定打包列表；<code>-X</code>：指定排除列表<ul>
 <li><code>tar -zcvf xxx.tgz -T /a/list -X /a/excludeList</code></li>
 </ul>
 </li>
@@ -777,6 +768,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

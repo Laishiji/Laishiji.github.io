@@ -516,18 +516,12 @@
 </li>
 <li><p><code>chattr [-RV][-v][+/-/=&lt;属性&gt;] [文件或目录]</code>:</p>
 <ul>
-<li><p>-R：递归处理，将指定目录下的所有文件及子目录一并处理</p>
-</li>
-<li><p>-v：&lt;版本编号&gt; 设置文件或目录版本</p>
-</li>
-<li><p>-V： 显示指令执行过程</p>
-</li>
-<li><p>+&lt;属性&gt;： 开启文件或目录的该项属性</p>
-</li>
-<li><p>-&lt;属性&gt; ：关闭文件或目录的该项属</p>
-</li>
-<li><p>=&lt;属性&gt;： 指定文件或目录的该项属性</p>
-</li>
+<li>-R：递归处理，将指定目录下的所有文件及子目录一并处理</li>
+<li>-v：&lt;版本编号&gt; 设置文件或目录版本</li>
+<li>-V： 显示指令执行过程</li>
+<li>+&lt;属性&gt;： 开启文件或目录的该项属性</li>
+<li>-&lt;属性&gt; ：关闭文件或目录的该项属</li>
+<li>=&lt;属性&gt;： 指定文件或目录的该项属性</li>
 <li><p>属性：</p>
 <ul>
 <li><strong>a：让文件或目录只能加数据</strong>。</li>
@@ -562,12 +556,10 @@
 <li>SGID<strong>主要用于目录, 在该目录下创建的任何文件及子目录属于该目录所拥有的组</strong> 。</li>
 </ul>
 </li>
-<li><p>SBIT: 目前只针对目录有效，切只能分配给其他人（o）;对于目录的作用是：当用户在该目录下建立文件或目录时，仅有<strong>自己与 root</strong>才有权力<strong>删除</strong>，例如/tmp。</p>
-</li>
-<li><p><strong>SUID/SGID/SBIT权限设置</strong> ：</p>
-<ul>
+<li>SBIT: 目前只针对目录有效，切只能分配给其他人（o）;对于目录的作用是：当用户在该目录下建立文件或目录时，仅有<strong>自己与 root</strong>才有权力<strong>删除</strong>，例如/tmp。</li>
+<li><strong>SUID/SGID/SBIT权限设置</strong> ：<ul>
 <li><strong>文字法</strong> ：SUID: <strong>u+s</strong> ，SGID: <strong>g+s</strong>，SBIT: <strong>o+t</strong></li>
-<li><em>数字法*</em>：将原来的三位数扩展为四位数即可，SUID为4，SGID为2，SBIT为1，把它们放在权限数字的最开头。例如设置SUID，可以写成<strong>4777</strong>，设置SGID可以写成，<strong>2777</strong> 。</li>
+<li><em>数字法<strong>：将原来的三位数扩展为四位数即可，SUID为4，SGID为2，SBIT为1，把它们放在权限数字的最开头。例如设置SUID，可以写成</strong>4777<strong>，设置SGID可以写成，</strong>2777*</em> 。</li>
 </ul>
 </li>
 </ul>
@@ -852,6 +844,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

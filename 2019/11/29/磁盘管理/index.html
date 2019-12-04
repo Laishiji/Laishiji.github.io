@@ -460,16 +460,13 @@
 <h3 id="分区管理"><a href="#分区管理" class="headerlink" title="分区管理"></a>分区管理</h3><ul>
 <li><p>分区原因</p>
 <ul>
-<li><p>隔离系统和程序，可安装多个OS</p>
-</li>
+<li>隔离系统和程序，可安装多个OS</li>
 <li><p>采用不同文件系统</p>
 </li>
 <li><p>优化I/O性能</p>
 </li>
-<li><p>实现磁盘空间配额限制</p>
-</li>
-<li><p>提高修复速度</p>
-</li>
+<li>实现磁盘空间配额限制</li>
+<li>提高修复速度</li>
 </ul>
 </li>
 <li><p>MBR分区管理</p>
@@ -547,8 +544,7 @@
 </li>
 <li><p><code>dumpe2fs</code>：显示ext文件系统信息，将磁盘块分组管理</p>
 </li>
-<li><p><code>xfs_info 挂载点</code>：显示已挂载的xfs文件系统信息</p>
-</li>
+<li><code>xfs_info 挂载点</code>：显示已挂载的xfs文件系统信息</li>
 </ul>
 </li>
 <li><p>文件系统检测和修复：</p>
@@ -565,28 +561,17 @@
 </li>
 <li><p><code>dd</code>：convert and copy a file</p>
 <ul>
-<li><p>用法：<code>dd if=/x/y of=/a/b bs=# count=#</code></p>
-</li>
-<li><p><code>if=/x/y</code>：从指定文件读取</p>
-</li>
-<li><p><code>of=/a/b</code>：写入到指定文件</p>
-</li>
-<li><p><code>ibs=size</code>：一次读size个字节</p>
-</li>
-<li><p><code>obs=size</code>：一次写size个字节</p>
-</li>
-<li><p><code>bs=size</code>：block size，指定块大小(既是ibs也是obs)</p>
-</li>
-<li><p><code>cbs=size</code>：一次转换size个字节</p>
-</li>
-<li><p><code>skip=blocks</code>：从开头忽略blocks个ibs大小的块，只复制之后的内容</p>
-</li>
-<li><p><code>seek=blocks</code>：从开头忽略blocks个obs大小的块，用if中复制的内容替换blocks个obs大小的块之后的内容。</p>
-</li>
-<li><p><code>count=n</code>：复制n个bs</p>
-</li>
-<li><p><img src="dd.jpg" alt=""></p>
-</li>
+<li>用法：<code>dd if=/x/y of=/a/b bs=# count=#</code></li>
+<li><code>if=/x/y</code>：从指定文件读取</li>
+<li><code>of=/a/b</code>：写入到指定文件</li>
+<li><code>ibs=size</code>：一次读size个字节</li>
+<li><code>obs=size</code>：一次写size个字节</li>
+<li><code>bs=size</code>：block size，指定块大小(既是ibs也是obs)</li>
+<li><code>cbs=size</code>：一次转换size个字节</li>
+<li><code>skip=blocks</code>：从开头忽略blocks个ibs大小的块，只复制之后的内容</li>
+<li><code>seek=blocks</code>：从开头忽略blocks个obs大小的块，用if中复制的内容替换blocks个obs大小的块之后的内容。</li>
+<li><code>count=n</code>：复制n个bs</li>
+<li><img src="dd.jpg" alt=""></li>
 <li><p>备份：</p>
 <ul>
 <li><code>dd if=/dev/sdx of=/dev/sdy</code>：整盘备份到另一磁盘</li>
@@ -660,35 +645,7 @@
 <li><p>swap交换分区是系统内存的补充，支持虚拟内存，当没有足够的内存保存系统处理的数据时会将数据写入swap分区</p>
 </li>
 <li><p>推荐系统swap空间</p>
-<table>
-<thead>
-<tr>
-<th align="center">系统RAM</th>
-<th align="center">推荐的swap空间</th>
-<th align="center">允许机器休眠的swap建议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">低于2GB</td>
-<td align="center">RAM的倍数</td>
-<td align="center">RAM的三倍</td>
-</tr>
-<tr>
-<td align="center">2GB - 8GB</td>
-<td align="center">等于RAM</td>
-<td align="center">RAM的倍数</td>
-</tr>
-<tr>
-<td align="center">8GB - 64GB</td>
-<td align="center">8GB</td>
-<td align="center">RAM的1.5倍</td>
-</tr>
-<tr>
-<td align="center">&gt; 64GB</td>
-<td align="center">16GB</td>
-<td align="center">不建议使用休眠功能</td>
-</tr>
-</tbody></table>
+<p>|  系统RAM   | 推荐的swap空间 | 允许机器休眠的swap建议 |<br>| :————: | :——————: | :——————————: |<br>|  低于2GB   |   RAM的倍数    |       RAM的三倍        |<br>| 2GB - 8GB  |    等于RAM     |       RAM的倍数        |<br>| 8GB - 64GB |      8GB       |       RAM的1.5倍       |<br>|   &gt; 64GB   |      16GB      |   不建议使用休眠功能   |</p>
 </li>
 <li><p><code>free</code>：查看内存使用情况</p>
 </li>
@@ -769,8 +726,7 @@
 </li>
 <li><p>ext：<code>resize2fs 逻辑卷名</code>（注意xfs与ext的区别）</p>
 </li>
-<li><p>亦可一次搞定（加上<code>-r</code>选项）：<code>lvextend -r -l +xxx /dev/vg0/mysql</code></p>
-</li>
+<li>亦可一次搞定（加上<code>-r</code>选项）：<code>lvextend -r -l +xxx /dev/vg0/mysql</code></li>
 </ul>
 </li>
 <li><p>扩展现有的卷组：<code>vgextend vg0 PV名</code></p>
@@ -1042,6 +998,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

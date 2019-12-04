@@ -18,13 +18,13 @@
   
   
   <title>常用命令入门 | Blog Of TheMasterplan</title>
-  <meta name="description" content="常用命令入门 Xwindow与命令行界面的切换：ctrl + alt + f1...f7，其中只有f7为图形化界面，启动图形化界面也可以用startx命令。  命令帮助：  whatis 命令：列出命令的作用以及man帮助的章节。  命令 --help：命令用法  man 章节号 命令：命令更详细的用法  info 命令  man -k 字符串:查找所有包含该字符串的命令  help：列出所有的内">
+  <meta name="description" content="常用命令入门 Xwindow与命令行界面的切换：ctrl + alt + f1...f7，其中只有f7为图形化界面，启动图形化界面也可以用startx命令。  命令帮助：  whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法  man 章节号 命令：命令更详细的用法  info 命令 man -k 字符串:查找所有包含该字符串的命令 help：列出所有的内部命令">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用命令入门">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="常用命令入门 Xwindow与命令行界面的切换：ctrl + alt + f1...f7，其中只有f7为图形化界面，启动图形化界面也可以用startx命令。  命令帮助：  whatis 命令：列出命令的作用以及man帮助的章节。  命令 --help：命令用法  man 章节号 命令：命令更详细的用法  info 命令  man -k 字符串:查找所有包含该字符串的命令  help：列出所有的内">
+<meta property="og:description" content="常用命令入门 Xwindow与命令行界面的切换：ctrl + alt + f1...f7，其中只有f7为图形化界面，启动图形化界面也可以用startx命令。  命令帮助：  whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法  man 章节号 命令：命令更详细的用法  info 命令 man -k 字符串:查找所有包含该字符串的命令 help：列出所有的内部命令">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-11-23T13:24:22.325Z">
 <meta name="twitter:card" content="summary">
@@ -436,66 +436,40 @@
 </li>
 <li><p>命令帮助：</p>
 <ul>
-<li><p><code>whatis 命令</code>：列出命令的作用以及man帮助的章节。</p>
-</li>
+<li><code>whatis 命令</code>：列出命令的作用以及man帮助的章节。</li>
 <li><p><code>命令 --help</code>：命令用法</p>
 </li>
 <li><p><code>man 章节号 命令</code>：命令更详细的用法</p>
 </li>
-<li><p><code>info 命令</code></p>
-</li>
-<li><p><code>man -k 字符串</code>:查找所有包含该字符串的命令</p>
-</li>
-<li><p><code>help</code>：列出所有的内部命令</p>
-</li>
+<li><code>info 命令</code></li>
+<li><code>man -k 字符串</code>:查找所有包含该字符串的命令</li>
+<li><code>help</code>：列出所有的内部命令</li>
 </ul>
 </li>
 <li><p>常见命令与快捷键：</p>
 <ul>
-<li><p><code>ls -a/-l</code>:列出当前目录所有文件；<code>ls -l == ll</code>;<code>ls -d .*/</code>：列出所有目录</p>
-</li>
-<li><p><code>date</code>:获取当前日期</p>
-</li>
-<li><p><code>cal</code>:获取日历</p>
-</li>
-<li><p><code>bc</code>:进入计算器,<code>scale = n</code>,n表示计算的精度</p>
-</li>
-<li><p><code>[Tab]</code>:命令、文件名、选项、参数补全，连续两次<code>Tab</code>键可列出所有选项</p>
-</li>
-<li><p><code>ctrl c</code>:终止目前程序</p>
-</li>
-<li><p><code>ctrl d</code> :等同于输入exit</p>
-</li>
-<li><p><code>shift pageup/pagedown</code>:翻页</p>
-</li>
-<li><p><code>nano</code>:一个简单的文本编辑器</p>
-</li>
-<li><p><code>reboot/shutdown -r</code>:重启；<code>shutdown/poweroff</code>:关机；<code>shutdown -h 1</code>:定时1分钟关机；<code>shutdown -h 8:20</code>:8:20关机</p>
-</li>
-<li><p><code>su -/su root</code>：获取root权限</p>
-</li>
-<li><p><code>sync</code>：将内存中的数据写入磁盘，防止丢失</p>
-</li>
-<li><p><code>clear</code>:清屏</p>
-</li>
-<li><p><code>file 文件名</code>:查看文件类型</p>
-</li>
-<li><p><code>tree</code>:查询当前目录的树形结构,需要安装；选项<code>-d</code>只显示目录；选项<code>-L</code>显示指定层级；例如<code>tree -d /boot -L 1</code>。</p>
-</li>
-<li><p><code>passwd</code>：更改密码</p>
-</li>
-<li><p><code>hostname</code>：查看主机名；<code>hostnamectl set-hostname 名字</code>：更改主机名。</p>
-</li>
-<li><p><code>ls -l $(which passwd)</code>：命令的嵌套执行，用$()表示。</p>
-</li>
-<li><p>修改提示符颜色:修改<code>PS1</code>变量的值，并保存在配置文件<code>/etc/profile.d/env.sh</code>中。</p>
-</li>
-<li><p><code>type 命令</code>：查看命令类型，内部命令集成在shell中。</p>
-</li>
-<li><p><code>enable</code>：查看所有内部命令；<code>enable -n 命令</code>:禁用内部命令</p>
-</li>
-<li><p><code>Hash缓存表:</code>系统初始hash表为空，当<strong>外部命令</strong>执行时，默认会从PATH路径下寻找该命令，找到后会将该命令的路径记录到hash表中，当再次使用该命令时，shell解释器首先查看hash表，存在则执行命令，不存在则去PATH路径下寻找，利用hash缓存表可大大提高命令的调用速率。</p>
-<ul>
+<li><code>ls -a/-l</code>:列出当前目录所有文件；<code>ls -l == ll</code>;<code>ls -d .*/</code>：列出所有目录</li>
+<li><code>date</code>:获取当前日期</li>
+<li><code>cal</code>:获取日历</li>
+<li><code>bc</code>:进入计算器,<code>scale = n</code>,n表示计算的精度</li>
+<li><code>[Tab]</code>:命令、文件名、选项、参数补全，连续两次<code>Tab</code>键可列出所有选项</li>
+<li><code>ctrl c</code>:终止目前程序</li>
+<li><code>ctrl d</code> :等同于输入exit</li>
+<li><code>shift pageup/pagedown</code>:翻页</li>
+<li><code>nano</code>:一个简单的文本编辑器</li>
+<li><code>reboot/shutdown -r</code>:重启；<code>shutdown/poweroff</code>:关机；<code>shutdown -h 1</code>:定时1分钟关机；<code>shutdown -h 8:20</code>:8:20关机</li>
+<li><code>su -/su root</code>：获取root权限</li>
+<li><code>sync</code>：将内存中的数据写入磁盘，防止丢失</li>
+<li><code>clear</code>:清屏</li>
+<li><code>file 文件名</code>:查看文件类型</li>
+<li><code>tree</code>:查询当前目录的树形结构,需要安装；选项<code>-d</code>只显示目录；选项<code>-L</code>显示指定层级；例如<code>tree -d /boot -L 1</code>。</li>
+<li><code>passwd</code>：更改密码</li>
+<li><code>hostname</code>：查看主机名；<code>hostnamectl set-hostname 名字</code>：更改主机名。</li>
+<li><code>ls -l $(which passwd)</code>：命令的嵌套执行，用$()表示。</li>
+<li>修改提示符颜色:修改<code>PS1</code>变量的值，并保存在配置文件<code>/etc/profile.d/env.sh</code>中。</li>
+<li><code>type 命令</code>：查看命令类型，内部命令集成在shell中。</li>
+<li><code>enable</code>：查看所有内部命令；<code>enable -n 命令</code>:禁用内部命令</li>
+<li><code>Hash缓存表:</code>系统初始hash表为空，当<strong>外部命令</strong>执行时，默认会从PATH路径下寻找该命令，找到后会将该命令的路径记录到hash表中，当再次使用该命令时，shell解释器首先查看hash表，存在则执行命令，不存在则去PATH路径下寻找，利用hash缓存表可大大提高命令的调用速率。<ul>
 <li><code>hash</code>：显示hash缓存</li>
 </ul>
 </li>
@@ -771,6 +745,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

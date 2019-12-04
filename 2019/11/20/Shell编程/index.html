@@ -372,7 +372,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、条件分支"><span class="toc-number">4.</span> <span class="toc-text">四、条件分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、脚本安全"><span class="toc-number">5.</span> <span class="toc-text">五、脚本安全</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、shell脚本基础"><span class="toc-number">1.</span> <span class="toc-text">一、shell脚本基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、特殊位置变量"><span class="toc-number">2.</span> <span class="toc-text">二、特殊位置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、算术逻辑运算和条件测试"><span class="toc-number">3.</span> <span class="toc-text">三、算术逻辑运算和条件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、条件分支"><span class="toc-number">4.</span> <span class="toc-text">四、条件分支</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#或者"><span class="toc-number"></span> <span class="toc-text">或者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#五、脚本安全"><span class="toc-number">1.</span> <span class="toc-text">五、脚本安全</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -451,14 +451,10 @@
 <li>注意脚本中定义别名不生效。</li>
 </ul>
 <h3 id="二、特殊位置变量"><a href="#二、特殊位置变量" class="headerlink" title="二、特殊位置变量"></a>二、特殊位置变量</h3><ul>
-<li><p><code>pstree -p</code>：查看进程树</p>
-</li>
-<li><p><code>getent</code>：查看系统数据库的相关记录，例如<code>getent passwd root</code>，查看passwd库中root的信息。</p>
-</li>
-<li><p><code>变量BASHPID</code>：当前bash进程的pid</p>
-</li>
-<li><p><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>，当命令列表执行完毕，将会退出subbash。要想退出当前进程，则需使用<code>{命令列表}</code>。</p>
-</li>
+<li><code>pstree -p</code>：查看进程树</li>
+<li><code>getent</code>：查看系统数据库的相关记录，例如<code>getent passwd root</code>，查看passwd库中root的信息。</li>
+<li><code>变量BASHPID</code>：当前bash进程的pid</li>
+<li><code>(命令列表)</code>：该语法的作用，小括号会开启一个subbash，其中的命令和变量只是<strong>临时生效</strong>，当命令列表执行完毕，将会退出subbash。要想退出当前进程，则需使用<code>{命令列表}</code>。</li>
 <li><p>环境变量：子进程，父进程均可访问</p>
 <ul>
 <li>定义方式：<code>export NAME=abc</code>、<code>declare -x NAME=abc</code></li>
@@ -514,8 +510,7 @@
 </li>
 <li><p>条件测试：</p>
 <ul>
-<li><p><code>test EXPRESSION</code>或者<code>[ EXPRESSION ]</code>或者<code>[[ EXPRESSION ]]</code>，<code>EXPRESSION</code><strong>前后必须要有空格</strong>，其中<strong><code>[[]]</code>语法支持正则表达式</strong>。</p>
-</li>
+<li><code>test EXPRESSION</code>或者<code>[ EXPRESSION ]</code>或者<code>[[ EXPRESSION ]]</code>，<code>EXPRESSION</code><strong>前后必须要有空格</strong>，其中<strong><code>[[]]</code>语法支持正则表达式</strong>。</li>
 <li><p><code>help test</code>：查看相关选项</p>
 </li>
 <li><p>脚本练习：查看磁盘最大使用率</p>
@@ -560,27 +555,14 @@
 </li>
 </ul>
 <h3 id="四、条件分支"><a href="#四、条件分支" class="headerlink" title="四、条件分支"></a>四、条件分支</h3><ul>
-<li><pre><code>if [ EXPRESSION ];then
-    条件为真的分支代码
-else
-    条件为假的分支代码
-fi
-
-#或者
-
-if [  ];then
-   xxxxx
-elif [  ];then
-   xxxxx
-elif [  ];then
-   xxxxx
-.......
-else 
-   yyyyy
-fi
-
+<li><p>```<br>if [ EXPRESSION ];then</p>
+<pre><code>条件为真的分支代码
+</code></pre><p>else</p>
+<pre><code>条件为假的分支代码
+</code></pre><p>fi</p>
+<h1 id="或者"><a href="#或者" class="headerlink" title="或者"></a>或者</h1><p>if [  ];then<br>   xxxxx<br>elif [  ];then<br>   xxxxx<br>elif [  ];then<br>   xxxxx<br>…….<br>else<br>   yyyyy<br>fi</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```shell</span><br><span class="line">  case $NUM in</span><br><span class="line">  1|3|5)</span><br><span class="line">     cmd1</span><br><span class="line">     ;;</span><br><span class="line">  2|4|6)</span><br><span class="line">     cmd2</span><br><span class="line">     ;;</span><br><span class="line">  ...</span><br><span class="line">  *)</span><br><span class="line">     cmdN</span><br><span class="line">     ;;</span><br><span class="line">  esac</span><br></pre></td></tr></table></figure>
-</code></pre></li>
+</li>
 </ul>
 <h3 id="五、脚本安全"><a href="#五、脚本安全" class="headerlink" title="五、脚本安全"></a>五、脚本安全</h3><ul>
 <li><code>set -u</code>：在脚本前加上该语句，在引用一个未设置的变量时，显示错误信息，并且不执行含有未设置变量的语句。</li>
@@ -833,6 +815,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

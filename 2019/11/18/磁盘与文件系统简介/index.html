@@ -450,28 +450,7 @@
 <p><img src="ext2.jpg" alt=""></p>
 </li>
 <li><p>data clock：ext2文件系统所支持的block大小有1K,2K和4K三种</p>
-<table>
-<thead>
-<tr>
-<th align="center">Block大小</th>
-<th>1KB</th>
-<th>2KB</th>
-<th>4KB</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">最大单一文件限制</td>
-<td>16GB</td>
-<td>256GB</td>
-<td>2TB</td>
-</tr>
-<tr>
-<td align="center">最大文件系统总容量</td>
-<td>2TB</td>
-<td>8TB</td>
-<td>16TB</td>
-</tr>
-</tbody></table>
+<p>|     Block大小      | 1KB  | 2KB   | 4KB  |<br>| :————————: | —— | ——- | —— |<br>|  最大单一文件限制  | 16GB | 256GB | 2TB  |<br>| 最大文件系统总容量 | 2TB  | 8TB   | 16TB |</p>
 <ul>
 <li>除非重新格式化，block的大小与数量在格式化完就不能再改变</li>
 <li>每个blcok内最多只能放置一个文件的数据</li>
@@ -752,6 +731,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>
