@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/</loc>
+    
+    <lastmod>2019-12-06T11:54:59.567Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/2019/12/05/matplotlib/</loc>
     
     <lastmod>2019-12-06T06:38:21.568Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://thmasterplan.cn/2019/12/05/Numpy-Pandas/</loc>
     
     <lastmod>2019-12-05T13:27:39.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/2019/12/04/Fuzzy-CMeans/</loc>
-    
-    <lastmod>2019-12-05T08:18:50.464Z</lastmod>
     
   </url>
   
