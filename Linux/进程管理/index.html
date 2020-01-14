@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>进程管理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="进程管理工具 lscpu：显示cpu信息  pstree -p：打印进程树  ps：(process state)，Linux系统各进程的相关信息均保存在&#x2F;proc&#x2F;PID下  BSD选项，选项前没有-：  a：打印所有终端中的进程  STAT：     x：与终端无关的进程，例如守护进程  u：额外显示进程的USER，CPU&#x2F;MEM占比，RSS（常驻内存集，不包括交换分区）与VSZ（分配给进程的">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="进程管理工具 lscpu：显示cpu信息  pstree -p：打印进程树  ps：(process state)，Linux系统各进程的相关信息均保存在&#x2F;proc&#x2F;PID下  BSD选项，选项前没有-：  a：打印所有终端中的进程  STAT：     x：与终端无关的进程，例如守护进程  u：额外显示进程的USER，CPU&#x2F;MEM占比，RSS（常驻内存集，不包括交换分区）与VSZ（分配给进程的">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86&#x2F;STAT.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86&#x2F;Linux优先级.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86&#x2F;恢复文件.jpg">
+<meta property="og:updated_time" content="2019-12-11T07:28:24.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86&#x2F;STAT.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/regex/">regex</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/" rel="tag">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.5px;">JAVA</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 13.5px;">Python</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/shell%E7%BC%96%E7%A8%8B/" style="font-size: 13px;">shell编程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="title">进程管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-09T05:54:57.000Z" itemprop="datePublished">2019-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Python/matplotlib/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/Python/matplotlib/" class="title">matplotlib</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-05T04:50:04.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Python/Numpy-Pandas/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/Python/Numpy-Pandas/" class="title">Numpy_Pandas</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-05T04:49:23.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Fuzzy-CMeans/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Fuzzy-CMeans/" class="title">Fuzzy CMeans</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-04T08:01:31.000Z" itemprop="datePublished">2019-12-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Linux/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/Linux/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="title">磁盘管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-29T07:26:51.000Z" itemprop="datePublished">2019-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程管理工具"><span class="toc-number">1.</span> <span class="toc-text">进程管理工具</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-进程管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      进程管理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="article-date">
+	  <time datetime="2019-12-09T05:54:57.000Z" itemprop="datePublished">2019-12-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 573(words)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="进程管理工具"><a href="#进程管理工具" class="headerlink" title="进程管理工具"></a>进程管理工具</h3><ul>
+<li><p><code>lscpu</code>：显示cpu信息</p>
+</li>
+<li><p><code>pstree -p</code>：打印进程树</p>
+</li>
+<li><p><code>ps</code>：(process state)，Linux系统各进程的相关信息均保存在/proc/PID下</p>
+<ul>
+<li><p>BSD选项，选项前没有<code>-</code>：</p>
+<ul>
+<li><p><code>a</code>：打印所有终端中的进程</p>
+<ul>
+<li><p>STAT：</p>
+<p><img src="STAT.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><code>x</code>：与终端无关的进程，例如守护进程</p>
+</li>
+<li><p><code>u</code>：额外显示进程的USER，CPU/MEM占比，RSS（常驻内存集，不包括交换分区）与VSZ（分配给进程的虚拟内存，包括交换分区），START（开始运行的时间）。</p>
+</li>
+<li><p><code>f</code>：显示进程父子关系</p>
+</li>
+<li><p><code>k -%cpu</code>：倒序排序显示cpu占比，<code>-</code>表示倒序</p>
+</li>
+<li><p><code>o</code>：只显示某些选项，后面跟要显示的选项；例如<code>ps axo psr</code>：显示命令使用哪个CPU核</p>
+</li>
+<li><p>Linux优先级：<code>o ni,pri,rtprio</code></p>
+<p><img src="Linux优先级.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>搜索进程</p>
+<ul>
+<li><p>按预定义的模式：<code>pgrep [options] pattern</code>：</p>
+<ul>
+<li><code>-u uid</code>：有效用户</li>
+<li><code>-U uid</code>：运行命令者</li>
+<li><code>-t terminal</code>：与指定终端相关的进程</li>
+<li><code>-l</code>：显示进程名，例如<code>pgrep -l &#39;^ba.*&#39;</code></li>
+<li><code>-a</code>：显示完整格式的进程名</li>
+<li><code>-P pid</code>：显示指定进程的子进程</li>
+</ul>
+</li>
+<li><p>按程序名称: <code>pidof 程序名</code></p>
+</li>
+</ul>
+</li>
+<li><p>进程管理工具：<code>top</code>，内置命令：</p>
+<ul>
+<li>排序：<code>P</code>：按%CPU；<code>M</code>：按%MEM；<code>T</code>：按累积占据CPU时长(TIME+)</li>
+<li><p>首部信息显示：</p>
+<ul>
+<li>uptime信息：<code>l</code></li>
+<li>tasks及cpu信息：<code>t</code></li>
+<li>cpu内核分别显示：<code>1</code></li>
+<li>内存信息：<code>m</code></li>
+</ul>
+</li>
+<li><p>退出：<code>q</code></p>
+</li>
+<li>修改刷新时间间隔：<code>s</code></li>
+<li>终止进程：<code>k</code></li>
+<li>保存当前进程信息：<code>W</code></li>
+<li><p>栏位信息：</p>
+<ul>
+<li><code>us</code>：用户空间</li>
+<li><code>sy</code>：内核空间</li>
+<li><code>ni</code>：调整nice时间</li>
+<li><code>id</code>：空闲</li>
+<li><code>wa</code>：等待IO时间</li>
+<li><code>hi</code>：硬中断</li>
+<li><code>si</code>：软中断</li>
+<li><code>st</code>：虚拟机偷走的时间</li>
+</ul>
+</li>
+<li><p>选项：</p>
+<ul>
+<li><code>-b</code>：显示所有进程（默认只显示前一部分）</li>
+<li><code>-p</code>：指定显示某些进程</li>
+<li><code>-H</code>：线程模式；示例：<code>top -H -p PID</code>，指定显示某个进程的所有线程</li>
+</ul>
+</li>
+<li><p>EPEL源的<code>htop</code>，功能更丰富的进程管理工具</p>
+</li>
+</ul>
+</li>
+<li><p>内存空间使用状态：<code>free</code></p>
+<ul>
+<li><code>-h</code>：易读格式</li>
+<li><code>-s n</code>：指定刷新间隔为n秒</li>
+</ul>
+</li>
+<li><p>查看虚拟内存使用状态：<code>vmstat</code></p>
+</li>
+<li><p>系统监控工具：</p>
+<ul>
+<li><p><code>iostat</code>：统计CPU和设备IO信息</p>
+</li>
+<li><p><code>iftop</code>：显示带宽使用情况，EPEL源</p>
+</li>
+<li><p><code>dstat</code>：替代iostat,vmstat,ifstat</p>
+</li>
+<li><p><code>iotop</code>：I/O监视器</p>
+</li>
+<li><p><code>nload</code>：查看网络实时吞吐量</p>
+</li>
+<li><p><code>lsof</code>：list open files；恢复文件：</p>
+<p><img src="恢复文件.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>进程信号与计划任务实现</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" title="进程管理" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/Python/matplotlib/" title="matplotlib"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>

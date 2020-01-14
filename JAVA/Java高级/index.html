@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Java高级 | Blog Of TheMasterplan</title>
+  <meta name="description" content="字符串   String常用方法： 1)   比较  2)   获取  3)   截取子串  4)   转换  5)   分割  补充：boolean endsWith)(String suffix);判断字符串是否是以suffix为后缀。 Static关键字  1)   内存图：   2)   静态代码块：  Arrays常用方法 继承   抽象类与接口  多态 向上转型，即父类引用指向子类对象">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java高级">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="字符串   String常用方法： 1)   比较  2)   获取  3)   截取子串  4)   转换  5)   分割  补充：boolean endsWith)(String suffix);判断字符串是否是以suffix为后缀。 Static关键字  1)   内存图：   2)   静态代码块：  Arrays常用方法 继承   抽象类与接口  多态 向上转型，即父类引用指向子类对象">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image001.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image002.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image004.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image005.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image007.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image009.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image011.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image012.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image013.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image014.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image015.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image016.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image017.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image018.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image019.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image021.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image022.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image023.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image024.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image025.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image026.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image027.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image028.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image029.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image030.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image031.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image032.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image033.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image034.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image036.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image037.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image038.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image039.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image040.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image041.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image042.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image043.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image044.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image045.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image046.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image047.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image048.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image049.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image050.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image051.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image052.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image053.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image054.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image055.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image056.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image057.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image058.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image059.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image060.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image061.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image062.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image063.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image065.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image067.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image068.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image069.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image070.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image071.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image072.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image073.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image074.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image075.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image076.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image077.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image078.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image079.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image080.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image081.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image082.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image083.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image084.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image085.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image086.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image087.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image088.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image089.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image090.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image091.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image092.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image094.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image096.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image097.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image098.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image099.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image100.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image101.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image102.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image103.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image104.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image105.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image107.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image108.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image109.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image110.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image111.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image112.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image113.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image115.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image116.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image117.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image119.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image120.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image121.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image122.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image123.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image124.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image125.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image126.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image127.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image128.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image129.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image130.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image131.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image132.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image133.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image134.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image135.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image136.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image137.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image138.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image139.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image140.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image141.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image142.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image143.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image144.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image145.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image146.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image147.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image148.png">
+<meta property="og:updated_time" content="2019-11-24T12:45:48.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E9%AB%98%E7%BA%A7&#x2F;clip_image001.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/JAVA/Java%E9%AB%98%E7%BA%A7/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/regex/">regex</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/" rel="tag">regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.5px;">JAVA</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Python/" style="font-size: 13.5px;">Python</a> <a href="/tags/git/" style="font-size: 13px;">git</a> <a href="/tags/regex/" style="font-size: 13px;">regex</a> <a href="/tags/shell%E7%BC%96%E7%A8%8B/" style="font-size: 13px;">shell编程</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13px;">安全</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="title">进程管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-09T05:54:57.000Z" itemprop="datePublished">2019-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Python/matplotlib/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/Python/matplotlib/" class="title">matplotlib</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-05T04:50:04.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Python/Numpy-Pandas/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/Python/Numpy-Pandas/" class="title">Numpy_Pandas</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-05T04:49:23.000Z" itemprop="datePublished">2019-12-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Fuzzy-CMeans/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Fuzzy-CMeans/" class="title">Fuzzy CMeans</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-12-04T08:01:31.000Z" itemprop="datePublished">2019-12-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/Linux/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/Linux/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="title">磁盘管理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-11-29T07:26:51.000Z" itemprop="datePublished">2019-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Static关键字"><span class="toc-number">2.</span> <span class="toc-text">Static关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Arrays常用方法"><span class="toc-number">3.</span> <span class="toc-text">Arrays常用方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#继承"><span class="toc-number">4.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象类与接口"><span class="toc-number">5.</span> <span class="toc-text">抽象类与接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多态"><span class="toc-number">6.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final关键字"><span class="toc-number">7.</span> <span class="toc-text">final关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类"><span class="toc-number">8.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#包装类"><span class="toc-number">9.</span> <span class="toc-text">包装类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合框架"><span class="toc-number">10.</span> <span class="toc-text">集合框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异常"><span class="toc-number">11.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发"><span class="toc-number">12.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File"><span class="toc-number">13.</span> <span class="toc-text">File</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO"><span class="toc-number">14.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络编程"><span class="toc-number">15.</span> <span class="toc-text">网络编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JDK8新特性：函数式接口"><span class="toc-number">16.</span> <span class="toc-text">JDK8新特性：函数式接口</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Java高级" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java高级
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/JAVA/Java%E9%AB%98%E7%BA%A7/" class="article-date">
+	  <time datetime="2019-11-19T09:33:47.000Z" itemprop="datePublished">2019-11-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JAVA/" rel="tag">JAVA</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JAVA/Java%E9%AB%98%E7%BA%A7/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2k(words)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p><img src="clip_image001.png" alt="img"></p>
+<p><img src="clip_image002.png" alt="img"></p>
+<p><img src="clip_image004.jpg" alt="img"></p>
+<p><strong>String常用方法：</strong></p>
+<p>1)   比较</p>
+<p><img src="clip_image005.png" alt="img"></p>
+<p>2)   获取</p>
+<p><img src="clip_image007.jpg" alt="img"></p>
+<p>3)   截取子串</p>
+<p><img src="clip_image009.jpg" alt="img"></p>
+<p>4)   转换</p>
+<p><img src="clip_image011.jpg" alt="img"></p>
+<p>5)   分割</p>
+<p><img src="clip_image012.png" alt="img"></p>
+<p>补充：boolean <a href="http://tool.oschina.net/uploads/apidocs/jdk_7u4/java/lang/String.html#endsWith(java.lang.String" target="_blank" rel="noopener">endsWith</a>)(<a href="http://tool.oschina.net/uploads/apidocs/jdk_7u4/java/lang/String.html" target="_blank" rel="noopener">String</a> suffix);判断字符串是否是以suffix为后缀。</p>
+<h1 id="Static关键字"><a href="#Static关键字" class="headerlink" title="Static关键字"></a>Static关键字</h1><p><img src="clip_image013.png" alt="img"></p>
+<p><img src="clip_image014.png" alt="img"></p>
+<p>1)   内存图：</p>
+<p><img src="clip_image015.png" alt="img"></p>
+<p><img src="clip_image016.png" alt="img"></p>
+<p>2)   静态代码块：</p>
+<p><img src="clip_image017.png" alt="img"></p>
+<h1 id="Arrays常用方法"><a href="#Arrays常用方法" class="headerlink" title="Arrays常用方法"></a>Arrays常用方法</h1><p><img src="clip_image018.png" alt="img"></p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><img src="clip_image019.png" alt="img"></p>
+<p><img src="clip_image021.jpg" alt="img"></p>
+<p><img src="clip_image022.png" alt="img"></p>
+<h1 id="抽象类与接口"><a href="#抽象类与接口" class="headerlink" title="抽象类与接口"></a>抽象类与接口</h1><p><img src="clip_image023.png" alt="img"></p>
+<p><img src="clip_image024.png" alt="img"></p>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p><img src="clip_image025.png" alt="img"></p>
+<p>向上转型，即父类引用指向子类对象，则引用无法调用原本<strong>子类特有的方法</strong>，例如Animal a = new Cat();</p>
+<p>向下转型，也即<strong>还原</strong>a的类型为cat，使其可以访问cat特有的方法，例如Cat cat = (Cat) a;[类似于强制类型转换]。</p>
+<h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>1)   修饰类：当前类不能有任何子类。</p>
+<p>2)   修饰方法：该方法不能被子类覆盖重写。（显然对于类、方法来说，abstract和final无法同时使用）</p>
+<p>3)   修饰局部变量：该变量（引用类型不能再指向其他变量）不能再改变。</p>
+<p>4)   修饰成员变量：该变量必须直接赋值或者在构造方法中赋值。</p>
+<h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><p>1)   成员内部类</p>
+<p><img src="clip_image026.png" alt="img"></p>
+<p>在内部类中访问重名的外部类成员变量：</p>
+<p><img src="clip_image027.png" alt="img"></p>
+<p>2)   局部内部类</p>
+<p><img src="clip_image028.png" alt="img"></p>
+<p><img src="clip_image029.png" alt="img"></p>
+<p><img src="clip_image030.png" alt="img"></p>
+<p>3)   局部内部类中的匿名内部类：</p>
+<p><img src="clip_image031.png" alt="img"></p>
+<p><img src="clip_image032.png" alt="img"></p>
+<h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p><img src="clip_image033.png" alt="img"></p>
+<p>自动装箱与自动拆箱。</p>
+<p>基本类型与字符串的转换：</p>
+<p><img src="clip_image034.png" alt="img"></p>
+<h1 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h1><p>+<img src="clip_image036.jpg" alt="img"></p>
+<p><strong>1)</strong>   <strong>Collection</strong></p>
+<p><img src="clip_image037.png" alt="img"></p>
+<p><strong>2)</strong>   <strong>Iterator接口</strong></p>
+<p><img src="clip_image038.png" alt="img"></p>
+<p><img src="clip_image039.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>泛型</strong></p>
+<p><img src="clip_image040.png" alt="img"></p>
+<p><img src="clip_image041.png" alt="img"></p>
+<p><img src="clip_image042.png" alt="img"></p>
+<p><strong>4)</strong>   <strong>List</strong></p>
+<p><img src="clip_image043.png" alt="img"></p>
+<p><strong>List的子类：</strong></p>
+<p><strong>A.</strong>   <strong>ArrayList:此实现不是同步的，底层是一个数组，增删慢，查询快。</strong></p>
+<p><strong>B.</strong>   <strong>LinkedList:此实现不是同步的，底层是双向链表，增删快，查询慢。</strong></p>
+<p><img src="clip_image044.png" alt="img"></p>
+<p><strong>C.</strong>   <strong>Vector:底层是数组，同步，了解即可</strong></p>
+<p><strong>5)</strong>   <strong>Set:set在调用add方法时，会调用元素的hashCode方法和equals方法判断元素是否重复，在存储自定义类型元素时，前提是需要重写对象中的hashCode和equals方法。</strong></p>
+<p><img src="clip_image045.png" alt="img"></p>
+<p><strong>A.</strong>   <strong>HashSet:不同步，底层是哈希表（查询速度快），无序。</strong></p>
+<p><strong>哈希值：十进制整数，逻辑地址值，由哈希函数计算而得。</strong></p>
+<p><strong>哈希表：jdk1.8之后，哈希表由数组+链表/红黑树构成。</strong></p>
+<p><img src="clip_image046.png" alt="img"></p>
+<p><strong>B.</strong>   <strong>LinkedHashSet:相较于HashSet多了一条链表记录元素的存储顺序，保证元素有序。</strong></p>
+<p><strong>6)</strong>   <strong>可变参数：</strong></p>
+<p><img src="clip_image047.png" alt="img"></p>
+<p><img src="clip_image048.png" alt="img"></p>
+<p><strong>7)</strong>   <strong>Collections集合工具类：</strong></p>
+<p><img src="clip_image049.png" alt="img"></p>
+<p><img src="clip_image050.png" alt="img"></p>
+<p><strong>Comparator:</strong></p>
+<p><img src="clip_image051.png" alt="img"></p>
+<p><strong>Comparable:</strong></p>
+<p><strong>要比较的类需要实现Comparable接口，同时覆盖compareTo方法：</strong></p>
+<p><img src="clip_image052.png" alt="img"></p>
+<p><strong>8)</strong>   <strong>Map</strong></p>
+<p><strong>A.</strong>   <strong>概述</strong></p>
+<p><img src="clip_image053.png" alt="img"></p>
+<p><strong>B.</strong>   <strong>Map接口常用方法：</strong></p>
+<p><img src="clip_image054.png" alt="img"></p>
+<p><img src="clip_image055.png" alt="img"></p>
+<p><img src="clip_image056.png" alt="img"></p>
+<p><img src="clip_image057.png" alt="img"></p>
+<p><strong>C.</strong>   <strong>Map遍历方法：</strong></p>
+<p><strong>a)</strong>   <strong>键找值：</strong></p>
+<p><img src="clip_image058.png" alt="img"></p>
+<p><strong>b)</strong>   <strong>Entry键值对对象：Map.Entry，在Map接口中有一个内部接口Entry,Map集合一创建就会创建一个Entry对象，记录键值对对象。</strong></p>
+<p><img src="clip_image059.png" alt="img"></p>
+<p><strong>D.</strong>   <strong>HashMap存储自定义类型键值为防止键重复，必须重写自定义类型的hashCode和equals方法。</strong></p>
+<p><strong>9)</strong>   <strong>HashTable:</strong></p>
+<p><img src="clip_image060.png" alt="img"></p>
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p><img src="clip_image061.png" alt="img"></p>
+<p><img src="clip_image062.png" alt="img"></p>
+<p><img src="clip_image063.png" alt="img"></p>
+<p>自定义异常：</p>
+<p><img src="clip_image065.jpg" alt="img"></p>
+<p><img src="clip_image067.jpg" alt="img"></p>
+<h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><p><strong>1.</strong>   <strong>线程状态图：</strong></p>
+<p>​                         </p>
+<p>​                                <img src="clip_image068.jpg" alt="img"></p>
+<p>等待-唤醒案例：</p>
+<p><img src="clip_image069.png" alt="img"></p>
+<p>notifyAll唤醒所有waiting状态的线程，唤醒之后的线程要与其他线程竞争锁，获取锁之后才能继续执行wait()方法之后的代码。</p>
+<p><strong>2.</strong>   <strong>创建线程第一种方法：</strong></p>
+<p><img src="clip_image070.png" alt="img"></p>
+<p>每个线程都有自己的栈空间。</p>
+<p><strong>3.</strong>   <strong>Thread**</strong>类构造方法和常用方法：**</p>
+<p><img src="clip_image071.png" alt="img"></p>
+<p><strong>4.</strong>   <strong>创建线程第二种方法：实现Runnable接口</strong></p>
+<p><img src="clip_image072.png" alt="img"></p>
+<p><strong>5.</strong>   <strong>两种创建方式的区别</strong></p>
+<p><img src="clip_image073.png" alt="img"></p>
+<p><img src="clip_image074.png" alt="img"></p>
+<p><strong>6.</strong>   <strong>匿名内部类两种方式创建线程：</strong></p>
+<p><img src="clip_image075.png" alt="img"></p>
+<p><img src="clip_image076.png" alt="img"></p>
+<p><strong>7.</strong>   <strong>线程安全与线程同步：</strong></p>
+<p><strong>1)</strong>   <strong>同步代码块</strong></p>
+<p><img src="clip_image077.png" alt="img"></p>
+<p><strong>（可以直接用synchronized(this){</strong></p>
+<p>​      <strong>///////////**</strong>代码块**</p>
+<p><strong>}**</strong>）this代表Runnable的实现类对象，唯一。**</p>
+<p>同步中的线程，没有执行完代码块中的内容不会释放锁，其余线程没有锁就算获取cpu执行权也会阻塞；同步保证了只能有一个线程在同步中执行共享数据，保证了安全；但是程序频繁地判断锁，获取锁，释放锁，程序效率会降低。</p>
+<p><strong>2)</strong>   <strong>同步方法</strong></p>
+<p><img src="clip_image078.png" alt="img"></p>
+<p><img src="clip_image079.png" alt="img"></p>
+<p><strong>静态同步方法：</strong></p>
+<p><img src="clip_image080.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>加lock锁</strong></p>
+<p><img src="clip_image081.png" alt="img"></p>
+<p><strong>8.</strong>   <strong>线程池：一个容纳多个线程的容器（例如LinkedList），其中的线程可以反复使用，无需反复创建线程而消耗过多资源。</strong></p>
+<p><img src="clip_image082.png" alt="img"></p>
+<p><img src="clip_image083.png" alt="img"></p>
+<p><strong>9.</strong>   <strong>Lambda**</strong>表达式：省略了实现接口，重写方法等。**</p>
+<p><strong>例：</strong><img src="clip_image084.png" alt="img"></p>
+<p><img src="clip_image085.png" alt="img"></p>
+<h1 id="File"><a href="#File" class="headerlink" title="File"></a>File</h1><p><strong>1.</strong>   <strong>File类的静态成员变量：</strong></p>
+<p><img src="clip_image086.png" alt="img"></p>
+<p><strong>2.</strong>   <strong>File类构造方法</strong></p>
+<p>1)   File（String pathname){}；</p>
+<p>2)   File(String Parent, String child){}：这个构造意思是根据一个目录和子目录得到File对象。如果我们想对某一个文件路径下的多个文件进行操作，这个时候采用这个构造函数就显示优势。</p>
+<p>3)   File(File parent, String child){}：这个函数的好处就是可以对parent进行File相关的操作，例如打印父路径下有多少个文件等。</p>
+<p><strong>3.</strong>   <strong>获取类方法：</strong></p>
+<p><img src="clip_image087.png" alt="img"></p>
+<p><strong>4.</strong>   <strong>判断类方法：</strong></p>
+<p><img src="clip_image088.png" alt="img"></p>
+<p><strong>5.</strong>   <strong>创建删除类方法：</strong></p>
+<p><img src="clip_image089.png" alt="img"></p>
+<p><strong>6.</strong>   <strong>目录遍历</strong></p>
+<p><img src="clip_image090.png" alt="img"></p>
+<p><img src="clip_image091.png" alt="img"></p>
+<p><strong>7.</strong>   <strong>文件过滤器：FileFilter接口</strong></p>
+<p><strong>listFiles(传递过滤器实现类对象，可直接用lambda表达式简化)。例如：</strong></p>
+<p><img src="clip_image092.png" alt="img"></p>
+<p><img src="clip_image094.jpg" alt="img"></p>
+<h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><p><img src="clip_image096.png" alt="img"></p>
+<p><img src="clip_image097.png" alt="img"></p>
+<p><strong>1.</strong>   <strong>OutputStream:</strong></p>
+<p><strong>1)</strong>   <strong>FileOutputStream</strong></p>
+<p><img src="clip_image098.png" alt="img"></p>
+<p><strong>2)</strong>   <strong>一次写一个字节</strong></p>
+<p><img src="clip_image099.png" alt="img"></p>
+<p><img src="clip_image100.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>一次写多个字节</strong></p>
+<p><img src="clip_image101.png" alt="img"></p>
+<p><img src="clip_image102.png" alt="img"></p>
+<p><strong>4)</strong>   <strong>续写与换行</strong></p>
+<p><img src="clip_image103.png" alt="img"></p>
+<p><strong>2.</strong>   <strong>InputStream&amp;FileInputStream</strong></p>
+<p><img src="clip_image104.png" alt="img"></p>
+<p><img src="clip_image105.png" alt="img"></p>
+<p><strong>1)</strong>   <strong>一次读一个字节，read()方法返回一个ASCII码值。</strong></p>
+<p><strong>2)</strong>   <strong>一次读多个字节：</strong></p>
+<p><img src="clip_image107.jpg" alt="img"></p>
+<p><strong>若未读取到字节，则同样返回-1.</strong></p>
+<p><strong>3.</strong>   <strong>练习：文件复制操作：</strong></p>
+<p><img src="clip_image108.png" alt="img"></p>
+<p><img src="clip_image109.png" alt="img"></p>
+<p><strong>4.</strong>   <strong>使用字节流读取中文时，会出现乱码的问题；一个中文字符：GBK占2个字节，UTF-8占3个字节。因此需要使用字符流。</strong></p>
+<p><strong>5.</strong>   <strong>Reader&amp;FileReader</strong></p>
+<p><img src="clip_image110.png" alt="img"></p>
+<p><img src="clip_image111.png" alt="img"></p>
+<p><strong>6.</strong>   <strong>writer&amp;FileWriter</strong></p>
+<p><img src="clip_image112.png" alt="img"></p>
+<p><img src="clip_image113.png" alt="img"></p>
+<p><strong>7.</strong>   <strong>IO中的异常处理</strong></p>
+<p><strong>1)</strong>   <strong>常规</strong></p>
+<p><img src="clip_image115.jpg" alt="img"></p>
+<p><strong>2)</strong>   <strong>JDK7新特性</strong></p>
+<p><img src="clip_image116.png" alt="img"></p>
+<p><strong>8.</strong>   <strong>属性集</strong></p>
+<p><img src="clip_image117.png" alt="img"></p>
+<p><strong>1)</strong>   <strong>setProperty/getProperty/stringPropertyNames</strong></p>
+<p><img src="clip_image119.jpg" alt="img"></p>
+<p><strong>2)</strong>   <strong>store</strong></p>
+<p><img src="clip_image120.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>load</strong></p>
+<p><img src="clip_image121.png" alt="img"></p>
+<p><strong>9.</strong>   <strong>缓冲流</strong></p>
+<p><strong>1)</strong>   <strong>BufferedOutputStream</strong></p>
+<p><img src="clip_image122.png" alt="img"></p>
+<p><img src="clip_image123.png" alt="img"></p>
+<p><strong>2)</strong>   <strong>BufferedInputStream</strong></p>
+<p><img src="clip_image124.png" alt="img"></p>
+<p><img src="clip_image125.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>BufferedWriter</strong></p>
+<p><img src="clip_image126.png" alt="img"></p>
+<p><img src="clip_image127.png" alt="img"></p>
+<p><img src="clip_image128.png" alt="img"></p>
+<p><strong>4)</strong>   <strong>BufferedReader</strong></p>
+<p><img src="clip_image129.png" alt="img"></p>
+<p><img src="clip_image130.png" alt="img"></p>
+<p><img src="clip_image131.png" alt="img"></p>
+<p><strong>10.</strong>  <strong>转换流</strong></p>
+<p><strong>1)</strong>   <strong>字符编码和字符集：</strong></p>
+<p><strong>A.</strong>   <strong>字符编码：一套自然语言的字符与二进制数之间的对应规则。</strong></p>
+<p><strong>B.</strong>   <strong>字符集：即编码表，生活中文字与二进制对应规则</strong></p>
+<p><strong>C.</strong>   <strong>常用字符集：</strong></p>
+<p><strong>a)</strong>   <strong>ASCII：美国</strong></p>
+<p><strong>b)</strong>   <strong>ISO：欧洲</strong></p>
+<p><strong>c)</strong>   <strong>GBxxx:GB2312,GBK,GB18030国标。GBK两个字节表示一个汉字。</strong></p>
+<p><strong>d)</strong>   <strong>Unicode：万国码。UTF-8/UTF-16/UTF-32。UTF-8三个字节表示一个汉字。</strong></p>
+<p><strong>2)</strong>   <strong>编码引出的问题：</strong></p>
+<p><strong>FileReader可以读取IDE默认编码格式UTF-8的文件，但是读取系统默认编码为GBK时会产生乱码。</strong></p>
+<p><strong>FileReader底层调用的是FileInputStream方法读取字节流，再通过字符集转换为字符，其父类为InputStreamReader.</strong></p>
+<p><strong>FileWriter同理。</strong></p>
+<p><strong>3)</strong>   <strong>OutputStreamWriter</strong></p>
+<p><img src="clip_image132.png" alt="img"></p>
+<p><img src="clip_image133.png" alt="img"></p>
+<p><strong>4)</strong>   <strong>InputStreamReader</strong></p>
+<p><img src="clip_image134.png" alt="img"></p>
+<p><strong>11.</strong>  <strong>序列化流</strong></p>
+<p><img src="clip_image135.png" alt="img"></p>
+<p><strong>1)</strong>   <strong>ObjectOutputStream</strong></p>
+<p><img src="clip_image136.png" alt="img"></p>
+<p><strong>只需要序列化的类implements Serializable接口即可，并不需要实现任何方法。</strong></p>
+<p><img src="clip_image137.png" alt="img"></p>
+<p><img src="clip_image138.png" alt="img"></p>
+<p><strong>2)</strong>   <strong>ObjectInputStream</strong></p>
+<p><strong>与序列化相似。</strong></p>
+<p><strong>3)</strong>   <strong>静态变量不能被序列化或反序列化。</strong></p>
+<p><strong>4)</strong>   <strong>使用transient关键字修饰变量避免序列化。</strong></p>
+<p><strong>A.</strong>   <strong>一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。</strong></p>
+<p><strong>B.</strong>   <strong>transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量，则该类需要实现Serializable接口。</strong></p>
+<p><strong>C.</strong>   <strong>被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。</strong></p>
+<p><strong>5)</strong>   <strong>InvalidClassException:</strong></p>
+<p><img src="clip_image139.png" alt="img"></p>
+<p><strong>序列化一个类后，又修改类的内容后，序列号会改变，反序列化时会出现InvalidClassException。</strong></p>
+<p><strong>12.</strong>  <strong>PrintStream打印流</strong></p>
+<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><p><strong>1.</strong>   <strong>客户端：</strong></p>
+<p><img src="clip_image140.png" alt="img"></p>
+<p><img src="clip_image141.png" alt="img"></p>
+<p><img src="clip_image142.png" alt="img"></p>
+<p>注意：在客户端发送完毕之后，要调用socket的shutdownOutput()方法，以免服务端的inputStream.read()方法阻塞。</p>
+<p><strong>2.</strong>   <strong>服务器端</strong></p>
+<p><img src="clip_image143.png" alt="img"></p>
+<p><img src="clip_image144.png" alt="img"></p>
+<h1 id="JDK8新特性：函数式接口"><a href="#JDK8新特性：函数式接口" class="headerlink" title="JDK8新特性：函数式接口"></a>JDK8新特性：函数式接口</h1><p><strong>1.</strong>   <strong>概念：函数式接口在Java中是指：有且仅有一个抽象方法的接口；</strong></p>
+<p><strong>@FunctionalInterface注解：可以检测接口是否为一个函数式接口。</strong></p>
+<p><strong>注意：使用匿名内部类编译时会有匿名内部类class文件，而lambda表达式不会有，效率更高。</strong></p>
+<p><strong>2.</strong>   <strong>函数式编程：</strong></p>
+<p><strong>Lambda表达式延迟加载：作为参数（即接口的实现）时会判断其他参数是否满足条件，如若不满足调用者的条件则不会执行lambda表达式方法体，提高性能。</strong></p>
+<p><strong>3.</strong>   <strong>Java.util.function：</strong></p>
+<p><strong>1)</strong>   <strong>Supplier</strong></p>
+<p><img src="clip_image145.png" alt="img"></p>
+<p><strong>2)</strong>   <strong>Consumer</strong></p>
+<p><img src="clip_image146.png" alt="img"></p>
+<p><img src="clip_image147.png" alt="img"></p>
+<p><img src="clip_image148.png" alt="img"></p>
+<p><strong>3)</strong>   <strong>Predicate</strong></p>
+<p><strong>4)</strong>   <strong>Function</strong></p>
+<p><strong>5)</strong>   <strong>Stream流</strong></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/JAVA/Java%E9%AB%98%E7%BA%A7/" title="Java高级" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/git/Git%E7%AC%94%E8%AE%B0/" title="Git笔记"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/Linux/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" title="文件权限与用户组管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+</body>
+</html>
