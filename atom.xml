@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2020-01-18T07:44:02.102Z</updated>
+  <updated>2020-01-31T08:36:35.141Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>for foreach iterator</title>
+    <link href="http://thmasterplan.cn/JAVA/for-foreach-iterator/"/>
+    <id>http://thmasterplan.cn/JAVA/for-foreach-iterator/</id>
+    <published>2020-01-31T08:23:18.000Z</published>
+    <updated>2020-01-31T08:36:35.141Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一、形式"><a href="#一、形式" class="headerlink" title="一、形式"></a>一、形式</h3><ol><li>for: <code>for（int i=0;i&lt;arr.size();i++）{...}</code></li><li>foreach:<code>for（int　i：arr）{...}</code></li><li>iterator:<code>Iterator it = arr.iterator();while(it.hasNext()){ object o =it.next(); ...}</code></li></ol><h3 id="二、差别"><a href="#二、差别" class="headerlink" title="二、差别"></a>二、差别</h3><ol><li>for需要指定集合的大小和集合元素的类型。</li><li>foreach需要知道集合元素的类型。</li><li>iterator既不需要指定集合元素的类型也不需要指定集合的大小。</li><li>foreach是iterator的语法糖，其底层使用iterator实现。</li><li>不能使用foreach语句进行add/remove操作。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、形式&quot;&gt;&lt;a href=&quot;#一、形式&quot; class=&quot;headerlink&quot; title=&quot;一、形式&quot;&gt;&lt;/a&gt;一、形式&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;for: &lt;code&gt;for（int i=0;i&amp;lt;arr.size();i++）{...}&lt;/code&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="http://thmasterplan.cn/categories/JAVA/"/>
+    
+    
+      <category term="JAVA" scheme="http://thmasterplan.cn/tags/JAVA/"/>
+    
+  </entry>
   
   <entry>
     <title>Java容器</title>
@@ -532,35 +559,6 @@
       
         &lt;h3 id=&quot;文件链接&quot;&gt;&lt;a href=&quot;#文件链接&quot; class=&quot;headerlink&quot; title=&quot;文件链接&quot;&gt;&lt;/a&gt;文件链接&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;硬链接：一个inode号对应多个文件名，硬链接也即同一个文件使用了多个别名，由命令&lt;code&gt;ln oldfil
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://thmasterplan.cn/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://thmasterplan.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>目录配置与文件目录管理</title>
-    <link href="http://thmasterplan.cn/Linux/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/"/>
-    <id>http://thmasterplan.cn/Linux/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/</id>
-    <published>2019-11-17T16:14:20.000Z</published>
-    <updated>2019-11-23T13:24:39.525Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="目录配置与文件目录管理"><a href="#目录配置与文件目录管理" class="headerlink" title="目录配置与文件目录管理"></a>目录配置与文件目录管理</h3><ul><li><p>目录配置：可参考FHS标准</p><ul><li><code>/bin</code>:存放二进制文件，常用命令</li><li><code>/boot</code>：系统启动项文件,内核</li><li><code>/dev</code>:设备文件，硬盘等</li><li><code>/etc</code>：配置文件</li><li><code>/home</code>:用户家目录，每一个用户在/home下都有一个文件夹</li><li><code>/lib</code>：链接库文件</li><li><code>/media</code>：媒体自动挂载点，比如U盘，光盘等</li><li><code>/mnt</code>：媒体挂载点，手动挂载</li><li><code>/opt</code>：自定义软件安装处，默认安装处为/usr/local</li><li><code>/root</code>：超级用户目录</li><li><code>/sbin</code>：存放系统管理员所能执行的命令</li><li><code>/tmp</code>：临时文件</li><li><code>/usr</code>：类似于二层根目录</li><li><code>/var</code>:存放缓存，日志，数据库文件；该文件夹需要分配的空间较大，因此在磁盘分区时挂载在/var的分区要大一些。</li><li><code>/proc</code>：内存中的进程信息</li><li><code>/sys</code>：硬件相关信息</li></ul></li><li><p>文件与目录管理</p><ul><li><p>常用命令：</p><ul><li><code>cd ~</code>:切换到home;<code>cd -</code>:切换到上一次所在目录</li><li><code>pwd</code>：打印当前目录</li><li><code>basename 和 dirname</code>：分别获取当前路径的文件名和目录名</li><li><code>touch xx</code>:若xx不存在，则创建一个新文件xx。若xx存在，把xx的修改时间改为当前。</li><li><code>&gt; xx</code>：若文件不存在，则创建一个空文件xx；若文件存在，则清空现有文件xx(可用于清空大文件)。</li><li><code>mkdir 目录名 目录名 目录名 ...</code></li><li><code>mkdir -p test/{a,b,c}/{d,e}</code>:递归创建目录，分别在a,b,c三个目录下创建d,e两个目录。</li><li><code>rmdir 目录名</code>:只能删除空目录</li><li><code>rm -rf</code>目录:删除目录下所有东西（慎用<code>rm</code>）</li><li><code>cp [选项] /PATH1/xx /PATH2/yy</code>:若yy是一个目录，则把文件xx拷贝到yy下；若yy不是一个目录，则把文件xx拷贝到PATH2目录下并<strong>重命名</strong>为yy。cp不能直接拷贝目录，需要加选项参数，<code>cp -rfp /目录1 /目录2 == cp -a /目录1 /目录2</code>：将目录1及其所有子目录及文件拷贝到目录2。参数：-r即递归，-f即强制,-p同时复制属性信息。</li><li><code>mv [选项] /PATH1/xx /PATH2/yy</code>：若yy是一个目录，则把文件xx剪切到yy下；若yy不是一个目录，则把文件xx剪切到PATH2目录下并<strong>重命名</strong>为yy。例如<code>mv xx yy</code>:就是把xx重命名为yy。</li><li><code>rename .log .logabc *</code>：重命名，把所有文件名中的<code>.log</code>改为<code>.logabc</code></li></ul></li><li><p>关于执行文件路径的变量：执行程序必须在其所在目录下才能执行，亦可使用绝对路径调用，若要直接敲命令就可以执行，则需要设置PATH，把命令所在目录添加在PATH后面。</p></li><li><p>文件的三个时间属性:</p><ul><li><code>atime</code>:access time</li><li><code>mtime</code>:modify time</li><li><code>ctime</code>:change time</li></ul></li><li><p>文件名规则：</p><ul><li>文件名最长255字节</li><li>蓝色—&gt;目录；绿色—&gt;可执行文件；红色—&gt;压缩文件；浅蓝色—&gt;链接文件；黄色—&gt;设备文件；粉色—&gt;套接字文件；棕色—&gt;管道文件；灰色—&gt;其他文件</li></ul></li><li><p>文件通配符：</p><ul><li><code>*</code>：匹配0个或多个字符</li></ul></li><li><p><code>?</code>：匹配任意一个字符</p><ul><li><code>[1-5]</code>：匹配字符1,2,3,4,5</li><li><code>[a-c]</code>：匹配字符a、A、b、B、c(没有C)。</li><li><code>[A-C]</code>：匹配A，b，B，c，C</li><li><code>[^abcd]</code>：匹配除abcd外的所有单个字母</li><li><img src="filematch.jpg" alt=""></li></ul></li><li><p>文件内容查阅</p><ul><li><code>cat 文件名</code>:显示所有文件内容，适合查看小文件，参数-n显示行数。<code>cat -n 文件名== nl 文件名</code>。</li><li><code>tac</code>：从最后一行显示，倒数显示。</li><li><code>more/less 文件名</code>:按空格一屏一屏地显示，按回车一行一行地显示。同时在文档下方输入<code>/字符串</code>即可查找文档中的字符串。</li><li><code>head -n 21 文件名</code>:查看文件的前21行</li><li><code>tail -n 21 文件名</code>:查看文件的尾21行；参数-f,监测日志，实时监测日志的变化。</li><li><code>od</code>:查看非文本文档，比如二进制文件。</li></ul></li><li><p>命令与文件的查询：</p><ul><li><p><code>which -a 命令</code>:在PATH路径中搜寻命令位置</p></li><li><p><code>whereis 命令</code>:返回命令路径及其帮助文档的路径；参数-b只返回命令路径。</p></li><li><p><code>locate 字符串</code>:在<code>/var/lib/mlocate/mlocate.db</code>中查询所有文件名中包含该字符串的文件并返回，该数据库每天定时更新，亦可通过<code>updatedb</code>更新。</p></li></ul></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;目录配置与文件目录管理&quot;&gt;&lt;a href=&quot;#目录配置与文件目录管理&quot; class=&quot;headerlink&quot; title=&quot;目录配置与文件目录管理&quot;&gt;&lt;/a&gt;目录配置与文件目录管理&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;目录配置：可参考FHS标准&lt;/p&gt;
-&lt;ul&gt;
-&lt;l
       
     
     </summary>
