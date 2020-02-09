@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>for foreach iterator | Blog Of TheMasterplan</title>
-  <meta name="description" content="一、形式 for: for（int i=0;i&amp;lt;arr.size();i++）{...} foreach:for（int　i：arr）{...} iterator:Iterator it = arr.iterator();while(it.hasNext()){ object o =it.next(); ...}  二、差别 for需要指定集合的大小和集合元素的类型。 foreach需要知道">
-<meta name="keywords" content="JAVA">
+  <title>双指针 | Blog Of TheMasterplan</title>
+  <meta name="description" content="升序数组的TwoSum:167 1234567891011121314class Solution &amp;#123;    public int[] twoSum(int[] numbers, int target) &amp;#123;        if(numbers == null) return null;        int start = 0, end = numbers.length -">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="for foreach iterator">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;for-foreach-iterator&#x2F;index.html">
+<meta property="og:title" content="双指针">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98&#x2F;%E5%8F%8C%E6%8C%87%E9%92%88&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="一、形式 for: for（int i=0;i&amp;lt;arr.size();i++）{...} foreach:for（int　i：arr）{...} iterator:Iterator it = arr.iterator();while(it.hasNext()){ object o =it.next(); ...}  二、差别 for需要指定集合的大小和集合元素的类型。 foreach需要知道">
+<meta property="og:description" content="升序数组的TwoSum:167 1234567891011121314class Solution &amp;#123;    public int[] twoSum(int[] numbers, int target) &amp;#123;        if(numbers == null) return null;        int start = 0, end = numbers.length -">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-31T08:36:35.141Z">
+<meta property="og:updated_time" content="2020-02-09T11:06:47.339Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/JAVA/for-foreach-iterator/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -372,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、形式"><span class="toc-number">1.</span> <span class="toc-text">一、形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、差别"><span class="toc-number">2.</span> <span class="toc-text">二、差别</span></a></li></ol>
+      
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-for-foreach-iterator" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-双指针" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      for foreach iterator
+      双指针
     </h1>
   
 
@@ -394,20 +394,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/JAVA/for-foreach-iterator/" class="article-date">
-	  <time datetime="2020-01-31T08:23:18.000Z" itemprop="datePublished">2020-01-31</time>
+	<a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/" class="article-date">
+	  <time datetime="2020-02-09T11:05:21.000Z" itemprop="datePublished">2020-02-09</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/" rel="tag">JAVA</a>
+	<a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
   </span>
 
 
@@ -420,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JAVA/for-foreach-iterator/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 114(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 725(words)</span>
 	
 	
 
@@ -431,18 +431,29 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="一、形式"><a href="#一、形式" class="headerlink" title="一、形式"></a>一、形式</h3><ol>
-<li>for: <code>for（int i=0;i&lt;arr.size();i++）{...}</code></li>
-<li>foreach:<code>for（int　i：arr）{...}</code></li>
-<li>iterator:<code>Iterator it = arr.iterator();while(it.hasNext()){ object o =it.next(); ...}</code></li>
-</ol>
-<h3 id="二、差别"><a href="#二、差别" class="headerlink" title="二、差别"></a>二、差别</h3><ol>
-<li>for需要指定集合的大小和集合元素的类型。</li>
-<li>foreach需要知道集合元素的类型。</li>
-<li>iterator既不需要指定集合元素的类型也不需要指定集合的大小。</li>
-<li>foreach是iterator的语法糖，其底层使用iterator实现。</li>
-<li>不能使用foreach语句进行add/remove操作。</li>
-</ol>
+        <ul>
+<li><p>升序数组的TwoSum:167</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span>(numbers == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = numbers.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(start &lt; end)&#123;</span><br><span class="line">            <span class="keyword">if</span>(numbers[start] + numbers[end] == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;start+<span class="number">1</span>, end+<span class="number">1</span>&#125;;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(numbers[start] + numbers[end] &lt; target)&#123;</span><br><span class="line">                start++;</span><br><span class="line">            &#125; <span class="keyword">else</span> end--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断某个数是否为平方数之和：633</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">judgeSquareSum</span><span class="params">(<span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(c &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = (<span class="keyword">int</span>)Math.sqrt(c);</span><br><span class="line">        <span class="keyword">while</span>(start &lt;= end)&#123;</span><br><span class="line">            <span class="keyword">int</span> squareSum = start*start + end*end;</span><br><span class="line">            <span class="keyword">if</span>(squareSum == c) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(squareSum &lt; c) start++;</span><br><span class="line">            <span class="keyword">else</span> end--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反转字符串中的元音字母：345</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseVowels</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        HashSet&lt;Character&gt; vowels = <span class="keyword">new</span> HashSet&lt;&gt;(</span><br><span class="line">        Arrays.asList(<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'A'</span>, <span class="string">'E'</span>, <span class="string">'I'</span>, <span class="string">'O'</span>, <span class="string">'U'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = s.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span>[] result = <span class="keyword">new</span> <span class="keyword">char</span>[s.length()];</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">while</span>(start &lt;= end)&#123;</span><br><span class="line">            <span class="keyword">char</span> startC = s.charAt(start);</span><br><span class="line">            <span class="keyword">char</span> endC = s.charAt(end);</span><br><span class="line">            <span class="keyword">if</span>(!vowels.contains(startC))&#123;</span><br><span class="line">                result[start++] = startC;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(!vowels.contains(endC))&#123;</span><br><span class="line">                result[end--] = endC;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result[start++] = endC;</span><br><span class="line">                result[end--] = startC;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给定一个非空字符串 <code>s</code>，<strong>最多</strong>删除一个字符。判断是否能成为回文字符串:680</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = s.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(left) == s.charAt(right))&#123;</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">return</span> isPalindrome(s, left+<span class="number">1</span>, right) || isPalindrome(s, left, right-<span class="number">1</span>);<span class="comment">//如果左右不对称，则判断删除s.charAt(left)或者s.charAt(right)后的子字符串是否为回文串</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String s, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(left) != s.charAt(right)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并两个有序数组：88</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = m - <span class="number">1</span>, j = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> k = m+n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums2[j] &gt; nums1[i]) nums1[k--] = nums2[j--];</span><br><span class="line">            <span class="keyword">else</span> nums1[k--] = nums1[i--];</span><br><span class="line">        &#125;<span class="comment">//从两个数组尾部开始比较大小</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//将剩余的某个数组中未比较的元素写入nums1</span></span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[k--] = nums1[i--];</span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[k--] = nums2[j--];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断链表中是否有环：141（快慢指针）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        <span class="keyword">while</span>(slow != <span class="keyword">null</span> &amp;&amp; fast!= <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                fast = fast.next.next;</span><br><span class="line">                <span class="keyword">if</span>(fast == slow)</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过删除字母匹配到字典里最长单词：524</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findLongestWord</span><span class="params">(String s, List&lt;String&gt; d)</span> </span>&#123;</span><br><span class="line">        String result = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(String target : d)&#123;</span><br><span class="line">            <span class="keyword">int</span> targetLen = target.length();</span><br><span class="line">            <span class="keyword">if</span>(isSubStr(s, target))&#123;</span><br><span class="line">               <span class="keyword">if</span>(maxLength &lt; targetLen)&#123;</span><br><span class="line">                   maxLength = targetLen;</span><br><span class="line">                   result = target;</span><br><span class="line">               &#125;<span class="keyword">else</span> <span class="keyword">if</span>(maxLength == targetLen)&#123;</span><br><span class="line">                   <span class="keyword">if</span>(result.compareTo(target) &lt; <span class="number">0</span>) <span class="keyword">continue</span>;<span class="comment">//比较字符串之间的字典顺序使用compareTo方法</span></span><br><span class="line">                   <span class="keyword">else</span> result = target;</span><br><span class="line">               &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isSubStr</span><span class="params">(String s, String target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//遍历字符串s,每匹配一个target的字符j加1</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt; s.length() &amp;&amp; j &lt; target.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == target.charAt(j)) j++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> j == target.length();<span class="comment">//若j等于target.length(),说明target是s的一部分</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -453,7 +464,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/JAVA/for-foreach-iterator/" title="for foreach iterator" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/" title="双指针" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -502,13 +513,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/" title="双指针"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/JAVA/Java%E5%AE%B9%E5%99%A8/" title="Java容器"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/JAVA/for-foreach-iterator/" title="for foreach iterator"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
