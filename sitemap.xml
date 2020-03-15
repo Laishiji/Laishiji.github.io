@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/JAVA/String-StringBuffer-StringBuilder/</loc>
+    
+    <lastmod>2020-03-15T06:19:36.484Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/JAVA/JDBC/</loc>
     
     <lastmod>2020-03-07T08:01:51.900Z</lastmod>
