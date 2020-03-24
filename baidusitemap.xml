@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8(%E4%B8%8A)/</loc>
+    <lastmod>2020-03-24</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JAVA/%E5%8F%8D%E5%B0%84/</loc>
+    <lastmod>2020-03-24</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JAVA/java%E4%BD%8D%E8%BF%90%E7%AE%97/</loc>
+    <lastmod>2020-03-23</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-03-22</lastmod>
   </url>  <url>
@@ -56,9 +65,6 @@
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JAVA/Java%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2019-11-24</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/java%E4%BD%8D%E8%BF%90%E7%AE%97/</loc>
     <lastmod>2019-11-24</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/regex/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
