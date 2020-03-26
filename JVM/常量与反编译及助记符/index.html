@@ -17,15 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: 机器学习 | Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;categories&#x2F;%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+  <title>常量与反编译及助记符 | Blog Of TheMasterplan</title>
+  <meta name="description" content="JVM参数，均以-XX:开始，其中-XX:+&amp;lt;option&amp;gt;，表示开启option选项；-XX:-&amp;lt;option&amp;gt;，表示关闭option选项；-XX:&amp;lt;option&amp;gt;=&amp;lt;value&amp;gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  常量的本质： 1234567891011">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常量与反编译及助记符">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JVM&#x2F;%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="JVM参数，均以-XX:开始，其中-XX:+&amp;lt;option&amp;gt;，表示开启option选项；-XX:-&amp;lt;option&amp;gt;，表示关闭option选项；-XX:&amp;lt;option&amp;gt;=&amp;lt;value&amp;gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  常量的本质： 1234567891011">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-26T06:13:58.910Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -363,70 +367,242 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: 机器学习</h1>
-      <p class="hidden-xs">Total 1 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-常量与反编译及助记符" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常量与反编译及助记符
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="article-date">
+	  <time datetime="2020-03-26T06:11:57.000Z" itemprop="datePublished">2020-03-26</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JVM/" rel="tag">JVM</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 453(words)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
         <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/机器学习/">机器学习</a></li>
-          
-          <li><a href="/categories/JAVA/">JAVA</a></li>
-          
-          <li><a href="/categories/git/">git</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/Python/">Python</a></li>
-          
-          <li><a href="/categories/shell编程/">shell编程</a></li>
-          
-          <li><a href="/categories/面试刷题/">面试刷题</a></li>
-          
-          <li><a href="/categories/JVM/">JVM</a></li>
-          
-          <li><a href="/categories/regex/">regex</a></li>
-          
-          <li><a href="/categories/安全/">安全</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse机器学习" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              机器学习
-            </a>
-            <small class="text-muted">(Total 1 articles)</small>
-        </h4>
+<li><p>JVM参数，均以<code>-XX:</code>开始，其中<code>-XX:+&lt;option&gt;</code>，表示开启option选项；<code>-XX:-&lt;option&gt;</code>，表示关闭option选项；<code>-XX:&lt;option&gt;=&lt;value&gt;</code>，表示将option选项的值设置为value。</p>
+</li>
+<li><p><code>-XX:+TraceClassLoading</code>，用于追踪类的加载信息并打印。</p>
+</li>
+<li><p><strong>常量的本质</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(MyParent2.string);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent2</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = <span class="string">"hello world"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"MyParent2 static block"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出为：hello world</li>
+<li>原理：<em>常量在<strong>编译阶段</strong>会存入调用该常量所在类的<strong>常量池</strong>中</em>，本质上调用类并没有直接引用常量所在的类，因此不会触发常量所在类的初始化。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(MyParent3.string);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent3</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"MyParent3 static block"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出为：MyParent3 static block</p>
+<pre><code>016933b5-7da0-46b5-88fa-b662d6f01494
+</code></pre></li>
+<li><p>原理：常量string在<strong>编译期未知</strong>，在<strong>运行期间才赋值</strong>，故而静态代码块会初始化。</p>
+</li>
+</ul>
+</li>
+<li><p>反编译.class文件：<code>javap -c 全类名</code></p>
+</li>
+<li><p>反编译代码助记符：</p>
+<ul>
+<li><code>getstatic</code>：获取类的静态字段</li>
+<li><code>ldc</code>：表示将int, float或是String类型的常量值从常量池推送至栈顶</li>
+<li><code>bipush</code>：表示将单字节（-128-127）的常量值从常量池推送至栈顶</li>
+<li><code>sipush</code>：表示将一个短整型（-32768—32767）常量值推送至栈顶</li>
+<li><code>iconst_1</code>：表示将int类型的1推送至栈顶（iconst_0 - iconst_5）</li>
+<li><code>anewarray</code>：创建一个引用类型数组，并将其引用值压入栈顶</li>
+<li><code>newarray</code>：创建一个基本类型的数组，并将其引用值压入栈顶</li>
+</ul>
+</li>
+<li><p>数组创建本质：new一个数组，对于数组实例来说，其类型是由JVM在运行期间动态生成的，动态生成的类型其父类为Object。</p>
+</li>
+</ul>
+
+      
     </div>
-    <div id="collapse机器学习" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading机器学习">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Fuzzy-CMeans/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-12-04T08:01:31.000Z" itemprop="datePublished">2019-12-04</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Fuzzy CMeans
-</a>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" title="常量与反编译及助记符" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
 
 
-              
-            </div>
-        </div>
-    </div>
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
   
- 
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E8%B4%AA%E5%BF%83/" title="贪心"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin" data-mobile-sites="weibo,qq,wechat,facebook,twitter,linkedin,qzone,linkedin"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -474,6 +650,30 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 
