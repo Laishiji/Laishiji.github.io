@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2020-04-01T08:12:26.238Z</updated>
+  <updated>2020-04-01T12:56:30.934Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cookie_Session</title>
+    <link href="http://thmasterplan.cn/JavaWeb/Cookie-Session/"/>
+    <id>http://thmasterplan.cn/JavaWeb/Cookie-Session/</id>
+    <published>2020-04-01T12:55:36.000Z</published>
+    <updated>2020-04-01T12:56:30.934Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul><li><p>概念：客户端会话技术，将数据保存到客户端。<code>import javax.servlet.http.Cookie</code>(类)。</p></li><li><p>主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。</p></li><li><p>使用</p><ul><li><p>创建Cookie对象，绑定数据：<code>new Cookie(String name, String value)</code></p></li><li><p>发送Cookie对象到客户端：<code>response.addCookie(Cookie cookie)</code></p></li><li><p>获取Cookie，拿到数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">if(cookies != null)&#123;</span><br><span class="line">   for(Cookie c : cookies)&#123;</span><br><span class="line">      String name = c.getName();</span><br><span class="line">      String val = c.getValue();</span><br><span class="line">      //..........</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>原理</p><ul><li>客户端发送请求-&gt;</li><li>服务器创建Cookie并发送到客户端 -&gt; </li><li>http响应头增加Set-Cookie：name=value字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证</li></ul></li><li><p>Tips</p><ul><li><p>一次可以创建多个Cookie并发送</p></li><li><p>Cookie在浏览器中存活时间</p><ul><li>默认情况下，浏览器关闭后Cookie数据销毁</li><li>持久化存储：<code>cookie.setMaxAge(int seconds)</code><ul><li>正数：将cookie数据写到硬盘的文件中，seconds时间之后文件被删除。</li><li>负数：默认值</li><li>0：删除cookie数据</li></ul></li></ul></li><li><p>Tomcat8之后Cookie支持中文</p></li><li><p>Cookie共享问题</p><ul><li><p>假设在一个Tomcat服务器中部署了多个web项目：</p><ul><li><p>默认情况下不同web项目的cookie不能共享</p></li><li><p><code>cookie.setPath(String path)</code>：设置Cookie的获取范围。默认情况下，设置当前的虚拟目录。如果要共享，可将path设置为”/“。</p></li></ul></li><li><p>服务器集群共享Cookie：</p><ul><li><code>setDomain(String path)</code>：设置一级域名</li><li>例如<code>setDomain(&quot;.baidu.com&quot;)</code>，则tieba.baidu.com和news.baidu.com中cookie可以共享</li></ul></li></ul></li></ul></li></ul><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul><li>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</li><li>主要作用<ul><li>用于存储一次会话的多次请求的数据</li><li>可以存储任意类型、任意大小的数据</li></ul></li><li><p>使用</p><ul><li>获取session对象：<code>HttpSession session = request.getSession();</code></li><li>存储数据：<code>session.setAttribute(&quot;name&quot;, &quot;value&quot;);</code></li><li>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></li></ul></li><li><p>原理：<strong>Session的实现依赖于Cookie</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。</p><ul><li>客户端发送请求-&gt;</li><li>创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证sessionID</li></ul></li><li><p>Tips</p><ul><li><p>浏览器关闭，服务器不关闭，浏览器重启，两次获取的session对象是否相同？</p><ul><li><p>默认情况下不是。</p></li><li><p>为避免这种情况，可设置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = new Cookie(&quot;JSESSIONID&quot;, session.getId());</span><br><span class="line">cookie.setMaxAge(60*60);//持久化存储cookie</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></li></ul></li><li><p>浏览器不关闭，服务器关闭，服务器开启，两次获取的session对象是否相同？</p><ul><li>新对象地址与原对象不同</li><li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。（Tomcat已经集成了这种技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件）<ul><li>session钝化：在服务器正常关闭前，将session对象序列化到硬盘上</li><li>session活化：服务器启动后，将session文件转化为内存中的session对象，删除文件</li></ul></li></ul></li><li><p>session何时被销毁？</p><ul><li><p>服务器关闭</p></li><li><p>session对象调用invalidate()方法</p></li><li><p>session默认失效时间为30分钟(可在tomcat的conf/web.xml中配置)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure></li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Cookie&quot;&gt;&lt;a href=&quot;#Cookie&quot; class=&quot;headerlink&quot; title=&quot;Cookie&quot;&gt;&lt;/a&gt;Cookie&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;概念：客户端会话技术，将数据保存到客户端。&lt;code&gt;import javax.servl
+      
+    
+    </summary>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/categories/JavaWeb/"/>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/tags/JavaWeb/"/>
+    
+  </entry>
   
   <entry>
     <title>Servlet</title>
@@ -538,33 +565,6 @@
         &lt;h3 id=&quot;Java容器关系图&quot;&gt;&lt;a href=&quot;#Java容器关系图&quot; class=&quot;headerlink&quot; title=&quot;Java容器关系图&quot;&gt;&lt;/a&gt;Java容器关系图&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;Java容器.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li
-      
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="http://thmasterplan.cn/categories/JAVA/"/>
-    
-    
-      <category term="JAVA" scheme="http://thmasterplan.cn/tags/JAVA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>接口与抽象类</title>
-    <link href="http://thmasterplan.cn/JAVA/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/"/>
-    <id>http://thmasterplan.cn/JAVA/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/</id>
-    <published>2020-01-14T03:50:19.000Z</published>
-    <updated>2020-01-14T04:16:11.139Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="接口与抽象类的异同"><a href="#接口与抽象类的异同" class="headerlink" title="接口与抽象类的异同"></a>接口与抽象类的异同</h3><p><img src="接口与抽象类的区别.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;接口与抽象类的异同&quot;&gt;&lt;a href=&quot;#接口与抽象类的异同&quot; class=&quot;headerlink&quot; title=&quot;接口与抽象类的异同&quot;&gt;&lt;/a&gt;接口与抽象类的异同&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;接口与抽象类的区别.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
       
     
     </summary>
