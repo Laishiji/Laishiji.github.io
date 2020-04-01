@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Java位运算 | Blog Of TheMasterplan</title>
-  <meta name="description" content="Java位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。  | ：按位或。有一个为1则为1。  ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b1000000000000000000">
-<meta name="keywords" content="JAVA">
+  <title>Servlet | Blog Of TheMasterplan</title>
+  <meta name="description" content="Servlet(Server applet) 调用流程：  用户访问html页面，表单提交 xml文件url-pattern与url匹配，若符合Tomcat则加载servlet-class对应的class文件进内存（反射） 实例化Servlet（class.newInstance()）得到一个Servlet对象 调用service()方法，根据表单的method，在该方法中调用doGet或doPo">
+<meta name="keywords" content="JavaWeb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java位运算">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
+<meta property="og:title" content="Servlet">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JavaWeb&#x2F;Servlet&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Java位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。  | ：按位或。有一个为1则为1。  ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b1000000000000000000">
+<meta property="og:description" content="Servlet(Server applet) 调用流程：  用户访问html页面，表单提交 xml文件url-pattern与url匹配，若符合Tomcat则加载servlet-class对应的class文件进内存（反射） 实例化Servlet（class.newInstance()）得到一个Servlet对象 调用service()方法，根据表单的method，在该方法中调用doGet或doPo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-30T14:18:01.418Z">
+<meta property="og:updated_time" content="2020-04-01T08:12:26.238Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/Servlet/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -372,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java位运算符"><span class="toc-number">1.</span> <span class="toc-text">Java位运算符</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet-Server-applet"><span class="toc-number">1.</span> <span class="toc-text">Servlet(Server applet)</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Java位运算" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Servlet" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Java位运算
+      Servlet
     </h1>
   
 
@@ -394,20 +394,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="article-date">
-	  <time datetime="2019-11-19T10:25:55.000Z" itemprop="datePublished">2019-11-19</time>
+	<a href="/JavaWeb/Servlet/" class="article-date">
+	  <time datetime="2020-04-01T08:10:10.000Z" itemprop="datePublished">2020-04-01</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/" rel="tag">JAVA</a>
+	<a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
   </span>
 
 
@@ -420,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/Servlet/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 374(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1k(words)</span>
 	
 	
 
@@ -431,36 +431,80 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Java位运算符"><a href="#Java位运算符" class="headerlink" title="Java位运算符"></a>Java位运算符</h3><ol>
-<li><p>&amp; ：按位与。同时为1才为1，否则为0。</p>
-</li>
-<li><p>| ：按位或。有一个为1则为1。</p>
-</li>
-<li><p>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</p>
-</li>
-<li><p>^ ：按位异或。不同为1，相同为0。</p>
+        <h3 id="Servlet-Server-applet"><a href="#Servlet-Server-applet" class="headerlink" title="Servlet(Server applet)"></a>Servlet(Server applet)</h3><ul>
+<li><p><strong>调用流程</strong>：</p>
 <ul>
-<li>0与任何数字异或都等于它本身</li>
-</ul>
-<ul>
-<li>一个数据对相同的数据异或两次，值不变,常应用于加密。即a^b^b == a。</li>
-<li>使用异或实现两个变量值交换。a = a^b; b = a^b; a = a^b。</li>
+<li>用户访问html页面，表单提交</li>
+<li>xml文件<code>url-pattern</code>与url匹配，若符合Tomcat则加载<code>servlet-class</code>对应的class文件进内存（反射）</li>
+<li>实例化Servlet（class.newInstance()）得到一个Servlet对象</li>
+<li>调用service()方法，根据表单的method，在该方法中调用doGet或doPost方法</li>
+<li>request对象获取参数，response对象返回数据</li>
+<li>服务器通过http协议返回数据</li>
 </ul>
 </li>
-<li><p>&lt;&lt; ：左移。左操作数乘以2的n次幂。n是右操作数，即左移的位数。右边空出两位补0，左边两位被挤掉。</p>
-</li>
-<li><p><strong>&gt;&gt;</strong> ：右移。左操作数除以2的n次幂。n是右操作数，即右移的位数。左边空出两位用符号位填充，右边两位被挤掉。</p>
+<li><p>Servlet<strong>生命周期</strong>：</p>
 <ul>
-<li>例如：-32 &gt;&gt; 2 ：原码：10000000000000000000000000100000，反码：11111111111111111111111111011111，补码：11111111111111111111111111100000。右移后为：11111111111111111111111111111000。求得原码为：10000000000000000000000000001000。得-8。</li>
+<li>实例化：无论访问多少次该Servlet，构造方法只执行一次，只存在一个对象（单实例）<ul>
+<li>注：多个用户同时访问时，可能存在线程安全问题。因此尽量不要在Servlet中定义成员变量。</li>
 </ul>
 </li>
-<li><p><strong>&gt;&gt;&gt;</strong> ：<strong>无符号右移</strong>。左边空出的位置用0补全。例如-32 &gt;&gt;&gt; 2变成一个很大的正数。</p>
+<li><strong>初始化</strong>：在构造方法执行后，执行<strong>init()</strong>方法，无论访问多少次该Servlet，init()方法<strong>只执行一次</strong></li>
+<li><strong>提供服务</strong>：tomcat创建req和resp对象，将这两个对象作为参数传递给service()，执行<strong>service()</strong>方法，在该方法中判断执行doGet()还是doPost()</li>
+<li><p><strong>销毁</strong>：当在server.xml的Context字段中配置了reloadable=”true”时，表示web应用有任何类型的更新都会自动重启，重启就会调用<strong>destroy()</strong>方法；tomcat服务器关闭时destroy()方法会被调用。</p>
 </li>
-<li><p>位运算均针对<strong>补码</strong>进行。正数的符号位为0，原、反、补码均为其本身；负数的符号位为1，其反码为对原码除符号位其余所有位求反，补码为对反码+1。</p>
+<li><p>被回收：等待下一次GC回收</p>
 </li>
-<li><p>对于有符号数，计算机中存储的是<strong>补码</strong>。</p>
+</ul>
 </li>
-</ol>
+<li><p><strong>自启动</strong>：假如需要在tomacat一启动就执行一些初始化的代码，比如校验数据库的完整性。但是Servlet的生命周期是在用户访问对应路径开始的，这就需要Servlet自启动，执行init()方法中的业务代码：在web.xml中增加<code>&lt;load-on-startup&gt;10&lt;/load-on-startup&gt;</code>，取值范围是1-99，数字表示启动顺序，数字越小启动的优先级越高。</p>
+</li>
+<li><p><strong>注解配置</strong>（Servlet3.0后支持，不再需要web.xml配置文件）</p>
+<ul>
+<li>Servlet类上使用<code>@WebServlet(&quot;/URI&quot;)</code>配置</li>
+</ul>
+</li>
+<li><p><strong>页面跳转</strong>：</p>
+<ul>
+<li><p>服务端跳转：<code>request.getRequestDispatcher(&quot;success.html&quot;).forward(request, response);</code>,服务器内部访问success.html，并将其发送给浏览器。</p>
+</li>
+<li><p>客户端跳转：<code>response.sendRedirect(&quot;fail.html&quot;);</code>，发送一条消息给浏览器让其访问fail.html，浏览器访问，服务器获取fail.html发送给浏览器。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>request对象</strong>：封装请求消息数据</p>
+<ul>
+<li><p>获取参数：</p>
+<p><code>request.getParameter()</code>：用于获取单值的参数<br><code>request.getParameterValues()</code>：用于获取具有多值的参数，比如注册时候提交的 “hobits”，可以是多选的。<br><code>request.getParameterMap()</code>：用于遍历所有的参数，并返回Map类型。</p>
+</li>
+<li><p>获取头信息：</p>
+<p><code>request.getHeader()</code>：获取浏览器传递过来的头信息。<br><code>request.getHeaderNames()</code>：获取浏览器所有的头信息名称，根据头信息名称就能遍历出所有的头信息</p>
+</li>
+<li><p>服务端传参：<code>request.setAttribute()</code>与<code>request.getAttribute()</code></p>
+</li>
+<li><p>设置编码：<code>request.setCharacterEncoding(&quot;UTF-8&quot;);</code></p>
+</li>
+<li><p>常见方法：</p>
+<p><code>request.getRequestURL()</code>：浏览器发出请求时的完整URL，包括协议 主机名 端口(如果有)”<br><code>request.getRequestURI()</code>：浏览器发出请求的资源名部分，去掉了协议和主机名”<br><code>request.getQueryString()</code>：请求行中的参数部分，只能显示以get方式发出的参数，post方式的看不到<br><code>request.getRemoteAddr()</code>：浏览器所处于的客户机的IP地址<br><code>request.getRemoteHost()</code>：浏览器所处于的客户机的主机名<br><code>request.getRemotePort()</code>：浏览器所处于的客户机使用的网络端口<br><code>request.getLocalAddr()</code>：服务器的IP地址<br><code>request.getLocalName()</code>：服务器的主机名<br><code>request.getMethod()</code>：得到客户机请求方式，一般是GET或者POST                 </p>
+</li>
+</ul>
+</li>
+<li><p><strong>response对象</strong>：通过response对象设置响应消息数据</p>
+<ul>
+<li><p>设置响应内容：<code>response.getWriter()</code>获取PrintWriter对象，使用println(),append(),write(),format()等等方法设置返回给浏览器的html内容。             </p>
+</li>
+<li><p>设置响应格式与编码：<code>response.setContentType(&quot;text/html;charset=utf-8&quot;)</code>或<code>response.setCharacterEncoding(&quot;UTF-8&quot;)</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>ServletContext对象</strong>：代表整个web应用，与servlet容器通信</p>
+<ul>
+<li>通过request.getServletContext()或this.getServletContext()获取</li>
+<li>获取MIME(text/html, image/jpeg…)类型数据：<code>getMimeType(String file)</code></li>
+<li>作为域对象共享数据：<code>setAttribute() getAttribute() removeAttribute()</code>，共享所有用户请求的数据</li>
+<li>获取文件的真实路径：<code>getRealPath(String file)</code></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -471,7 +515,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" title="Java位运算" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/JavaWeb/Servlet/" title="Servlet" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -520,13 +564,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/Linux/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" title="常见文本处理命令"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" title="网络安全总结"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/JavaWeb/JSON/" title="JSON"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

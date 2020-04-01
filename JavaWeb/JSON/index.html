@@ -17,19 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Java位运算 | Blog Of TheMasterplan</title>
-  <meta name="description" content="Java位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。  | ：按位或。有一个为1则为1。  ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b1000000000000000000">
-<meta name="keywords" content="JAVA">
+  <title>JSON | Blog Of TheMasterplan</title>
+  <meta name="description" content="JSON简介 概念：JavaScript对象表示法(JavaScript Object Notation)。 作用：JSON是存储和交换文本信息的语法，常用于信息传输，比XML更小、更快、更易解析。  语法 基本语法：  数据由键值对构成，值的取值类型有： 整数或浮点数 字符串：&amp;quot;string&amp;quot; 布尔值：true&#x2F;false 数组：[] 对象：{name:&amp;quot;Tom&amp;q">
+<meta name="keywords" content="JavaWeb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java位运算">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JAVA&#x2F;Java%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
+<meta property="og:title" content="JSON">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JavaWeb&#x2F;JSON&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Java位运算符 &amp;amp; ：按位与。同时为1才为1，否则为0。  | ：按位或。有一个为1则为1。  ~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&amp;gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&amp;gt;补码的逆运算)：0b1000000000000000000">
+<meta property="og:description" content="JSON简介 概念：JavaScript对象表示法(JavaScript Object Notation)。 作用：JSON是存储和交换文本信息的语法，常用于信息传输，比XML更小、更快、更易解析。  语法 基本语法：  数据由键值对构成，值的取值类型有： 整数或浮点数 字符串：&amp;quot;string&amp;quot; 布尔值：true&#x2F;false 数组：[] 对象：{name:&amp;quot;Tom&amp;q">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-30T14:18:01.418Z">
+<meta property="og:updated_time" content="2020-04-01T08:11:33.597Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/JSON/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -372,21 +372,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java位运算符"><span class="toc-number">1.</span> <span class="toc-text">Java位运算符</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON简介"><span class="toc-number">1.</span> <span class="toc-text">JSON简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-number">2.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON在Java中的解析"><span class="toc-number">3.</span> <span class="toc-text">JSON在Java中的解析</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Java位运算" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-JSON" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Java位运算
+      JSON
     </h1>
   
 
@@ -394,20 +394,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" class="article-date">
-	  <time datetime="2019-11-19T10:25:55.000Z" itemprop="datePublished">2019-11-19</time>
+	<a href="/JavaWeb/JSON/" class="article-date">
+	  <time datetime="2020-04-01T08:09:57.000Z" itemprop="datePublished">2020-04-01</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/" rel="tag">JAVA</a>
+	<a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
   </span>
 
 
@@ -420,10 +420,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/JSON/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 374(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 381(words)</span>
 	
 	
 
@@ -431,36 +431,47 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Java位运算符"><a href="#Java位运算符" class="headerlink" title="Java位运算符"></a>Java位运算符</h3><ol>
-<li><p>&amp; ：按位与。同时为1才为1，否则为0。</p>
-</li>
-<li><p>| ：按位或。有一个为1则为1。</p>
-</li>
-<li><p>~ ：按位取反。例如3：补码：0b00000000000000000000000000000011。~3—&gt;得:0b11111111111111111111111111111100。(依旧为补码)。减一后取反得原码(原码-&gt;补码的逆运算)：0b1000000000000000000000000000100。故3取反后为-4。</p>
-</li>
-<li><p>^ ：按位异或。不同为1，相同为0。</p>
-<ul>
-<li>0与任何数字异或都等于它本身</li>
+        <h3 id="JSON简介"><a href="#JSON简介" class="headerlink" title="JSON简介"></a>JSON简介</h3><ul>
+<li>概念：JavaScript对象表示法(JavaScript Object Notation)。</li>
+<li>作用：JSON是存储和交换文本信息的语法，常用于信息传输，比XML更小、更快、更易解析。</li>
 </ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
+<li><p>基本语法：</p>
 <ul>
-<li>一个数据对相同的数据异或两次，值不变,常应用于加密。即a^b^b == a。</li>
-<li>使用异或实现两个变量值交换。a = a^b; b = a^b; a = a^b。</li>
-</ul>
-</li>
-<li><p>&lt;&lt; ：左移。左操作数乘以2的n次幂。n是右操作数，即左移的位数。右边空出两位补0，左边两位被挤掉。</p>
-</li>
-<li><p><strong>&gt;&gt;</strong> ：右移。左操作数除以2的n次幂。n是右操作数，即右移的位数。左边空出两位用符号位填充，右边两位被挤掉。</p>
-<ul>
-<li>例如：-32 &gt;&gt; 2 ：原码：10000000000000000000000000100000，反码：11111111111111111111111111011111，补码：11111111111111111111111111100000。右移后为：11111111111111111111111111111000。求得原码为：10000000000000000000000000001000。得-8。</li>
+<li>数据由键值对构成，值的取值类型有：<ul>
+<li>整数或浮点数</li>
+<li>字符串：<code>&quot;string&quot;</code></li>
+<li>布尔值：<code>true/false</code></li>
+<li>数组：<code>[]</code></li>
+<li>对象：<code>{name:&quot;Tom&quot;,age:23,gender:&quot;male&quot;}</code></li>
+<li>null</li>
 </ul>
 </li>
-<li><p><strong>&gt;&gt;&gt;</strong> ：<strong>无符号右移</strong>。左边空出的位置用0补全。例如-32 &gt;&gt;&gt; 2变成一个很大的正数。</p>
+<li>数据由<code>,</code>分隔</li>
+<li><code>{}</code>保存对象，同时也定义了JSON格式</li>
+<li><code>[]</code>保存数组</li>
+</ul>
 </li>
-<li><p>位运算均针对<strong>补码</strong>进行。正数的符号位为0，原、反、补码均为其本身；负数的符号位为1，其反码为对原码除符号位其余所有位求反，补码为对反码+1。</p>
+<li><p>获取数据方式：JSON对象.键名；JSON对象[“键名”]；数组对象[索引]。</p>
 </li>
-<li><p>对于有符号数，计算机中存储的是<strong>补码</strong>。</p>
+</ul>
+<h3 id="JSON在Java中的解析"><a href="#JSON在Java中的解析" class="headerlink" title="JSON在Java中的解析"></a>JSON在Java中的解析</h3><ul>
+<li><p>Java常用的JSON解析类库：GSON, FastJson, Jackson；以Jackson为例。</p>
 </li>
-</ol>
+<li><p>Java对象转JSON</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class Person&#123;</span><br><span class="line">   private String name;</span><br><span class="line">   private int age;</span><br><span class="line">   private String gender;</span><br><span class="line">   //getter and setter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class JacksonTest&#123;</span><br><span class="line">   //创建Java对象</span><br><span class="line">    Person p = new Person();</span><br><span class="line">    p.setName(&quot;Tom&quot;);</span><br><span class="line">    p.setAge(23);</span><br><span class="line">    p.setGender(&quot;男&quot;);</span><br><span class="line">   //创建Jackson对象</span><br><span class="line">   ObjectMapper mapper = new ObjectMapper();</span><br><span class="line">   //转换方法：</span><br><span class="line">   /*</span><br><span class="line">      writeValue(args, obj):</span><br><span class="line">         args: </span><br><span class="line">            File:将obj对象转换为JSON字符串，并保存到指定文件；</span><br><span class="line">            Writer:转换，并将json数据填充到字符输出流</span><br><span class="line">            OutputStream:转换，并将json数据填充到字节输出流</span><br><span class="line">      writeValueAsString(obj):将对象转换为json字符串</span><br><span class="line">   */</span><br><span class="line">   String json = mapper.writeValueAsString(p);</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注解：<ul>
+<li>@JsonIgnore：排除属性（该注解置于要忽略的属性上），指定属性不会被转换</li>
+<li>@JsonFormat：属性值格式化（该注解置于要格式化的属性上），例<code>@JsonFormat(pattern=&quot;yyyy-MM-dd&quot;)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>JSON转Java对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String json = &quot;&#123;name:\&quot;Tom\&quot;,age:23&#125;&quot;;</span><br><span class="line">ObjectMapper mapper = new ObjectMapper();</span><br><span class="line">Person p = mapper.readValue(json, Person.class);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -471,7 +482,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" title="Java位运算" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/JavaWeb/JSON/" title="JSON" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -521,12 +532,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/Linux/%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" title="常见文本处理命令"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/JavaWeb/Servlet/" title="Servlet"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" title="网络安全总结"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/JavaWeb/XML/" title="XML"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
