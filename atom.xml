@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2020-04-01T12:56:30.934Z</updated>
+  <updated>2020-04-03T14:29:23.154Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -17,20 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Cookie_Session</title>
-    <link href="http://thmasterplan.cn/JavaWeb/Cookie-Session/"/>
-    <id>http://thmasterplan.cn/JavaWeb/Cookie-Session/</id>
-    <published>2020-04-01T12:55:36.000Z</published>
-    <updated>2020-04-01T12:56:30.934Z</updated>
+    <title>Filter_Listener</title>
+    <link href="http://thmasterplan.cn/JavaWeb/Filter-Listener/"/>
+    <id>http://thmasterplan.cn/JavaWeb/Filter-Listener/</id>
+    <published>2020-04-03T07:52:10.000Z</published>
+    <updated>2020-04-03T14:29:23.154Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul><li><p>概念：客户端会话技术，将数据保存到客户端。<code>import javax.servlet.http.Cookie</code>(类)。</p></li><li><p>主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。</p></li><li><p>使用</p><ul><li><p>创建Cookie对象，绑定数据：<code>new Cookie(String name, String value)</code></p></li><li><p>发送Cookie对象到客户端：<code>response.addCookie(Cookie cookie)</code></p></li><li><p>获取Cookie，拿到数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">if(cookies != null)&#123;</span><br><span class="line">   for(Cookie c : cookies)&#123;</span><br><span class="line">      String name = c.getName();</span><br><span class="line">      String val = c.getValue();</span><br><span class="line">      //..........</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>原理</p><ul><li>客户端发送请求-&gt;</li><li>服务器创建Cookie并发送到客户端 -&gt; </li><li>http响应头增加Set-Cookie：name=value字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证</li></ul></li><li><p>Tips</p><ul><li><p>一次可以创建多个Cookie并发送</p></li><li><p>Cookie在浏览器中存活时间</p><ul><li>默认情况下，浏览器关闭后Cookie数据销毁</li><li>持久化存储：<code>cookie.setMaxAge(int seconds)</code><ul><li>正数：将cookie数据写到硬盘的文件中，seconds时间之后文件被删除。</li><li>负数：默认值</li><li>0：删除cookie数据</li></ul></li></ul></li><li><p>Tomcat8之后Cookie支持中文</p></li><li><p>Cookie共享问题</p><ul><li><p>假设在一个Tomcat服务器中部署了多个web项目：</p><ul><li><p>默认情况下不同web项目的cookie不能共享</p></li><li><p><code>cookie.setPath(String path)</code>：设置Cookie的获取范围。默认情况下，设置当前的虚拟目录。如果要共享，可将path设置为”/“。</p></li></ul></li><li><p>服务器集群共享Cookie：</p><ul><li><code>setDomain(String path)</code>：设置一级域名</li><li>例如<code>setDomain(&quot;.baidu.com&quot;)</code>，则tieba.baidu.com和news.baidu.com中cookie可以共享</li></ul></li></ul></li></ul></li></ul><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul><li>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</li><li>主要作用<ul><li>用于存储一次会话的多次请求的数据</li><li>可以存储任意类型、任意大小的数据</li></ul></li><li><p>使用</p><ul><li>获取session对象：<code>HttpSession session = request.getSession();</code></li><li>存储数据：<code>session.setAttribute(&quot;name&quot;, &quot;value&quot;);</code></li><li>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></li></ul></li><li><p>原理：<strong>Session的实现依赖于Cookie</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。</p><ul><li>客户端发送请求-&gt;</li><li>创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证sessionID</li></ul></li><li><p>Tips</p><ul><li><p>浏览器关闭，服务器不关闭，浏览器重启，两次获取的session对象是否相同？</p><ul><li><p>默认情况下不是。</p></li><li><p>为避免这种情况，可设置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = new Cookie(&quot;JSESSIONID&quot;, session.getId());</span><br><span class="line">cookie.setMaxAge(60*60);//持久化存储cookie</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></li></ul></li><li><p>浏览器不关闭，服务器关闭，服务器开启，两次获取的session对象是否相同？</p><ul><li>新对象地址与原对象不同</li><li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。（Tomcat已经集成了这种技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件）<ul><li>session钝化：在服务器正常关闭前，将session对象序列化到硬盘上</li><li>session活化：服务器启动后，将session文件转化为内存中的session对象，删除文件</li></ul></li></ul></li><li><p>session何时被销毁？</p><ul><li><p>服务器关闭</p></li><li><p>session对象调用invalidate()方法</p></li><li><p>session默认失效时间为30分钟(可在tomcat的conf/web.xml中配置)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure></li></ul></li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="Filter（过滤器）"><a href="#Filter（过滤器）" class="headerlink" title="Filter（过滤器）"></a>Filter（过滤器）</h3><ul><li><p><strong>概念</strong>：客户端访问服务器资源时，filter拦截请求，作特殊处理：<strong>登录验证</strong>、<strong>统一编码处理</strong>、<strong>敏感字符过滤等</strong>。</p></li><li><p><strong>使用</strong></p><ul><li><p>实现<code>javax.servlet.Filter</code>接口</p></li><li><p>覆写<code>init()/doFilter()/destroy()</code>方法</p><ul><li>doFilter()放行代码：<code>filterChain.doFilter(servletRequest, servletResponse);</code></li></ul></li><li><p>配置拦截路径</p><ul><li><p>注解配置：<code>@WebFilter(&quot;/path&quot;)</code></p></li><li><p>web.xml配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">    &lt;filter-name&gt;name&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;filterClassName&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line"></span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;name&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/path&lt;/url-pattern&gt; &lt;!-- 拦截路径 --&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure></li></ul></li></ul></li><li><p><strong>filter的执行流程</strong></p><ul><li>客户端请求 -&gt;</li><li>经过filter -&gt;</li><li>执行doFilter()：<ul><li>对request对象请求消息处理 -&gt;</li><li>放行 -&gt;</li><li>(服务器servlet执行后响应) 对response对象的响应消息处理 </li></ul></li></ul></li><li><p><strong>filter的生命周期</strong></p><ul><li><code>init()</code>：服务器启动后，创建filter对象，调用init()方法，只执行一次。用于加载资源。</li><li><code>doFilter()</code>：<strong>每一次请求</strong>被拦截资源时，都会执行。</li><li><code>destroy()</code>：服务器关闭，filter对象被销毁。正常关闭情况下，会执行destroy()方法。用于释放资源。</li></ul></li><li><p><strong>拦截方式配置</strong>，设置dispatcherTypes属性</p><ul><li><p>注解方式</p><ul><li>DispatcherType.REQUEST：默认值。浏览器直接请求资源时，才会执行filter。</li><li>DispatcherType.FORWARD：转发访问资源。</li><li>DispatcherType.INCLUDE：包含访问资源。</li><li>DispatcherType.ERROR：错误跳转资源。</li><li>DispatcherType.ASYNC：异步访问资源。</li></ul></li><li><p>web.xml方式</p><ul><li>添加<code>&lt;dispatcher&gt; &lt;/dispatcher&gt;</code>标签，标签中文本取上述取值即可。</li></ul></li></ul></li><li><p><strong>过滤器链的执行顺序</strong>：filter1 -&gt; filter2… -&gt; 资源执行 -&gt;…filter2 -&gt; filter1。</p><ul><li>注解配置：按照类名的字符串比较规则比较，值小的先执行。例如filterA与filterB，则filterA先执行。</li><li>web.xml配置：按照<code>&lt;filter-mapping&gt;</code>的定义顺序执行。</li></ul></li></ul><h3 id="Listener-监听器"><a href="#Listener-监听器" class="headerlink" title="Listener(监听器)"></a>Listener(监听器)</h3><ul><li><p>概念：监听器就是一个实现了特定<strong>接口</strong>的普通Java程序，这个程序专门用于监听另一个Java对象的方法调用或者属性改变（事件）。当被监听对象发生上述事件后，监听器某个方法将立即被执行。</p></li><li><p>常用的监听器”6 + 2”：</p><ul><li><p><strong>6个常规监听器</strong>，对应JavaWeb<strong>三大域对象</strong></p><ul><li><p><strong>ServletContext</strong></p><ul><li>ServletContextListener(生命周期监听)，<strong>项目启动时</strong>，ServletContext创建后创建该接口的实现类对象。注：Spring框架的ContextLoaderListener类实现了该接口。</li><li>ServletContextAttributeListener(属性监听)</li></ul></li><li><p><strong>HttpSession</strong></p><ul><li>HttpSessionListener(生命周期监听)，只有在servlet中调用了request.getSession()方法且根据JSESSIONID找不到对应的session时才会创建新的session对象，触发监听。</li><li>HttpSessionAttributeListener(属性监听)</li></ul></li><li><p><strong>ServletRequest</strong></p><ul><li>ServletRequestListener(生命周期监听)，每一次请求都会创建request对象并触发监听，每一次请求结束都会销毁request对象并触发监听。</li><li>ServletRequestAttributeListener(属性监听)</li></ul></li><li><p><strong>生命周期监听</strong>：每当tomcat<strong>创建或销毁三大域对象</strong>时，都会被其对应的Listener察觉并调用其特定的方法。</p></li><li><strong>属性监听</strong>：每当调用域对象的setAttribute()或getAttribute()，都会被对应的属性监听器察觉并调用其特定的方法。</li></ul></li><li><p><strong>2个感知监听</strong></p><ul><li>HttpSessionBindingListener：需要通过<code>session.setAttribute(&quot;key&quot;, new Object())</code>存储的对象Object实现该监听器接口，其有两个方法<code>valueBound()/valueUnbound</code>，当该对象被<strong>绑定(存储)</strong>时，触发该对象的<code>valueBound()</code>方法；当该对象被session<strong>解绑</strong>时<code>session.removeAttribute(&quot;key&quot;);</code>时触发该对象的<code>valueUnbound()</code>方法。</li><li>HttpSessionActivationListener：需要通过<code>session.setAttribute(&quot;key&quot;, new Object())</code>存储的对象Object实现该监听器接口。当该session即将被<strong>钝化(序列化)</strong>时，触发该监听器的<code>sessionWillPassivate()</code>方法；当该session<strong>活化</strong>时，触发该监听器的<code>sessionDidActivate</code>方法。</li></ul></li></ul></li><li><p><strong>设计模式：观察者模式</strong>（待补充）</p></li><li><p><code>javax.servlet.ServletContextListener</code>接口：用于监听ServletContext对象的销毁与创建</p><ul><li><code>void contextDestroyed(ServletContextEvent sce)</code>：ServletContext对象<strong>被销毁</strong>之前会调用该方法。</li><li><p><code>void contextInitialized(ServletContextEvent sce)</code>：ServletContext对象<strong>创建</strong>后会调用该方法，服务器启动后自动调用。</p></li><li><p>使用：实现接口 -&gt; 覆写方法 -&gt; 配置</p><ul><li><p>web.xml配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">   &lt;listener-class&gt;监听器类名&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure></li><li><p>注解配置：<code>@WebListener</code></p></li></ul></li></ul></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;Cookie&quot;&gt;&lt;a href=&quot;#Cookie&quot; class=&quot;headerlink&quot; title=&quot;Cookie&quot;&gt;&lt;/a&gt;Cookie&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;概念：客户端会话技术，将数据保存到客户端。&lt;code&gt;import javax.servl
+        &lt;h3 id=&quot;Filter（过滤器）&quot;&gt;&lt;a href=&quot;#Filter（过滤器）&quot; class=&quot;headerlink&quot; title=&quot;Filter（过滤器）&quot;&gt;&lt;/a&gt;Filter（过滤器）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;概念&lt;/strong&gt;：客户端访问
+      
+    
+    </summary>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/categories/JavaWeb/"/>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/tags/JavaWeb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Cookie_Session</title>
+    <link href="http://thmasterplan.cn/JavaWeb/Cookie-Session/"/>
+    <id>http://thmasterplan.cn/JavaWeb/Cookie-Session/</id>
+    <published>2020-04-01T12:55:36.000Z</published>
+    <updated>2020-04-03T07:49:07.529Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><ul><li>会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一<strong>标识一个用户并记录其状态</strong>。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。</li></ul><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul><li><p>概念：客户端会话技术，将数据保存到客户端。<code>javax.servlet.http.Cookie</code>(类)。</p></li><li><p>主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。cookie的作用就像是身份凭证。</p></li><li><p>使用</p><ul><li><p>创建Cookie对象，绑定数据：<code>new Cookie(String name, String value)</code></p></li><li><p>发送Cookie对象到客户端：<code>response.addCookie(Cookie cookie)</code></p></li><li><p>获取Cookie，拿到数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">if(cookies != null)&#123;</span><br><span class="line">   for(Cookie c : cookies)&#123;</span><br><span class="line">      String name = c.getName();</span><br><span class="line">      String val = c.getValue();</span><br><span class="line">      //..........</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>原理</p><ul><li>客户端发送请求-&gt;</li><li>服务器创建Cookie并发送到客户端 -&gt; </li><li>http响应头增加Set-Cookie：name=value字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证</li></ul></li><li><p>Tips</p><ul><li><p>一次可以创建多个Cookie并发送</p></li><li><p>Cookie在浏览器中存活时间</p><ul><li>默认情况下，浏览器关闭后Cookie数据销毁</li><li><strong>持久化存储</strong>：<code>cookie.setMaxAge(int seconds)</code><ul><li>正数：将cookie数据写到硬盘的文件中，seconds时间之后文件被删除。</li><li>负数：默认值</li><li>0：删除已经存在于客户端的cookie数据</li></ul></li></ul></li><li><p>Tomcat8之后Cookie支持中文</p></li><li><p><strong>Cookie共享问题</strong></p><ul><li><p>假设在一个Tomcat服务器中部署了多个web项目：</p><ul><li><p>默认情况下不同web项目的cookie不能共享</p></li><li><p><code>cookie.setPath(String path)</code>：设置Cookie的获取范围。默认情况下，设置当前的虚拟目录。如果要共享，可将path设置为”/“。</p></li></ul></li><li><p>服务器集群共享Cookie：</p><ul><li><code>setDomain(String path)</code>：设置一级域名</li><li>例如<code>setDomain(&quot;.baidu.com&quot;)</code>，则tieba.baidu.com和news.baidu.com中cookie可以共享</li></ul></li></ul></li></ul></li></ul><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul><li><p>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</p></li><li><p>主要作用</p><ul><li>用于存储一次会话的多次请求的数据</li><li>可以存储任意类型、任意大小的数据</li></ul></li><li><p>使用</p><ul><li><p>获取session对象：<code>HttpSession session = request.getSession();</code></p></li><li><p>存储数据：<code>session.setAttribute(&quot;name&quot;, Object);</code></p></li><li><p>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></p></li></ul></li><li><p>原理：<strong>Session的实现依赖于Cookie</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。</p><ul><li>客户端发送请求-&gt;</li><li>创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</li><li>客户端存储cookie数据 -&gt; </li><li>客户端下一次请求http请求头设置cookie -&gt; </li><li>服务器验证sessionID</li></ul></li><li><p>Tips</p><ul><li><p>浏览器关闭，服务器不关闭，浏览器重启，两次获取的session对象是否相同？</p><ul><li><p>默认情况下不是。</p></li><li><p>为避免这种情况，可手动设置持久化存储JSESSIONID</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = new Cookie(&quot;JSESSIONID&quot;, session.getId());</span><br><span class="line">cookie.setMaxAge(60*60);//持久化存储cookie</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure></li></ul></li><li><p>浏览器不关闭，服务器关闭，服务器开启，两次获取的session对象是否相同？</p><ul><li>新对象地址与原对象不同</li><li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。<ul><li>session钝化：在服务器正常关闭前，将session对象序列化到硬盘上</li><li>session活化：服务器启动后，将session文件转化为内存中的session对象，删除文件</li><li>Tomcat已经集成了钝化与活化技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件</li><li>session钝化与活化不仅仅是服务器关闭时发生，当在线用户过多时，大量session对象存在于服务器内存中。为减轻服务器内存负担，当一个session长时间没有被访问，也会被序列号到磁盘上（注意session中存储的对象所在的类必须要实现序列化接口）。可在tomcat的<code>conf/context.xml</code>中配置。</li></ul></li></ul></li><li><p>session何时被销毁？</p><ul><li><p>服务器关闭</p></li><li><p>session对象调用invalidate()方法</p></li><li><p>session默认失效时间为30分钟(可在tomcat的conf/web.xml中配置)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure></li></ul></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;会话&quot;&gt;&lt;a href=&quot;#会话&quot; class=&quot;headerlink&quot; title=&quot;会话&quot;&gt;&lt;/a&gt;会话&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一&lt;strong&gt;标识一个用户并记录其状态&lt;/strong&gt;。由于
       
     
     </summary>
@@ -537,34 +564,6 @@
       
         &lt;h3 id=&quot;一、形式&quot;&gt;&lt;a href=&quot;#一、形式&quot; class=&quot;headerlink&quot; title=&quot;一、形式&quot;&gt;&lt;/a&gt;一、形式&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;for: &lt;code&gt;for（int i=0;i&amp;lt;arr.size();i++）{...}&lt;/code&gt;&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="http://thmasterplan.cn/categories/JAVA/"/>
-    
-    
-      <category term="JAVA" scheme="http://thmasterplan.cn/tags/JAVA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java容器</title>
-    <link href="http://thmasterplan.cn/JAVA/Java%E5%AE%B9%E5%99%A8/"/>
-    <id>http://thmasterplan.cn/JAVA/Java%E5%AE%B9%E5%99%A8/</id>
-    <published>2020-01-18T07:35:59.000Z</published>
-    <updated>2020-01-18T07:44:02.102Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Java容器关系图"><a href="#Java容器关系图" class="headerlink" title="Java容器关系图"></a>Java容器关系图</h3><p><img src="Java容器.jpg" alt=""></p><ul><li>图片来源：<a href="https://zhuanlan.zhihu.com/p/29421226" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/29421226</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Java容器关系图&quot;&gt;&lt;a href=&quot;#Java容器关系图&quot; class=&quot;headerlink&quot; title=&quot;Java容器关系图&quot;&gt;&lt;/a&gt;Java容器关系图&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;Java容器.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li
       
     
     </summary>

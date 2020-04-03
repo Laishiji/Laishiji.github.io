@@ -17,15 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: JVM | Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;categories&#x2F;JVM&#x2F;index.html">
+  <title>Filter_Listener | Blog Of TheMasterplan</title>
+  <meta name="description" content="Filter（过滤器） 概念：客户端访问服务器资源时，filter拦截请求，作特殊处理：登录验证、统一编码处理、敏感字符过滤等。  使用  实现javax.servlet.Filter接口  覆写init()&#x2F;doFilter()&#x2F;destroy()方法  doFilter()放行代码：filterChain.doFilter(servletRequest, servletResponse);">
+<meta name="keywords" content="JavaWeb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Filter_Listener">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JavaWeb&#x2F;Filter-Listener&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="Filter（过滤器） 概念：客户端访问服务器资源时，filter拦截请求，作特殊处理：登录验证、统一编码处理、敏感字符过滤等。  使用  实现javax.servlet.Filter接口  覆写init()&#x2F;doFilter()&#x2F;destroy()方法  doFilter()放行代码：filterChain.doFilter(servletRequest, servletResponse);">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-04-03T14:29:23.154Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/categories/JVM/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/Filter-Listener/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -363,76 +367,268 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: JVM</h1>
-      <p class="hidden-xs">Total 2 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/JavaWeb/">JavaWeb</a></li>
-          
-          <li><a href="/categories/git/">git</a></li>
-          
-          <li><a href="/categories/JAVA/">JAVA</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/Python/">Python</a></li>
-          
-          <li><a href="/categories/shell编程/">shell编程</a></li>
-          
-          <li><a href="/categories/面试刷题/">面试刷题</a></li>
-          
-          <li><a href="/categories/JVM/">JVM</a></li>
-          
-          <li><a href="/categories/安全/">安全</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseJVM" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              JVM
-            </a>
-            <small class="text-muted">(Total 2 articles)</small>
-        </h4>
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Filter（过滤器）"><span class="toc-number">1.</span> <span class="toc-text">Filter（过滤器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Listener-监听器"><span class="toc-number">2.</span> <span class="toc-text">Listener(监听器)</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Filter-Listener" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Filter_Listener
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/JavaWeb/Filter-Listener/" class="article-date">
+	  <time datetime="2020-04-03T07:52:10.000Z" itemprop="datePublished">2020-04-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/Filter-Listener/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
     </div>
-    <div id="collapseJVM" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingJVM">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-03-26T06:11:57.000Z" itemprop="datePublished">2020-03-26</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 常量与反编译及助记符
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="Filter（过滤器）"><a href="#Filter（过滤器）" class="headerlink" title="Filter（过滤器）"></a>Filter（过滤器）</h3><ul>
+<li><p><strong>概念</strong>：客户端访问服务器资源时，filter拦截请求，作特殊处理：<strong>登录验证</strong>、<strong>统一编码处理</strong>、<strong>敏感字符过滤等</strong>。</p>
+</li>
+<li><p><strong>使用</strong></p>
+<ul>
+<li><p>实现<code>javax.servlet.Filter</code>接口</p>
+</li>
+<li><p>覆写<code>init()/doFilter()/destroy()</code>方法</p>
+<ul>
+<li>doFilter()放行代码：<code>filterChain.doFilter(servletRequest, servletResponse);</code></li>
+</ul>
+</li>
+<li><p>配置拦截路径</p>
+<ul>
+<li><p>注解配置：<code>@WebFilter(&quot;/path&quot;)</code></p>
+</li>
+<li><p>web.xml配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">    &lt;filter-name&gt;name&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;filterClassName&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line"></span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;name&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/path&lt;/url-pattern&gt; &lt;!-- 拦截路径 --&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>filter的执行流程</strong></p>
+<ul>
+<li>客户端请求 -&gt;</li>
+<li>经过filter -&gt;</li>
+<li>执行doFilter()：<ul>
+<li>对request对象请求消息处理 -&gt;</li>
+<li>放行 -&gt;</li>
+<li>(服务器servlet执行后响应) 对response对象的响应消息处理 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>filter的生命周期</strong></p>
+<ul>
+<li><code>init()</code>：服务器启动后，创建filter对象，调用init()方法，只执行一次。用于加载资源。</li>
+<li><code>doFilter()</code>：<strong>每一次请求</strong>被拦截资源时，都会执行。</li>
+<li><code>destroy()</code>：服务器关闭，filter对象被销毁。正常关闭情况下，会执行destroy()方法。用于释放资源。</li>
+</ul>
+</li>
+<li><p><strong>拦截方式配置</strong>，设置dispatcherTypes属性</p>
+<ul>
+<li><p>注解方式</p>
+<ul>
+<li>DispatcherType.REQUEST：默认值。浏览器直接请求资源时，才会执行filter。</li>
+<li>DispatcherType.FORWARD：转发访问资源。</li>
+<li>DispatcherType.INCLUDE：包含访问资源。</li>
+<li>DispatcherType.ERROR：错误跳转资源。</li>
+<li>DispatcherType.ASYNC：异步访问资源。</li>
+</ul>
+</li>
+<li><p>web.xml方式</p>
+<ul>
+<li>添加<code>&lt;dispatcher&gt; &lt;/dispatcher&gt;</code>标签，标签中文本取上述取值即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>过滤器链的执行顺序</strong>：filter1 -&gt; filter2… -&gt; 资源执行 -&gt;…filter2 -&gt; filter1。</p>
+<ul>
+<li>注解配置：按照类名的字符串比较规则比较，值小的先执行。例如filterA与filterB，则filterA先执行。</li>
+<li>web.xml配置：按照<code>&lt;filter-mapping&gt;</code>的定义顺序执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Listener-监听器"><a href="#Listener-监听器" class="headerlink" title="Listener(监听器)"></a>Listener(监听器)</h3><ul>
+<li><p>概念：监听器就是一个实现了特定<strong>接口</strong>的普通Java程序，这个程序专门用于监听另一个Java对象的方法调用或者属性改变（事件）。当被监听对象发生上述事件后，监听器某个方法将立即被执行。</p>
+</li>
+<li><p>常用的监听器”6 + 2”：</p>
+<ul>
+<li><p><strong>6个常规监听器</strong>，对应JavaWeb<strong>三大域对象</strong></p>
+<ul>
+<li><p><strong>ServletContext</strong></p>
+<ul>
+<li>ServletContextListener(生命周期监听)，<strong>项目启动时</strong>，ServletContext创建后创建该接口的实现类对象。注：Spring框架的ContextLoaderListener类实现了该接口。</li>
+<li>ServletContextAttributeListener(属性监听)</li>
+</ul>
+</li>
+<li><p><strong>HttpSession</strong></p>
+<ul>
+<li>HttpSessionListener(生命周期监听)，只有在servlet中调用了request.getSession()方法且根据JSESSIONID找不到对应的session时才会创建新的session对象，触发监听。</li>
+<li>HttpSessionAttributeListener(属性监听)</li>
+</ul>
+</li>
+<li><p><strong>ServletRequest</strong></p>
+<ul>
+<li>ServletRequestListener(生命周期监听)，每一次请求都会创建request对象并触发监听，每一次请求结束都会销毁request对象并触发监听。</li>
+<li>ServletRequestAttributeListener(属性监听)</li>
+</ul>
+</li>
+<li><p><strong>生命周期监听</strong>：每当tomcat<strong>创建或销毁三大域对象</strong>时，都会被其对应的Listener察觉并调用其特定的方法。</p>
+</li>
+<li><strong>属性监听</strong>：每当调用域对象的setAttribute()或getAttribute()，都会被对应的属性监听器察觉并调用其特定的方法。</li>
+</ul>
+</li>
+<li><p><strong>2个感知监听</strong></p>
+<ul>
+<li>HttpSessionBindingListener：需要通过<code>session.setAttribute(&quot;key&quot;, new Object())</code>存储的对象Object实现该监听器接口，其有两个方法<code>valueBound()/valueUnbound</code>，当该对象被<strong>绑定(存储)</strong>时，触发该对象的<code>valueBound()</code>方法；当该对象被session<strong>解绑</strong>时<code>session.removeAttribute(&quot;key&quot;);</code>时触发该对象的<code>valueUnbound()</code>方法。</li>
+<li>HttpSessionActivationListener：需要通过<code>session.setAttribute(&quot;key&quot;, new Object())</code>存储的对象Object实现该监听器接口。当该session即将被<strong>钝化(序列化)</strong>时，触发该监听器的<code>sessionWillPassivate()</code>方法；当该session<strong>活化</strong>时，触发该监听器的<code>sessionDidActivate</code>方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>设计模式：观察者模式</strong>（待补充）</p>
+</li>
+<li><p><code>javax.servlet.ServletContextListener</code>接口：用于监听ServletContext对象的销毁与创建</p>
+<ul>
+<li><code>void contextDestroyed(ServletContextEvent sce)</code>：ServletContext对象<strong>被销毁</strong>之前会调用该方法。</li>
+<li><p><code>void contextInitialized(ServletContextEvent sce)</code>：ServletContext对象<strong>创建</strong>后会调用该方法，服务器启动后自动调用。</p>
+</li>
+<li><p>使用：实现接口 -&gt; 覆写方法 -&gt; 配置</p>
+<ul>
+<li><p>web.xml配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">   &lt;listener-class&gt;监听器类名&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注解配置：<code>@WebListener</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-
-              
-                
-<a href="/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-03-24T09:08:23.000Z" itemprop="datePublished">2020-03-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 类加载过程
-</a>
-
-
-              
-            </div>
-        </div>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/JavaWeb/Filter-Listener/" title="Filter_Listener" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
   
- 
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/JavaWeb/Cookie-Session/" title="Cookie_Session"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -480,6 +676,28 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 

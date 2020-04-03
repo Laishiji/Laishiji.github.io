@@ -18,15 +18,15 @@
   
   
   <title>Cookie_Session | Blog Of TheMasterplan</title>
-  <meta name="description" content="Cookie 概念：客户端会话技术，将数据保存到客户端。import javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。  使用  创建Cookie对象，绑定数据：new Cookie(String name, String value)  发送Cookie对象到客户端：response.addCookie(Coo">
+  <meta name="description" content="会话 会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一标识一个用户并记录其状态。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。  Cookie 概念：客户端会话技术，将数据保存到客户端。javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证，一次登录后服务器便使用cook">
 <meta name="keywords" content="JavaWeb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cookie_Session">
 <meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;JavaWeb&#x2F;Cookie-Session&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Cookie 概念：客户端会话技术，将数据保存到客户端。import javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。  使用  创建Cookie对象，绑定数据：new Cookie(String name, String value)  发送Cookie对象到客户端：response.addCookie(Coo">
+<meta property="og:description" content="会话 会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一标识一个用户并记录其状态。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。  Cookie 概念：客户端会话技术，将数据保存到客户端。javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证，一次登录后服务器便使用cook">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-01T12:56:30.934Z">
+<meta property="og:updated_time" content="2020-04-03T07:49:07.529Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/Cookie-Session/index.html">
@@ -191,7 +191,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">8</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell%E7%BC%96%E7%A8%8B/">shell编程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -201,7 +201,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lintcode/" rel="tag">lintcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lintcode/" rel="tag">lintcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell%E7%BC%96%E7%A8%8B/" rel="tag">shell编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -220,7 +220,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">18</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -232,6 +232,31 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled ">
         
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/JavaWeb/Filter-Listener/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/JavaWeb/Filter-Listener/" class="title">Filter_Listener</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-03T07:52:10.000Z" itemprop="datePublished">2020-04-03</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-thumb">
@@ -332,31 +357,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a>
-              </p>
-              <p class="item-title">
-                <a href="/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/" class="title">动态规划入门</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-03-28T13:38:15.000Z" itemprop="datePublished">2020-03-28</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -372,7 +372,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-number">1.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Session"><span class="toc-number">2.</span> <span class="toc-text">Session</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#会话"><span class="toc-number">1.</span> <span class="toc-text">会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-number">2.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Session"><span class="toc-number">3.</span> <span class="toc-text">Session</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -419,10 +419,13 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul>
-<li><p>概念：客户端会话技术，将数据保存到客户端。<code>import javax.servlet.http.Cookie</code>(类)。</p>
+        <h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><ul>
+<li>会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一<strong>标识一个用户并记录其状态</strong>。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。</li>
+</ul>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul>
+<li><p>概念：客户端会话技术，将数据保存到客户端。<code>javax.servlet.http.Cookie</code>(类)。</p>
 </li>
-<li><p>主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。</p>
+<li><p>主要作用：避免多次登录验证，一次登录后服务器便使用cookie验证身份。cookie的作用就像是身份凭证。</p>
 </li>
 <li><p>使用</p>
 <ul>
@@ -452,17 +455,17 @@
 <li><p>Cookie在浏览器中存活时间</p>
 <ul>
 <li>默认情况下，浏览器关闭后Cookie数据销毁</li>
-<li>持久化存储：<code>cookie.setMaxAge(int seconds)</code><ul>
+<li><strong>持久化存储</strong>：<code>cookie.setMaxAge(int seconds)</code><ul>
 <li>正数：将cookie数据写到硬盘的文件中，seconds时间之后文件被删除。</li>
 <li>负数：默认值</li>
-<li>0：删除cookie数据</li>
+<li>0：删除已经存在于客户端的cookie数据</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>Tomcat8之后Cookie支持中文</p>
 </li>
-<li><p>Cookie共享问题</p>
+<li><p><strong>Cookie共享问题</strong></p>
 <ul>
 <li><p>假设在一个Tomcat服务器中部署了多个web项目：</p>
 <ul>
@@ -484,17 +487,22 @@
 </li>
 </ul>
 <h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul>
-<li>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</li>
-<li>主要作用<ul>
+<li><p>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</p>
+</li>
+<li><p>主要作用</p>
+<ul>
 <li>用于存储一次会话的多次请求的数据</li>
 <li>可以存储任意类型、任意大小的数据</li>
 </ul>
 </li>
 <li><p>使用</p>
 <ul>
-<li>获取session对象：<code>HttpSession session = request.getSession();</code></li>
-<li>存储数据：<code>session.setAttribute(&quot;name&quot;, &quot;value&quot;);</code></li>
-<li>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></li>
+<li><p>获取session对象：<code>HttpSession session = request.getSession();</code></p>
+</li>
+<li><p>存储数据：<code>session.setAttribute(&quot;name&quot;, Object);</code></p>
+</li>
+<li><p>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></p>
+</li>
 </ul>
 </li>
 <li><p>原理：<strong>Session的实现依赖于Cookie</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。</p>
@@ -512,7 +520,7 @@
 <ul>
 <li><p>默认情况下不是。</p>
 </li>
-<li><p>为避免这种情况，可设置</p>
+<li><p>为避免这种情况，可手动设置持久化存储JSESSIONID</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = new Cookie(&quot;JSESSIONID&quot;, session.getId());</span><br><span class="line">cookie.setMaxAge(60*60);//持久化存储cookie</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -520,9 +528,11 @@
 <li><p>浏览器不关闭，服务器关闭，服务器开启，两次获取的session对象是否相同？</p>
 <ul>
 <li>新对象地址与原对象不同</li>
-<li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。（Tomcat已经集成了这种技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件）<ul>
+<li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。<ul>
 <li>session钝化：在服务器正常关闭前，将session对象序列化到硬盘上</li>
 <li>session活化：服务器启动后，将session文件转化为内存中的session对象，删除文件</li>
+<li>Tomcat已经集成了钝化与活化技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件</li>
+<li>session钝化与活化不仅仅是服务器关闭时发生，当在线用户过多时，大量session对象存在于服务器内存中。为减轻服务器内存负担，当一个session长时间没有被访问，也会被序列号到磁盘上（注意session中存储的对象所在的类必须要实现序列化接口）。可在tomcat的<code>conf/context.xml</code>中配置。</li>
 </ul>
 </li>
 </ul>
@@ -599,6 +609,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/JavaWeb/Filter-Listener/" title="Filter_Listener"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
     
     
     <li class="next">
