@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/%E6%B3%A8%E8%A7%A3/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/String-StringBuffer-StringBuilder/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/JDBC/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/for-foreach-iterator/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%AE%B9%E5%99%A8/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E4%BD%8D%E8%BF%90%E7%AE%97/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E9%AB%98%E7%BA%A7/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JavaWeb/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/</loc>
     <lastmod>2020-04-05</lastmod>
   </url>  <url>
@@ -22,23 +52,11 @@
     <loc>http://thmasterplan.cn/JavaWeb/JSON/</loc>
     <lastmod>2020-04-01</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/Java%E4%BD%8D%E8%BF%90%E7%AE%97/</loc>
-    <lastmod>2020-03-30</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/Java%E9%AB%98%E7%BA%A7/</loc>
-    <lastmod>2020-03-30</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/XML/</loc>
-    <lastmod>2020-03-30</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/%E5%8F%8D%E5%B0%84/</loc>
     <lastmod>2020-03-30</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-03-29</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/JDBC/</loc>
-    <lastmod>2020-03-26</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/</loc>
     <lastmod>2020-03-26</lastmod>
@@ -46,17 +64,11 @@
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E8%B4%AA%E5%BF%83/</loc>
     <lastmod>2020-03-26</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/%E6%B3%A8%E8%A7%A3/</loc>
-    <lastmod>2020-03-25</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2020-03-24</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-03-22</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/String-StringBuffer-StringBuilder/</loc>
-    <lastmod>2020-03-15</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
     <lastmod>2020-02-15</lastmod>
@@ -72,15 +84,6 @@
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8F%8C%E6%8C%87%E9%92%88/</loc>
     <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/for-foreach-iterator/</loc>
-    <lastmod>2020-01-31</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/Java%E5%AE%B9%E5%99%A8/</loc>
-    <lastmod>2020-01-18</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JAVA/%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB/</loc>
-    <lastmod>2020-01-14</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2019-12-11</lastmod>
