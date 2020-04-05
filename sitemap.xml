@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/mybatisHelloWorld/</loc>
+    
+    <lastmod>2020-04-05T08:40:46.856Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/Maven%25E5%2585%25A5%25E9%2597%25A8/</loc>
+    
+    <lastmod>2020-04-05T03:20:55.615Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Servlet/</loc>
     
     <lastmod>2020-04-03T15:17:16.496Z</lastmod>

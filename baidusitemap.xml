@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2020-04-05</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Servlet/</loc>
     <lastmod>2020-04-03</lastmod>
   </url>  <url>
