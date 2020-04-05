@@ -356,15 +356,6 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#软件运行环境"><span class="toc-number">1.</span> <span class="toc-text">软件运行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序包的来源"><span class="toc-number">2.</span> <span class="toc-text">程序包的来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm包管理"><span class="toc-number">3.</span> <span class="toc-text">rpm包管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum管理"><span class="toc-number">4.</span> <span class="toc-text">yum管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制yum仓库"><span class="toc-number">5.</span> <span class="toc-text">定制yum仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dnf管理"><span class="toc-number">6.</span> <span class="toc-text">dnf管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码编译安装"><span class="toc-number">7.</span> <span class="toc-text">源码编译安装</span></a></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
   <article id="post-Linux软件安装和包管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -574,15 +565,6 @@
     </li>
     
     
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
   </ul>
   
   
@@ -700,6 +682,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

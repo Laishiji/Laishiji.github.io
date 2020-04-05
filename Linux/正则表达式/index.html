@@ -356,15 +356,6 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符分类：字符匹配、匹配次数、位置锚定、分组"><span class="toc-number">1.</span> <span class="toc-text">元字符分类：字符匹配、匹配次数、位置锚定、分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符匹配"><span class="toc-number">1.1.</span> <span class="toc-text">字符匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数"><span class="toc-number">1.2.</span> <span class="toc-text">匹配次数：用在用指定次数的字符后面，指定前面的字符出现的次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#位置锚定：定位出现的位置"><span class="toc-number">1.3.</span> <span class="toc-text">位置锚定：定位出现的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组："><span class="toc-number">1.4.</span> <span class="toc-text">分组：\(\)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展的正则表达式：-去掉"><span class="toc-number">1.5.</span> <span class="toc-text">扩展的正则表达式： 去掉\</span></a></li></ol></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
   <article id="post-正则表达式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -515,15 +506,6 @@
     </li>
     
     
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
   </ul>
   
   
@@ -641,6 +623,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

@@ -370,15 +370,6 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#磁盘工作原理"><span class="toc-number">1.</span> <span class="toc-text">磁盘工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区管理"><span class="toc-number">2.</span> <span class="toc-text">分区管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件系统管理"><span class="toc-number">3.</span> <span class="toc-text">文件系统管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挂载设备"><span class="toc-number">4.</span> <span class="toc-text">挂载设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外围设备使用"><span class="toc-number">5.</span> <span class="toc-text">外围设备使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理虚拟内存"><span class="toc-number">6.</span> <span class="toc-text">管理虚拟内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID管理"><span class="toc-number">7.</span> <span class="toc-text">RAID管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM（逻辑卷管理器）"><span class="toc-number">8.</span> <span class="toc-text">LVM（逻辑卷管理器）</span></a></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
   <article id="post-磁盘管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -796,15 +787,6 @@
     </li>
     
     
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
   </ul>
   
   
@@ -922,6 +904,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

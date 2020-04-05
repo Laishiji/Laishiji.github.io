@@ -488,15 +488,6 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Static关键字"><span class="toc-number">2.</span> <span class="toc-text">Static关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Arrays常用方法"><span class="toc-number">3.</span> <span class="toc-text">Arrays常用方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#继承"><span class="toc-number">4.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#抽象类与接口"><span class="toc-number">5.</span> <span class="toc-text">抽象类与接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多态"><span class="toc-number">6.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final关键字"><span class="toc-number">7.</span> <span class="toc-text">final关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类"><span class="toc-number">8.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#包装类"><span class="toc-number">9.</span> <span class="toc-text">包装类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合框架"><span class="toc-number">10.</span> <span class="toc-text">集合框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异常"><span class="toc-number">11.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发"><span class="toc-number">12.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File"><span class="toc-number">13.</span> <span class="toc-text">File</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO"><span class="toc-number">14.</span> <span class="toc-text">IO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络编程"><span class="toc-number">15.</span> <span class="toc-text">网络编程</span></a></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
   <article id="post-Java基础" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -875,15 +866,6 @@
     </li>
     
     
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
   </ul>
   
   
@@ -1001,6 +983,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>
