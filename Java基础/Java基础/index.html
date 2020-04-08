@@ -26,10 +26,10 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="字符串 String  String类是final的，因此不能被继承。源码是一个final修饰的字符数组，因此一旦创建就是一个不可变的  字符串。 1private final char value[];  判断字符串是否相等？ [涉及JVM的部分待补充]  值在编译阶段确定（相等） 1234567public static void main(String[] args) &amp;#123;		Str">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="d:&#x2F;学习&#x2F;Java&#x2F;异常.png">
-<meta property="og:updated_time" content="2020-04-08T15:36:45.218Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Exception.png">
+<meta property="og:updated_time" content="2020-04-08T15:42:34.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:&#x2F;学习&#x2F;Java&#x2F;异常.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Exception.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/index.html">
   
@@ -602,12 +602,12 @@
 <li><p>考虑这样的情况，一个类实现了多个接口，且这些接口有相同的默认方法。解决方案：<strong>重写方法，并使用<code>接口名.super.方法名()</code>调用指定接口的方法</strong>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public interface Vehicle &#123;</span><br><span class="line">  	default void print()&#123;</span><br><span class="line">  		System.out.println(&quot;vehicle...&quot;);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public interface FourWheeler &#123;</span><br><span class="line">  	default void print()&#123;</span><br><span class="line">  		System.out.println(&quot;fourWheeler...&quot;);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  public class Car implements Vehicle, FourWheeler &#123;</span><br><span class="line">  </span><br><span class="line">  	@Override</span><br><span class="line">  	public void print() &#123;</span><br><span class="line">  		FourWheeler.super.print();</span><br><span class="line">  		Vehicle.super.print();</span><br><span class="line">  	&#125;</span><br><span class="line">  	</span><br><span class="line">  	public static void main(String[] args) &#123;</span><br><span class="line">  		Vehicle car = new Car();</span><br><span class="line">  		car.print();</span><br><span class="line">  	&#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Car implements Vehicle, FourWheeler &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void print() &#123;</span><br><span class="line">		FourWheeler.super.print();</span><br><span class="line">		Vehicle.super.print();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Vehicle car = new Car();</span><br><span class="line">		car.print();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>输出：fourWheeler…</p>
-<pre><code>          vehicle...
-</code></pre></li>
+<p>}</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">输出：fourWheeler...</span><br><span class="line">              vehicle...</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>Java9：新增了<strong>私有方法</strong>，<strong>私有静态方法</strong></p>
 </li>
 </ul>
@@ -706,7 +706,7 @@
 </ul>
 <h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><ul>
 <li><p>Java异常图解</p>
-<p><img src="D:/学习/Java/异常.png" alt=""></p>
+<p><img src="Exception.png" alt=""></p>
 </li>
 <li><p>Throwable类中定义了一些查看异常的方法：</p>
 <ul>
