@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-04-09</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Others/%E6%A3%80%E7%B4%A2%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2020-04-09</lastmod>
   </url>  <url>
@@ -11,9 +14,6 @@
     <lastmod>2020-04-09</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/Shell%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2020-04-09</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-04-09</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/JavaIO/</loc>

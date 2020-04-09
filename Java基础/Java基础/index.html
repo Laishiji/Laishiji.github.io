@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;权限修饰符.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Exception.png">
-<meta property="og:updated_time" content="2020-04-09T08:58:00.144Z">
+<meta property="og:updated_time" content="2020-04-09T12:20:41.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;权限修饰符.png">
   <!-- Canonical links -->
@@ -503,6 +503,8 @@
 <li>StringBuffer 适用于多线程场景，如果是单线程场合 StringBuilder 更适合。</li>
 </ul>
 </li>
+<li><p>jdk1.9后String/StringBuffer/StringBuilder均不再使用字符数组，而是直接使用字节数组byte[] value。</p>
+</li>
 </ul>
 <h3 id="七个关键字"><a href="#七个关键字" class="headerlink" title="七个关键字"></a>七个关键字</h3><h4 id="static-涉及JVM的部分待补充"><a href="#static-涉及JVM的部分待补充" class="headerlink" title="static  [涉及JVM的部分待补充]"></a>static  [涉及JVM的部分待补充]</h4><ul>
 <li><p>修饰成员变量或成员方法</p>
@@ -533,7 +535,7 @@
 <li>修饰类：当前类不能有任何子类。</li>
 <li>修饰方法：该方法不能被子类重写。（显然对于类、方法来说，abstract和final无法同时使用）</li>
 <li>修饰变量：对于基本数据类型，其值不能再改变。对于引用数据类型，不能再改为存储其他对象的地址或引用。</li>
-<li>修饰成员变量：对于基本数据类型，其值不能再改变。对于引用数据类型，不能再改为存储其他对象的地址或引用。并且该变量必须直接赋值或在构造方法中赋值。</li>
+<li>修饰成员变量：对于基本数据类型，其值不能再改变。对于引用数据类型，不能再改为存储其他对象的地址或引用（对象自身是可以改变的）。并且该变量必须直接赋值或在构造方法中赋值。</li>
 </ul>
 <h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><h4 id="native"><a href="#native" class="headerlink" title="native"></a>native</h4><h4 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h4><h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><h4 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h4><h3 id="权限修饰符作用范围"><a href="#权限修饰符作用范围" class="headerlink" title="权限修饰符作用范围"></a>权限修饰符作用范围</h3><p><img src="权限修饰符.png" alt=""></p>
 <h3 id="Arrays常用方法"><a href="#Arrays常用方法" class="headerlink" title="Arrays常用方法"></a>Arrays常用方法</h3><ul>
