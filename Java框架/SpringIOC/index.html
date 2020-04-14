@@ -17,21 +17,19 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>mybatisHelloWorld | Blog Of TheMasterplan</title>
-  <meta name="description" content="概述 mybatis是基于Java的半自动化持久层框架，内部封装了JDBC。开发者只需要关注sql语句本身（在配置文件或注解中编写，sql与java编码分离，一个专注数据，一个专注业务），而不需要花费精力去处理加载驱动、创建连接、创建statement等繁杂的过程。  MybatisHelloWorld 工程文件结构如图     创建Maven工程，配置pom.xml，插入： 1234567891">
-<meta name="keywords" content="Mybatis">
+  <title>SpringIOC | Blog Of TheMasterplan</title>
+  <meta name="description" content="Spring概述 Spring以IOC(Inversion of Control)和AOP(Aspect Oriented Programming)为内核，提供了展现层SpringMVC和持久层Spring JDBC以及业务层事务管理等众多的企业级应用技术。  控制反转Inversion of Control(IOC)耦合度 概念：模块（类）之间的关联、依赖的程度，是衡量代码独立性的一个指标，也是">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatisHelloWorld">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;mybatisHelloWorld&#x2F;index.html">
+<meta property="og:title" content="SpringIOC">
+<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;SpringIOC&#x2F;index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="概述 mybatis是基于Java的半自动化持久层框架，内部封装了JDBC。开发者只需要关注sql语句本身（在配置文件或注解中编写，sql与java编码分离，一个专注数据，一个专注业务），而不需要花费精力去处理加载驱动、创建连接、创建statement等繁杂的过程。  MybatisHelloWorld 工程文件结构如图     创建Maven工程，配置pom.xml，插入： 1234567891">
+<meta property="og:description" content="Spring概述 Spring以IOC(Inversion of Control)和AOP(Aspect Oriented Programming)为内核，提供了展现层SpringMVC和持久层Spring JDBC以及业务层事务管理等众多的企业级应用技术。  控制反转Inversion of Control(IOC)耦合度 概念：模块（类）之间的关联、依赖的程度，是衡量代码独立性的一个指标，也是">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;mybatisHelloWorld&#x2F;mybatisHelloWorld.jpg">
-<meta property="og:updated_time" content="2020-04-05T08:40:46.856Z">
+<meta property="og:updated_time" content="2020-04-14T13:37:41.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;mybatisHelloWorld&#x2F;mybatisHelloWorld.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -384,21 +382,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MybatisHelloWorld"><span class="toc-number">2.</span> <span class="toc-text">MybatisHelloWorld</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring概述"><span class="toc-number">1.</span> <span class="toc-text">Spring概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制反转Inversion-of-Control-IOC"><span class="toc-number">2.</span> <span class="toc-text">控制反转Inversion of Control(IOC)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#耦合度"><span class="toc-number">2.0.1.</span> <span class="toc-text">耦合度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#工厂模式解耦例子"><span class="toc-number">2.0.2.</span> <span class="toc-text">工厂模式解耦例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IOC"><span class="toc-number">2.0.3.</span> <span class="toc-text">IOC</span></a></li></ol></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-mybatisHelloWorld" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-SpringIOC" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      mybatisHelloWorld
+      SpringIOC
     </h1>
   
 
@@ -406,8 +404,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/" class="article-date">
-	  <time datetime="2020-04-05T08:39:41.000Z" itemprop="datePublished">2020-04-05</time>
+	<a href="/Java%E6%A1%86%E6%9E%B6/SpringIOC/" class="article-date">
+	  <time datetime="2020-04-14T13:36:18.000Z" itemprop="datePublished">2020-04-14</time>
 	</a>
 </span>
         
@@ -419,53 +417,75 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Mybatis/" rel="tag">Mybatis</a>
+	<a class="article-tag-link" href="/tags/Spring/" rel="tag">Spring</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E6%A1%86%E6%9E%B6/SpringIOC/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>mybatis是基于Java的半自动化持久层框架，内部封装了JDBC。<strong>开发者只需要关注sql语句本身（在配置文件或注解中编写，sql与java编码分离，一个专注数据，一个专注业务）</strong>，而不需要花费精力去处理加载驱动、创建连接、创建statement等繁杂的过程。</li>
+        <h3 id="Spring概述"><a href="#Spring概述" class="headerlink" title="Spring概述"></a>Spring概述</h3><ul>
+<li>Spring以IOC(Inversion of Control)和AOP(Aspect Oriented Programming)为内核，提供了展现层SpringMVC和持久层Spring JDBC以及业务层事务管理等众多的企业级应用技术。</li>
 </ul>
-<h3 id="MybatisHelloWorld"><a href="#MybatisHelloWorld" class="headerlink" title="MybatisHelloWorld"></a>MybatisHelloWorld</h3><ul>
-<li><p>工程文件结构如图</p>
-<p><img src="mybatisHelloWorld.jpg" alt=""></p>
-</li>
-</ul>
-<ol>
-<li><p>创建Maven工程，配置pom.xml，插入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;5.1.48&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">   </span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.5.4&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">   </span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">   </span><br><span class="line">  &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建实体类和DAO接口</p>
+<h3 id="控制反转Inversion-of-Control-IOC"><a href="#控制反转Inversion-of-Control-IOC" class="headerlink" title="控制反转Inversion of Control(IOC)"></a>控制反转Inversion of Control(IOC)</h3><h5 id="耦合度"><a href="#耦合度" class="headerlink" title="耦合度"></a>耦合度</h5><ul>
+<li><p>概念：模块（类）之间的<strong>关联、依赖的程度</strong>，是衡量<strong>代码独立性</strong>的一个指标，也是<strong>软件工程设计及编码质量评价</strong>的一个标准。耦合的程度依赖于以下几个因素：</p>
 <ul>
-<li><p>实体类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    private Integer id;//包装类默认为null</span><br><span class="line">    private String lastName;</span><br><span class="line">    private String email;</span><br><span class="line">    private String gender;</span><br><span class="line">    //getters and setters, toString...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>DAO接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper &#123;</span><br><span class="line">    public User getUserById(Integer id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>模块间的调用</li>
+<li>模块间传递的数据量</li>
+<li>一个模块施加到另一个模块的控制的多少</li>
+<li>模块间接口的复杂程度</li>
 </ul>
 </li>
-<li><p>创建sql映射文件：<code>UserMapper.xml</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- sql映射文件：保存了每一个sql语句的映射信息--&gt;</span><br><span class="line"></span><br><span class="line">&lt;mapper namespace=&quot;com.laishiji.mybatis.dao.UserMapper&quot;&gt; &lt;!--名称空间指定DAO接口的全类名 --&gt;</span><br><span class="line">    &lt;!-- id指定DAO接口的抽象方法名，返回类型为实体类的全类名--&gt;</span><br><span class="line">    &lt;select id=&quot;getUserById&quot; resultType=&quot;com.laishiji.mybatis.bean.User&quot;&gt;</span><br><span class="line">         select id, last_name lastName, gender,email from user where id = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<li><p>耦合按从高到低的顺序可分为：</p>
+<ul>
+<li>内容耦合：<strong>一个模块直接修改或操作另一个模块的数据</strong>，或者直接转入另一个模块时，就发生了内容耦合。例如，类与类之间直接调用或继承关系都属于这种耦合。</li>
+<li>公共耦合：<strong>多个模块共同引用一个全局数据项</strong>。</li>
+<li>控制耦合：一个模块在界面上传递一个信号（如开关值、标志量等）控制另一个模块，接收信号的模块的动作根据信号值进行调整，称为控制耦合。</li>
+<li>标记耦合：模块间通过<strong>参数传递复杂的内部数据结构</strong>。</li>
+<li>数据耦合：模块间通过<strong>参数传递基本类型的数据</strong>。</li>
+</ul>
 </li>
-<li><p>创建mybatis全局配置文件，配置数据连接池信息，mapper信息等：<code>mybatisConfig.xml</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- mybatis全局配置文件：包含数据库连接池信息，事务管理器信息等--&gt;</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line"></span><br><span class="line">              &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                  &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">                  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis&quot;/&gt;</span><br><span class="line">                  &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">                  &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;</span><br><span class="line">              &lt;/dataSource&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line"></span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;UserMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<li><p>需要低耦合的原因：在耦合度很高的情况下，维护代码时修改一个地方会牵连到很多地方，难以厘清，可谓是牵一发而动全身。</p>
 </li>
-<li><p>mysql中建表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">drop database if exists mybatis;</span><br><span class="line">create database mybatis default character set utf8;</span><br><span class="line"></span><br><span class="line">create table user(</span><br><span class="line">  id int(11) primary key auto_increment,</span><br><span class="line">  last_name varchar(255),</span><br><span class="line">  gender char(1),</span><br><span class="line">  email varchar(255)</span><br><span class="line">)engine=innodb default charset=utf8;</span><br><span class="line"></span><br><span class="line">insert into user(id,last_name,gender,email) values (1,&apos;Tom&apos;,&apos;男&apos;,&apos;123@qq.com&apos;),</span><br><span class="line">                                   (2,&apos;Jim&apos;,&apos;男&apos;,&apos;234@qq.com&apos;),</span><br><span class="line">                                    (3,&apos;Lisa&apos;,&apos;女&apos;,&apos;324@qq.com&apos;);</span><br></pre></td></tr></table></figure>
+<li><p>降低耦合度的方法：</p>
+<ul>
+<li>少用继承，多用接口。</li>
+<li>模块的功能划分尽可能的单一（高内聚）。</li>
+<li>遵循一个定义只在一个地方出现。</li>
+<li>少使用全局变量。</li>
+<li>类成员变量和方法少用public，多用private。</li>
+<li>多使用设计模式，比如使用MVC设计模式就可以降低界面与业务逻辑的耦合度。</li>
+<li><strong>如果模块间必须存在耦合，尽量使用数据耦合</strong>。例如使用配置文件或注解传递参数，使用反射创建对象等都属于数据耦合。</li>
+</ul>
 </li>
-<li><p>创建测试类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package com.laishiji.mybatis;</span><br><span class="line"></span><br><span class="line">import com.laishiji.mybatis.bean.User;</span><br><span class="line">import com.laishiji.mybatis.dao.UserMapper;</span><br><span class="line">import org.apache.ibatis.io.Resources;</span><br><span class="line">import org.apache.ibatis.session.SqlSession;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  SqlSession代表和数据库的一次会话，用完必须关闭；</span><br><span class="line"> *  SqlSession和Connection一样都是非线程安全的，因此不要写作类的成员变量；</span><br><span class="line"> *  mapper接口没有实现类，但是mybatis会为这个接口生成一个代理对象。</span><br><span class="line"> */</span><br><span class="line">public class MybatisTest &#123;</span><br><span class="line">    @Test</span><br><span class="line">    public void test() throws IOException &#123;</span><br><span class="line">        String resource = &quot;mybatisConfig.xml&quot;;</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">        SqlSessionFactory sqlSessionFactory =  new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"></span><br><span class="line">        SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        User user = session.selectOne(&quot;com.laishiji.mybatis.dao.UserMapper.getUserById&quot;,1);</span><br><span class="line">        System.out.println(user);</span><br><span class="line"></span><br><span class="line">        session.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *   接口式编程：</span><br><span class="line">     *    原生：DAO类 ---&gt; DAOImpl实现类</span><br><span class="line">     *    mybatis：xxxMapper接口 ---&gt; xxxMapper.xml</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    @Test</span><br><span class="line">    public void test2() throws IOException &#123;</span><br><span class="line">        String resource = &quot;mybatisConfig.xml&quot;;</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">        SqlSessionFactory sqlSessionFactory =  new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"></span><br><span class="line">        SqlSession openSession = sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        //通过反射+动态代理获取接口的实现类对象</span><br><span class="line">        UserMapper mapper = openSession.getMapper(UserMapper.class);</span><br><span class="line"></span><br><span class="line">        User user = mapper.getUserById(1);</span><br><span class="line">        System.out.println(user);</span><br><span class="line"></span><br><span class="line">        openSession.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</ul>
+<h5 id="工厂模式解耦例子"><a href="#工厂模式解耦例子" class="headerlink" title="工厂模式解耦例子"></a>工厂模式解耦例子</h5><ul>
+<li><p>持久层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 账户的持久层接口</span><br><span class="line"> */</span><br><span class="line">public interface IAccountDao &#123;</span><br><span class="line">    void saveAccount();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 持久层实现类</span><br><span class="line"> */</span><br><span class="line">public class AccountDaoImpl implements IAccountDao &#123;</span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">        System.out.println(&quot;账户已经保存！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+<li><p>业务层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 账户业务层的接口</span><br><span class="line"> */</span><br><span class="line">public interface IAccountService &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 模拟保存账户</span><br><span class="line">     */</span><br><span class="line">    void saveAccount();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 业务层实现类</span><br><span class="line"> */</span><br><span class="line">public class AccountServiceImpl implements IAccountService &#123;</span><br><span class="line"></span><br><span class="line">    private IAccountDao accountDao = (AccountDaoImpl) BeanFactory.getBean(&quot;accountDao&quot;);</span><br><span class="line"></span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表现层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 模拟表现层调用业务层，实际开发中类似Servlet</span><br><span class="line"> */</span><br><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IAccountService as = (AccountServiceImpl) BeanFactory.getBean(&quot;accountService&quot;);</span><br><span class="line">        as.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>BeanFactory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 一个创建Bean对象的工厂</span><br><span class="line"> * Bean: 可重用组件，例如在Java中JavaBean有实体类、service和dao对象等</span><br><span class="line"> *</span><br><span class="line"> * 工厂模式解耦：使用配置文件或注解传递参数，使用反射创建对象。</span><br><span class="line"> */</span><br><span class="line">public class BeanFactory &#123;</span><br><span class="line">    //定义一个Properties对象</span><br><span class="line">    private static Properties props;</span><br><span class="line">    //定义Map存储bean对象，避免多实例降低效率（即避免每次调用getBean方法都要重新创建对象）</span><br><span class="line">    private static Map&lt;String, Object&gt; beansMap;</span><br><span class="line"></span><br><span class="line">    //初始化</span><br><span class="line">    static&#123;</span><br><span class="line">        props = new Properties();</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取properties文件的流对象并加载</span><br><span class="line">            props.load(BeanFactory.class.getClassLoader().getResourceAsStream(&quot;bean.properties&quot;));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            throw new ExceptionInInitializerError(&quot;初始化properties失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        beansMap = new HashMap&lt;&gt;();</span><br><span class="line">        Enumeration keys = props.keys();</span><br><span class="line">        //遍历properties中的每个key，创建对应的实例并存入beansMap中</span><br><span class="line">        while(keys.hasMoreElements())&#123;</span><br><span class="line">            String beanName = keys.nextElement().toString();</span><br><span class="line">            String beanPath = props.getProperty(beanName);</span><br><span class="line">            Object bean = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                bean = Class.forName(beanPath).newInstance();</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            beansMap.put(beanName, bean);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据bean的名称获取bean对象</span><br><span class="line">     * @param beanName</span><br><span class="line">     * @return bean对象</span><br><span class="line">     */</span><br><span class="line">    public static Object getBean(String beanName)&#123;</span><br><span class="line">        return beansMap.get(beanName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h5><ul>
+<li>概念与作用</li>
+<li>改进工厂模式</li>
+<li>XML配置</li>
+<li>注解配置</li>
+</ul>
 
       
     </div>
@@ -476,7 +496,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/" title="mybatisHelloWorld" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/" title="SpringIOC" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -525,13 +545,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/JavaWeb/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" title="JDK动态代理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/" title="Maven入门"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/Others/%E6%A3%80%E7%B4%A2%E6%8A%80%E5%B7%A7/" title="检索技巧"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
