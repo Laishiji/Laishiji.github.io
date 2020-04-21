@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="Spring概述 Spring以IOC(Inversion of Control)和AOP(Aspect Oriented Programming)为内核，提供了展现层SpringMVC和持久层Spring JDBC以及业务层事务管理等众多的企业级应用技术。  控制反转Inversion of Control(IOC)耦合度 概念：模块（类）之间的关联、依赖的程度，是衡量代码独立性的一个指标，也是">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-14T13:37:41.722Z">
+<meta property="og:updated_time" content="2020-04-21T09:47:25.180Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/index.html">
@@ -447,7 +447,7 @@
 <li>公共耦合：<strong>多个模块共同引用一个全局数据项</strong>。</li>
 <li>控制耦合：一个模块在界面上传递一个信号（如开关值、标志量等）控制另一个模块，接收信号的模块的动作根据信号值进行调整，称为控制耦合。</li>
 <li>标记耦合：模块间通过<strong>参数传递复杂的内部数据结构</strong>。</li>
-<li>数据耦合：模块间通过<strong>参数传递基本类型的数据</strong>。</li>
+<li><strong><em>数据耦合</em></strong>：模块间通过<strong>参数传递基本类型的数据</strong>。</li>
 </ul>
 </li>
 <li><p>需要低耦合的原因：在耦合度很高的情况下，维护代码时修改一个地方会牵连到很多地方，难以厘清，可谓是牵一发而动全身。</p>
@@ -471,20 +471,138 @@
 </li>
 <li><p>业务层</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 账户业务层的接口</span><br><span class="line"> */</span><br><span class="line">public interface IAccountService &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 模拟保存账户</span><br><span class="line">     */</span><br><span class="line">    void saveAccount();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 业务层实现类</span><br><span class="line"> */</span><br><span class="line">public class AccountServiceImpl implements IAccountService &#123;</span><br><span class="line"></span><br><span class="line">    private IAccountDao accountDao = (AccountDaoImpl) BeanFactory.getBean(&quot;accountDao&quot;);</span><br><span class="line"></span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 业务层实现类</span><br><span class="line"> */</span><br><span class="line">public class AccountServiceImpl implements IAccountService &#123;</span><br><span class="line"></span><br><span class="line">    private IAccountDao accountDao = (IAccountDao) BeanFactory.getBean(&quot;accountDao&quot;);</span><br><span class="line"></span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">        accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>表现层</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 模拟表现层调用业务层，实际开发中类似Servlet</span><br><span class="line"> */</span><br><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IAccountService as = (AccountServiceImpl) BeanFactory.getBean(&quot;accountService&quot;);</span><br><span class="line">        as.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 模拟表现层调用业务层，实际开发中类似Servlet</span><br><span class="line"> */</span><br><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IAccountService as = (IAccountService) BeanFactory.getBean(&quot;accountService&quot;);</span><br><span class="line">        as.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bean.properties配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">accountService=com.itheima.service.impl.AccountServiceImpl</span><br><span class="line">accountDao=com.itheima.dao.impl.AccountDaoImpl</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>BeanFactory</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 一个创建Bean对象的工厂</span><br><span class="line"> * Bean: 可重用组件，例如在Java中JavaBean有实体类、service和dao对象等</span><br><span class="line"> *</span><br><span class="line"> * 工厂模式解耦：使用配置文件或注解传递参数，使用反射创建对象。</span><br><span class="line"> */</span><br><span class="line">public class BeanFactory &#123;</span><br><span class="line">    //定义一个Properties对象</span><br><span class="line">    private static Properties props;</span><br><span class="line">    //定义Map存储bean对象，避免多实例降低效率（即避免每次调用getBean方法都要重新创建对象）</span><br><span class="line">    private static Map&lt;String, Object&gt; beansMap;</span><br><span class="line"></span><br><span class="line">    //初始化</span><br><span class="line">    static&#123;</span><br><span class="line">        props = new Properties();</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取properties文件的流对象并加载</span><br><span class="line">            props.load(BeanFactory.class.getClassLoader().getResourceAsStream(&quot;bean.properties&quot;));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            throw new ExceptionInInitializerError(&quot;初始化properties失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        beansMap = new HashMap&lt;&gt;();</span><br><span class="line">        Enumeration keys = props.keys();</span><br><span class="line">        //遍历properties中的每个key，创建对应的实例并存入beansMap中</span><br><span class="line">        while(keys.hasMoreElements())&#123;</span><br><span class="line">            String beanName = keys.nextElement().toString();</span><br><span class="line">            String beanPath = props.getProperty(beanName);</span><br><span class="line">            Object bean = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                bean = Class.forName(beanPath).newInstance();</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            beansMap.put(beanName, bean);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据bean的名称获取bean对象</span><br><span class="line">     * @param beanName</span><br><span class="line">     * @return bean对象</span><br><span class="line">     */</span><br><span class="line">    public static Object getBean(String beanName)&#123;</span><br><span class="line">        return beansMap.get(beanName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h5><ul>
-<li>概念与作用</li>
-<li>改进工厂模式</li>
-<li>XML配置</li>
-<li>注解配置</li>
+<li><p>概念与作用：控制反转把创建对象的权力交给框架，它包括Dependency Injection与Dependency Lookup两部分。其作用在于<strong>降低程序的耦合度</strong>。</p>
+</li>
+<li><p><strong>基于XML的IoC配置</strong></p>
+<ul>
+<li><p>bean.xml示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line">    &lt;!--将对象的创建交给spring管理--&gt;</span><br><span class="line">    &lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.impl.AccountServiceImpl&quot;&gt;&lt;/bean&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ApplicationContext的三个常用实现类</p>
+<ul>
+<li>ClassPathXmlApplicationContext：加载类路径下的配置文件</li>
+<li>FileSystemXmlApplicationContext：加载磁盘任意路径下的配置文件</li>
+<li>AnnotationConfigApplicationContext：读取注解</li>
+</ul>
+</li>
+<li><p><strong>核心容器的两个接口</strong>引发的问题</p>
+<ul>
+<li>ApplicationContext（常用）：单例对象适用。创建核心容器时，<strong>创建对象的策略为立即加载</strong>。只要一读取完配置文件就立马创建bean对象。</li>
+<li>BeanFactory（ApplicationContext父接口的父接口）：多例对象适用。创建核心容器时，<strong>创建对象的策略为延迟加载</strong>。也即，何时调用获取bean对象的方法，那时才创建对象。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Spring对bean对象的管理细节</p>
+<ul>
+<li><p>创建bean对象的三种方式</p>
+<ul>
+<li><p><strong>使用默认构造函数创建</strong>：在spring的xml配置文件中使用bean标签，配置id和class属性后，且没有其他属性和标签时，采用的是默认构造函数创建bean对象(反射中的newInstance方法使用默认构造创建对象)，如果类没有默认构造函数则无法创建对象。</p>
+</li>
+<li><p><strong>使用普通类(工厂)中的方法创建对象并存入spring容器</strong>(比如jar包中的类)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class InstanceFactory&#123;</span><br><span class="line">    public IAccountService getAccountService()&#123;</span><br><span class="line">        return new AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--创建实例工厂对象--&gt;</span><br><span class="line">&lt;bean id=&quot;instanceFactory&quot; class=&quot;com.itheima.factory.InstanceFactory&quot;&gt;&lt;/bean&gt; </span><br><span class="line">&lt;!--通过指定实例工厂对象的方法，创建指定对象--&gt;</span><br><span class="line">&lt;bean id=&quot;accountService&quot; factory-bean=&quot;instanceFactory&quot; factory-method=&quot;getAccountService&quot;&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用工厂中的静态方法创建对象并存入容器</strong>(比如jar包中的类)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class StaticFactory&#123;</span><br><span class="line">    public static IAccountService getAccountService()&#123;</span><br><span class="line">        return new AccountServiceImpl();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--通过指定工厂类的静态方法创建对象--&gt;</span><br><span class="line">&lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.factory.StaticFactory&quot; factory-method=&quot;getAccountService&quot;&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>bean对象的作用范围调整：bean标签scope属性，取值为以下</p>
+<ul>
+<li>singleton：单例（默认的，不管new多少次，内存中只有一个实例对象）</li>
+<li>prototype：多例</li>
+<li>request：作用于web应用的请求范围</li>
+<li>session：作用于web应用的会话范围</li>
+<li>global-session：作用于集群环境的会话范围（全局会话范围），若不是集群环境，则效果与session相同</li>
+</ul>
+</li>
+<li><p>bean对象的生命周期</p>
+<ul>
+<li>单例对象：单例对象的生命周期与容器相同，容器创建则对象创建，容器销毁时对象销毁，可在bean标签中指定init-method与destroy-method属性来执行bean对象中的init方法和destroy方法。</li>
+<li>多例对象：使用对象时才创建对象，spring不能销毁，只能通过GC回收，因此无论如何都不会执行bean对象中的destroy方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>依赖注入（Dependency Injection）：当调用者需要被调用者的协助时，在传统的程序设计过程中，通常由调用者来创建被调用者的实例，但在IoC中，创建被调用者的工作不再由调用者来完成，而是将被调用者的创建移到调用者的外部，从而反转被调用者的创建，消除了调用者对被调用者创建的控制，因此称为控制反转。要实现IoC，通常的解决方案是将创建被调用者实例的工作交由 IoC 容器来完成，然后在调用者中注入被调用者（通过【构造器/方法/注解】注入实现），这样我们就实现了调用者与被调用者的解耦，该过程被称为依赖注入。</p>
+<ul>
+<li><p>注入的数据类型</p>
+<ul>
+<li>基本数据类型和String</li>
+<li>bean</li>
+<li>复杂类型/集合类型</li>
+</ul>
+</li>
+<li><p>注入的方式有</p>
+<ul>
+<li><p>构造器：通过bean标签中的<code>constructor-arg</code>标签配置实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        //读取xml，通过反射创建bean对象；依赖查找</span><br><span class="line">        ApplicationContext ac = new ClassPathXmlApplicationContext(&quot;bean.xml&quot;);</span><br><span class="line"></span><br><span class="line"> //     IAccountService as = (IAccountService) ac.getBean(&quot;accountService&quot;);</span><br><span class="line">        IAccountService as = ac.getBean(&quot;accountService&quot;, IAccountService.class);//两种方式获取bean对象</span><br><span class="line">        as.saveAccount();</span><br><span class="line"></span><br><span class="line">        /** 使用BeanFactory</span><br><span class="line">         * BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource(&quot;bean.xml&quot;));</span><br><span class="line">         * IAccountService as = (IAccountService) beanFactory.getBean(&quot;accountService&quot;);</span><br><span class="line">         */</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class AccountServiceImpl implements IAccountService &#123;</span><br><span class="line"></span><br><span class="line">    private IAccountDao accountDao;</span><br><span class="line"></span><br><span class="line">    public AccountServiceImpl(IAccountDao accountDao) &#123;</span><br><span class="line">        this.accountDao = accountDao;</span><br><span class="line">    &#125;</span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">       accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;accountService&quot; class=&quot;com.itheima.service.impl.AccountServiceImpl&quot;&gt;</span><br><span class="line">        &lt;!--value属性用于注入基本类型和String类型，ref属性则为bean类型--&gt;</span><br><span class="line">        &lt;constructor-arg name=&quot;accountDao&quot; ref=&quot;accountDaoImpl&quot;&gt;&lt;/constructor-arg&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line">&lt;bean id=&quot;accountDaoImpl&quot; class=&quot;com.itheima.dao.impl.AccountDaoImpl&quot;&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>set方法：<code>property</code>标签，<code>name</code>属性指定方法名，<code>value</code>属性用于注入基本类型和String类型，<code>ref</code>属性则为bean类型。bean类需要设置set方法。</p>
+<ul>
+<li>集合类型的注入：使用<code>set,list,arroCay,map,props</code>等子标签</li>
+</ul>
+</li>
+<li><p>注解：<code>@Autowired</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于注解的IoC配置</strong></p>
+<ul>
+<li><p>首先配置context</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;</span><br><span class="line">    &lt;!--指定spring在创建容器时要扫描的包--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=&quot;com.itheima&quot;&gt;&lt;/context:component-scan&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建bean对象的注解</p>
+<ul>
+<li><code>@Component</code>：被注解的类由spring创建并存入IoC容器</li>
+<li><code>@Controller</code>：用于表现层</li>
+<li><code>@Service</code>：用于业务层</li>
+<li><code>@Repository</code>：用于持久层</li>
+<li>后三个注解的作用与属性都与<code>@Component</code>相同</li>
+</ul>
+</li>
+<li><p>依赖注入的注解</p>
+<ul>
+<li><p><code>@Resource</code>：在需要注入依赖的变量上标记，并在其实现类上标记<code>@Component</code>（或其余三种）注解。通过name属性匹配实现类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Component(&quot;accountService&quot;)</span><br><span class="line">public class AccountServiceImpl implements IAccountService &#123;</span><br><span class="line">    @Resource(name=&quot;accountDao&quot;)</span><br><span class="line">    private IAccountDao accountDao;</span><br><span class="line"></span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">       accountDao.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Repository(&quot;accountDao&quot;)</span><br><span class="line">public class AccountDaoImpl implements IAccountDao &#123;</span><br><span class="line">    public void saveAccount() &#123;</span><br><span class="line">        System.out.println(&quot;Your Account has been saved!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ApplicationContext ac = new ClassPathXmlApplicationContext(&quot;bean.xml&quot;);</span><br><span class="line">        IAccountService as = (IAccountService) ac.getBean(&quot;accountService&quot;);</span><br><span class="line">        as.saveAccount();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Autowired</code>：<code>@Qualifier</code>需要与<code>@Autowired</code>一起使用。</p>
+</li>
+<li>以上的注解只能用于bean类型的注入，集合类型的注入只能通过xml配置文件实现。</li>
+<li><code>@Value</code>：用于注入基本类型与String类型数据。</li>
+</ul>
+</li>
+<li><p>改变作用范围的注解：<code>@Scope</code>，value属性常用取值为singleton，prototype</p>
+</li>
+<li><p>与生命周期相关的注解</p>
+<ul>
+<li><code>@PreDestroy</code>：指定销毁方法</li>
+<li><code>@PostConstruct</code>：指定初始化方法</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
       

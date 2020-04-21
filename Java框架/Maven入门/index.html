@@ -27,7 +27,7 @@
 <meta property="og:description" content="Maven配置踩坑 修改本地仓库路径：找到conf目录下的settings.xml，添加&amp;lt;localRepository&amp;gt;PATH&amp;lt;&#x2F;localRepository&amp;gt;，PATH即为仓库路径。  修改Maven云仓库为国内镜像站：同样在conf目录下的settings.xml下，找到&amp;lt;mirrors&amp;gt;标签，添加 123456&amp;lt;mirror&amp;gt;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;Maven%E5%85%A5%E9%97%A8&#x2F;MavenDirStruc.jpg">
-<meta property="og:updated_time" content="2020-04-05T03:20:55.615Z">
+<meta property="og:updated_time" content="2020-04-15T09:25:29.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E6%A1%86%E6%9E%B6&#x2F;Maven%E5%85%A5%E9%97%A8&#x2F;MavenDirStruc.jpg">
   <!-- Canonical links -->
@@ -431,11 +431,15 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Maven配置踩坑"><a href="#Maven配置踩坑" class="headerlink" title="Maven配置踩坑"></a>Maven配置踩坑</h3><ul>
+        <ul>
+<li><h3 id="Maven配置踩坑"><a href="#Maven配置踩坑" class="headerlink" title="Maven配置踩坑"></a>Maven配置踩坑</h3><ul>
 <li><p><strong>修改本地仓库路径</strong>：找到conf目录下的settings.xml，添加<code>&lt;localRepository&gt;PATH&lt;/localRepository&gt;</code>，PATH即为仓库路径。</p>
 </li>
 <li><p><strong>修改Maven云仓库为国内镜像站</strong>：同样在conf目录下的settings.xml下，找到<code>&lt;mirrors&gt;</code>标签，添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">       &lt;id&gt;alimaven&lt;/id&gt;</span><br><span class="line">       &lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">       &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;!-- 改为阿里云镜像 --&gt;</span><br><span class="line">       &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;        </span><br><span class="line">     &lt;/mirror&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">       &lt;id&gt;alimaven&lt;/id&gt;</span><br><span class="line">       &lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">       &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;!-- 改为阿里云镜像 --&gt;</span><br><span class="line">     &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;        </span><br><span class="line">     &lt;/mirror&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改默认jdk版本1.5为期望的版本</strong>：同样在conf目录下的settings.xml下，找到<code>&lt;profiles&gt;</code>标签，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;profile&gt;</span><br><span class="line">    &lt;id&gt;jdk-1.8&lt;/id&gt;</span><br><span class="line">    &lt;activation&gt;</span><br><span class="line">        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">        &lt;jdk&gt;1.8&lt;/jdk&gt;</span><br><span class="line">    &lt;/activation&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</span><br><span class="line">			&lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</span><br><span class="line">			&lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt; </span><br><span class="line">    &lt;/properties&gt; </span><br><span class="line">&lt;/profile&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="Maven项目目录结构"><a href="#Maven项目目录结构" class="headerlink" title="Maven项目目录结构"></a>Maven项目目录结构</h3><p><img src="MavenDirStruc.jpg" alt=""></p>
@@ -458,6 +462,8 @@
 </li>
 <li><p>引入外部依赖：先在 src 文件夹下添加 lib 文件夹，然后将工程需要的 jar 文件复制到 lib 文件夹下。然后添加以下依赖到pom.xml：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;xxx&lt;/groupId&gt;  </span><br><span class="line">        &lt;artifactId&gt;xxx&lt;/artifactId&gt;    </span><br><span class="line">        &lt;version&gt;1.0&lt;/version&gt; </span><br><span class="line">        &lt;scope&gt;system&lt;/scope&gt; &lt;!--作用域--&gt;</span><br><span class="line">        &lt;systemPath&gt;$&#123;basedir&#125;\src\lib\yyy.jar&lt;/systemPath&gt; </span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 

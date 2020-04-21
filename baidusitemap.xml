@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
-    <lastmod>2020-04-14</lastmod>
+    <lastmod>2020-04-21</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-04-09</lastmod>
+    <lastmod>2020-04-21</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2020-04-15</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Others/%E6%A3%80%E7%B4%A2%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2020-04-09</lastmod>
@@ -44,9 +47,6 @@
     <lastmod>2020-04-05</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/</loc>
-    <lastmod>2020-04-05</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-04-05</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Servlet/</loc>

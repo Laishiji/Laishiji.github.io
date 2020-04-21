@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;权限修饰符.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Exception.png">
-<meta property="og:updated_time" content="2020-04-09T12:42:23.256Z">
+<meta property="og:updated_time" content="2020-04-21T08:57:31.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;Java%E5%9F%BA%E7%A1%80&#x2F;权限修饰符.png">
   <!-- Canonical links -->
@@ -565,16 +565,18 @@
 </li>
 </ul>
 <h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><ul>
-<li>概念：父类引用指向子类对象。</li>
-<li><p>多态代码中</p>
-<ul>
+<li>概念：父类（接口）引用指向子类对象。</li>
+<li>多态代码中<ul>
 <li>成员<strong>重写方法</strong>的访问规则：先在子类对象中找，没有则向上找。</li>
 <li><strong>成员变量</strong>访问规则：直接使用父类成员变量。</li>
 </ul>
 </li>
-<li><p>向上转型即多态：父类引用指向子类对象；引用无法调用原本<strong>子类特有的方法</strong>。</p>
-</li>
+<li>向上转型即多态：父类引用指向子类对象；引用无法调用原本<strong>子类特有的方法</strong>。</li>
 <li>向下转型，例如<code>Anaimal a = new Cat();Cat cat = (Cat) a;</code>，这个过程将父类变量还原为子类类型，使其又可以访问<strong>子类特有的方法</strong>。</li>
+<li>多态的作用？<ul>
+<li>Polymorphism allows us to perform a single action in different ways. In other words, polymorphism allows you to define one interface and have multiple implementations.</li>
+</ul>
+</li>
 </ul>
 <h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><ul>
 <li>封装通过将类属性定义为私有，对外提供类属性的setters/getters方法来修改和获取属性值实现。</li>
@@ -619,6 +621,8 @@
 <li><p>Java9：新增了<strong>私有方法</strong>，<strong>私有静态方法</strong></p>
 </li>
 </ul>
+</li>
+<li><p><strong>面向接口编程？</strong></p>
 </li>
 </ul>
 <h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><ul>
