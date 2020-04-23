@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="Spring概述 Spring以IOC(Inversion of Control)和AOP(Aspect Oriented Programming)为内核，提供了展现层SpringMVC和持久层Spring JDBC以及业务层事务管理等众多的企业级应用技术。  控制反转Inversion of Control(IOC)耦合度 概念：模块（类）之间的关联、依赖的程度，是衡量代码独立性的一个指标，也是">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-21T09:47:25.180Z">
+<meta property="og:updated_time" content="2020-04-23T08:30:48.465Z">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/index.html">
@@ -382,7 +382,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring概述"><span class="toc-number">1.</span> <span class="toc-text">Spring概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制反转Inversion-of-Control-IOC"><span class="toc-number">2.</span> <span class="toc-text">控制反转Inversion of Control(IOC)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#耦合度"><span class="toc-number">2.0.1.</span> <span class="toc-text">耦合度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#工厂模式解耦例子"><span class="toc-number">2.0.2.</span> <span class="toc-text">工厂模式解耦例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IOC"><span class="toc-number">2.0.3.</span> <span class="toc-text">IOC</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring概述"><span class="toc-number">1.</span> <span class="toc-text">Spring概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制反转Inversion-of-Control-IOC"><span class="toc-number">2.</span> <span class="toc-text">控制反转Inversion of Control(IOC)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#耦合度"><span class="toc-number">2.0.1.</span> <span class="toc-text">耦合度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#工厂模式解耦例子"><span class="toc-number">2.0.2.</span> <span class="toc-text">工厂模式解耦例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IOC"><span class="toc-number">2.0.3.</span> <span class="toc-text">IOC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IoC案例"><span class="toc-number">3.</span> <span class="toc-text">IoC案例</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -600,6 +600,34 @@
 <li><code>@PreDestroy</code>：指定销毁方法</li>
 <li><code>@PostConstruct</code>：指定初始化方法</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于注解的IoC配置（不再需要xml文件）</strong></p>
+<ul>
+<li><code>@Configuration</code>：创建一个代替bean.xml的配置类<code>SpringConfig</code>后，使用该注解标记该类为配置类</li>
+<li><code>@Import</code>：标记<strong>主配置类</strong>，用于导入其他的从配置类。属性：<code>Class&lt;?&gt;[] value;</code>。使用该注解后可不再使用<code>@Configuration</code>注解。</li>
+<li><code>@ComponentScan</code>：指定spring在创建容器时需要扫描的包</li>
+<li><code>@Bean</code>：标记一个方法，将该方法的返回值作为bean对象存入IoC容器。其属性name用于指定bean对象的id，默认值为方法名。</li>
+<li><code>@PropertySource</code>：指定properties配置文件的位置。用于配置数据库等字符串信息。</li>
+<li>使用<code>new AnnotationConfigApplicationContext(SpringConfig.class);</code>获取容器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="IoC案例"><a href="#IoC案例" class="headerlink" title="IoC案例"></a>IoC案例</h3><ul>
+<li><p>使用xml配置，注解结合xml配置，纯注解配置三种方式</p>
+<ul>
+<li>Use “Sourcegraph” to view the code：<a href="https://github.com/Laishiji/SpringLearningDemo" target="_blank" rel="noopener">https://github.com/Laishiji/SpringLearningDemo</a></li>
+</ul>
+</li>
+<li><p>Spring整合Junit</p>
+<ul>
+<li><p>导入依赖spring-test</p>
+</li>
+<li><p>使用Junit提供的<code>@RunWith</code>替换Runner(替换main方法)</p>
+</li>
+<li><p>使用<code>@ContextConfiguration</code>告知Spring的运行器，spring容器的创建是基于xml还是注解，并说明位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 单元测试,Spring整合Junit</span><br><span class="line"> */</span><br><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@ContextConfiguration(classes = SpringConfig.class)</span><br><span class="line">public class AccountServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    IAccountService as;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testFindAll()&#123;</span><br><span class="line">        List&lt;Account&gt; accounts = as.findAllAccount();</span><br><span class="line">        for (Account a : accounts) &#123;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
