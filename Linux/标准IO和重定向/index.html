@@ -18,15 +18,17 @@
   
   
   <title>标准IO和重定向 | Blog Of TheMasterplan</title>
-  <meta name="description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&amp;gt;；例如hostname &amp;gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&amp;gt;&amp;gt;则">
-<meta name="keywords" content="Linux">
+  <meta name="description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&gt;；例如hostname &gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&gt;&gt;则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="标准IO和重定向">
-<meta property="og:url" content="http:&#x2F;&#x2F;thmasterplan.cn&#x2F;Linux&#x2F;%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91&#x2F;index.html">
+<meta property="og:url" content="http://thmasterplan.cn/Linux/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&amp;gt;；例如hostname &amp;gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&amp;gt;&amp;gt;则">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-23T13:24:02.434Z">
+<meta property="og:description" content="标准IO和重定向 三种I&#x2F;O设备 标准输入(STDIN)：（文件描述符0） 默认接收来自键盘的输入 标准输出（STDOUT）：（文件描述符1） 默认输出到终端窗口 标准错误（STDERR）：（文件描述符2） 默认输出到终端窗口   I&#x2F;O重定向至文件 标准输出重定向：&gt;；例如hostname &gt; &#x2F;dev&#x2F;pts&#x2F;2将输出重定向至另一设备；若为文件，则清空文件再写入。&gt;&gt;则">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-17T16:09:31.000Z">
+<meta property="article:modified_time" content="2019-11-23T13:24:02.434Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Linux/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
@@ -36,14 +38,16 @@
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
   
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   
   
     <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
   
   
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 
 <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
@@ -230,7 +234,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
   </div>
 
@@ -242,6 +246,56 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled ">
         
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/uncategorized/ThreadLocal/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/uncategorized/ThreadLocal/" class="title">ThreadLocal</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-26T02:20:48.000Z" itemprop="datePublished">2020-04-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/uncategorized/SpringAOP/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/uncategorized/SpringAOP/" class="title">SpringAOP</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-23T08:36:02.000Z" itemprop="datePublished">2020-04-23</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-thumb">
@@ -313,56 +367,6 @@
               </p>
               <p class="item-date">
                 <time datetime="2020-04-08T14:47:15.000Z" itemprop="datePublished">2020-04-08</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/JUC/Java%E5%B9%B6%E5%8F%91/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/JUC/">JUC</a>
-              </p>
-              <p class="item-title">
-                <a href="/JUC/Java%E5%B9%B6%E5%8F%91/" class="title">Java并发</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-04-08T14:28:41.000Z" itemprop="datePublished">2020-04-08</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-thumb">
-              <a href="/Java%E5%9F%BA%E7%A1%80/JavaIO/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-              </p>
-              <p class="item-title">
-                <a href="/Java%E5%9F%BA%E7%A1%80/JavaIO/" class="title">JavaIO</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-04-08T14:23:56.000Z" itemprop="datePublished">2020-04-08</time>
               </p>
             </div>
           </li>
@@ -572,8 +576,12 @@
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
+
 <script src="/js/plugin.min.js"></script>
+
+
 <script src="/js/application.js"></script>
+
 
     <script>
 (function (window) {
@@ -591,7 +599,9 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     window.INSIGHT_CONFIG = INSIGHT_CONFIG;
 })(window);
 </script>
+
 <script src="/js/insight.js"></script>
+
 
 
 
