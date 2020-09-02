@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>GC与内存分配策略 | Blog Of TheMasterplan</title>
+  <meta name="description" content="对象已死吗（GC回收的前提是判断对象已死） 概述：对于程序计数器、虚拟机栈、本地方法栈，其内存区域和回收都具备确定性，方法结束或线程结束时，其内存自然就回收了。GC主要关注堆和方法区的分配与回收。  引用计数算法（不常用）：给对象添加一个引用计数器，每当被引用时，计数器值+1；引用失效（引用不再指向该对象）时，计数器值-1。任何时刻计数器为0的对象就是不可能再被使用的。缺点：难以解决对象之间相互循">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GC与内存分配策略">
+<meta property="og:url" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="对象已死吗（GC回收的前提是判断对象已死） 概述：对于程序计数器、虚拟机栈、本地方法栈，其内存区域和回收都具备确定性，方法结束或线程结束时，其内存自然就回收了。GC主要关注堆和方法区的分配与回收。  引用计数算法（不常用）：给对象添加一个引用计数器，每当被引用时，计数器值+1；引用失效（引用不再指向该对象）时，计数器值-1。任何时刻计数器为0的对象就是不可能再被使用的。缺点：难以解决对象之间相互循">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Reachability_Analysis.png">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/mark_clean.jpeg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/mark_arrange.png">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Copying.png">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/GC.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Serial.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/ParNew.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Serial.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Parallel.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/CMS.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/G1HeapAllocation.png">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/G1.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/GC_Args.png">
+<meta property="article:published_time" content="2020-09-02T07:17:43.000Z">
+<meta property="article:modified_time" content="2020-09-02T12:53:38.442Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/Reachability_Analysis.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JUC/">JUC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JUC/" style="font-size: 13px;">JUC</a> <a href="/tags/JVM/" style="font-size: 13.4px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.6px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.8px;">Java基础</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Others/" style="font-size: 13.2px;">Others</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/leetcode/" style="font-size: 13.8px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象已死吗（GC回收的前提是判断对象已死）"><span class="toc-number">1.</span> <span class="toc-text">对象已死吗（GC回收的前提是判断对象已死）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集算法"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集器"><span class="toc-number">3.</span> <span class="toc-text">垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存分配与回收策略"><span class="toc-number">4.</span> <span class="toc-text">内存分配与回收策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC的触发条件"><span class="toc-number">5.</span> <span class="toc-text">GC的触发条件</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-GC与内存分配策略" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GC与内存分配策略
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" class="article-date">
+	  <time datetime="2020-09-02T07:17:43.000Z" itemprop="datePublished">2020-09-02</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JVM/" rel="tag">JVM</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="对象已死吗（GC回收的前提是判断对象已死）"><a href="#对象已死吗（GC回收的前提是判断对象已死）" class="headerlink" title="对象已死吗（GC回收的前提是判断对象已死）"></a>对象已死吗（GC回收的前提是判断对象已死）</h3><ul>
+<li><p><strong>概述</strong>：对于程序计数器、虚拟机栈、本地方法栈，其内存区域和回收都具备确定性，方法结束或线程结束时，其内存自然就回收了。GC主要关注堆和方法区的分配与回收。</p>
+</li>
+<li><p><strong>引用计数算法（不常用）</strong>：给对象添加一个引用计数器，每当被引用时，计数器值+1；引用失效（引用不再指向该对象）时，计数器值-1。任何时刻计数器为0的对象就是不可能再被使用的。缺点：难以解决对象之间相互循环使用的问题。（比如对象A中的引用指向B，对象B中的引用指向A，对象A、B计数器永远为1）</p>
+</li>
+<li><p><strong>可达性分析算法（主流实现）</strong>：通过一系列的称为“GC Roots”的对象作为起始点向下搜索，搜索走过的路径称为“引用链”，当一个对象到“GC Roots”没有任何引用链相连，即证明对象不可达。</p>
+<p><img src="Reachability_Analysis.png" alt=""></p>
+<p>可作为GC Roots的对象包括：</p>
+<ul>
+<li>虚拟机栈：栈帧中局部变量表中引用的对象</li>
+<li>方法区：<ul>
+<li>类静态变量引用的对象</li>
+<li>常量引用的对象</li>
+</ul>
+</li>
+<li>本地方法栈：JNI引用的对象</li>
+</ul>
+</li>
+<li><p><strong>再谈引用</strong>：JDK1.2之后，引用概念分为以下4种，强度依次减弱</p>
+<ul>
+<li><strong>强引用</strong>：类似“Object obj = new Object()”这类引用，只要强引用存在，GC永远不会回收被引用的对象。</li>
+<li><strong>软引用</strong>：描述有用但非必须的对象，当<strong>系统将要发生OOM异常时</strong>，软引用指向的对象才被真正回收。通过SoftReference类实现。</li>
+<li><strong>弱引用</strong>：GC工作时，无论当前内存是否足够，都会回收只被弱引用关联的对象。通过WeakReference类实现。</li>
+<li><strong>虚引用</strong>：为一个对象设置虚引用关联的唯一目的时能<strong>在对象被回收时收到一个系统通知</strong>。通过PhantomReference类实现。</li>
+</ul>
+</li>
+<li><p><strong>生存还是死亡</strong>：即使在可达性分析算法中不可达的对象，在该对象的finalize()方法中也有一次自救的方法，即重新与引用链上的任何一个对象建立关联即可，譬如把this赋值给某个类变量或者对象的成员变量。但是，建议使用try-finally语法而尽量不使用finally()方法。</p>
+</li>
+<li><p><strong>回收方法区</strong>：主要回收<strong>废弃常量</strong>和<strong>无用的类</strong>。废弃常量的回收与堆中的对象类似，而无用类的判定则要复杂的多，需要满足：</p>
+<ul>
+<li>堆中不存在该类的实例</li>
+<li>ClassLoader已被回收</li>
+<li>Class对象没有被引用，且无法在任何地方通过反射访问该类的方法。</li>
+<li>是否对类进行回收，HotSpot虚拟机提供了<code>-Xnoclassgc</code>参数进行控制，还可以使用<code>-verbose:class</code>以及<code>-XX:+TraceClassLoading</code>、<code>-XX:+TraceClassUnLoading</code>查看类加载和卸载信息。</li>
+<li>注：对于大量使用反射、动态代理、CGLib等ByteCode框架的场景，要注意方法区的类卸载。</li>
+</ul>
+</li>
+</ul>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><ul>
+<li><p><strong>标记-清除算法</strong>：标记回收对象，标记完成后统一回收。</p>
+<p><img src="mark_clean.jpeg" alt=""></p>
+<ul>
+<li>缺点：标记和清除效率都不高；会产生大量不连续的内存碎片，导致无法给大对象分配内存。</li>
+</ul>
+</li>
+<li><p><strong>标记-整理算法</strong>：标记回收对象，让所有存活的对象向一端移动，然后直接清理掉对象所在的连续内存后的所有内存。</p>
+<p><img src="mark_arrange.png" alt=""></p>
+<ul>
+<li>特点：适用于老年代的算法，不会产生内存碎片。</li>
+</ul>
+</li>
+<li><p><strong>复制算法</strong>：对于现在的商业虚拟机，堆内存被划分为三块，一块较大的Eden空间、两块较小的Survivor空间。</p>
+<ol>
+<li><p>当Eden空间满时，第一次Minor-GC（针对新生代的GC）将Eden还存活的对象全部复制到Survivor-0中，存活对象“寿命计数器”+1，清理Eden；</p>
+</li>
+<li><p>当Eden满时，第二次Minor-GC将Eden和Survivor-0中还存活的对象复制到Survivor-1中，存活对象“寿命计数器”+1，清理Eden和Survivor-0；</p>
+</li>
+<li><p>当Eden满时，第三次Minor-GC将Eden和Survivor-1中还存活的对象复制到Survivor-0中，存活对象“寿命计数器”+1，清理Eden和Survivor-1；</p>
+<p>…….</p>
+</li>
+<li><p>如此往复，当某个Survivor满或者对象“寿命计数器”值达到阈值，则将对象复制到老年代中。</p>
+</li>
+<li><p>当老年代和新生代都满时，会进行一次Full-GC。</p>
+</li>
+</ol>
+<ul>
+<li><p>HotSpot虚拟机的Eden和Survivor大小默认比例为8:1，保证了内存利用率达到90%。</p>
+<p><img src="Copying.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>分代收集算法</strong>：现在的商业虚拟机采用分代收集算法。</p>
+<ul>
+<li><strong>新生代：由于每次GC时都有绝大部分对象死去，只有少量对象存活</strong>，故采用<strong>复制算法</strong>，因为只需要付出少量存活对象的复制成本。</li>
+<li><strong>老年代：由于老年代对象存活率高且没有额外空间对它分配担保</strong>，故采用标记-整理算法或标记-清除算法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="GC.jpg" alt=""></p>
+<p>以上是HotSpot虚拟机中的7个垃圾收集器，连线表示垃圾收集器之间可以搭配使用。</p>
+<ul>
+<li><p><strong>Serial收集器</strong>：单线程；简单高效，拥有最高的单线程收集效率；Client场景下的默认新生代收集器。</p>
+<p><img src="Serial.jpg" alt=""></p>
+</li>
+<li><p><strong>ParNew收集器</strong>：Serial的多线程版本；Server场景下默认的新生代收集器；唯一能与CMS收集器配合使用的收集器。</p>
+<p><img src="ParNew.jpg" alt=""></p>
+</li>
+<li><p><strong>Parallel Scavenge收集器</strong>：多线程，<strong>吞吐量</strong>（CPU运行用户代码的时间除以CPU总消耗时间）<strong>优先</strong>的收集器。</p>
+</li>
+<li><p><strong>Serial Old收集器</strong>：Serial的老年代版本，Client场景使用。</p>
+<p><img src="Serial.jpg" alt=""></p>
+</li>
+<li><p><strong>Parallel Old收集器</strong>：Parallel Scavenge的老年代版本</p>
+<p><img src="Parallel.jpg" alt=""></p>
+</li>
+<li><p><strong>CMS(Concurrent Mark Sweep)收集器</strong>：以获取<strong>最短回收停顿时间</strong>为目标，基于<strong>标记-清除</strong>算法。分为四个阶段：</p>
+<ol>
+<li>初始标记：只标记与GC Roots直接关联的对象，需要Stop The World。</li>
+<li>并发标记：进行 GC Roots Tracing，耗时最长，不需要停顿。</li>
+<li>重新标记：修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，需要Stop The World。</li>
+<li>并发清除：不需要停顿。</li>
+</ol>
+<p><img src="CMS.jpg" alt=""></p>
+<ul>
+<li>缺点明显：<ol>
+<li>CPU资源敏感：CMS默认启动的回收线程数是（CPU数+3）/4，当CPU数较少时，吞吐量很低。</li>
+<li>无法处理浮动垃圾：浮动垃圾是指<strong>并发清除阶段</strong>由于用户线程继续运行而产生的垃圾，这部分垃圾只能下一次GC清除。</li>
+<li>标记-清除算法会产生大量空间碎片。</li>
+</ol>
+</li>
+<li>总体上来说，CMS的垃圾回收过程是与用户线程一起并发执行的。</li>
+</ul>
+</li>
+<li><p><strong>G1(Garbage First)收集器</strong>：面向服务端应用。</p>
+<ul>
+<li><p>使用G1时，Java堆内存布局与以往不同，它<strong>将整个Java堆划分为多个大小相等的独立Region</strong>，新生代与老年代是一部分不连续Region的集合，如图：</p>
+<p><img src="G1HeapAllocation.png" alt=""></p>
+</li>
+<li><p>G1通过记录每个Region垃圾回收时间和回收所得空间（这两个值通过过去回收的经验计算），并维护一个优先列表，每次根据用户允许的收集时间，优先回收价值最大的Region。<strong>使用Region划分内存空间</strong>，<strong>有优先级的区域回收方式</strong>，保证了G1在有限的时间内获取尽可能高的收集效率。</p>
+</li>
+<li><p>每个Region都维护一个Remembered Set，用于记录Region之间的对象引用，来避免GC时的全堆扫描。（其他收集器新生代与老年代之间的对象引用也是使用Remembered Set，避免Minor-GC时全堆扫描）。</p>
+</li>
+<li><p>如不计算维护Remembered Set的操作，G1的运作可划分如下：</p>
+<ol>
+<li>初始标记：停顿。</li>
+<li>并发标记</li>
+<li>最终标记：停顿。为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的 Remembered Set Logs 里面，最终标记阶段需要把 Remembered Set Logs 的数据合并到 Remembered Set 中。</li>
+<li>筛选回收：根据用户允许的收集时间和优先列表来回收。</li>
+</ol>
+</li>
+</ul>
+<p><img src="G1.jpg" alt=""></p>
+<ul>
+<li>总结G1的特点如下：<ol>
+<li>并行与并发：G1在多CPU和大内存的硬件优势下能有效缩短Stop-The-World的时间。</li>
+<li>分代收集：新生代和老年代可以一起回收。</li>
+<li>空间整合：整体上看基于“标记-整理”算法，局部上看基于“复制”算法。不会产生内存碎片。</li>
+<li>可预测的停顿：能让用户自定义在一个长度为M毫秒的时间片段内，消耗在GC上的时间不超过N毫秒。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>垃圾收集器参数总结</strong></p>
+<p><img src="GC_Args.png" alt=""></p>
+</li>
+</ul>
+<h3 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h3><ul>
+<li><strong>对象优先在Eden分配</strong></li>
+<li><strong>大对象直接进入老年代</strong>：大对象是指<strong>需要连续内存空间的对象</strong>，最典型的大对象是那种<strong>很长的字符串以及数组</strong>。<ul>
+<li>经常出现大对象会提前触发垃圾收集以获取足够的连续空间分配给大对象。</li>
+<li>通过参数<code>-XX:PretenureSizeThreshold</code>，大于此值的对象直接在老年代分配，避免在 Eden 和 Survivor 之间的大量内存复制。</li>
+</ul>
+</li>
+<li><strong>长期存活的对象将进入老年代</strong>：通过参数<code>-XX:MaxTenuringThreshold</code>用来定义年龄的阈值。</li>
+<li><strong>动态对象年龄判定</strong>：虚拟机并不是永远要求对象的年龄必须达到 MaxTenuringThreshold 才能晋升老年代，<strong>如果在 Survivor 中相同年龄所有对象大小的总和大于 Survivor 空间的一半</strong>，则年龄大于或等于该年龄的对象可以直接进入老年代，无需等到 MaxTenuringThreshold 中要求的年龄。</li>
+<li><strong>空间分配担保</strong>：在发生 Minor GC 之前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果条件成立的话，那么 Minor GC 可以确认是安全的；如果不成立的话虚拟机会查看 HandlePromotionFailure 的值是否允许担保失败，如果允许那么就会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试着进行一次 Minor GC；如果小于，或者 HandlePromotionFailure 的值不允许冒险，那么就要进行一次 Full GC。</li>
+</ul>
+<h3 id="GC的触发条件"><a href="#GC的触发条件" class="headerlink" title="GC的触发条件"></a>GC的触发条件</h3><ul>
+<li><p>对于Minor GC，其触发条件为Eden区满时。而对于Full GC:</p>
+<ol>
+<li>调用System.gc()。</li>
+<li>老年代空间不足。</li>
+<li>空间分配担保失败。</li>
+<li>Concurrent Mode Failure。</li>
+</ol>
+</li>
+<li><p>减少Full GC的方法：</p>
+<ol>
+<li>尽量不要创建大对象和数组。</li>
+<li>通过<code>-Xmn</code>调大新生代大小。</li>
+<li>通过<code>-XX:MaxTenuringThreshold</code>调大进入老年代的阈值。</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" title="GC与内存分配策略" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/" title="Java内存区域与内存溢出异常"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
