@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2020-09-02T12:53:38.442Z</updated>
+  <updated>2020-09-03T09:23:14.793Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虚拟机类加载机制</title>
+    <link href="http://thmasterplan.cn/JVM/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
+    <id>http://thmasterplan.cn/JVM/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</id>
+    <published>2020-09-03T09:22:40.000Z</published>
+    <updated>2020-09-03T09:23:14.793Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><ul><li>一个Java类从编写完成到被卸载的过程：X.java -&gt; X.class（编译为磁盘中的二进制文件）-&gt; 加载（ClassLoader将X.class加载到虚拟机内存）-&gt; 连接 （确定类与类之间的关系，包含验证、准备、解析三步） -&gt; 初始化  -&gt; 使用 -&gt; 卸载。类是在运行期间第一次使用时动态加载的，而不是一次性加载所有类。因为如果一次性加载，那么会占用很多的内存。类加载过程如下图：</li></ul><p><img src="ClassLoading_Procedure.png" alt=""></p><ul><li><p><strong>加载</strong>：加载是类加载的一个阶段，注意不要混淆。</p><p>加载阶段完成以下三件事：</p><ul><li>通过一个类的全限定名来<strong>获取</strong>定义此类的<strong>二进制字节流</strong>。</li><li>将该字节流表示的静态存储结构<strong>转换</strong>为<strong>方法区的运行时数据结构</strong>。</li><li>在内存中<strong>生成</strong>一个代表该类的java.lang.<strong>Class对象</strong>，<strong>作为</strong>方法区该类的各种<strong>数据的访问入口</strong>。</li></ul><p>二进制字节流的获取方式有：</p><ul><li>从<strong>ZIP包</strong>读取，成为 JAR、EAR、WAR 格式的基础。</li><li>从<strong>网络</strong>获取，典型应用为Applet</li><li><strong>运行时计算生成</strong>，比如动态代理技术，在java.lang.reflect.Proxy中使用ProxyGenerator.generateProxyClass来为特定接口生成代理类的二进制字节流。</li><li>由<strong>其他文件</strong>生成，比如由JSP文件生成对应的Class类。</li><li>从<strong>数据库</strong>读取。</li></ul></li><li><p><strong>连接</strong></p><ul><li><strong>验证</strong>：这一阶段的目的是确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</li><li><strong>准备</strong>：在方法区中，为类的<strong>静态变量</strong>分配内存，并将其初始化为<strong>默认值</strong>（例如对于static int a = 10, 此时会赋值为默认值0；布尔类型默认为false；引用类型为null…），但是对于<strong>final修饰</strong>的常量则直接赋<strong>指定值</strong>。注意：实例变量（即未被static修饰的变量）不会在这阶段分配内存，它会在对象实例化时随着对象一起被分配在堆中，也就是类加载完成之后了。</li><li><strong>解析</strong>：将class文件常量池的<strong>符号引用替换为直接引用</strong>的过程。<ul><li>符号引用：与虚拟机的内存布局无关。可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。</li><li>直接引用：与虚拟机实现的内存布局相关。可以是直接指向目标的指针、相对偏移量或者能间接定位到目标的句柄。</li></ul></li></ul></li><li><p><strong>初始化</strong>：<strong>为类的静态变量赋予正确的初始值</strong>（此时才赋予程序员设定的值），<strong>并执行静态代码块</strong>。</p><p>Java程序对类的使用方式可分为两种：主动引用与被动引用。每个类（接口）只有被Java程序“<strong>首次主动引用</strong>”时才<strong>初始化</strong>。包括：</p><ol><li>使用<strong>new</strong>实例化该类对象。</li><li><strong>读取或设置</strong>一个类（接口）的<strong>静态字段，</strong>以及<strong>调用</strong>一个类（接口）的<strong>静态方法</strong>。注：被final修饰的静态字段除外。</li><li>使用java.lang.reflect包的方法对类进行<strong>反射</strong>调用。</li><li><strong>初始化某类的子类</strong>（先初始化父类）。</li><li>带<strong>main</strong>方法的类。</li><li>JDK1.7开始提供的动态语言支持 *。</li></ol><p>被动引用例子：</p><ul><li><p>通过子类引用父类的静态字段，不会导致子类初始化。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(SubClass.value);&#x2F;&#x2F;value字段在SuperClass中为静态字段</span><br></pre></td></tr></table></figure></li><li><p>通过数组定义来引用类，不会触发被引用类的初始化。但是该过程会对数组类进行初始化，数组类是一个由虚拟机自动生成的、直接继承自 Object 的子类，其中包含了数组的属性和方法。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SuperClass[] array &#x3D; new SuperClass[10];</span><br></pre></td></tr></table></figure></li><li><p>常量在编译阶段会存入调用类的常量池中，本质上并没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(ConstClass.HELLOWORLD);</span><br></pre></td></tr></table></figure></li></ul></li></ul><h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><ul><li><p><strong>类与类加载器</strong>：加载阶段中的“通过一个类的全限定名来获取定义此类的二进制字节流”这个动作在虚拟机外部实现，由类加载器实现。我们可以通过自定义类加载器去控制字节流的获取方式。注意：数组类不通过类加载器创建，它由JVM直接创建。</p><p>HotSpot VM内置了三个重要的 ClassLoader，除了 BootstrapClassLoader 其他类加载器均由 Java 实现且全部继承自<code>java.lang.ClassLoader</code>：</p><ol><li><strong>BootstrapClassLoader(启动类加载器)</strong> ：最顶层的加载类，由C++实现，负责加载 <code>%JAVA_HOME%/lib</code>目录下的jar包和类或者或被 <code>-Xbootclasspath</code>参数指定的路径中的所有类。</li><li><strong>ExtensionClassLoader(扩展类加载器)</strong> ：主要负责加载目录 <code>%JRE_HOME%/lib/ext</code> 目录下的jar包和类，或被 <code>java.ext.dirs</code> 系统变量所指定的路径下的jar包。</li><li><strong>AppClassLoader(应用程序类加载器)</strong> :面向用户的加载器，负责加载当前应用classpath下的所有jar包和类。</li></ol></li><li><p><strong>双亲委派模型</strong>：每一个类都有一个对应它的类加载器。系统中的 ClassLoder 在协同工作的时候会默认使用 <strong>双亲委派模型</strong> 。即在类加载的时候：</p><ol><li>系统会首先判断当前类是否被加载过。已经被加载的类会直接返回，否则才会尝试加载。</li><li>加载的时候，首先会<strong>把该请求委派该父类加载器的 <code>loadClass()</code> 处理</strong>，因此所有的请求最终都应该传送到顶层的启动类加载器 <code>BootstrapClassLoader</code> 中。</li><li>当父类加载器无法处理时，才由自己来处理。当父类加载器为null时，会使用启动类加载器 <code>BootstrapClassLoader</code> 作为父类加载器。</li></ol><p><img src="classloader_PDM.png" alt=""></p><p>以上的父子关系一般通过组合关系（Composition）来实现，而不是继承关系（Inheritance）。</p><ul><li><strong>双亲委派模型的好处</strong>：双亲委派模型保证了Java程序的稳定运行，可以<strong>避免类的重复加载</strong>（JVM 区分不同类的方式不仅仅根据类名，相同的类文件被不同的类加载器加载产生的是两个不同的类），也<strong>保证了 Java 的核心 API 不被篡改</strong>。如果没有使用双亲委派模型，而是每个类加载器加载自己的话就会出现一些问题，比如我们编写一个称为 <code>java.lang.Object</code> 类的话，那么程序运行的时候，系统就会出现多个不同的 <code>Object</code> 类。</li></ul></li><li><p><strong>破坏双亲委派模型</strong>：自定义类加载器，需要继承ClassLoader。如果不想打破双亲委派模型，就重写 <code>ClassLoader</code> 类中的 <code>findClass()</code> 方法即可，无法被父类加载器加载的类最终会通过这个方法被加载；如果想打破双亲委派模型则需要重写 <code>loadClass()</code> 方法。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;类加载过程&quot;&gt;&lt;a href=&quot;#类加载过程&quot; class=&quot;headerlink&quot; title=&quot;类加载过程&quot;&gt;&lt;/a&gt;类加载过程&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;一个Java类从编写完成到被卸载的过程：X.java -&amp;gt; X.class（编译为磁盘中的二进制文
+      
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="http://thmasterplan.cn/categories/JVM/"/>
+    
+    
+      <category term="JVM" scheme="http://thmasterplan.cn/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>GC与内存分配策略</title>
@@ -486,33 +513,6 @@
     
     
       <category term="lintcode" scheme="http://thmasterplan.cn/tags/lintcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常量与反编译及助记符</title>
-    <link href="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/"/>
-    <id>http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/</id>
-    <published>2020-03-26T06:11:57.000Z</published>
-    <updated>2020-03-26T06:13:58.910Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><p>JVM参数，均以<code>-XX:</code>开始，其中<code>-XX:+&lt;option&gt;</code>，表示开启option选项；<code>-XX:-&lt;option&gt;</code>，表示关闭option选项；<code>-XX:&lt;option&gt;=&lt;value&gt;</code>，表示将option选项的值设置为value。</p></li><li><p><code>-XX:+TraceClassLoading</code>，用于追踪类的加载信息并打印。</p></li><li><p><strong>常量的本质</strong>：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">System.out.println(MyParent2.string);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent2</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = <span class="string">"hello world"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">System.out.println(<span class="string">"MyParent2 static block"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>输出为：hello world</li><li>原理：<em>常量在<strong>编译阶段</strong>会存入调用该常量所在类的<strong>常量池</strong>中</em>，本质上调用类并没有直接引用常量所在的类，因此不会触发常量所在类的初始化。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest3</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">System.out.println(MyParent3.string);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent3</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">System.out.println(<span class="string">"MyParent3 static block"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>输出为：MyParent3 static block</p><pre><code>016933b5-7da0-46b5-88fa-b662d6f01494</code></pre></li><li><p>原理：常量string在<strong>编译期未知</strong>，在<strong>运行期间才赋值</strong>，故而静态代码块会初始化。</p></li></ul></li><li><p>反编译.class文件：<code>javap -c 全类名</code></p></li><li><p>反编译代码助记符：</p><ul><li><code>getstatic</code>：获取类的静态字段</li><li><code>ldc</code>：表示将int, float或是String类型的常量值从常量池推送至栈顶</li><li><code>bipush</code>：表示将单字节（-128-127）的常量值从常量池推送至栈顶</li><li><code>sipush</code>：表示将一个短整型（-32768—32767）常量值推送至栈顶</li><li><code>iconst_1</code>：表示将int类型的1推送至栈顶（iconst_0 - iconst_5）</li><li><code>anewarray</code>：创建一个引用类型数组，并将其引用值压入栈顶</li><li><code>newarray</code>：创建一个基本类型的数组，并将其引用值压入栈顶</li></ul></li><li><p>数组创建本质：new一个数组，对于数组实例来说，其类型是由JVM在运行期间动态生成的，动态生成的类型其父类为Object。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JVM参数，均以&lt;code&gt;-XX:&lt;/code&gt;开始，其中&lt;code&gt;-XX:+&amp;lt;option&amp;gt;&lt;/code&gt;，表示开启option选项；&lt;code&gt;-XX:-&amp;lt;option&amp;gt;&lt;/code&gt;，表示关闭option选项；&lt;code&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="JVM" scheme="http://thmasterplan.cn/categories/JVM/"/>
-    
-    
-      <category term="JVM" scheme="http://thmasterplan.cn/tags/JVM/"/>
     
   </entry>
   

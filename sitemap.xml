@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/JVM/%25E8%2599%259A%25E6%258B%259F%25E6%259C%25BA%25E7%25B1%25BB%25E5%258A%25A0%25E8%25BD%25BD%25E6%259C%25BA%25E5%2588%25B6/</loc>
+    
+    <lastmod>2020-09-03T09:23:14.793Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/JVM/GC%25E4%25B8%258E%25E5%2586%2585%25E5%25AD%2598%25E5%2588%2586%25E9%2585%258D%25E7%25AD%2596%25E7%2595%25A5/</loc>
     
     <lastmod>2020-09-02T12:53:38.442Z</lastmod>
@@ -201,13 +208,6 @@
     <loc>http://thmasterplan.cn/%25E9%259D%25A2%25E8%25AF%2595%25E5%2588%25B7%25E9%25A2%2598/%25E8%25B4%25AA%25E5%25BF%2583/</loc>
     
     <lastmod>2020-03-26T06:13:26.316Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/JVM/%25E7%25B1%25BB%25E5%258A%25A0%25E8%25BD%25BD%25E8%25BF%2587%25E7%25A8%258B/</loc>
-    
-    <lastmod>2020-03-24T11:55:23.653Z</lastmod>
     
   </url>
   
