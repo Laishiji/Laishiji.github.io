@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2020-09-03</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-09-03</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/</loc>
+    <lastmod>2020-09-03</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/JVM/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</loc>
     <lastmod>2020-09-03</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2020-09-02</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/</loc>
-    <lastmod>2020-09-02</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-04-26</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/uncategorized/ThreadLocal/</loc>
     <lastmod>2020-04-26</lastmod>
@@ -78,9 +81,6 @@
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-03-29</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/</loc>
-    <lastmod>2020-03-26</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/%E8%B4%AA%E5%BF%83/</loc>
     <lastmod>2020-03-26</lastmod>

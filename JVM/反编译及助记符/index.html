@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>常量与反编译及助记符 | Blog Of TheMasterplan</title>
-  <meta name="description" content="JVM参数，均以-XX:开始，其中-XX:+&lt;option&gt;，表示开启option选项；-XX:-&lt;option&gt;，表示关闭option选项；-XX:&lt;option&gt;&#x3D;&lt;value&gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  常量的本质： 1234567891011">
+  <title>反编译及助记符 | Blog Of TheMasterplan</title>
+  <meta name="description" content="JVM参数，均以-XX:开始，其中-XX:+&lt;option&gt;，表示开启option选项；-XX:-&lt;option&gt;，表示关闭option选项；-XX:&lt;option&gt;&#x3D;&lt;value&gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  反编译.class文件：javap -c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常量与反编译及助记符">
-<meta property="og:url" content="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/index.html">
+<meta property="og:title" content="反编译及助记符">
+<meta property="og:url" content="http://thmasterplan.cn/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="JVM参数，均以-XX:开始，其中-XX:+&lt;option&gt;，表示开启option选项；-XX:-&lt;option&gt;，表示关闭option选项；-XX:&lt;option&gt;&#x3D;&lt;value&gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  常量的本质： 1234567891011">
+<meta property="og:description" content="JVM参数，均以-XX:开始，其中-XX:+&lt;option&gt;，表示开启option选项；-XX:-&lt;option&gt;，表示关闭option选项；-XX:&lt;option&gt;&#x3D;&lt;value&gt;，表示将option选项的值设置为value。  -XX:+TraceClassLoading，用于追踪类的加载信息并打印。  反编译.class文件：javap -c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-26T06:11:57.000Z">
-<meta property="article:modified_time" content="2020-03-26T06:13:58.910Z">
+<meta property="article:modified_time" content="2020-09-03T09:27:38.419Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -236,14 +236,14 @@
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-常量与反编译及助记符" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-反编译及助记符" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      常量与反编译及助记符
+      反编译及助记符
     </h1>
   
 
@@ -251,7 +251,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="article-date">
+	<a href="/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="article-date">
 	  <time datetime="2020-03-26T06:11:57.000Z" itemprop="datePublished">2020-03-26</time>
 	</a>
 </span>
@@ -270,7 +270,7 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
@@ -280,21 +280,6 @@
 <li><p>JVM参数，均以<code>-XX:</code>开始，其中<code>-XX:+&lt;option&gt;</code>，表示开启option选项；<code>-XX:-&lt;option&gt;</code>，表示关闭option选项；<code>-XX:&lt;option&gt;=&lt;value&gt;</code>，表示将option选项的值设置为value。</p>
 </li>
 <li><p><code>-XX:+TraceClassLoading</code>，用于追踪类的加载信息并打印。</p>
-</li>
-<li><p><strong>常量的本质</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(MyParent2.string);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent2</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = <span class="string">"hello world"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"MyParent2 static block"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>输出为：hello world</li>
-<li>原理：<em>常量在<strong>编译阶段</strong>会存入调用该常量所在类的<strong>常量池</strong>中</em>，本质上调用类并没有直接引用常量所在的类，因此不会触发常量所在类的初始化。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(MyParent3.string);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyParent3</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String string = UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"MyParent3 static block"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>输出为：MyParent3 static block</p>
-<pre><code>016933b5-7da0-46b5-88fa-b662d6f01494
-</code></pre></li>
-<li><p>原理：常量string在<strong>编译期未知</strong>，在<strong>运行期间才赋值</strong>，故而静态代码块会初始化。</p>
-</li>
-</ul>
 </li>
 <li><p>反编译.class文件：<code>javap -c 全类名</code></p>
 </li>
@@ -322,7 +307,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/JVM/%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" title="常量与反编译及助记符" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" title="反编译及助记符" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
