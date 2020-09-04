@@ -18,17 +18,17 @@
   
   
   <title>Java基础 | Blog Of TheMasterplan</title>
-  <meta name="description" content="字符串 String  String类是final的，因此不能被继承。源码是一个final修饰的字符数组，因此一旦创建就是一个不可变的字符串。 1private final char value[];  判断字符串是否相等？   值在编译阶段确定（相等） 1234567public static void main(String[] args) &amp;#123;  		String a &#x3D;">
+  <meta name="description" content="字符串 String  String类是final的，因此不能被继承。源码是一个final修饰的字符数组，因此一旦创建就是一个不可变的字符串。 1private final char value[];  StringTable编译期优化：  判断字符串是否相等？   值在编译阶段确定（相等） 1234567public static void main(String[] args) &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="字符串 String  String类是final的，因此不能被继承。源码是一个final修饰的字符数组，因此一旦创建就是一个不可变的字符串。 1private final char value[];  判断字符串是否相等？   值在编译阶段确定（相等） 1234567public static void main(String[] args) &amp;#123;  		String a &#x3D;">
+<meta property="og:description" content="字符串 String  String类是final的，因此不能被继承。源码是一个final修饰的字符数组，因此一旦创建就是一个不可变的字符串。 1private final char value[];  StringTable编译期优化：  判断字符串是否相等？   值在编译阶段确定（相等） 1234567public static void main(String[] args) &amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Exception.png">
 <meta property="article:published_time" content="2020-04-08T14:47:15.000Z">
-<meta property="article:modified_time" content="2020-09-03T11:42:08.501Z">
+<meta property="article:modified_time" content="2020-09-04T05:29:11.114Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七个关键字"><span class="toc-number">2.</span> <span class="toc-text">七个关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#static-涉及JVM的部分待补充"><span class="toc-number">2.1.</span> <span class="toc-text">static  [涉及JVM的部分待补充]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#final"><span class="toc-number">2.2.</span> <span class="toc-text">final</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instanceof"><span class="toc-number">2.3.</span> <span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#native"><span class="toc-number">2.4.</span> <span class="toc-text">native</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transient"><span class="toc-number">2.5.</span> <span class="toc-text">transient</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronized"><span class="toc-number">2.6.</span> <span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile"><span class="toc-number">2.7.</span> <span class="toc-text">volatile</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限修饰符作用范围"><span class="toc-number">3.</span> <span class="toc-text">权限修饰符作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays常用方法"><span class="toc-number">4.</span> <span class="toc-text">Arrays常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象三大特性"><span class="toc-number">5.</span> <span class="toc-text">面向对象三大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#继承"><span class="toc-number">5.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多态"><span class="toc-number">5.2.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装"><span class="toc-number">5.3.</span> <span class="toc-text">封装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口与抽象类"><span class="toc-number">6.</span> <span class="toc-text">接口与抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">7.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包装类"><span class="toc-number">8.</span> <span class="toc-text">包装类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递与引用传递"><span class="toc-number">9.</span> <span class="toc-text">值传递与引用传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java四种引用类型"><span class="toc-number">10.</span> <span class="toc-text">Java四种引用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的三种遍历方式"><span class="toc-number">11.</span> <span class="toc-text">集合的三种遍历方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常"><span class="toc-number">12.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File"><span class="toc-number">13.</span> <span class="toc-text">File</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键字"><span class="toc-number">2.</span> <span class="toc-text">关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#static"><span class="toc-number">2.1.</span> <span class="toc-text">static</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#final"><span class="toc-number">2.2.</span> <span class="toc-text">final</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instanceof"><span class="toc-number">2.3.</span> <span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#native"><span class="toc-number">2.4.</span> <span class="toc-text">native</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transient"><span class="toc-number">2.5.</span> <span class="toc-text">transient</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限修饰符作用范围"><span class="toc-number">3.</span> <span class="toc-text">权限修饰符作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrays常用方法"><span class="toc-number">4.</span> <span class="toc-text">Arrays常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象三大特性"><span class="toc-number">5.</span> <span class="toc-text">面向对象三大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#继承"><span class="toc-number">5.1.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多态"><span class="toc-number">5.2.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#封装"><span class="toc-number">5.3.</span> <span class="toc-text">封装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口与抽象类"><span class="toc-number">6.</span> <span class="toc-text">接口与抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-number">7.</span> <span class="toc-text">内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包装类"><span class="toc-number">8.</span> <span class="toc-text">包装类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递与引用传递"><span class="toc-number">9.</span> <span class="toc-text">值传递与引用传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java四种引用类型"><span class="toc-number">10.</span> <span class="toc-text">Java四种引用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的三种遍历方式"><span class="toc-number">11.</span> <span class="toc-text">集合的三种遍历方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常"><span class="toc-number">12.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件操作"><span class="toc-number">13.</span> <span class="toc-text">文件操作</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -284,6 +284,8 @@
 <ul>
 <li><p>String类是final的，因此不能被继承。源码是一个<strong>final修饰的字符数组</strong>，因此一旦创建就是一个不可变的字符串。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private final char value[];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StringTable编译期优化：</p>
 </li>
 <li><p>判断字符串是否相等？ </p>
 <ol>
@@ -351,10 +353,8 @@
 <li><p>jdk1.9后String/StringBuffer/StringBuilder均不再使用字符数组，而是直接使用字节数组byte[] value。</p>
 </li>
 </ul>
-<h3 id="七个关键字"><a href="#七个关键字" class="headerlink" title="七个关键字"></a>七个关键字</h3><h4 id="static-涉及JVM的部分待补充"><a href="#static-涉及JVM的部分待补充" class="headerlink" title="static  [涉及JVM的部分待补充]"></a>static  [涉及JVM的部分待补充]</h4><ul>
-<li><p>修饰成员变量或成员方法</p>
-</li>
-<li><p>不需要创建对象就可通过类名调用，它们均属于类，而非某个对象</p>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><ul>
+<li><p>修饰成员变量或成员方法：不需要创建对象就可通过类名调用，它们均属于类，而非某个对象</p>
 </li>
 <li><p>修饰内部类（不允许修饰普通类）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class StaticTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static class Inner&#123;</span><br><span class="line">		static&#123;</span><br><span class="line">			System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;静态内部类静态代码块&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		Inner() &#123;</span><br><span class="line">			System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;静态内部类构造方法&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		public void innerMethod()&#123;</span><br><span class="line">			System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;静态内部类普通方法&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Inner inner &#x3D; new Inner();</span><br><span class="line">		inner.innerMethod();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -365,7 +365,7 @@
 </li>
 <li><p>静态代码块</p>
 <ul>
-<li>第一次使用类时，类的静态代码块执行唯一的一次。</li>
+<li>第一次使用类时，类的静态代码块执行唯一的一次。（类加载的初始化阶段执行静态代码块）</li>
 <li>静态代码块先于构造方法执行。</li>
 </ul>
 </li>
@@ -382,7 +382,7 @@
 <li>修饰<strong>数据</strong>：对于基本数据类型，其值不能再改变；对于引用数据类型，不能再改为存储其他对象的地址或引用（对象自身是可以改变的）。对于类变量，<strong>必须赋初始值</strong>或<strong>在构造方法中赋值</strong>。</li>
 <li>修饰<strong>数组</strong>：数组的引用不能再指向其他数组，当数组内容可变。</li>
 </ul>
-<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><h4 id="native"><a href="#native" class="headerlink" title="native"></a>native</h4><h4 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h4><h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><h4 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h4><h3 id="权限修饰符作用范围"><a href="#权限修饰符作用范围" class="headerlink" title="权限修饰符作用范围"></a>权限修饰符作用范围</h3><p><img src="权限修饰符.png" alt=""></p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><h4 id="native"><a href="#native" class="headerlink" title="native"></a>native</h4><h4 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h4><h3 id="权限修饰符作用范围"><a href="#权限修饰符作用范围" class="headerlink" title="权限修饰符作用范围"></a>权限修饰符作用范围</h3><p><img src="权限修饰符.png" alt=""></p>
 <ul>
 <li>外部类只有public和default两种权限。</li>
 <li>待补充。</li>
@@ -605,7 +605,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3>
       
     </div>
     <div class="article-footer">
