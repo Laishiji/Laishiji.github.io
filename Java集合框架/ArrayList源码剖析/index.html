@@ -25,13 +25,13 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="ArrayList源码剖析概述​          ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。 ​          每个ArrayList都有一个容量(capacity)，表示底层数组的实际大小。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。  ​          size(), isEmp">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:/myblog/source/_posts/Java集合框架/ArrayList_base.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ArrayList%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/ArrayList_base.png">
 <meta property="article:published_time" content="2020-09-07T09:18:35.000Z">
-<meta property="article:modified_time" content="2020-09-07T09:28:10.000Z">
+<meta property="article:modified_time" content="2020-09-07T09:33:12.910Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java集合框架">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/myblog/source/_posts/Java集合框架/ArrayList_base.png">
+<meta name="twitter:image" content="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ArrayList%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/ArrayList_base.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ArrayList%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/index.html">
   
@@ -270,7 +270,7 @@
       
         <h4 id="ArrayList源码剖析"><a href="#ArrayList源码剖析" class="headerlink" title="ArrayList源码剖析"></a>ArrayList源码剖析</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>​          <em>ArrayList</em>实现了<em>List</em>接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入<code>null</code>元素，底层通过<strong>数组实现</strong>。</p>
 <p>​          每个<em>ArrayList</em>都有一个容量(capacity)，表示底层数组的实际大小。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。</p>
-<p><img src="D:\myblog\source\_posts\Java集合框架\ArrayList_base.png" alt=""></p>
+<p><img src="ArrayList_base.png" alt=""></p>
 <p>​          size(), isEmpty(), get(), set()方法均能在常数时间内完成，add()方法的时间开销跟插入位置有关，addAll()方法的时间开销跟添加元素的个数成正比。其余方法大都是线性时间。</p>
 <p>​          为追求效率，ArrayList没有实现同步(synchronized)，如果需要多个线程并发访问，可使用Vector替代。ArrayList除未实现同步外，其余跟<em>Vector</em>大致相同。</p>
 <h5 id="ArrayList的实现"><a href="#ArrayList的实现" class="headerlink" title="ArrayList的实现"></a>ArrayList的实现</h5><h6 id="ArrayList中的常量"><a href="#ArrayList中的常量" class="headerlink" title="ArrayList中的常量"></a>ArrayList中的常量</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Default initial capacity.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Shared empty array instance used for empty instances.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Shared empty array instance used for default sized empty instances. We</span></span><br><span class="line"><span class="comment">     * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span></span><br><span class="line"><span class="comment">     * first element is added.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br></pre></td></tr></table></figure>
