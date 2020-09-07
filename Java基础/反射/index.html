@@ -18,15 +18,15 @@
   
   
   <title>反射 | Blog Of TheMasterplan</title>
-  <meta name="description" content="反射：将类的各个组成部分封装为其他对象。在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。  反射的好处  可以在程序运行期间操作封装好的对象（Field,Constructor,Method） 解耦，提高程序的可扩展性   获取Class对象  Class">
+  <meta name="description" content="概述反射概念 反射就是把Java类中的各个成分（成员变量、构造器、成员方法）映射成一个个的Java对象。              在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个属性和方法；这种动态获取的信息以及动态调用对象的方法的功能称为Java语言的反射机制。  反射的好处：解耦，提高程序的可扩展性。（例如Spring框架的依赖注入）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反射">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="反射：将类的各个组成部分封装为其他对象。在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。  反射的好处  可以在程序运行期间操作封装好的对象（Field,Constructor,Method） 解耦，提高程序的可扩展性   获取Class对象  Class">
+<meta property="og:description" content="概述反射概念 反射就是把Java类中的各个成分（成员变量、构造器、成员方法）映射成一个个的Java对象。              在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个属性和方法；这种动态获取的信息以及动态调用对象的方法的功能称为Java语言的反射机制。  反射的好处：解耦，提高程序的可扩展性。（例如Spring框架的依赖注入）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-24T09:08:10.000Z">
-<meta property="article:modified_time" content="2020-04-05T14:37:30.392Z">
+<meta property="article:modified_time" content="2020-09-07T09:13:47.335Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反射概念"><span class="toc-number">1.1.</span> <span class="toc-text">反射概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class类"><span class="toc-number">1.2.</span> <span class="toc-text">Class类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射的使用"><span class="toc-number">2.</span> <span class="toc-text">反射的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取Class类对象"><span class="toc-number">2.1.</span> <span class="toc-text">获取Class类对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constructor"><span class="toc-number">2.2.</span> <span class="toc-text">Constructor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Field"><span class="toc-number">2.3.</span> <span class="toc-text">Field</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-number">2.4.</span> <span class="toc-text">Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">3.</span> <span class="toc-text">练习</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -266,69 +266,91 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <ul>
-<li><p>反射：将类的各个组成部分封装为其他对象。在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="反射概念"><a href="#反射概念" class="headerlink" title="反射概念"></a>反射概念</h3><ul>
+<li><p>反射就是把Java类中的各个成分（成员变量、构造器、成员方法）映射成一个个的Java对象。            </p>
 </li>
-<li><p>反射的好处</p>
-<ul>
-<li>可以在程序运行期间操作封装好的对象（Field,Constructor,Method）</li>
-<li>解耦，提高程序的可扩展性</li>
+<li><p>在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个属性和方法；这种动态获取的信息以及动态调用对象的方法的功能称为Java语言的反射机制。</p>
+</li>
+<li>反射的好处：解耦，提高程序的可扩展性。（例如Spring框架的依赖注入）</li>
 </ul>
-</li>
-<li><p>获取Class对象</p>
-<ul>
-<li><p>Class对象中将类的成员变量封装到Field[]中，将类的构造方法封装到Constructor[]中，将类的方法封装到Method[]中。</p>
-</li>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><ul>
+<li>Class类存在于JDK的java.lang包中，手动编写的类被编译后会产生一个Class对象，其表示的是创建的类的信息，这个Class对象保存在同名.class的文件中。Class类的对象作用是运行时提供或获得某个对象的类型信息。</li>
+</ul>
+<h2 id="反射的使用"><a href="#反射的使用" class="headerlink" title="反射的使用"></a>反射的使用</h2><h3 id="获取Class类对象"><a href="#获取Class类对象" class="headerlink" title="获取Class类对象"></a>获取Class类对象</h3><ul>
+<li><u><strong>Class对象中将类的成员变量封装到Field[]中，将类的构造方法封装到Constructor<T>[]中，将类的方法封装到Method[]中。</strong></u></li>
 <li><p>三种方式</p>
 <ul>
 <li>Class.forName(“全类名”)：将字节码文件加载进内存，返回Class对象。此种方式<strong>多用于配置文件，将类名定义在配置文件中，通过读取文件加载类。</strong></li>
 <li>类名.class：通过类名的class属性获取。<strong>多用于参数的传递。</strong></li>
-<li>new 类名().getClass() ：getClass()方法在Object类中定义。<strong>通过对象获取类的字节码。</strong></li>
+<li>对象.getClass() ：getClass()方法在Object类中定义。<strong>通过对象获取类的字节码。</strong></li>
 <li>注：不论使用哪种方式，同一个.class文件在一次程序运行中只会被加载一次，因此在一次运行中即使使用三种方式各获取一次，获取的都是同一个对象。</li>
 </ul>
 </li>
-<li><p>获取类的Class对象是Java程序对类的主动使用，会初始化该类（静态代码块，静态变量）。</p>
-</li>
-<li>静态synchronized方法的同步对象是：静态同步方法所在类的Class对象。</li>
-</ul>
-</li>
-<li><p>Class对象功能</p>
-<ul>
-<li><p>获取所有成员变量</p>
-<ul>
-<li>Field[] getFields() 获取public修饰的,包括所有父类的</li>
-<li>Field getField(String name)</li>
-<li>Field[] getDeclaredFields() 不考虑修饰符，但是不能获取父类的</li>
-<li>Field getDeclaredFields(String name)</li>
-</ul>
-</li>
-<li><p>获取所有构造方法</p>
-<ul>
-<li>getConstructors()</li>
-<li>getDeclaredConstructors()</li>
-</ul>
-</li>
-<li><p>获取所有成员方法</p>
-<ul>
-<li>getMethods()</li>
-<li>getDeclaredMethods()</li>
-</ul>
-</li>
-<li><p>获取全类名（包括包名在内）: getName()</p>
-</li>
-<li><p>Field对象常用方法: set(),get(),setAccessible(true)【暴力反射】</p>
-</li>
-<li><p>Constructor对象常用方法:newInstance(Object… initargs)</p>
-</li>
-<li><p>Method对象常用方法：invoke(Object obj, Object… args), getName()</p>
-</li>
-<li><p>测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class&lt;Test&gt; testClass = Test<span class="class">.<span class="keyword">class</span></span>;<span class="comment">//获取Class对象</span></span><br><span class="line"></span><br><span class="line">		Test test = <span class="keyword">new</span> Test();</span><br><span class="line"></span><br><span class="line">		Field a = testClass.getDeclaredField(<span class="string">"a"</span>);<span class="comment">//获取指定变量</span></span><br><span class="line">		a.set(test, <span class="number">100</span>);<span class="comment">//给指定变量设置值</span></span><br><span class="line"></span><br><span class="line">		Field[] fields = testClass.getDeclaredFields();<span class="comment">//获取所有变量</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">			field.setAccessible(<span class="keyword">true</span>);<span class="comment">//暴力反射，使得可以访问private修饰的成员变量</span></span><br><span class="line">			System.out.print(<span class="string">" "</span>+field.get(test));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">int</span> b = <span class="number">6</span>;</span><br><span class="line">	<span class="keyword">int</span> c = <span class="number">7</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> d = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getD</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setD</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.d = d;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>控制台输出：100 6 7 8</p>
+<li>注：获取类的Class对象是Java程序对类的主动使用，会初始化该类（静态代码块，静态变量）。</li>
+<li>注：静态synchronized方法的同步对象是：静态同步方法所在类的Class对象。</li>
+<li>Class类的一些方法<ol>
+<li>getName(): 获取全类名</li>
+<li>getSimpleName(): 获取类名</li>
+<li>newInstance(): 创建实例化对象</li>
+</ol>
 </li>
 </ul>
+<h3 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h3><ul>
+<li>Constructor类存在于反射包(java.lang.reflect)中，反映的是Class 对象所表示的类的构造方法。</li>
+<li><p>通过类的<strong>Class对象的方法</strong>获取Constructor对象：</p>
+<ol>
+<li>Constructor&lt;?&gt; []  getConstructors(): 返回<strong>所有public修饰的</strong>Constructor对象的数组</li>
+<li>Constructor&lt;?&gt; []  getDeclaredConstructors(): 返回<strong>所有的</strong>Constructor对象的数组</li>
+<li>Constructor  getConstructor(Class&lt;?&gt;… parameterTypes): 返回<strong>指定参数类型</strong>、<strong>public修饰</strong>的Constructor对象</li>
+<li>Constructor  getDeclaredConstructor(Class&lt;?&gt;… parameterTypes): 返回<strong>指定参数类型的所有</strong>Constructor对象</li>
+</ol>
 </li>
-<li><p>练习：写一个“框架”，可以创建任意类的对象，并能够执行其中任意方法</p>
+<li><p>Constructor对象本身的方法</p>
+<ol>
+<li>String getName(): 获取构造方法名称</li>
+<li>T newInstance(): 创建实例化对象。Class对象的newInstance()方法也是调用构造器对象的该方法。</li>
+</ol>
+</li>
+</ul>
+<h3 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h3><ul>
+<li>Field类提供<strong>有关类或接口的单个字段</strong>的信息，以及<strong>对它的动态访问权限</strong>。</li>
+<li><p>通过类的<strong>Class对象的方法</strong>获取Field对象：</p>
+<ol>
+<li>Field[]  getFields(): 只获取public修饰的Field字段, 包括继承自父类的字段</li>
+<li>Field[]  getDeclaredFields():  获取类的所有字段，但是<strong>不包括继承自父类的</strong></li>
+<li>Field  getField(String name): 获取指定的public修饰的字段，包括继承字段</li>
+<li>Field  getDeclaredFields(String name): 获取指定的字段，不包括继承字段</li>
+</ol>
+</li>
+<li><p>Field对象本身的方法</p>
+<ol>
+<li>void  set(Object obj, Object value): 设置指定对象上此字段的新值</li>
+<li>Object  get(Object obj): 返回指定对象上此<strong>字段的值</strong></li>
+<li>Class&lt;?&gt;  getType(): 返回一个Class对象，它标识了此Field表示<strong>字段的声明类型</strong></li>
+<li>String  getName(): 返回此Field对象表示的<strong>字段的名称</strong></li>
+<li>void  setAccessible(boolean flag): 设置该字段是否可被访问。对于getDeclaredFields()和getDeclaredFields(String name)方法来说，若返回的Field中有由private修饰的字段，那么需要<code>field.setAccessible(true)</code>以表示其可以被访问。（暴力反射）</li>
+</ol>
+</li>
+</ul>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
+<li>Method 提供关于类或接口上单独某个方法（以及如何访问该方法）的信息，所反映的方法可能是类方法或实例方法（包括抽象方法）。</li>
+<li><p>通过类的<strong>Class对象的方法</strong>获取Method对象：</p>
+<ol>
+<li>Method[]  getMethods(): 返回public修饰的方法对应Method的数组，包括继承自父类的</li>
+<li>Method[]  getDeclaredMethods(): 返回所有的方法对应Method的数组，不包括继承的</li>
+<li>Method  getMethod(String name, Class&lt;?&gt; …parameterTypes):  返回指定名称和参数列表的<strong>public修饰</strong>的方法对应Method</li>
+<li>Method  getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes): 返回指定名称和参数列表的方法对应Method</li>
+</ol>
+</li>
+<li><p>Method对象本身的方法</p>
+<ol>
+<li>Object  invoke(Object obj, Object… args): 对指定对象调用此Method表示的方法</li>
+<li>Class&lt;?&gt;  getReturnType(): 返回的Class对象描述了此Method表示<strong>方法的返回类型</strong></li>
+<li>String getName(): 返回Method 对象表示的方法名称，即返回<strong>方法的名称</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>写一个“框架”，可以创建任意类的对象，并能够执行其中任意方法</p>
 <ul>
 <li><p>思路：使用反射，不需要更改框架的代码，只需更改配置文件的参数，就可以体现泛用性。（平时创建不同的对象是需要不同的代码的，比如 new Person(), new Student()）</p>
 </li>
@@ -340,11 +362,6 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> reflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//1.加载配置文件</span></span><br><span class="line">		Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">		ClassLoader classLoader = MyFrame<span class="class">.<span class="keyword">class</span>.<span class="title">getClassLoader</span>()</span>;</span><br><span class="line">		InputStream iStream = classLoader.getResourceAsStream(<span class="string">"pro.properties"</span>);</span><br><span class="line">		properties.load(iStream);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//2.获取配置文件中定义的数据</span></span><br><span class="line">		String className = properties.getProperty(<span class="string">"className"</span>);</span><br><span class="line">		String methodName = properties.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//3.加载类进入内存</span></span><br><span class="line">		Class&lt;?&gt; cls = Class.forName(className);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//4.创建对象</span></span><br><span class="line">		<span class="comment">//Object object = cls.newInstance();本质仍然是调用Constructor对象的newInstance()方法</span></span><br><span class="line">		Constructor&lt;?&gt; c = cls.getConstructor();</span><br><span class="line">		Object object = c.newInstance();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//5.获取Method对象</span></span><br><span class="line">		Method method = cls.getMethod(methodName);</span><br><span class="line"></span><br><span class="line">	    <span class="comment">//6.执行方法</span></span><br><span class="line">		method.invoke(object);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Person类</span></span><br><span class="line"><span class="keyword">package</span> model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"eating..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pro.properties配置文件内容</span></span><br><span class="line">className=model.Person</span><br><span class="line">methodName=eat</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/66853751" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/66853751</a></li>
-</ul>
 
       
     </div>
