@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Archive: 2019/11 | Blog Of TheMasterplan</title>
+  <title>Blog Of TheMasterplan</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http://thmasterplan.cn/archives/2019/11/page/2/index.html">
+<meta property="og:url" content="http://thmasterplan.cn/page/6/index.html">
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="LSJ">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/archives/2019/11/page/2/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/page/6/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -209,97 +209,137 @@
 </aside>
 
   
-  
-<main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive: 2019/11</h1>
-	      <p class="text-muted">Total 5 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <main class="main" role="main">
   
   
+    <div class="content">
+  <article id="post-VIM的简单使用" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">VIM的简单使用</a>
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2019" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2019
-            </a>
-            <!-- <a href="/archives/2019" class="archive-year">2019</a> -->
-          </h3>
-        </div>
-        <div id="collapse2019" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2019">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/Linux/%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-17T16:14:20.000Z" itemprop="datePublished">2019-11-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 目录配置与文件目录管理
-</a>
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="article-date">
+	  <time datetime="2019-11-17T16:08:02.000Z" itemprop="datePublished">2019-11-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
 
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="VIM：一个模式编辑器"><a href="#VIM：一个模式编辑器" class="headerlink" title="VIM：一个模式编辑器"></a>VIM：一个模式编辑器</h3><ul>
+<li>三种主要模式：<ul>
+<li>Normal（命令）模式：默认模式，可移动光标，剪切/粘贴文本。<ul>
+<li><code>-&gt; Insert模式：输入i,a,o,I,A,O任意一个</code>；</li>
+<li><code>-&gt; extended command模式:输入:</code>；</li>
+<li><code>h:左; l:右; j:下; k:上</code>；</li>
+<li><code>)</code>：下一句；<code>(</code>：上一句</li>
+<li><code>}</code>：下一段；<code>{</code>：上一段</li>
+<li><code>ctrl d</code>：向下翻半屏</li>
+<li><code>ctrl u</code>：向上翻半屏</li>
+<li><code>/字符串</code>：全文查找字符串</li>
+</ul>
+</li>
+<li>Insert(编辑)模式：可修改文本。<ul>
+<li><code>-&gt; Normal模式:ESC键</code>；</li>
+</ul>
+</li>
+<li>扩展命令(extended command)模式：保存，退出等。<ul>
+<li><code>-&gt; Normal模式：ESC键</code>；</li>
+<li><code>wq</code>：存盘退出；</li>
+<li><code>q!</code>：不存盘退出；</li>
+<li><code>w</code>：临时保存，类似于win下的ctrl+s；</li>
+<li><code>r filename</code>：将filename的文件内容读到当前文件中；</li>
+<li><code>w filename</code>：将当前文件内容写入filename文件中；</li>
+<li><code>!命令</code>：在不退出vim的情况下执行命令；</li>
+</ul>
+</li>
+<li><code>r!命令</code>：在不退出vim的情况下，将执行命令的结果写入当前文件。<ul>
+<li><code>set number</code>：显示行号；输入数字再输入<code>+</code>或<code>-</code>则向下或向上跳相应行数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="VIM的简单使用" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+</div>
 
   
-    
-    
-    
-<a href="/Linux/%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-17T16:12:54.000Z" itemprop="datePublished">2019-11-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 磁盘与文件系统简介
-</a>
-
 
   
-    
-    
-    
-<a href="/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-17T16:11:48.000Z" itemprop="datePublished">2019-11-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 常用命令入门
-</a>
-
-
-  
-    
-    
-    
-<a href="/Linux/%E6%A0%87%E5%87%86IO%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-17T16:09:31.000Z" itemprop="datePublished">2019-11-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 标准IO和重定向
-</a>
-
-
-  
-    
-    
-    
-<a href="/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-11-17T16:08:02.000Z" itemprop="datePublished">2019-11-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> VIM的简单使用
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	
     
     <nav class="bar bar-footer clearfix" data-stick-bottom>
         <div class="bar-inner">
         <ul class="pager pull-left">
             
             <li class="prev">
-                <a href="/archives/2019/11/">
+                <a href="/page/5/">
                     
                     Prev
                 </a>
@@ -315,12 +355,12 @@
             </li>
             
         </ul>
-        <div class="total-article bar-right">Page 2 of 2</div>
+        <div class="total-article bar-right">Page 6 of 6</div>
         </div>
     </nav>
     
 
- 	
+ 
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -373,6 +413,10 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+
+   
 
 
 
