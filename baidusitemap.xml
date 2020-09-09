@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-09-09</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/PriorityQueue%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/</loc>
     <lastmod>2020-09-08</lastmod>
   </url>  <url>
@@ -32,9 +35,6 @@
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E6%B3%9B%E5%9E%8B/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/</loc>
