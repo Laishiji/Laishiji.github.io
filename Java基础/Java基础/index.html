@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Exception.png">
 <meta property="article:published_time" content="2020-04-08T14:47:15.000Z">
-<meta property="article:modified_time" content="2020-09-09T04:01:49.159Z">
+<meta property="article:modified_time" content="2020-09-09T04:07:16.083Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -379,13 +379,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public interface Vehicle &#123;</span><br><span class="line">  	default void print()&#123;</span><br><span class="line">  		System.out.println(&quot;vehicle...&quot;);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  public interface FourWheeler &#123;</span><br><span class="line">  	default void print()&#123;</span><br><span class="line">  		System.out.println(&quot;fourWheeler...&quot;);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Car implements Vehicle, FourWheeler &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void print() &#123;</span><br><span class="line">		FourWheeler.super.print();</span><br><span class="line">		Vehicle.super.print();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Vehicle car &#x3D; new Car();</span><br><span class="line">		car.print();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>输出：fourWheeler…</p>
-<pre><code>          vehicle...
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<p>  ​                     输出：fourWheeler…<br>  ​                     vehicle…</p>
+<ul>
 <li><p>Java9：新增了<strong>私有方法</strong>，<strong>私有静态方法</strong></p>
 </li>
 <li><p><strong>面向接口编程？</strong></p>
@@ -525,7 +524,7 @@
        super(message);//所有的子类异常都交给父类处理
     }
 }
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 自定义异常类一般以命名Exception结尾</span><br><span class="line">  - 必须继承Exception类或者RuntimeException类。</span><br><span class="line">    - 继承自Exception：自定义异常为编译期异常，必须处理。</span><br><span class="line">    - 继承自RuntimeException：运行期异常无需处理。</span><br><span class="line"></span><br><span class="line">### 字符串</span><br><span class="line"></span><br><span class="line">#### String</span><br><span class="line"></span><br><span class="line">- String类是final的，因此不能被继承。源码是一个**final修饰的字符数组**，因此一旦创建就是一个不可变的字符串。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 自定义异常类一般以命名Exception结尾</span><br><span class="line">  - 必须继承Exception类或者RuntimeException类。</span><br><span class="line">    - 继承自Exception：自定义异常为编译期异常，必须处理。</span><br><span class="line">    - 继承自RuntimeException：运行期异常无需处理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 字符串</span><br><span class="line"></span><br><span class="line">#### String</span><br><span class="line"></span><br><span class="line">- String类是final的，因此不能被继承。源码是一个**final修饰的字符数组**，因此一旦创建就是一个不可变的字符串。</span><br></pre></td></tr></table></figure>
 private final char value[];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- StringTable编译期优化：</span><br><span class="line"></span><br><span class="line">- 判断字符串是否相等？ </span><br><span class="line"></span><br><span class="line">  1. 值在编译阶段确定（相等）</span><br></pre></td></tr></table></figure>
   public static void main(String[] args) {
