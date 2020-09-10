@@ -28,8 +28,9 @@
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JVM_Runtime_DataArea.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JIT_flow.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/Constant_pool.png">
+<meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/OOM.jpg">
 <meta property="article:published_time" content="2020-08-23T03:24:45.000Z">
-<meta property="article:modified_time" content="2020-09-07T11:38:50.706Z">
+<meta property="article:modified_time" content="2020-09-10T02:34:48.688Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
@@ -223,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">3.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">3.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的OOM原因"><span class="toc-number">4.</span> <span class="toc-text">常见的OOM原因</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆"><span class="toc-number">4.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区"><span class="toc-number">4.2.</span> <span class="toc-text">方法区</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -340,6 +341,29 @@
 <li><code>-XX:Permsize=10M</code>: 设置方法区大小为10M</li>
 <li><code>-XX:MaxDirectMemorySize=10M</code>: 设置本机直接内存大小为10M</li>
 </ul>
+<h3 id="常见的OOM原因"><a href="#常见的OOM原因" class="headerlink" title="常见的OOM原因"></a>常见的OOM原因</h3><p><img src="OOM.jpg" alt=""></p>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>堆内存没有足够空间存放新创建的对象。常见异常：<code>java.lang.OutOfMemoryError:Javaheap space</code>; <code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code></p>
+<p>常见原因：</p>
+<ol>
+<li>创建了一个<strong>超大对象</strong>，比如大数组</li>
+<li><strong>超出预期的访问量/数据量</strong>，通常是上游系统请求流量飙升，常见于各类<strong>促销/秒杀活动</strong>，可以结合业务流量指标排查是否有尖状峰值。</li>
+<li><strong>过度使用</strong>终结器（<strong>Finalizer</strong>），该对象没有立即被 GC。重写了finalize()方法的对象不会被立即GC。</li>
+<li><strong>内存泄漏</strong>（Memory Leak），<strong>大量对象引用没有释放</strong>，JVM 无法对其自动回收，常见于使用了 File 等资源没有回收。</li>
+</ol>
+<p>解决方案：针对大部分情况，通常只需要通过 <code>-Xmx</code> 参数调高 JVM 堆内存空间即可。如果仍然没有解决，可以参考以下情况做进一步处理：</p>
+<ol>
+<li>如果是超大对象，可以检查其合理性，比如是否一次性查询了数据库全部结果，而没有做结果数限制。</li>
+<li>如果是业务峰值压力，可以考虑添加机器资源，或者做限流降级。</li>
+<li>如果是内存泄漏，需要找到持有的对象，修改代码设计，比如关闭没有释放的连接。</li>
+</ol>
+<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>常见原因：对象数组和类型数组所关联的class太多。</p>
+<p>解决方案：</p>
+<ol>
+<li>修改 <code>-XX:MaxPermSize</code> 启动参数，调大永久代空间。</li>
+<li>设置 <code>-XX:+CMSClassUnloadingEnabled</code> 和 <code>-XX:+UseConcMarkSweepGC</code>这两个参数允许 JVM 卸载 class。</li>
+<li>JDK 1.8 使用 Metaspace 替换了永久代（Permanent Generation），调整 Metaspace 空间大小的启动参数为 <code>-XX:MaxMetaspaceSize</code>。</li>
+</ol>
+<p>其他OOM原因参考：<a href="https://zhuanlan.zhihu.com/p/79355050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/79355050</a></p>
 
       
     </div>
