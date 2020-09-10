@@ -17,21 +17,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>TreeMap源码剖析 | Blog Of TheMasterplan</title>
-  <meta name="description" content="概述TreeMap实现SortedMap接口，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用Iterator遍历TreeMap时，得到的记录是排过序的。如果使用排序的映射，建议使用TreeMap。在使用TreeMap时，key必须实现Comparable接口或者在构造TreeMap传入自定义的Comparator，否则会在运行时抛出java.lang.Class">
-<meta property="og:type" content="article">
-<meta property="og:title" content="TreeMap源码剖析">
-<meta property="og:url" content="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/TreeMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/index.html">
+  <title>HashSet源码剖析 | Blog Of TheMasterplan</title>
+  <meta property="og:type" content="article">
+<meta property="og:title" content="HashSet源码剖析">
+<meta property="og:url" content="http://thmasterplan.cn/uncategorized/HashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="概述TreeMap实现SortedMap接口，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用Iterator遍历TreeMap时，得到的记录是排过序的。如果使用排序的映射，建议使用TreeMap。在使用TreeMap时，key必须实现Comparable接口或者在构造TreeMap传入自定义的Comparator，否则会在运行时抛出java.lang.Class">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-09T07:13:28.000Z">
-<meta property="article:modified_time" content="2020-09-09T07:18:55.600Z">
+<meta property="article:published_time" content="2020-09-10T08:41:23.000Z">
+<meta property="article:modified_time" content="2020-09-10T08:41:23.690Z">
 <meta property="article:author" content="LSJ">
-<meta property="article:tag" content="Java集合框架">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/TreeMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/uncategorized/HashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -185,7 +182,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -204,7 +201,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -219,21 +216,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeMap的实现"><span class="toc-number">2.</span> <span class="toc-text">TreeMap的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#底层数据结构"><span class="toc-number">2.1.</span> <span class="toc-text">底层数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#成员变量的含义"><span class="toc-number">2.2.</span> <span class="toc-text">成员变量的含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法"><span class="toc-number">2.3.</span> <span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动扩容机制"><span class="toc-number">2.4.</span> <span class="toc-text">自动扩容机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法分析"><span class="toc-number">2.5.</span> <span class="toc-text">常用方法分析</span></a></li></ol></li></ol>
+      
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-TreeMap源码剖析" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-HashSet源码剖析" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      TreeMap源码剖析
+      HashSet源码剖析
     </h1>
   
 
@@ -241,33 +238,22 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/TreeMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="article-date">
-	  <time datetime="2020-09-09T07:13:28.000Z" itemprop="datePublished">2020-09-09</time>
+	<a href="/uncategorized/HashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="article-date">
+	  <time datetime="2020-09-10T08:41:23.000Z" itemprop="datePublished">2020-09-10</time>
 	</a>
 </span>
         
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a>
-  </span>
-
         
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" rel="tag">Java集合框架</a>
-  </span>
-
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/TreeMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/uncategorized/HashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>TreeMap实现SortedMap接口，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用Iterator遍历TreeMap时，得到的记录是排过序的。如果使用排序的映射，建议使用TreeMap。在使用TreeMap时，key必须实现Comparable接口或者在构造TreeMap传入自定义的Comparator，否则会在运行时抛出java.lang.ClassCastException类型的异常。</p>
-<h2 id="TreeMap的实现"><a href="#TreeMap的实现" class="headerlink" title="TreeMap的实现"></a><em>TreeMap</em>的实现</h2><h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><h3 id="成员变量的含义"><a href="#成员变量的含义" class="headerlink" title="成员变量的含义"></a>成员变量的含义</h3><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><h3 id="自动扩容机制"><a href="#自动扩容机制" class="headerlink" title="自动扩容机制"></a>自动扩容机制</h3><h3 id="常用方法分析"><a href="#常用方法分析" class="headerlink" title="常用方法分析"></a>常用方法分析</h3>
+        
       
     </div>
     <div class="article-footer">
@@ -277,7 +263,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/TreeMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="TreeMap源码剖析" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/uncategorized/HashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="HashSet源码剖析" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -327,12 +313,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/uncategorized/LinkedHashSet%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="LinkedHashSet源码剖析"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/LinkedHashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="LinkedHashMap源码剖析"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
