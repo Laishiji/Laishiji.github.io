@@ -29,8 +29,10 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/CPU_Cache.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/JMM_Operation.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/Java_Thread_State.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/Waiting.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/Timed_Waiting.png">
 <meta property="article:published_time" content="2020-09-12T12:39:07.000Z">
-<meta property="article:modified_time" content="2020-09-13T04:06:37.084Z">
+<meta property="article:modified_time" content="2020-09-13T04:35:16.496Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -385,10 +387,10 @@
 <li><p>Runnable：包括了操作系统线程状态中的Ready和Runnning。</p>
 </li>
 <li><p>Waiting（无限期等待）：处于该状态的线程要等待被其他线程显式地唤醒。</p>
-<p>| <strong>进入方法</strong>                               | <strong>退出方法</strong>                                  |<br>| ————————————————————— | ——————————————————————- |<br>| 没有设置 Timeout 参数的 Object.wait() 方法 | Object.notify() / Object.notifyAll()          |<br>| 没有设置 Timeout 参数的 Thread.join() 方法 | 被调用的线程执行完毕                          |<br>| LockSupport.park()                         | LockSupport.unpark(thread)/thread.interrupt() |</p>
+<p><img src="Waiting.png" alt=""></p>
 </li>
 <li><p>Timed Waiting（限期等待）：无需等待其它线程显式地唤醒，在一定时间之后会被系统自动唤醒。</p>
-<p>| 进入方法                                 | 退出方法                                        |<br>| ———————————————————— | ———————————————————————- |<br>| Thread.sleep() 方法                      | 时间结束                                        |<br>| 设置了 Timeout 参数的 Object.wait() 方法 | 时间结束 / Object.notify() / Object.notifyAll() |<br>| 设置了 Timeout 参数的 Thread.join() 方法 | 时间结束 / 被调用的线程执行完毕                 |<br>| LockSupport.parkNanos() 方法             | -                                               |<br>| LockSupport.parkUntil() 方法             | -                                               |</p>
+<p><img src="Timed_Waiting.png" alt=""></p>
 </li>
 <li><p>Blocked：等待获取一个排它锁。阻塞和等待的区别在于，<strong>阻塞是被动</strong>的，而<strong>等待线程是主动进入</strong>的。</p>
 </li>
