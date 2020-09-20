@@ -18,19 +18,19 @@
   
   
   <title>JUC概述 | Blog Of TheMasterplan</title>
-  <meta name="description" content="OverView 原子包基础类型：AtomicBoolean，AtomicInteger，AtomicLong数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray引用：AtomicReference，AtomicMarkableReference，AtomicStampedReferenceFieldUpdater：AtomicInt">
+  <meta name="description" content="OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray 引用AtomicReference，AtomicMarkableReference，AtomicStampedReference FieldUpdaterAtomicInte">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC概述">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="OverView 原子包基础类型：AtomicBoolean，AtomicInteger，AtomicLong数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray引用：AtomicReference，AtomicMarkableReference，AtomicStampedReferenceFieldUpdater：AtomicInt">
+<meta property="og:description" content="OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray 引用AtomicReference，AtomicMarkableReference，AtomicStampedReference FieldUpdaterAtomicInte">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-1.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-lock.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-2.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-executors-1.png">
 <meta property="article:published_time" content="2020-09-20T11:06:19.000Z">
-<meta property="article:modified_time" content="2020-09-20T13:51:38.048Z">
+<meta property="article:modified_time" content="2020-09-20T13:56:37.180Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子包"><span class="toc-number">2.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础类型：AtomicBoolean，AtomicInteger，AtomicLong"><span class="toc-number">2.1.</span> <span class="toc-text">基础类型：AtomicBoolean，AtomicInteger，AtomicLong</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray"><span class="toc-number">2.2.</span> <span class="toc-text">数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用：AtomicReference，AtomicMarkableReference，AtomicStampedReference"><span class="toc-number">2.3.</span> <span class="toc-text">引用：AtomicReference，AtomicMarkableReference，AtomicStampedReference</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FieldUpdater：AtomicIntegerFieldUpdater-AtomicLongFieldUpdater，AtomicReferenceFieldUpdater"><span class="toc-number">2.4.</span> <span class="toc-text">FieldUpdater：AtomicIntegerFieldUpdater, AtomicLongFieldUpdater，AtomicReferenceFieldUpdater</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adder和Accumulator-LongAdder-DoubleAdder-LongAccmulator-DoubleAccumulator"><span class="toc-number">2.5.</span> <span class="toc-text">Adder和Accumulator: LongAdder, DoubleAdder, LongAccmulator, DoubleAccumulator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁和工具类"><span class="toc-number">3.</span> <span class="toc-text">锁和工具类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发集合"><span class="toc-number">4.</span> <span class="toc-text">并发集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程池"><span class="toc-number">5.</span> <span class="toc-text">线程池</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子包"><span class="toc-number">2.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础类型"><span class="toc-number">2.1.</span> <span class="toc-text">基础类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组"><span class="toc-number">2.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用"><span class="toc-number">2.3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FieldUpdater"><span class="toc-number">2.4.</span> <span class="toc-text">FieldUpdater</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adder和Accumulator"><span class="toc-number">2.5.</span> <span class="toc-text">Adder和Accumulator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁和工具类"><span class="toc-number">3.</span> <span class="toc-text">锁和工具类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发集合"><span class="toc-number">4.</span> <span class="toc-text">并发集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程池"><span class="toc-number">5.</span> <span class="toc-text">线程池</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -272,7 +272,12 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <h3 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h3><p><img src="java-thread-x-juc-overview-1.png" alt=""></p>
-<h3 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h3><h4 id="基础类型：AtomicBoolean，AtomicInteger，AtomicLong"><a href="#基础类型：AtomicBoolean，AtomicInteger，AtomicLong" class="headerlink" title="基础类型：AtomicBoolean，AtomicInteger，AtomicLong"></a>基础类型：<em>AtomicBoolean</em>，<em>AtomicInteger</em>，<em>AtomicLong</em></h4><h4 id="数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray"><a href="#数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray" class="headerlink" title="数组：AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray"></a>数组：<em>AtomicIntegerArray</em>，<em>AtomicLongArray</em>，<em>AtomicReferenceArray</em></h4><h4 id="引用：AtomicReference，AtomicMarkableReference，AtomicStampedReference"><a href="#引用：AtomicReference，AtomicMarkableReference，AtomicStampedReference" class="headerlink" title="引用：AtomicReference，AtomicMarkableReference，AtomicStampedReference"></a>引用：<em>AtomicReference</em>，<em>AtomicMarkableReference</em>，<em>AtomicStampedReference</em></h4><h4 id="FieldUpdater：AtomicIntegerFieldUpdater-AtomicLongFieldUpdater，AtomicReferenceFieldUpdater"><a href="#FieldUpdater：AtomicIntegerFieldUpdater-AtomicLongFieldUpdater，AtomicReferenceFieldUpdater" class="headerlink" title="FieldUpdater：AtomicIntegerFieldUpdater, AtomicLongFieldUpdater，AtomicReferenceFieldUpdater"></a>FieldUpdater：<em>AtomicIntegerFieldUpdater</em>, <em>AtomicLongFieldUpdater</em>，<em>AtomicReferenceFieldUpdater</em></h4><h4 id="Adder和Accumulator-LongAdder-DoubleAdder-LongAccmulator-DoubleAccumulator"><a href="#Adder和Accumulator-LongAdder-DoubleAdder-LongAccmulator-DoubleAccumulator" class="headerlink" title="Adder和Accumulator: LongAdder, DoubleAdder, LongAccmulator, DoubleAccumulator"></a>Adder和Accumulator: <em>LongAdder</em>, <em>DoubleAdder</em>, <em>LongAccmulator</em>, <em>DoubleAccumulator</em></h4><h3 id="锁和工具类"><a href="#锁和工具类" class="headerlink" title="锁和工具类"></a>锁和工具类</h3><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
+<h3 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h3><h4 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h4><p><em>AtomicBoolean</em>，<em>AtomicInteger</em>，<em>AtomicLong</em></p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p><em>AtomicIntegerArray</em>，<em>AtomicLongArray</em>，<em>AtomicReferenceArray</em></p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><em>AtomicReference</em>，<em>AtomicMarkableReference</em>，<em>AtomicStampedReference</em></p>
+<h4 id="FieldUpdater"><a href="#FieldUpdater" class="headerlink" title="FieldUpdater"></a>FieldUpdater</h4><p><em>AtomicIntegerFieldUpdater</em>, <em>AtomicLongFieldUpdater</em>，<em>AtomicReferenceFieldUpdater</em></p>
+<h4 id="Adder和Accumulator"><a href="#Adder和Accumulator" class="headerlink" title="Adder和Accumulator"></a>Adder和Accumulator</h4><p><em>LongAdder</em>, <em>DoubleAdder</em>, <em>LongAccmulator</em>, <em>DoubleAccumulator</em></p>
+<h3 id="锁和工具类"><a href="#锁和工具类" class="headerlink" title="锁和工具类"></a>锁和工具类</h3><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
 <h3 id="并发集合"><a href="#并发集合" class="headerlink" title="并发集合"></a>并发集合</h3><p><img src="java-thread-x-juc-overview-2.png" alt=""></p>
 <h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p><img src="java-thread-x-juc-executors-1.png" alt=""></p>
 <p>图片来源均为：</p>
@@ -474,23 +479,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>
