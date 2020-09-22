@@ -27,10 +27,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/java-thread-x-atomicinteger-unsafe.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/juc_atomic.png">
-<meta property="og:image" content="d:/myblog/source/_posts/JUC之原子包/AtomicLong.png">
-<meta property="og:image" content="d:/myblog/source/_posts/JUC之原子包/LongAdder.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/AtomicLong.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/LongAdder.png">
 <meta property="article:published_time" content="2020-09-19T11:56:16.000Z">
-<meta property="article:modified_time" content="2020-09-21T07:31:48.655Z">
+<meta property="article:modified_time" content="2020-09-22T03:59:47.917Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -337,9 +337,9 @@
 </ul>
 <h4 id="JDK8新增的原子操作类LongAdder和DoubleAdder"><a href="#JDK8新增的原子操作类LongAdder和DoubleAdder" class="headerlink" title="JDK8新增的原子操作类LongAdder和DoubleAdder"></a>JDK8新增的原子操作类<em>LongAdder</em>和<em>DoubleAdder</em></h4><p>使用<em>AtomicLong</em>时，在高并发下大量线程会同时去竞争更新同一个原子变量，那么就会由大量线程因为不断自旋而浪费CPU资源。因此JDK8新增了<em>LongAdder</em>用于克服在高并发下使用<em>AtomicLong</em>的缺点，提升性能。</p>
 <p>如图所示，使用<em>AtomicLong</em>时，是多个线程同时竞争同一个原子变量：</p>
-<p><img src="D:\myblog\source\_posts\JUC之原子包\AtomicLong.png" alt=""></p>
+<p><img src="AtomicLong.png" alt=""></p>
 <p>而使用<em>LongAdder</em>时，则为：</p>
-<p><img src="D:\myblog\source\_posts\JUC之原子包\LongAdder.png" alt=""></p>
+<p><img src="LongAdder.png" alt=""></p>
 <p><em>LongAdder</em>维护了一个<em>Cell</em>数组，每个<em>Cell</em>里有一个初始值为0L的long型变量，这样在同等并发量的情况下，争夺单个变量更新操作的线程减少。并且如果多个线程争夺同一个<em>Cell</em>原子变量失败了，它并不是在当前<em>Cell</em>变量上一直自旋CAS重试，而是尝试在其他<em>Cell</em>的变量上进行CAS，这个改变增加了当前线程重试CAS成功的可能性。最后，<strong>在获取<em>LongAdder</em>当前值时，把所有<em>Cell</em>变量的value累加再加上base返回</strong>。</p>
 <p><em>Cell</em>数组默认是null，只有在高并发的情况下才会创建它。在并发量少的时候所有的累加操作都是对base变量进行的，此时与<em>AtomicLong</em>类似。</p>
 <p><em>Cell</em>类使用了<code>@sun.misc.Contended</code>修饰进行字节填充，这是因为数组元素的内存地址连续，为了避免伪共享。</p>

@@ -17,24 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JUC之锁和工具类 | Blog Of TheMasterplan</title>
+  <title>JUC之锁 | Blog Of TheMasterplan</title>
   <meta name="description" content="OverView 锁锁概述乐观锁与悲观锁乐观锁和悲观锁是在数据库中引入的名词，但是在并发包中也引入了类似的思想，非阻塞同步CAS操作就是乐观的并发策略，阻塞同步synchronized就是悲观的并发策略。 悲观锁指对数据被外界修改持保守态度，在数据被处理前先加锁，提交事务后才释放锁。悲观锁的实现往往依靠数据库提供的锁机制。 乐观锁则认为数据在一般情况下不会造成冲突，访问数据前不加锁，在事务提交时才">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JUC之锁和工具类">
-<meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81%E5%92%8C%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:title" content="JUC之锁">
+<meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/index.html">
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="OverView 锁锁概述乐观锁与悲观锁乐观锁和悲观锁是在数据库中引入的名词，但是在并发包中也引入了类似的思想，非阻塞同步CAS操作就是乐观的并发策略，阻塞同步synchronized就是悲观的并发策略。 悲观锁指对数据被外界修改持保守态度，在数据被处理前先加锁，提交事务后才释放锁。悲观锁的实现往往依靠数据库提供的锁机制。 乐观锁则认为数据在一般情况下不会造成冲突，访问数据前不加锁，在事务提交时才">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:/myblog/source/_posts/JUC之锁和工具类/java-thread-x-juc-overview-lock.png">
-<meta property="og:image" content="d:/myblog/source/_posts/JUC之锁和工具类/juc_locks.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/java-thread-x-juc-overview-lock.png">
+<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/juc_locks.png">
 <meta property="article:published_time" content="2020-09-21T05:25:08.000Z">
-<meta property="article:modified_time" content="2020-09-21T12:32:12.482Z">
+<meta property="article:modified_time" content="2020-09-22T04:02:47.132Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/myblog/source/_posts/JUC之锁和工具类/java-thread-x-juc-overview-lock.png">
+<meta name="twitter:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/java-thread-x-juc-overview-lock.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81%E5%92%8C%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -222,21 +222,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-number">2.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁概述"><span class="toc-number">2.1.</span> <span class="toc-text">锁概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#乐观锁与悲观锁"><span class="toc-number">2.1.1.</span> <span class="toc-text">乐观锁与悲观锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公平锁与非公平锁"><span class="toc-number">2.1.2.</span> <span class="toc-text">公平锁与非公平锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#独占锁与共享锁"><span class="toc-number">2.1.3.</span> <span class="toc-text">独占锁与共享锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可重入锁"><span class="toc-number">2.1.4.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自旋锁"><span class="toc-number">2.1.5.</span> <span class="toc-text">自旋锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LockSupport"><span class="toc-number">2.2.</span> <span class="toc-text">LockSupport</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Unsafe的park和unpark方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">Unsafe的park和unpark方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#park"><span class="toc-number">2.2.2.</span> <span class="toc-text">park()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#park-Object-blocker"><span class="toc-number">2.2.3.</span> <span class="toc-text">park(Object blocker)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parkNanos-long-nanos"><span class="toc-number">2.2.4.</span> <span class="toc-text">parkNanos(long nanos)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parkUntil-Object-blocker-long-nanos"><span class="toc-number">2.2.5.</span> <span class="toc-text">parkUntil(Object blocker, long nanos)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unpark-Thread-thread"><span class="toc-number">2.2.6.</span> <span class="toc-text">unpark(Thread thread)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AQS"><span class="toc-number">2.3.</span> <span class="toc-text">AQS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReentrantLock"><span class="toc-number">2.4.</span> <span class="toc-text">ReentrantLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReentrantReadWriteLock"><span class="toc-number">2.5.</span> <span class="toc-text">ReentrantReadWriteLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StampedLock"><span class="toc-number">2.6.</span> <span class="toc-text">StampedLock</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程同步器"><span class="toc-number">3.</span> <span class="toc-text">线程同步器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CountDownLatch"><span class="toc-number">3.1.</span> <span class="toc-text">CountDownLatch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CyclicBarrier"><span class="toc-number">3.2.</span> <span class="toc-text">CyclicBarrier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore"><span class="toc-number">3.3.</span> <span class="toc-text">Semaphore</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-number">2.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁概述"><span class="toc-number">2.1.</span> <span class="toc-text">锁概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#乐观锁与悲观锁"><span class="toc-number">2.1.1.</span> <span class="toc-text">乐观锁与悲观锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公平锁与非公平锁"><span class="toc-number">2.1.2.</span> <span class="toc-text">公平锁与非公平锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#独占锁与共享锁"><span class="toc-number">2.1.3.</span> <span class="toc-text">独占锁与共享锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可重入锁"><span class="toc-number">2.1.4.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自旋锁"><span class="toc-number">2.1.5.</span> <span class="toc-text">自旋锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LockSupport"><span class="toc-number">2.2.</span> <span class="toc-text">LockSupport</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Unsafe的park和unpark方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">Unsafe的park和unpark方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#park"><span class="toc-number">2.2.2.</span> <span class="toc-text">park()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#park-Object-blocker"><span class="toc-number">2.2.3.</span> <span class="toc-text">park(Object blocker)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parkNanos-long-nanos"><span class="toc-number">2.2.4.</span> <span class="toc-text">parkNanos(long nanos)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#parkUntil-Object-blocker-long-nanos"><span class="toc-number">2.2.5.</span> <span class="toc-text">parkUntil(Object blocker, long nanos)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unpark-Thread-thread"><span class="toc-number">2.2.6.</span> <span class="toc-text">unpark(Thread thread)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AQS"><span class="toc-number">2.3.</span> <span class="toc-text">AQS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReentrantLock"><span class="toc-number">2.4.</span> <span class="toc-text">ReentrantLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReentrantReadWriteLock"><span class="toc-number">2.5.</span> <span class="toc-text">ReentrantReadWriteLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StampedLock"><span class="toc-number">2.6.</span> <span class="toc-text">StampedLock</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JUC之锁和工具类" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-JUC之锁" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JUC之锁和工具类
+      JUC之锁
     </h1>
   
 
@@ -244,7 +244,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81%E5%92%8C%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="article-date">
+	<a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/" class="article-date">
 	  <time datetime="2020-09-21T05:25:08.000Z" itemprop="datePublished">2020-09-21</time>
 	</a>
 </span>
@@ -263,13 +263,13 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81%E5%92%8C%E5%B7%A5%E5%85%B7%E7%B1%BB/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h2><p><img src="D:\myblog\source\_posts\JUC之锁和工具类\java-thread-x-juc-overview-lock.png" alt=""></p>
+        <h2 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h2><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
 <h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="锁概述"><a href="#锁概述" class="headerlink" title="锁概述"></a>锁概述</h3><h4 id="乐观锁与悲观锁"><a href="#乐观锁与悲观锁" class="headerlink" title="乐观锁与悲观锁"></a>乐观锁与悲观锁</h4><p>乐观锁和悲观锁是在数据库中引入的名词，但是在并发包中也引入了类似的思想，非阻塞同步CAS操作就是乐观的并发策略，阻塞同步synchronized就是悲观的并发策略。</p>
 <p>悲观锁指对数据被外界修改持保守态度，在数据被处理前先加锁，提交事务后才释放锁。悲观锁的实现往往依靠数据库提供的锁机制。</p>
 <p>乐观锁则认为数据在一般情况下不会造成冲突，访问数据前不加锁，在事务提交时才检测是否存在冲突。乐观锁的实现一般是在表中添加version字段或者使用业务状态。</p>
@@ -284,7 +284,7 @@
 <p>可重入锁的原理是在锁内部维护一个线程标识和一个计数器。计数器初始值为0，说明该锁没有被任何线程占用。当一个线程获取了该锁，计数器值+1。当获取了该锁的线程再次获取锁时发现线程标识是自己，计数器值再+1。释放一次锁则计数器值-1。当计数器值为0时，线程标识置null，阻塞线程被唤醒竞争该锁。</p>
 <h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>自旋锁的思想是<strong>让一个线程在请求一个共享数据的锁时执行忙循环</strong>（自旋）一段时间，如果在这段时间内能获得锁，就可以避免进入阻塞状态。可以通过<code>-XX:PreBlockSpinsh</code>设置尝试次数，默认为10次。</p>
 <p>JDK层面的锁由java.util.concurrent.locks包提供，其接口和类如下图所示：</p>
-<p><img src="D:\myblog\source\_posts\JUC之锁和工具类\juc_locks.png" alt=""></p>
+<p><img src="juc_locks.png" alt=""></p>
 <h3 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a><em>LockSupport</em></h3><p><em>LockSupport</em>类是个工具类，其主要作用是挂起和唤醒线程，它是创建锁和其他同步类的基础。</p>
 <p><em>LockSupport</em>类与每个使用它的线程都会关联一个许可证，在默认情况下调用<em>LockSupport</em>的方法的线程是<strong>不</strong>持有许可证的。该类是使用<em>Unsafe</em>类实现的。</p>
 <p><em>LockSupport</em>的构造方法为私有构造方法，无法被实例化，其方法基本为静态方法。</p>
@@ -296,7 +296,7 @@
 <li>unpark函数，给予线程许可，即激活调用park后阻塞的线程。这个函数不是安全的，调用这个函数时要确保线程依旧存活。</li>
 </ul>
 <h4 id="park"><a href="#park" class="headerlink" title="park()"></a>park()</h4><h4 id="park-Object-blocker"><a href="#park-Object-blocker" class="headerlink" title="park(Object blocker)"></a>park(Object blocker)</h4><h4 id="parkNanos-long-nanos"><a href="#parkNanos-long-nanos" class="headerlink" title="parkNanos(long nanos)"></a>parkNanos(long nanos)</h4><h4 id="parkUntil-Object-blocker-long-nanos"><a href="#parkUntil-Object-blocker-long-nanos" class="headerlink" title="parkUntil(Object blocker, long nanos)"></a>parkUntil(Object blocker, long nanos)</h4><h4 id="unpark-Thread-thread"><a href="#unpark-Thread-thread" class="headerlink" title="unpark(Thread thread)"></a>unpark(Thread thread)</h4><h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a><em>AQS</em></h3><p>AQS全称抽象队列同步器(<em>AbstractQueuedSynchronizer</em>)。</p>
-<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a><em>ReentrantLock</em></h3><h3 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a><em>ReentrantReadWriteLock</em></h3><h3 id="StampedLock"><a href="#StampedLock" class="headerlink" title="StampedLock"></a><em>StampedLock</em></h3><h2 id="线程同步器"><a href="#线程同步器" class="headerlink" title="线程同步器"></a>线程同步器</h2><h3 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a><em>CountDownLatch</em></h3><h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a><em>CyclicBarrier</em></h3><h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a><em>Semaphore</em></h3>
+<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a><em>ReentrantLock</em></h3><h3 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a><em>ReentrantReadWriteLock</em></h3><h3 id="StampedLock"><a href="#StampedLock" class="headerlink" title="StampedLock"></a><em>StampedLock</em></h3>
       
     </div>
     <div class="article-footer">
@@ -306,7 +306,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81%E5%92%8C%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="JUC之锁和工具类" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/" title="JUC之锁" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
