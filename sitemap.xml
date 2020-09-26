@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/Java%25E5%25B9%25B6%25E5%258F%2591/JUC%25E6%25A6%2582%25E8%25BF%25B0/</loc>
+    
+    <lastmod>2020-09-26T08:46:45.435Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/Java%25E5%25B9%25B6%25E5%258F%2591/JUC%25E5%25AE%25B9%25E5%2599%25A8%25E4%25B9%258BCopyOnWriteArrayList/</loc>
     
     <lastmod>2020-09-26T08:43:04.604Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://thmasterplan.cn/Java%25E5%25B9%25B6%25E5%258F%2591/%25E7%25BA%25BF%25E7%25A8%258B%25E5%25AE%2589%25E5%2585%25A8%25E4%25B8%258E%25E9%2594%2581%25E4%25BC%2598%25E5%258C%2596/</loc>
     
     <lastmod>2020-09-21T12:11:40.100Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/Java%25E5%25B9%25B6%25E5%258F%2591/JUC%25E6%25A6%2582%25E8%25BF%25B0/</loc>
-    
-    <lastmod>2020-09-21T09:06:36.647Z</lastmod>
     
   </url>
   
