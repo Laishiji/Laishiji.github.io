@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/JavaIO/</loc>
+    <lastmod>2020-10-13</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8BConcurrentHashMap/</loc>
+    <lastmod>2020-10-13</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
     <lastmod>2020-10-12</lastmod>
   </url>  <url>
@@ -43,9 +49,6 @@
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8BCopyOnWriteArrayList/</loc>
     <lastmod>2020-09-27</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8BConcurrentHashMap/</loc>
-    <lastmod>2020-09-27</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/</loc>
     <lastmod>2020-09-27</lastmod>
   </url>  <url>
@@ -86,9 +89,6 @@
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/JavaIO/</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E6%B3%9B%E5%9E%8B/</loc>
