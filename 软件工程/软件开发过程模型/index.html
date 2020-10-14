@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>软件开发过程模型 | Blog Of TheMasterplan</title>
+  <meta name="description" content="软件开发过程模型瀑布模型（Waterfall Model）瀑布模型（经典生命模型）提出了软件开发的系统化的、顺序的方法。其流程从用户需求规格说明开始，通过策划、建模、构建和部署过程，最终提供一个完整的软件并提供持续的技术支持。  模型特点 必须等前一阶段的工作完成之后，才能开始后一段的工作。 每一阶段都必须完成规定的文档，没有交出合格的文档就是没有完成该阶段的任务。 前一阶段的输出文档就是后一阶段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件开发过程模型">
+<meta property="og:url" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="软件开发过程模型瀑布模型（Waterfall Model）瀑布模型（经典生命模型）提出了软件开发的系统化的、顺序的方法。其流程从用户需求规格说明开始，通过策划、建模、构建和部署过程，最终提供一个完整的软件并提供持续的技术支持。  模型特点 必须等前一阶段的工作完成之后，才能开始后一段的工作。 每一阶段都必须完成规定的文档，没有交出合格的文档就是没有完成该阶段的任务。 前一阶段的输出文档就是后一阶段">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/Waterfall.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/PrototypeEvolution.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/Incremental.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/Incremental.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/Spiral.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/WaterFountain.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/dev_workflow.png">
+<meta property="article:published_time" content="2020-10-13T07:23:02.000Z">
+<meta property="article:modified_time" content="2020-10-14T05:18:35.129Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="软件工程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/Waterfall.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.38px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.5px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 13.88px;">Java并发</a> <a href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" style="font-size: 13.75px;">Java集合框架</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.25px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#软件开发过程模型"><span class="toc-number">1.</span> <span class="toc-text">软件开发过程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#瀑布模型（Waterfall-Model）"><span class="toc-number">1.1.</span> <span class="toc-text">瀑布模型（Waterfall Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模型特点"><span class="toc-number">1.1.1.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型优点"><span class="toc-number">1.1.2.</span> <span class="toc-text">模型优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型局限"><span class="toc-number">1.1.3.</span> <span class="toc-text">模型局限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用场景"><span class="toc-number">1.1.4.</span> <span class="toc-text">适用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演化模型（Evolutionary-Model）"><span class="toc-number">1.2.</span> <span class="toc-text">演化模型（Evolutionary Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快速原型（Rapid-Prototype）"><span class="toc-number">1.2.1.</span> <span class="toc-text">快速原型（Rapid Prototype）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#模型特点-1"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模型优点-1"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">模型优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模型局限-1"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">模型局限</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#适用场景-1"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">适用场景</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型进化（-Prototype-Evolution）"><span class="toc-number">1.2.2.</span> <span class="toc-text">原型进化（ Prototype Evolution）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增量模型（Incremental-Model）"><span class="toc-number">1.3.</span> <span class="toc-text">增量模型（Incremental Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模型特点-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型优点-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">模型优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型局限-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">模型局限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用场景-2"><span class="toc-number">1.3.4.</span> <span class="toc-text">适用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#螺旋模型（Spiral-Model）"><span class="toc-number">1.4.</span> <span class="toc-text">螺旋模型（Spiral Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模型特点-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">模型特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型优点-3"><span class="toc-number">1.4.2.</span> <span class="toc-text">模型优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型局限-3"><span class="toc-number">1.4.3.</span> <span class="toc-text">模型局限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用场景-3"><span class="toc-number">1.4.4.</span> <span class="toc-text">适用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#喷泉模型（Water-Fountain-Model）"><span class="toc-number">1.5.</span> <span class="toc-text">喷泉模型（Water Fountain Model）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模型优点-4"><span class="toc-number">1.5.1.</span> <span class="toc-text">模型优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模型局限-4"><span class="toc-number">1.5.2.</span> <span class="toc-text">模型局限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于构件的开发模型（Component-based-Development-Model）"><span class="toc-number">1.6.</span> <span class="toc-text">基于构件的开发模型（Component-based Development Model）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体开发流程参考"><span class="toc-number">2.</span> <span class="toc-text">具体开发流程参考</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-软件开发过程模型" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件开发过程模型
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/" class="article-date">
+	  <time datetime="2020-10-13T07:23:02.000Z" itemprop="datePublished">2020-10-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><h3 id="瀑布模型（Waterfall-Model）"><a href="#瀑布模型（Waterfall-Model）" class="headerlink" title="瀑布模型（Waterfall Model）"></a>瀑布模型（Waterfall Model）</h3><p>瀑布模型（经典生命模型）提出了软件开发的系统化的、顺序的方法。其流程从用户需求规格说明开始，通过策划、建模、构建和部署过程，最终提供一个完整的软件并提供持续的技术支持。</p>
+<p><img src="Waterfall.png" alt=""></p>
+<h4 id="模型特点"><a href="#模型特点" class="headerlink" title="模型特点"></a>模型特点</h4><ul>
+<li>必须等前一阶段的工作完成之后，才能开始后一段的工作。</li>
+<li>每一阶段都必须完成规定的文档，没有交出合格的文档就是没有完成该阶段的任务。</li>
+<li>前一阶段的输出文档就是后一阶段的输入文档，因此，只有前一阶段的输出文档正确，后一阶段的工作才能得到正确的结果。</li>
+<li>每个阶段结束前都要对所完成的文档进行评审，以便及早发现问题，改正错误。事实上越是早期阶段犯下的错误，暴露出来的时间就越晚，排除故障改正错误所需付出的代价也越高。因此，及时审查，是保证软件质量，降低软件成本的重要措施。</li>
+</ul>
+<h4 id="模型优点"><a href="#模型优点" class="headerlink" title="模型优点"></a>模型优点</h4><ul>
+<li>强调了开发的阶段性，各阶段具有顺序性和依赖性</li>
+<li>强调早期调研和需求分析，推迟编码实现的观点</li>
+<li>提供了一个模板，这个模板使得分析、设计、编码、测试和支持的方法可以在该模板下有一个共同的指导。</li>
+</ul>
+<h4 id="模型局限"><a href="#模型局限" class="headerlink" title="模型局限"></a>模型局限</h4><ul>
+<li>瀑布模型是一种线性模型，要求项目严格按规程推进，必须等到所有开发工作全部完成以后才能获得可以交付的软件产品。不能对软件系统进行快速创建，对于一些急于交付的软件系统的开发很不方便。</li>
+<li>瀑布模型适合于需求明确，且无大的需求变更的软件开发（编译系统、操作系统等）。而对于分析初期需求模糊的项目，瀑布模型也并不适合。</li>
+</ul>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><p>适用于需求确定，无大的需求变更，工作能够采用线性的方式完成的软件。</p>
+<h3 id="演化模型（Evolutionary-Model）"><a href="#演化模型（Evolutionary-Model）" class="headerlink" title="演化模型（Evolutionary Model）"></a>演化模型（Evolutionary Model）</h3><h4 id="快速原型（Rapid-Prototype）"><a href="#快速原型（Rapid-Prototype）" class="headerlink" title="快速原型（Rapid Prototype）"></a>快速原型（Rapid Prototype）</h4><p>软件开发过程中，开发初期很难得到一个完整的、准确的需求规格说明，开发者往往对要解决的应用问题模糊不清，以至于形成的需求规格说明常常是不完整的、不准确的，有时甚至是有歧义的。此外，在整个开发过程中，用户可能会产生新的要求，导致需求的变更。为了适应这种需求的不确定性和变化，于是出现了快速原型（Rapid Prototype）开发方法。</p>
+<h5 id="模型特点-1"><a href="#模型特点-1" class="headerlink" title="模型特点"></a>模型特点</h5><ul>
+<li><strong>快速原型是用来获取用户需求的，或是用来试探设计是否有效的。一旦需求或设计确定下来了，原型就将被抛弃。</strong>因此，快速原型要求快速构件、容易修改，以节约原型创建的成本、加快开发速度。</li>
+<li>快速原型是暂时适用使用的，因此并不要求完整。它往往针对某个局部问题建立专门原型，如界面原型、工作流原型等。</li>
+<li>快速原型不能贯穿软件的整个生命周期，它需要和其他的过程模型相结合才能产生作用。例如，在瀑布模型中应用快速原型，以解决瀑布模型在需求分析时期存在的不足。</li>
+</ul>
+<h5 id="模型优点-1"><a href="#模型优点-1" class="headerlink" title="模型优点"></a>模型优点</h5><ul>
+<li>能渐进地启发客户提出新的要求或任务，促使开发人员和用户达成共识。</li>
+<li>减少了开发风险，避免了因为需求不确定而在开发过程中浪费了大量的资源。</li>
+</ul>
+<h5 id="模型局限-1"><a href="#模型局限-1" class="headerlink" title="模型局限"></a>模型局限</h5><ul>
+<li>没有考虑到软件的整体和长期的可维护性。</li>
+<li>可能由于达不到质量要求而导致产品被抛弃，从而采用新的模型重新设计。</li>
+</ul>
+<h5 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h5><p>原型方法比较适用于用户需求不清、需求经常变化的情况。当系统规模不是很大也不太复杂时，采用该方法比较好。</p>
+<h4 id="原型进化（-Prototype-Evolution）"><a href="#原型进化（-Prototype-Evolution）" class="headerlink" title="原型进化（ Prototype Evolution）"></a>原型进化（ Prototype Evolution）</h4><p>原型进化对开发过程的考虑是，针对有待开发的软件系统，先开发一个原型系统给用户使用，然后根据用户使用情况的意见反馈，对原型系统不断修改，使它逐步接近并最终到达开发目标。<strong>跟快速原型不同的是，快速原型在完成需求定义后将被抛弃，而原型进化所要创建的原型则是一个今后将要投入应用的系统</strong>，只是所创建的原型系统在功能、性能等方面还有许多不 足，还没有达到最终开发目标，需要不断改进。 原型进化的工作流程如图 2-3 所示。</p>
+<p><img src="PrototypeEvolution.png" alt=""></p>
+<p>从图中可以看到，它具有以下两个特点：</p>
+<ul>
+<li>原型进化模型将软件的需求细部定义、产品开发和有效性验证放在同一个工作进程中交替或并行运作。因此，在获得了软件需求框架以后，例如软件的基本功能被确定以后，就可以直接进入到对软件的开发中。</li>
+<li>原型进化模型是通过不断发布新的软件版本而使软件逐步完善的，因此，这种开发模式特别<strong>适合于那些用户急需的软件产品开发</strong>。它能够快速地向用户交付可以投入实际运行的软件成果，并能够很好地适应软件用户对需求规格的变更。 原型进化模型能够适应软件需求的中途变更，但在应用的时候，以下问题需要得到足够的重视：<ol>
+<li>原型进化模型虽说使开发进程加快了，但不能像瀑布模型那样提供明确的里程碑管理，随着开发过程中版本的快速更新，项目管理、软件配置管理会变得复杂起来，管理者难以把握开发进度。因此，<strong>对于大型软件项目，原型进化模型缺乏有效的管理规程</strong>。</li>
+<li><strong>开发过程中软件版本的快速变更，还可能损伤软件的内部结构，使其缺乏整体性和稳定性</strong>。另外，用于反映软件版本变更的文档也有可能跟不上软件的变更速度。这些问题必将影响到今后软件的维护。</li>
+</ol>
+</li>
+</ul>
+<h3 id="增量模型（Incremental-Model）"><a href="#增量模型（Incremental-Model）" class="headerlink" title="增量模型（Incremental Model）"></a>增量模型（Incremental Model）</h3><p>增量模型融合了瀑布模型的基本成分和原型进化模型的迭代特征，它对软件过程的考虑是：在整体上按照瀑布模型的流程实施项目开发，以方便对项目的管理；但在软件的实际开发中，则<strong>将软件系统按功能分解为许多增减构件，并以构件为单位逐个地创建与交付</strong>，直到全部增量构件创建完成，并都被集成到系统之中交付用户使用。</p>
+<p><img src="Incremental.jpg" alt=""></p>
+<p><img src="Incremental.png" alt=""></p>
+<h4 id="模型特点-2"><a href="#模型特点-2" class="headerlink" title="模型特点"></a>模型特点</h4><ul>
+<li>当使用增量模型时，第一个增量往往是核心的产品。</li>
+<li>客户对每个增量的使用和评估都作为下一个增量发布的新特性和功能。</li>
+<li>该模型采用随着日程时间的进展而交错的线性序列，每一个线性序列产生软件的一个可发布的“增量”。</li>
+</ul>
+<h4 id="模型优点-2"><a href="#模型优点-2" class="headerlink" title="模型优点"></a>模型优点</h4><ul>
+<li>第一个可交付版本所需要的成本和时间很少。</li>
+<li>开发由增量表示的小系统所承担的风险不大。</li>
+<li>由于很快发布了第一个版本，因此可以减少用户需求的变更。</li>
+<li>运行增量投资，即在项目开始时，可以仅对一个或两个增量投资。</li>
+</ul>
+<h4 id="模型局限-2"><a href="#模型局限-2" class="headerlink" title="模型局限"></a>模型局限</h4><ul>
+<li>管理发生的成本、进度和配置的复杂性可能会超出组织的能力。</li>
+<li>如果没有对用户的变更要求进行规划，那么产生的出事增量可能会造成后来增量的不稳定。</li>
+<li>如果需求不想早期思考的那样稳定和完整，那么一些增量就可能需要重新开发，重新发布。</li>
+</ul>
+<h4 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h4><p>项目在既定的商业要求期限之前不可能找到足够的开发人员的情况。</p>
+<h3 id="螺旋模型（Spiral-Model）"><a href="#螺旋模型（Spiral-Model）" class="headerlink" title="螺旋模型（Spiral Model）"></a>螺旋模型（Spiral Model）</h3><p>对于复杂的大型软件，开发一个原型往往达不到要求。<strong>螺旋模型将瀑布模型和演化模型结合起来，加入了两种模型均忽略的风险分析</strong>，弥补了这两种模型的不足。</p>
+<p><img src="Spiral.png" alt=""></p>
+<p>螺旋线中的每个回路都被分成为四个步骤：</p>
+<ol>
+<li>制定计划：确定软件的目标，选定实施方案，明确项目开发的限制条件；</li>
+<li>风险评估：分析所选的方案，识别风险，消除风险；</li>
+<li>实施工程：实施软件开发，验证阶段性产品；</li>
+<li>用户评估：评价开发工作，提出修正建议，建立下一个周期的开发计划。</li>
+</ol>
+<h4 id="模型特点-3"><a href="#模型特点-3" class="headerlink" title="模型特点"></a>模型特点</h4><ul>
+<li>与瀑布模型相比，螺旋模型支持用户需求的动态变化，为用户参与软件开发的所有关键决策提供了方便。</li>
+<li>使用螺旋模型进行软件开发，需要开发人员具有相当丰富的风险评估经验和专门知识。</li>
+</ul>
+<h4 id="模型优点-3"><a href="#模型优点-3" class="headerlink" title="模型优点"></a>模型优点</h4><ul>
+<li>关注软件的重用。</li>
+<li>关注早期错误的消除。</li>
+<li>将质量目标放在首位。</li>
+<li>将开发阶段与维护阶段结合在一起。</li>
+</ul>
+<h4 id="模型局限-3"><a href="#模型局限-3" class="headerlink" title="模型局限"></a>模型局限</h4><ul>
+<li>开发人员需要有较强的风险评估的经验。</li>
+<li>契约开发通常需要事先指定过程模型和发布产品。</li>
+</ul>
+<h4 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h4><p>螺旋模型强调风险分析，使得开发人员和用户对每个演化层出现的风险有所了解，从而做出应有的反应。因此，该模型适合用于庞大、复杂并且具有高风险的系统。</p>
+<h3 id="喷泉模型（Water-Fountain-Model）"><a href="#喷泉模型（Water-Fountain-Model）" class="headerlink" title="喷泉模型（Water Fountain Model）"></a>喷泉模型（Water Fountain Model）</h3><p>喷泉模型是专门<strong>针对面向对象软件开发方法而提出</strong>的。该模型认为软件开发过程自下而上周期的各阶段是相互迭代和无间隙的特性。</p>
+<p>无间隙指在各项活动之间无明显边界，如分析和设计活动之间没有明显的界限，由于对象概念的引入，表达分析、设计、实现等活动只用对象类和关系，从而可以较为容易地实现活动的迭代和无间隙，使其开发自然地包括复用。</p>
+<p>在面向对象方法中，对象既是对现实问题中实体的抽象，也是构造软件系统的基本元素。 因此，建立对象模型在面向对象方法中，既可以用于分析，也可以用于设计，而且分析阶段所获得的对象框架模型可以无缝过渡到设计阶段，以作为软件实现的依据。</p>
+<p><img src="WaterFountain.jpg" alt=""></p>
+<p>开发步骤：</p>
+<ol>
+<li>第一阶段软件开发的目标可以是软件的基本功能；</li>
+<li>第二阶段可以是在第一阶段建立的软件 的基础上，对软件进行进一步的完善，并实现软件的主要功能；</li>
+<li>第三阶段则是在第二阶段的基 础上，对软件进行更加完整的开发，并以实现软件全部功能作为创建目标。 应该说，喷泉模型能够较有效地平衡软件系统的近期需求与远期规划，因此能够较好地满足用户在软件应用上的发展需要。</li>
+</ol>
+<h4 id="模型优点-4"><a href="#模型优点-4" class="headerlink" title="模型优点"></a>模型优点</h4><p>喷泉模型不像瀑布模型那样，需要分析活动结束后才开始设计活动，设计活动结束后才开始编码活动。该模型的各个阶段没有明显的界限，开发人员可以同步进行开发。其优点是可以提高软件项目开发效率，节省开发时间，适应于面向对象的软件开发过程。</p>
+<h4 id="模型局限-4"><a href="#模型局限-4" class="headerlink" title="模型局限"></a>模型局限</h4><p>由于喷泉模型在各个开发阶段是重叠的，因此在开发过程中需要大量的开发人员，因此不利于项目的管理。此外这种模型要求严格管理文档，使得审核的难度加大，尤其是面对可能随时加入各种信息、需求与资料的情况。 </p>
+<h3 id="基于构件的开发模型（Component-based-Development-Model）"><a href="#基于构件的开发模型（Component-based-Development-Model）" class="headerlink" title="基于构件的开发模型（Component-based Development Model）"></a>基于构件的开发模型（Component-based Development Model）</h3><p>基于构件的开发方法是指利用预先包装的构件来构造应用系统。构件可以是组织内部开发的构件，也可以是商品化成品构件。基于构件的开发模型具有许多螺旋模型的特点，它本质上是演化模型，需要以迭代方式构件软件。其不同之处在于，基于构件的开发模型<strong>采用预先打包的软件构件开发应用</strong>。</p>
+<h2 id="具体开发流程参考"><a href="#具体开发流程参考" class="headerlink" title="具体开发流程参考"></a>具体开发流程参考</h2><p>类似于螺旋模型，结合了瀑布模型和演化模型。</p>
+<p><img src="dev_workflow.png" alt=""></p>
+<p>本文参考：</p>
+<ol>
+<li><a href="https://www.cnblogs.com/jojop/p/11801241.html" target="_blank" rel="noopener">https://www.cnblogs.com/jojop/p/11801241.html</a></li>
+<li><a href="https://www.cnblogs.com/youcong/p/9498489.html" target="_blank" rel="noopener">https://www.cnblogs.com/youcong/p/9498489.html</a></li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/" title="软件开发过程模型" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/" title="开发原则"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" title="阿里Java开发规范"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
