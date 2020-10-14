@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/JavaWeb/Cookie-Session/</loc>
+    <lastmod>2020-10-14</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JavaWeb/Filter-Listener/</loc>
+    <lastmod>2020-10-14</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JavaWeb/Servlet/</loc>
+    <lastmod>2020-10-14</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/</loc>
     <lastmod>2020-10-14</lastmod>
   </url>  <url>
@@ -91,12 +100,6 @@
     <loc>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-09-10</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/JavaWeb/Cookie-Session/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JavaWeb/Filter-Listener/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
@@ -119,9 +122,6 @@
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/mybatisHelloWorld/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JavaWeb/Servlet/</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/uncategorized/SpringAOP/</loc>
