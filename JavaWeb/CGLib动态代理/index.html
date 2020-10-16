@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: Java集合框架 | Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http://thmasterplan.cn/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/index.html">
+  <title>CGLib动态代理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="概述CGLib是一个强大、高性能的字节码生产类库，可以实现运行期动态扩展Java类和实现Java接口，Spring在运行期间通过 CGlib继承被代理类，重写父类的方法，实现AOP面向切面编程。 使用使用Enhancer类的create方法得到代理对象，该方法的参数列表：  Class ：被代理类的class对象 Callback：用于提供增强的代码，一般写该接口的实现类MethodInterce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CGLib动态代理">
+<meta property="og:url" content="http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="概述CGLib是一个强大、高性能的字节码生产类库，可以实现运行期动态扩展Java类和实现Java接口，Spring在运行期间通过 CGlib继承被代理类，重写父类的方法，实现AOP面向切面编程。 使用使用Enhancer类的create方法得到代理对象，该方法的参数列表：  Class ：被代理类的class对象 Callback：用于提供增强的代码，一般写该接口的实现类MethodInterce">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-16T02:50:22.000Z">
+<meta property="article:modified_time" content="2020-10-16T08:18:25.216Z">
 <meta property="article:author" content="LSJ">
+<meta property="article:tag" content="JavaWeb">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/categories/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -209,128 +214,161 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: Java集合框架</h1>
-      <p class="hidden-xs">Total 8 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/Java集合框架/">Java集合框架</a></li>
-          
-          <li><a href="/categories/JavaWeb/">JavaWeb</a></li>
-          
-          <li><a href="/categories/JVM/">JVM</a></li>
-          
-          <li><a href="/categories/Java基础/">Java基础</a></li>
-          
-          <li><a href="/categories/Java并发/">Java并发</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/Java框架/">Java框架</a></li>
-          
-          <li><a href="/categories/面试刷题/">面试刷题</a></li>
-          
-          <li><a href="/categories/软件工程/">软件工程</a></li>
-          
-          <li><a href="/categories/数据结构与算法/">数据结构与算法</a></li>
-          
-          <li><a href="/categories/Others/">Others</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseJava集合框架" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              Java集合框架
-            </a>
-            <small class="text-muted">(Total 8 articles)</small>
-        </h4>
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">2.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK与CGLib动态代理区别"><span class="toc-number">3.</span> <span class="toc-text">JDK与CGLib动态代理区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#区别"><span class="toc-number">3.1.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用注意"><span class="toc-number">3.2.</span> <span class="toc-text">使用注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring中如何选择代理机制？"><span class="toc-number">3.3.</span> <span class="toc-text">Spring中如何选择代理机制？</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CGLib动态代理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CGLib动态代理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="article-date">
+	  <time datetime="2020-10-16T02:50:22.000Z" itemprop="datePublished">2020-10-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
     </div>
-    <div id="collapseJava集合框架" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingJava集合框架">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/LinkedHashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-09T07:13:05.000Z" itemprop="datePublished">2020-09-09</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> LinkedHashMap源码剖析
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>CGLib是一个强大、高性能的字节码生产类库，可以实现运行期动态扩展Java类和实现Java接口，Spring在运行期间通过 CGlib<strong>继承被代理类</strong>，重写父类的方法，实现AOP面向切面编程。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用Enhancer类的create方法得到代理对象，该方法的参数列表：</p>
+<ul>
+<li>Class ：被代理类的class对象</li>
+<li>Callback：用于提供增强的代码，一般写该接口的实现类MethodInterceptor</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Object cgLibProxy = Enhancer.create(XXX.getClass(), <span class="keyword">new</span> MethodInterceptor()&#123;</span><br><span class="line">    <span class="comment">//执行被代理类的任何方法都会经过该方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="JDK与CGLib动态代理区别"><a href="#JDK与CGLib动态代理区别" class="headerlink" title="JDK与CGLib动态代理区别"></a>JDK与CGLib动态代理区别</h3><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><ul>
+<li><p>JDK动态代理是面向接口，<strong>通过创建代理实现类实现</strong>，创建代理速度比CGLib快。</p>
+</li>
+<li><p><strong>CGLib动态代理是通过继承被代理类实现</strong>（如果被代理类被final关键字所修饰，那么会失败），创建代理没有JDK动态代理快，但是运行速度比JDK动态代理要快。</p>
+</li>
+</ul>
+<h4 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h4><p>如果要被代理的对象是个实现类，那么Spring会使用JDK动态代理来完成操作（Spirng默认采用JDK动态代理实现机制）</p>
+<p>如果被代理类不是实现类，Spring会强制使用CGLib来实现动态代理。</p>
+<h4 id="Spring中如何选择代理机制？"><a href="#Spring中如何选择代理机制？" class="headerlink" title="Spring中如何选择代理机制？"></a>Spring中如何选择代理机制？</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过配置Spring的中<aop:config>标签来显示的指定使用动态代理机制 proxy-target-class=true表示使用CGLib代理，如果为false就是默认使用JDK动态代理。</p>
 
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-09T05:10:49.000Z" itemprop="datePublished">2020-09-09</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> HashMap源码剖析
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/PriorityQueue%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-08T10:40:43.000Z" itemprop="datePublished">2020-09-08</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> PriorityQueue源码剖析
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ArrayDeque%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-08T07:05:08.000Z" itemprop="datePublished">2020-09-08</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> ArrayDeque源码剖析
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/LinkedList%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-07T12:11:21.000Z" itemprop="datePublished">2020-09-07</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> LinkedList源码剖析
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ArrayList%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-07T09:18:35.000Z" itemprop="datePublished">2020-09-07</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> ArrayList源码剖析
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-07T09:17:52.000Z" itemprop="datePublished">2020-09-07</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 集合知识体系结构
-</a>
-
-
-              
-                
-<a href="/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E6%AF%94%E8%BE%83%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-07T09:17:29.000Z" itemprop="datePublished">2020-09-07</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 比较器与迭代器
-</a>
-
-
-              
-            </div>
-        </div>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" title="CGLib动态代理" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
   
- 
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="24大设计模式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -384,6 +422,28 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 
