@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/SpringAOP/</loc>
+    
+    <lastmod>2020-10-16T14:05:33.351Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/JavaWeb/CGLib%25E5%258A%25A8%25E6%2580%2581%25E4%25BB%25A3%25E7%2590%2586/</loc>
     
-    <lastmod>2020-10-16T08:18:25.216Z</lastmod>
+    <lastmod>2020-10-16T11:34:07.902Z</lastmod>
     
   </url>
   
@@ -299,13 +306,6 @@
     <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/mybatisHelloWorld/</loc>
     
     <lastmod>2020-09-07T11:37:45.843Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/uncategorized/SpringAOP/</loc>
-    
-    <lastmod>2020-09-07T11:37:24.361Z</lastmod>
     
   </url>
   
