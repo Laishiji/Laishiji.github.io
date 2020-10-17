@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Spring%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2020-10-17</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
+    <lastmod>2020-10-17</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringAOP/</loc>
-    <lastmod>2020-10-16</lastmod>
+    <lastmod>2020-10-17</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Spring%E6%A8%A1%E6%9D%BF%E7%B1%BBJdbcTemplate/</loc>
+    <lastmod>2020-10-17</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2020-10-16</lastmod>
@@ -11,9 +20,6 @@
     <lastmod>2020-10-16</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/ThreadLocal%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/</loc>
-    <lastmod>2020-10-16</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
     <lastmod>2020-10-16</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Cookie-Session/</loc>
