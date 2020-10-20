@@ -26,7 +26,7 @@
 <meta property="og:description" content="概述作用用于处理请求与业务逻辑。 调用流程 用户访问html页面，表单提交 xml文件url-pattern与url匹配，若符合Tomcat则加载servlet-class对应的class文件进内存（反射） 实例化Servlet（class.newInstance()）得到一个Servlet对象 调用service()方法，根据表单的method，在该方法中调用doGet或doPost方法 req">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-01T08:10:10.000Z">
-<meta property="article:modified_time" content="2020-10-14T16:01:29.375Z">
+<meta property="article:modified_time" content="2020-10-19T14:03:14.032Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JavaWeb">
 <meta name="twitter:card" content="summary">
@@ -324,6 +324,7 @@
 </ul>
 <h3 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h3><h4 id="服务端跳转"><a href="#服务端跳转" class="headerlink" title="服务端跳转"></a>服务端跳转</h4><p>forward转发：<code>request.getRequestDispatcher(&quot;success.html&quot;).forward(request, response);</code>，服务器内部访问success.html，并将其发送给浏览器。<strong>客户端只请求一次，服务器内部跳转</strong>。</p>
 <h4 id="客户端跳转"><a href="#客户端跳转" class="headerlink" title="客户端跳转"></a>客户端跳转</h4><p>redirect重定向：<code>response.sendRedirect(&quot;fail.html&quot;);</code>，发送一条消息给浏览器让其访问fail.html，浏览器访问，服务器获取fail.html发送给浏览器。<strong>客户端一共请求了两次</strong>。</p>
+<p>注意：由于WEB-INF目录下的页面浏览器不能访问到，因此只能通过forward转发的方式返回该页面给用户，而redirect重定向不行。</p>
 <h3 id="Servlet自启动"><a href="#Servlet自启动" class="headerlink" title="Servlet自启动"></a>Servlet自启动</h3><p>假如需要在tomacat一启动就执行一些初始化的代码，比如校验数据库的完整性。但是Servlet的生命周期是在用户访问对应路径开始的，这就需要Servlet自启动，执行init()方法中的业务代码：在web.xml中增加<code>&lt;load-on-startup&gt;10&lt;/load-on-startup&gt;</code>，取值范围是1-99，数字表示启动顺序，数字越小启动的优先级越高。</p>
 <h3 id="Servlet映射器-Mapper"><a href="#Servlet映射器-Mapper" class="headerlink" title="Servlet映射器(Mapper)"></a>Servlet映射器(Mapper)</h3><p>每一个请求，对应的URL要交给哪一个Servlet处理，由Tomcat中的映射器Mapper类处理。</p>
 <h3 id="ServletContext-ServletContextListener-Filter以及自启动Servlet的执行顺序（对称）"><a href="#ServletContext-ServletContextListener-Filter以及自启动Servlet的执行顺序（对称）" class="headerlink" title="ServletContext, ServletContextListener, Filter以及自启动Servlet的执行顺序（对称）"></a>ServletContext, ServletContextListener, Filter以及自启动Servlet的执行顺序（对称）</h3><p>ServletContext -&gt; ServletContextListener -&gt; Filter -&gt; 自启动Servlet -&gt;  浏览器请求访问普通Servlet -&gt; 销毁自启动Servlet -&gt; 销毁Filter-&gt; 销毁ServletContextListener -&gt; 销毁ServletContext</p>
