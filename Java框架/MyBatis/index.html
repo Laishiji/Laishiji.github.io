@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>MyBatis | Blog Of TheMasterplan</title>
+  <meta name="description" content="全局配置文件MyBatis官方文档 约束1234&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration  PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot;  &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-config.dtd&quot;&gt; properti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis">
+<meta property="og:url" content="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="全局配置文件MyBatis官方文档 约束1234&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration  PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot;  &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-config.dtd&quot;&gt; properti">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-21T04:12:46.000Z">
+<meta property="article:modified_time" content="2020-10-21T05:25:33.505Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="MyBatis">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13.33px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.67px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.67px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.78px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 13.89px;">Java并发</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13px;">MyBatis</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Others/" style="font-size: 13.22px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.44px;">Spring</a> <a href="/tags/leetcode/" style="font-size: 13.56px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.11px;">数据结构与算法</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.22px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局配置文件"><span class="toc-number">1.</span> <span class="toc-text">全局配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#约束"><span class="toc-number">1.1.</span> <span class="toc-text">约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#properties标签（不常用）"><span class="toc-number">1.2.</span> <span class="toc-text">properties标签（不常用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#settings标签（重要）"><span class="toc-number">1.3.</span> <span class="toc-text">settings标签（重要）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeAliases标签"><span class="toc-number">1.4.</span> <span class="toc-text">typeAliases标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#objectFactory标签"><span class="toc-number">1.5.</span> <span class="toc-text">objectFactory标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#plugins标签"><span class="toc-number">1.6.</span> <span class="toc-text">plugins标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#enviroments标签"><span class="toc-number">1.7.</span> <span class="toc-text">enviroments标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#databaseIdProvider标签"><span class="toc-number">1.8.</span> <span class="toc-text">databaseIdProvider标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mappers标签"><span class="toc-number">1.9.</span> <span class="toc-text">mappers标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#映射文件"><span class="toc-number">2.</span> <span class="toc-text">映射文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态SQL"><span class="toc-number">3.</span> <span class="toc-text">动态SQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存"><span class="toc-number">4.</span> <span class="toc-text">缓存</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-MyBatis" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MyBatis
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Java%E6%A1%86%E6%9E%B6/MyBatis/" class="article-date">
+	  <time datetime="2020-10-21T04:12:46.000Z" itemprop="datePublished">2020-10-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/MyBatis/" rel="tag">MyBatis</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E6%A1%86%E6%9E%B6/MyBatis/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h2><p><a href="https://mybatis.org/mybatis-3/zh/configuration.html" target="_blank" rel="noopener">MyBatis官方文档</a></p>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta">  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">  "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="properties标签（不常用）"><a href="#properties标签（不常用）" class="headerlink" title="properties标签（不常用）"></a>properties标签（不常用）</h3><p>使用该标签可引入外部properties配置文件的内容，或在子标签property中进行配置。</p>
+<h3 id="settings标签（重要）"><a href="#settings标签（重要）" class="headerlink" title="settings标签（重要）"></a>settings标签（重要）</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">设置名</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">有效值</th>
+<th style="text-align:left">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cacheEnabled</td>
+<td style="text-align:left">全局性地开启或关闭所有映射器配置文件中已配置的任何缓存。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>true</td>
+</tr>
+<tr>
+<td style="text-align:left">lazyLoadingEnabled</td>
+<td style="text-align:left">延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置 <code>fetchType</code> 属性来覆盖该项的开关状态。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>false</td>
+</tr>
+<tr>
+<td style="text-align:left">aggressiveLazyLoading</td>
+<td style="text-align:left">开启时，任一方法的调用都会加载该对象的所有延迟加载属性。 否则，每个延迟加载属性会按需加载（参考 <code>lazyLoadTriggerMethods</code>)。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>false （在 3.4.1 及之前的版本中默认为 true）</td>
+</tr>
+<tr>
+<td style="text-align:left">multipleResultSetsEnabled</td>
+<td style="text-align:left">是否允许单个语句返回多结果集（需要数据库驱动支持）。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>true</td>
+</tr>
+<tr>
+<td style="text-align:left">useColumnLabel</td>
+<td style="text-align:left">使用列标签代替列名。实际表现依赖于数据库驱动，具体可参考数据库驱动的相关文档，或通过对比测试来观察。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>true</td>
+</tr>
+<tr>
+<td style="text-align:left">useGeneratedKeys</td>
+<td style="text-align:left">允许 JDBC 支持自动生成主键，需要数据库驱动支持。如果设置为 true，将强制使用自动生成主键。尽管一些数据库驱动不支持此特性，但仍可正常工作（如 Derby）。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>False</td>
+</tr>
+<tr>
+<td style="text-align:left">autoMappingBehavior</td>
+<td style="text-align:left">指定 MyBatis 应如何自动映射列到字段或属性。 NONE 表示关闭自动映射；PARTIAL 只会自动映射没有定义嵌套结果映射的字段。 FULL 会自动映射任何复杂的结果集（无论是否嵌套）。</td>
+<td style="text-align:left">NONE, PARTIAL, FULL</td>
+<td style="text-align:left">PARTIAL</td>
+</tr>
+<tr>
+<td style="text-align:left">autoMappingUnknownColumnBehavior</td>
+<td style="text-align:left">指定发现自动映射目标未知列（或未知属性类型）的行为。<code>NONE</code>: 不做任何反应<code>WARNING</code>: 输出警告日志（<code>&#39;org.apache.ibatis.session.AutoMappingUnknownColumnBehavior&#39;</code> 的日志等级必须设置为 <code>WARN</code>）<code>FAILING</code>: 映射失败 (抛出 <code>SqlSessionException</code>)</td>
+<td style="text-align:left">NONE, WARNING, FAILING</td>
+<td style="text-align:left">NONE</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultExecutorType</td>
+<td style="text-align:left">配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（PreparedStatement）； BATCH 执行器不仅重用语句还会执行批量更新。</td>
+<td style="text-align:left">SIMPLE REUSE BATCH</td>
+<td style="text-align:left">SIMPLE</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultStatementTimeout</td>
+<td style="text-align:left">设置超时时间，它决定数据库驱动等待数据库响应的秒数。</td>
+<td style="text-align:left">任意正整数</td>
+<td style="text-align:left">未设置 (null)</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultFetchSize</td>
+<td style="text-align:left">为驱动的结果集获取数量（fetchSize）设置一个建议值。此参数只可以在查询设置中被覆盖。</td>
+<td style="text-align:left">任意正整数</td>
+<td style="text-align:left">未设置 (null)</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultResultSetType</td>
+<td style="text-align:left">指定语句默认的滚动策略。（新增于 3.5.2）</td>
+<td style="text-align:left">FORWARD_ONLY \</td>
+<td style="text-align:left">SCROLL_SENSITIVE \</td>
+<td>SCROLL_INSENSITIVE \</td>
+<td>DEFAULT（等同于未设置）</td>
+<td>未设置 (null)</td>
+</tr>
+<tr>
+<td style="text-align:left">safeRowBoundsEnabled</td>
+<td style="text-align:left">是否允许在嵌套语句中使用分页（RowBounds）。如果允许使用则设置为 false。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>False</td>
+</tr>
+<tr>
+<td style="text-align:left">safeResultHandlerEnabled</td>
+<td style="text-align:left">是否允许在嵌套语句中使用结果处理器（ResultHandler）。如果允许使用则设置为 false。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>True</td>
+</tr>
+<tr>
+<td style="text-align:left">mapUnderscoreToCamelCase</td>
+<td style="text-align:left">是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>False</td>
+</tr>
+<tr>
+<td style="text-align:left">localCacheScope</td>
+<td style="text-align:left">MyBatis 利用本地缓存机制（Local Cache）防止循环引用和加速重复的嵌套查询。 默认值为 SESSION，会缓存一个会话中执行的所有查询。 若设置值为 STATEMENT，本地缓存将仅用于执行语句，对相同 SqlSession 的不同查询将不会进行缓存。</td>
+<td style="text-align:left">SESSION \</td>
+<td style="text-align:left">STATEMENT</td>
+<td>SESSION</td>
+</tr>
+<tr>
+<td style="text-align:left">jdbcTypeForNull</td>
+<td style="text-align:left">当没有为参数指定特定的 JDBC 类型时，空值的默认 JDBC 类型。 某些数据库驱动需要指定列的 JDBC 类型，多数情况直接用一般类型即可，比如 NULL、VARCHAR 或 OTHER。</td>
+<td style="text-align:left">JdbcType 常量，常用值：NULL、VARCHAR 或 OTHER。</td>
+<td style="text-align:left">OTHER</td>
+</tr>
+<tr>
+<td style="text-align:left">lazyLoadTriggerMethods</td>
+<td style="text-align:left">指定对象的哪些方法触发一次延迟加载。</td>
+<td style="text-align:left">用逗号分隔的方法列表。</td>
+<td style="text-align:left">equals,clone,hashCode,toString</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultScriptingLanguage</td>
+<td style="text-align:left">指定动态 SQL 生成使用的默认脚本语言。</td>
+<td style="text-align:left">一个类型别名或全限定类名。</td>
+<td style="text-align:left">org.apache.ibatis.scripting.xmltags.XMLLanguageDriver</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultEnumTypeHandler</td>
+<td style="text-align:left">指定 Enum 使用的默认 <code>TypeHandler</code> 。（新增于 3.4.5）</td>
+<td style="text-align:left">一个类型别名或全限定类名。</td>
+<td style="text-align:left">org.apache.ibatis.type.EnumTypeHandler</td>
+</tr>
+<tr>
+<td style="text-align:left">callSettersOnNulls</td>
+<td style="text-align:left">指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，这在依赖于 Map.keySet() 或 null 值进行初始化时比较有用。注意基本类型（int、boolean 等）是不能设置成 null 的。</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>false</td>
+</tr>
+<tr>
+<td style="text-align:left">returnInstanceForEmptyRow</td>
+<td style="text-align:left">当返回行的所有列都是空时，MyBatis默认返回 <code>null</code>。 当开启这个设置时，MyBatis会返回一个空实例。 请注意，它也适用于嵌套的结果集（如集合或关联）。（新增于 3.4.2）</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>false</td>
+</tr>
+<tr>
+<td style="text-align:left">logPrefix</td>
+<td style="text-align:left">指定 MyBatis 增加到日志名称的前缀。</td>
+<td style="text-align:left">任何字符串</td>
+<td style="text-align:left">未设置</td>
+</tr>
+<tr>
+<td style="text-align:left">logImpl</td>
+<td style="text-align:left">指定 MyBatis 所用日志的具体实现，未指定时将自动查找。</td>
+<td style="text-align:left">SLF4J \</td>
+<td style="text-align:left">LOG4J \</td>
+<td>LOG4J2 \</td>
+<td>JDK_LOGGING \</td>
+<td>COMMONS_LOGGING \</td>
+<td>STDOUT_LOGGING \</td>
+<td>NO_LOGGING</td>
+<td>未设置</td>
+</tr>
+<tr>
+<td style="text-align:left">proxyFactory</td>
+<td style="text-align:left">指定 Mybatis 创建可延迟加载对象所用到的代理工具。</td>
+<td style="text-align:left">CGLIB \</td>
+<td style="text-align:left">JAVASSIST</td>
+<td>JAVASSIST （MyBatis 3.3 以上）</td>
+</tr>
+<tr>
+<td style="text-align:left">vfsImpl</td>
+<td style="text-align:left">指定 VFS 的实现</td>
+<td style="text-align:left">自定义 VFS 的实现的类全限定名，以逗号分隔。</td>
+<td style="text-align:left">未设置</td>
+</tr>
+<tr>
+<td style="text-align:left">useActualParamName</td>
+<td style="text-align:left">允许使用方法签名中的名称作为语句参数名称。 为了使用该特性，你的项目必须采用 Java 8 编译，并且加上 <code>-parameters</code> 选项。（新增于 3.4.1）</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>true</td>
+</tr>
+<tr>
+<td style="text-align:left">configurationFactory</td>
+<td style="text-align:left">指定一个提供 <code>Configuration</code> 实例的类。 这个被返回的 Configuration 实例用来加载被反序列化对象的延迟加载属性值。 这个类必须包含一个签名为<code>static Configuration getConfiguration()</code> 的方法。（新增于 3.2.3）</td>
+<td style="text-align:left">一个类型别名或完全限定类名。</td>
+<td style="text-align:left">未设置</td>
+</tr>
+<tr>
+<td style="text-align:left">shrinkWhitespacesInSql</td>
+<td style="text-align:left">从SQL中删除多余的空格字符。请注意，这也会影响SQL中的文字字符串。 (新增于 3.5.5)</td>
+<td style="text-align:left">true \</td>
+<td style="text-align:left">false</td>
+<td>false</td>
+</tr>
+<tr>
+<td style="text-align:left">defaultSqlProviderType</td>
+<td style="text-align:left">Specifies an sql provider class that holds provider method (Since 3.5.6). This class apply to the <code>type</code>(or <code>value</code>) attribute on sql provider annotation(e.g. <code>@SelectProvider</code>), when these attribute was omitted.</td>
+<td style="text-align:left">A type alias or fully qualified class name</td>
+<td style="text-align:left">Not set</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="typeAliases标签"><a href="#typeAliases标签" class="headerlink" title="typeAliases标签"></a>typeAliases标签</h3><h3 id="objectFactory标签"><a href="#objectFactory标签" class="headerlink" title="objectFactory标签"></a>objectFactory标签</h3><h3 id="plugins标签"><a href="#plugins标签" class="headerlink" title="plugins标签"></a>plugins标签</h3><h3 id="enviroments标签"><a href="#enviroments标签" class="headerlink" title="enviroments标签"></a>enviroments标签</h3><h3 id="databaseIdProvider标签"><a href="#databaseIdProvider标签" class="headerlink" title="databaseIdProvider标签"></a>databaseIdProvider标签</h3><h3 id="mappers标签"><a href="#mappers标签" class="headerlink" title="mappers标签"></a>mappers标签</h3><h2 id="映射文件"><a href="#映射文件" class="headerlink" title="映射文件"></a>映射文件</h2><p>约束：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper</span></span><br><span class="line"><span class="meta">  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html" target="_blank" rel="noopener">MyBatis官方文档</a></p>
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><p><a href="https://mybatis.org/mybatis-3/zh/dynamic-sql.html" target="_blank" rel="noopener">MyBatis官方文档</a></p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p><a href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#cache" target="_blank" rel="noopener">MyBatis官方文档</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/" title="MyBatis" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/Java%E6%A1%86%E6%9E%B6/SpringMVC/" title="SpringMVC"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
