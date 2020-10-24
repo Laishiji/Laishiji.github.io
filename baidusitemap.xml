@@ -2,12 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/</loc>
+    <lastmod>2020-10-24</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
+    <lastmod>2020-10-23</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
+    <lastmod>2020-10-23</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringAOP/</loc>
     <lastmod>2020-10-23</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B/</loc>
-    <lastmod>2020-10-21</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
     <lastmod>2020-10-21</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%AE%B9%E5%99%A8/%E6%AF%94%E8%BE%83%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
@@ -43,13 +49,7 @@
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Spring%E6%A8%A1%E6%9D%BF%E7%B1%BBJdbcTemplate/</loc>
     <lastmod>2020-10-19</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringAOP/</loc>
-    <lastmod>2020-10-19</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2020-10-18</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
     <lastmod>2020-10-18</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</loc>
