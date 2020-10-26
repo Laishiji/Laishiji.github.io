@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Others/Git/</loc>
+    <lastmod>2020-10-26</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Others/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2020-10-25</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2020-10-25</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
+    <lastmod>2020-10-24</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/</loc>
     <lastmod>2020-10-24</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
-    <lastmod>2020-10-23</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
     <lastmod>2020-10-23</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringAOP/</loc>
@@ -140,9 +149,6 @@
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/JSON/</loc>
-    <lastmod>2020-09-07</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/VIM%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
