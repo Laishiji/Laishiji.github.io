@@ -1,5 +1,7 @@
-# Laishiji.github.io
-📰 Blog Repo.
+[![](https://img.shields.io/badge/blog-thmasterplan-brightgreen.svg)](https://thmasterplan.cn/)
+
+
+# 📰 Blog Repo.
 
 - [Java基础](https://thmasterplan.cn/categories/Java%E5%9F%BA%E7%A1%80/)
 - [JVM](https://thmasterplan.cn/categories/JVM/)
@@ -9,4 +11,3 @@
 - [JavaWeb基础](https://thmasterplan.cn/categories/JavaWeb/)
 - [Spring系列](https://thmasterplan.cn/categories/Java%E6%A1%86%E6%9E%B6/)
 - [CentOS7](https://thmasterplan.cn/categories/Linux/)
-
