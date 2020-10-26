@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Others/Git/entity_ref_index.png">
 <meta property="og:image" content="http://thmasterplan.cn/Others/Git/git_file_state.png">
 <meta property="article:published_time" content="2020-10-25T06:33:13.000Z">
-<meta property="article:modified_time" content="2020-10-26T09:15:08.943Z">
+<meta property="article:modified_time" content="2020-10-26T09:49:52.402Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -329,7 +329,13 @@
 </ul>
 <p>实体、引用与索引的关系如图：</p>
 <p><img src="entity_ref_index.png" alt=""></p>
-<h3 id="Git项目搭建"><a href="#Git项目搭建" class="headerlink" title="Git项目搭建"></a>Git项目搭建</h3><h4 id="本地新建"><a href="#本地新建" class="headerlink" title="本地新建"></a>本地新建</h4><p>在项目根目录下：<code>git init</code>，就会生成.git目录。</p>
+<h3 id="Git项目搭建"><a href="#Git项目搭建" class="headerlink" title="Git项目搭建"></a>Git项目搭建</h3><h4 id="本地新建"><a href="#本地新建" class="headerlink" title="本地新建"></a>本地新建</h4><ol>
+<li>在项目根目录下：<code>git init</code>，就会生成.git目录。</li>
+<li>本地生成SSH公钥：<code>ssh-keygen rsa</code>命令生成公钥，生成目录为用户目录下的<code>.ssh</code>文件夹，拷贝公钥<code>id_rsa.pub</code>的文本到github/gitee/gitlab对应处，即可无需密码登录。</li>
+<li><code>git branch -M main</code>：创建主分支main。</li>
+<li>在项目根目录下：<code>git remote add origin [远程仓库地址]</code>，给远程仓库地址命名为origin，方便后续使用。远程仓库地址SSH方式示例：<code>git@github.com:Github用户名/项目名.git</code>。</li>
+<li>在项目根目录下：<code>git push -u origin main</code>，将main分支push到远程仓库。</li>
+</ol>
 <h4 id="远程克隆"><a href="#远程克隆" class="headerlink" title="远程克隆"></a>远程克隆</h4><p><code>git clone [url]</code>。</p>
 <h3 id="Git文件操作"><a href="#Git文件操作" class="headerlink" title="Git文件操作"></a>Git文件操作</h3><h4 id="文件的四种状态"><a href="#文件的四种状态" class="headerlink" title="文件的四种状态"></a>文件的四种状态</h4><p>版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态。</p>
 <p>使用<code>git status</code>查看文件状态。</p>
@@ -354,8 +360,7 @@
 </ul>
 <p>例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#为注释</span><br><span class="line">*.txt        #忽略所有 .txt结尾的文件,这样的话上传就不会被选中！</span><br><span class="line">!lib.txt     #但lib.txt除外</span><br><span class="line">&#x2F;temp        #忽略temp同级目录其他文件和目录，不忽略temp目录</span><br><span class="line">build&#x2F;       #忽略build&#x2F;目录下的所有文件</span><br><span class="line">doc&#x2F;*.txt    #会忽略 doc&#x2F;notes.txt 但不包括 doc&#x2F;server&#x2F;arch.txt</span><br></pre></td></tr></table></figure>
-<h3 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h3><h3 id="Idea集成Git"><a href="#Idea集成Git" class="headerlink" title="Idea集成Git"></a>Idea集成Git</h3><p>本地生成SSH公钥：<code>ssh-keygen</code>命令生成公钥，生成目录为用户目录下的<code>.ssh</code>文件夹，拷贝公钥到github/gitee/gitlab对应处，即可无需密码登录。</p>
-
+<h3 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h3><h3 id="Idea集成Git"><a href="#Idea集成Git" class="headerlink" title="Idea集成Git"></a>Idea集成Git</h3>
       
     </div>
     <div class="article-footer">
