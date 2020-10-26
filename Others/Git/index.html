@@ -31,8 +31,12 @@
 <meta property="og:image" content="http://thmasterplan.cn/Others/Git/git.png">
 <meta property="og:image" content="http://thmasterplan.cn/Others/Git/entity_ref_index.png">
 <meta property="og:image" content="http://thmasterplan.cn/Others/Git/git_file_state.png">
+<meta property="og:image" content="http://thmasterplan.cn/Others/Git/fast_merge_1.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Others/Git/fast_merge_2.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Others/Git/fast_merge.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Others/Git/idea_git.png">
 <meta property="article:published_time" content="2020-10-25T06:33:13.000Z">
-<meta property="article:modified_time" content="2020-10-26T09:49:52.402Z">
+<meta property="article:modified_time" content="2020-10-26T13:35:06.050Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
@@ -226,7 +230,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制"><span class="toc-number">1.</span> <span class="toc-text">版本控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地版本控制系统"><span class="toc-number">1.1.</span> <span class="toc-text">本地版本控制系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集中化版本控制系统"><span class="toc-number">1.2.</span> <span class="toc-text">集中化版本控制系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分布式版本控制系统"><span class="toc-number">1.3.</span> <span class="toc-text">分布式版本控制系统</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git配置"><span class="toc-number">2.</span> <span class="toc-text">Git配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git的原理"><span class="toc-number">3.</span> <span class="toc-text">Git的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git三大区域"><span class="toc-number">3.1.</span> <span class="toc-text">Git三大区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实体、引用与索引"><span class="toc-number">3.2.</span> <span class="toc-text">实体、引用与索引</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#实体"><span class="toc-number">3.2.1.</span> <span class="toc-text">实体</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#引用"><span class="toc-number">3.2.2.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#索引"><span class="toc-number">3.2.3.</span> <span class="toc-text">索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git项目搭建"><span class="toc-number">4.</span> <span class="toc-text">Git项目搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地新建"><span class="toc-number">4.1.</span> <span class="toc-text">本地新建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程克隆"><span class="toc-number">4.2.</span> <span class="toc-text">远程克隆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git文件操作"><span class="toc-number">5.</span> <span class="toc-text">Git文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件的四种状态"><span class="toc-number">5.1.</span> <span class="toc-text">文件的四种状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">5.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略文件"><span class="toc-number">5.3.</span> <span class="toc-text">忽略文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git分支"><span class="toc-number">6.</span> <span class="toc-text">Git分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Idea集成Git"><span class="toc-number">7.</span> <span class="toc-text">Idea集成Git</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制"><span class="toc-number">1.</span> <span class="toc-text">版本控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地版本控制系统"><span class="toc-number">1.1.</span> <span class="toc-text">本地版本控制系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集中化版本控制系统"><span class="toc-number">1.2.</span> <span class="toc-text">集中化版本控制系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分布式版本控制系统"><span class="toc-number">1.3.</span> <span class="toc-text">分布式版本控制系统</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git配置"><span class="toc-number">2.</span> <span class="toc-text">Git配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git的原理"><span class="toc-number">3.</span> <span class="toc-text">Git的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git三大区域"><span class="toc-number">3.1.</span> <span class="toc-text">Git三大区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实体、引用与索引"><span class="toc-number">3.2.</span> <span class="toc-text">实体、引用与索引</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#实体"><span class="toc-number">3.2.1.</span> <span class="toc-text">实体</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#引用"><span class="toc-number">3.2.2.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#索引"><span class="toc-number">3.2.3.</span> <span class="toc-text">索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git项目搭建"><span class="toc-number">4.</span> <span class="toc-text">Git项目搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地新建"><span class="toc-number">4.1.</span> <span class="toc-text">本地新建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程克隆"><span class="toc-number">4.2.</span> <span class="toc-text">远程克隆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git文件操作"><span class="toc-number">5.</span> <span class="toc-text">Git文件操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件的四种状态"><span class="toc-number">5.1.</span> <span class="toc-text">文件的四种状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">5.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略文件"><span class="toc-number">5.3.</span> <span class="toc-text">忽略文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git分支"><span class="toc-number">6.</span> <span class="toc-text">Git分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分支合并"><span class="toc-number">6.1.</span> <span class="toc-text">分支合并</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Idea集成Git"><span class="toc-number">7.</span> <span class="toc-text">Idea集成Git</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -299,7 +303,7 @@
 <h3 id="Git的原理"><a href="#Git的原理" class="headerlink" title="Git的原理"></a>Git的原理</h3><h4 id="Git三大区域"><a href="#Git三大区域" class="headerlink" title="Git三大区域"></a>Git三大区域</h4><ul>
 <li>工作区：存放项目代码的地方。</li>
 <li>暂存区：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息。</li>
-<li>本地版本库：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本。</li>
+<li>本地版本库：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据，每提交一次修改就会有一个新的版本。其中HEAD指向最新放入仓库的版本。</li>
 </ul>
 <p>三大区域与远程库交互的图示如下：</p>
 <p><img src="git.png" alt=""></p>
@@ -319,9 +323,9 @@
 </li>
 </ul>
 <h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><ul>
-<li><p>Git 中，一个分支（branch）、远程分支（remote branch）或一个标签（tag）仅是指向一个实体的一个指针，这里的实体通常是一个commit实体。这些引用以文本文件的形式存储在目录 .git/refs/ 中。</p>
+<li><p>Git 中，<strong>一个分支（branch）、远程分支（remote branch）或一个标签（tag）仅是指向一个实体的一个<u>指针</strong>&lt;/u&gt;，这里的实体通常是一个commit实体。这些引用以文本文件的形式存储在目录 .git/refs/ 中。</p>
 </li>
-<li><p>Git 有一种特殊的引用，称为符号引用。它并不直接指向一个实体，而是指向另一个引用。比如，.git/HEAD就是一个符号引用。它指向你正在工作的当前分支，初始为main分支。</p>
+<li><p>Git 有一种特殊的引用，称为符号引用。它并不直接指向一个实体，而是指向另一个引用。比如，.git/HEAD就是一个符号引用。它指向你正在工作的当前分支的最新版本，初始为main分支。</p>
 </li>
 </ul>
 <h5 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h5><ul>
@@ -332,11 +336,14 @@
 <h3 id="Git项目搭建"><a href="#Git项目搭建" class="headerlink" title="Git项目搭建"></a>Git项目搭建</h3><h4 id="本地新建"><a href="#本地新建" class="headerlink" title="本地新建"></a>本地新建</h4><ol>
 <li>在项目根目录下：<code>git init</code>，就会生成.git目录。</li>
 <li>本地生成SSH公钥：<code>ssh-keygen rsa</code>命令生成公钥，生成目录为用户目录下的<code>.ssh</code>文件夹，拷贝公钥<code>id_rsa.pub</code>的文本到github/gitee/gitlab对应处，即可无需密码登录。</li>
-<li><code>git branch -M main</code>：创建主分支main。</li>
+<li><code>git branch -M main</code>：重命名默认分支名master为主分支main。</li>
 <li>在项目根目录下：<code>git remote add origin [远程仓库地址]</code>，给远程仓库地址命名为origin，方便后续使用。远程仓库地址SSH方式示例：<code>git@github.com:Github用户名/项目名.git</code>。</li>
 <li>在项目根目录下：<code>git push -u origin main</code>，将main分支push到远程仓库。</li>
 </ol>
-<h4 id="远程克隆"><a href="#远程克隆" class="headerlink" title="远程克隆"></a>远程克隆</h4><p><code>git clone [url]</code>。</p>
+<h4 id="远程克隆"><a href="#远程克隆" class="headerlink" title="远程克隆"></a>远程克隆</h4><ul>
+<li>在本地没有项目的情况下初次克隆：<code>git clone [url]</code>。</li>
+<li>在本地已有项目的情况下：<code>git pull origin main</code>。</li>
+</ul>
 <h3 id="Git文件操作"><a href="#Git文件操作" class="headerlink" title="Git文件操作"></a>Git文件操作</h3><h4 id="文件的四种状态"><a href="#文件的四种状态" class="headerlink" title="文件的四种状态"></a>文件的四种状态</h4><p>版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态。</p>
 <p>使用<code>git status</code>查看文件状态。</p>
 <ul>
@@ -360,7 +367,49 @@
 </ul>
 <p>例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#为注释</span><br><span class="line">*.txt        #忽略所有 .txt结尾的文件,这样的话上传就不会被选中！</span><br><span class="line">!lib.txt     #但lib.txt除外</span><br><span class="line">&#x2F;temp        #忽略temp同级目录其他文件和目录，不忽略temp目录</span><br><span class="line">build&#x2F;       #忽略build&#x2F;目录下的所有文件</span><br><span class="line">doc&#x2F;*.txt    #会忽略 doc&#x2F;notes.txt 但不包括 doc&#x2F;server&#x2F;arch.txt</span><br></pre></td></tr></table></figure>
-<h3 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h3><h3 id="Idea集成Git"><a href="#Idea集成Git" class="headerlink" title="Idea集成Git"></a>Idea集成Git</h3>
+<h3 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h3><p><strong>每个分支有多个版本，每提交一次修改就会有一个新的版本</strong>，HEAD指向当前分支的最新版本。</p>
+<p>Git默认创建分支master，使用<code>git branch</code>查看当前所有分支。</p>
+<p><strong>在商业项目开发中，不会轻易在主分支上操作，而是建立一个开发用的分支，最后将成熟的代码添加到主分支上。</strong></p>
+<ul>
+<li>创建新分支：<code>git branch 分支名</code>。新分支与当前分支指向同一个提交点（版本），切换到新分支后的提交才是新分支独有的。</li>
+<li>切换到另一个分支：<code>git checkout 分支名</code>。</li>
+<li>查看分支提交日志：<code>git log --oneline</code>或<code>git log</code>。</li>
+</ul>
+<h4 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h4><ul>
+<li><p><strong>快速合并：</strong></p>
+<ol>
+<li><p>假设某时刻在main分支，<code>git branch dev</code>创建dev分支，<code>git checkout dev</code>切换到dev分支，此时main和dev都指向最新的同一个版本，如图所示：</p>
+<p><img src="fast_merge_1.jpg" alt=""></p>
+</li>
+<li><p>添加某个文件test，<code>git add test</code>-&gt;<code>git commit -m &quot;test merge&quot;</code>提交形成新版本后，dev指向了新版本而main还在前一个版本，如何让main分支与dev合并呢？如图所示：</p>
+<p><img src="fast_merge_2.jpg" alt=""></p>
+</li>
+<li><p><code>git checkout main</code>先切回main分支，然后<code>git merge dev</code>，此时Git的实际操作是将main指针指向dev指向的同一个版本实体，因此称为快速合并。 </p>
+<p><img src="fast_merge.jpg" alt=""></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>快速合并前提：一个分支没有变化，另一个分支有新版本的情况。如果两个分支都有修改则不适用。</p>
+<ul>
+<li><p><strong>三方合并：</strong></p>
+<p>适用于两个分支都有新版本的情况。</p>
+<ol>
+<li>假设某时刻在main分支，<code>git branch dev</code>创建dev分支，<code>git checkout dev</code>切换到dev分支，此时main和dev都指向最新的同一个版本；</li>
+<li>添加某个文件test，<code>git add test</code>-&gt;<code>git commit -m &quot;test merge&quot;</code>提交形成新版本，dev指向了新版本；</li>
+<li><code>git checkout main</code>切换回main分支，修改某个文件，提交形成新版本，main指向了新版本；</li>
+<li><code>git merge dev</code>，创建新版本，该版本是main分支的修改版本与dev修改版本的合并，main指针指向该新版本，dev则不变，依旧指向其修改的那个版本。</li>
+</ol>
+</li>
+<li><p><strong>合并冲突：</strong>两个分支都对以前相同版本的某个文件进行了修改，如何合并呢？</p>
+<p>Git会将两个分支的修改都保留下，由用户协商进行保留。</p>
+</li>
+</ul>
+<h3 id="Idea集成Git"><a href="#Idea集成Git" class="headerlink" title="Idea集成Git"></a>Idea集成Git</h3><p>IDEA在顶部菜单栏VCS选项下集成了版本控制功能，选择<code>Import into Version Control</code>，选择<code>Create Git Repository</code>即可。</p>
+<p>项目目录中，红色表示该文件状态为Untracked，蓝色表示文件被修改（Modified），否则则是被忽略。</p>
+<p>VCS-&gt;Git-&gt;Push-&gt;Define remote设置远程仓库URL</p>
+<p><img src="idea_git.png" alt=""></p>
+
       
     </div>
     <div class="article-footer">
