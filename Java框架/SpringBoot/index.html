@@ -26,7 +26,7 @@
 <meta property="og:description" content="配置SpringBoot使用一个全局的配置文件，文件名是固定的application。有两种格式的配置文件：  property：application.properties yaml：application.yml  该配置文件用于修改SpringBoot自动配置的默认值。SpringBoot会扫描以下位置的全局配置文件，优先级从高到低如下：项目根目录&#x2F;config&#x2F;， 项目根目录&#x2F;，resou">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-28T01:26:07.000Z">
-<meta property="article:modified_time" content="2020-11-01T08:51:43.009Z">
+<meta property="article:modified_time" content="2020-11-01T15:39:54.584Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#YAML"><span class="toc-number">1.1.</span> <span class="toc-text">YAML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取配置文件中的值"><span class="toc-number">1.2.</span> <span class="toc-text">获取配置文件中的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件占位符"><span class="toc-number">1.3.</span> <span class="toc-text">配置文件占位符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RandomValuePropertySource"><span class="toc-number">1.3.1.</span> <span class="toc-text">RandomValuePropertySource</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性配置占位符"><span class="toc-number">1.3.2.</span> <span class="toc-text">属性配置占位符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置多环境"><span class="toc-number">1.4.</span> <span class="toc-text">配置多环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多配置文件方式"><span class="toc-number">1.4.1.</span> <span class="toc-text">多配置文件方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文档块方式"><span class="toc-number">1.4.2.</span> <span class="toc-text">文档块方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行方式"><span class="toc-number">1.4.3.</span> <span class="toc-text">命令行方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动配置原理"><span class="toc-number">1.5.</span> <span class="toc-text">自动配置原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志"><span class="toc-number">2.</span> <span class="toc-text">日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSR-303-–-Bean-Validation"><span class="toc-number">3.</span> <span class="toc-text">JSR 303 – Bean Validation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thymeleaf模板引擎"><span class="toc-number">4.</span> <span class="toc-text">Thymeleaf模板引擎</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#YAML"><span class="toc-number">1.1.</span> <span class="toc-text">YAML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取配置文件中的值"><span class="toc-number">1.2.</span> <span class="toc-text">获取配置文件中的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件占位符"><span class="toc-number">1.3.</span> <span class="toc-text">配置文件占位符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RandomValuePropertySource"><span class="toc-number">1.3.1.</span> <span class="toc-text">RandomValuePropertySource</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性配置占位符"><span class="toc-number">1.3.2.</span> <span class="toc-text">属性配置占位符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置多环境"><span class="toc-number">1.4.</span> <span class="toc-text">配置多环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多配置文件方式"><span class="toc-number">1.4.1.</span> <span class="toc-text">多配置文件方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文档块方式"><span class="toc-number">1.4.2.</span> <span class="toc-text">文档块方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行方式"><span class="toc-number">1.4.3.</span> <span class="toc-text">命令行方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动装配原理"><span class="toc-number">1.5.</span> <span class="toc-text">自动装配原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志"><span class="toc-number">2.</span> <span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SLF4J的使用"><span class="toc-number">2.1.</span> <span class="toc-text">SLF4J的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本使用"><span class="toc-number">2.1.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常见日志配置"><span class="toc-number">2.1.2.</span> <span class="toc-text">常见日志配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#切换日志框架"><span class="toc-number">2.1.3.</span> <span class="toc-text">切换日志框架</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSR-303-–-Bean-Validation"><span class="toc-number">3.</span> <span class="toc-text">JSR 303 – Bean Validation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean-Validation中的constraint"><span class="toc-number">3.1.</span> <span class="toc-text">Bean Validation中的constraint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate-Validator-附加的-constraint"><span class="toc-number">3.2.</span> <span class="toc-text">Hibernate Validator 附加的 constraint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Hibernate-Validator"><span class="toc-number">3.3.</span> <span class="toc-text">使用Hibernate Validator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义constraint"><span class="toc-number">3.4.</span> <span class="toc-text">自定义constraint</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thymeleaf模板引擎"><span class="toc-number">4.</span> <span class="toc-text">Thymeleaf模板引擎</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -321,14 +321,182 @@
 <p>properties格式同理：<code>spring.profiles.active=development</code></p>
 <h4 id="文档块方式"><a href="#文档块方式" class="headerlink" title="文档块方式"></a>文档块方式</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"> <span class="attr">port:</span> <span class="number">8080</span> <span class="comment">#默认为8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">profiles:</span></span><br><span class="line">  <span class="attr">active:</span> <span class="string">dev</span> <span class="comment">#激活dev则使用8081</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"> <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"> <span class="attr">port:</span> <span class="number">8082</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">profiles:</span> <span class="string">prod</span></span><br></pre></td></tr></table></figure>
 <h4 id="命令行方式"><a href="#命令行方式" class="headerlink" title="命令行方式"></a>命令行方式</h4><p>加入选项<code>--spring.profiles.active=prod</code>即可。</p>
-<p>——————————————————————待补充—————————————————-</p>
-<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p>application配置文件可以配置哪些属性？参照<a href="https://docs.spring.io/spring-boot/docs/2.1.17.RELEASE/reference/html/common-application-properties.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<h3 id="自动装配原理"><a href="#自动装配原理" class="headerlink" title="自动装配原理"></a>自动装配原理</h3><p>application配置文件可以配置哪些属性？参照<a href="https://docs.spring.io/spring-boot/docs/2.1.17.RELEASE/reference/html/common-application-properties.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<p>———————————————————-待补充———————————————————-</p>
 <h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>SLF4J(Simple Logging Facade for Java)：抽象层日志框架。</p>
 <p>LogBack：具体的日志框架实现。</p>
 <p><code>spring-boot-starter-logging</code>采用了SLF4J + LogBack实现日志功能，<strong>我们在开发的时候应该使用抽象层框架SLF4J，而LogBack的实现则是用于配置</strong>，这是<a href="https://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/#D%EF%BC%9A%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE%E5%8E%9F%E5%88%99%EF%BC%88Dependency-Inversion-Principle%EF%BC%89">依赖倒置原则</a>与<a href="https://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/#L%EF%BC%9A%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99%EF%BC%88Liskov-Substitution-Principle%EF%BC%89">里氏替换原则</a>的体现。</p>
+<p>当我们引入其他依赖时，该依赖使用的日志框架可能与Spring Boot的实现方案不同，比如可能是JUL，log4j, log4j2等等。为了统一日志框架，SLF4J提供了常见日志框架实现的转换方案。我们唯一要做的就是<strong>在引入其他依赖时，排除掉其使用的日志框架</strong>即可，以此来避免SLF4J提供的转换jar包与之冲突。比如，Spring使用的就是commons-logging日志框架，在引入spring-core时，我们需要如此做：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="SLF4J的使用"><a href="#SLF4J的使用" class="headerlink" title="SLF4J的使用"></a>SLF4J的使用</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//日志记录器   </span></span><br><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line"><span class="comment">//日志级别</span></span><br><span class="line"><span class="comment">//由低到高：trace &lt; debug &lt; info &lt; warn &lt; error</span></span><br><span class="line">logger.trace(<span class="string">"trace..."</span>);</span><br><span class="line">logger.debug(<span class="string">"debug..."</span>);</span><br><span class="line">logger.info(<span class="string">"info..."</span>);</span><br><span class="line">logger.warn(<span class="string">"warn..."</span>);</span><br><span class="line">logger.error(<span class="string">"error..."</span>);</span><br></pre></td></tr></table></figure>
+<p>Spring Boot默认使用info级别及以上的日志级别，所以trace和debug日志信息是不会输出到控制台的。我们可以在<code>application</code>配置文件中调整日志级别：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.level.com.example</span>=<span class="string">trace</span></span><br></pre></td></tr></table></figure>
+<p>以上配置的含义是：<code>com.example</code>包下的所有代码日志级别调整为trace及以上。</p>
+<h4 id="常见日志配置"><a href="#常见日志配置" class="headerlink" title="常见日志配置"></a>常见日志配置</h4><p>如果我们不指定日志输出文件和路径，日志只会在控制台中输出。</p>
+<p>在<code>application</code>配置文件中：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认生成日志文件到当前项目根目录下</span></span><br><span class="line"><span class="meta">logging.file</span>=<span class="string">mylog.log</span></span><br><span class="line"><span class="comment">#也可指定路径</span></span><br><span class="line"><span class="meta">logging.file</span>=<span class="string">G:/mylog.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#或者在当前磁盘下生成a目录，a目录下生成b目录，b目录下默认生成spring.log日志文件</span></span><br><span class="line"><span class="meta">logging.path</span>=<span class="string">/a/b</span></span><br><span class="line"><span class="comment">#                                                            [从左显示的]  </span></span><br><span class="line"><span class="comment">#指定控制台输出的日志格式   [           时间          ]  [ 线程名 ][字符宽度][最长50个字符] [日志消息与换行符]</span></span><br><span class="line"><span class="meta">logging.pattern.console</span>=<span class="string">%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定文件中日志输出的格式</span></span><br><span class="line"><span class="meta">logging.pattern.file</span>=<span class="string">%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; *** [%thread] *** %-5level *** %logger&#123;50&#125; ： %msg%n</span></span><br></pre></td></tr></table></figure>
+<p>我们也可在resources下放入各个日志框架自己的配置文件，Spring Boot就不会使用默认配置了。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Logging System</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logback</td>
+<td><code>logback-spring.xml</code>, <code>logback-spring.groovy</code>, <code>logback.xml</code>, or <code>logback.groovy</code></td>
+</tr>
+<tr>
+<td>Log4j2</td>
+<td><code>log4j2-spring.xml</code> or <code>log4j2.xml</code></td>
+</tr>
+<tr>
+<td>JDK (Java Util Logging)</td>
+<td><code>logging.properties</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="切换日志框架"><a href="#切换日志框架" class="headerlink" title="切换日志框架"></a>切换日志框架</h4><p>假设要替换为log4j：</p>
+<ol>
+<li>在pom.xml中选中<code>spring-boot-starter-logging</code>，右键Diagrams打开依赖树；</li>
+<li>选中logback-classic，右键Exclude; </li>
+<li>选中log4j-over-slf4j，右键Exclude，也即删除SLF4J的覆盖方案；</li>
+<li>导入SLF4J对log4j的适配方案依赖<code>slf4j-log4j12</code>。</li>
+</ol>
 <h2 id="JSR-303-–-Bean-Validation"><a href="#JSR-303-–-Bean-Validation" class="headerlink" title="JSR 303 – Bean Validation"></a>JSR 303 – Bean Validation</h2><p>JSR是Java Specification Requests的缩写，意思是Java 规范提案。是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准。<a href="https://jcp.org/en/jsr/detail?id=303" target="_blank" rel="noopener">JSR - 303</a> 为 JavaBean 验证定义了相应的元数据模型和 API。</p>
 <p>在任何时候，当你要处理一个应用程序的业务逻辑，数据校验是你必须要考虑和面对的事情。应用程序必须通过某种手段来确保输入进来的数据从语义上来讲是正确的。在通常的情况下，应用程序是分层的，不同的层由不同的开发人员来完成。很多时候同样的数据验证逻辑会出现在不同的层，这样就会导致代码冗余和一些管理的问题，比如说语义的一致性等。为了避免这样的情况发生，最好是将验证逻辑与相应的域模型进行绑定。</p>
-<p>Hibernate Validator 是 Bean Validation 的参考实现 . Hibernate Validator 提供了 JSR 303 规范中所有内置 constraint 的实现，除此之外还有一些附加的 constraint。</p>
+<p>Hibernate Validator 是 Bean Validation 的参考实现 。 Hibernate Validator 提供了 JSR 303 规范中所有内置 constraint 的实现，除此之外还有一些附加的 constraint。</p>
+<h3 id="Bean-Validation中的constraint"><a href="#Bean-Validation中的constraint" class="headerlink" title="Bean Validation中的constraint"></a>Bean Validation中的constraint</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Constraint</strong></th>
+<th style="text-align:left"><strong>被注解的属性：</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>@Valid</code></td>
+<td style="text-align:left">是一个对象，需要检查此对象的所有字段值（级联验证）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Null</code></td>
+<td style="text-align:left">必须为 <code>null</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>@NotNull</code></strong></td>
+<td style="text-align:left"><strong>必须不为 <code>null</code></strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@AssertTrue</code></td>
+<td style="text-align:left">必须为 <code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@AssertFalse</code></td>
+<td style="text-align:left">必须为 <code>false</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Min(value)</code></td>
+<td style="text-align:left">必须是一个数字，其最小值为value</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Max(value)</code></td>
+<td style="text-align:left">必须是一个数字，其最大值为value</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@DecimalMin(value)</code></td>
+<td style="text-align:left">必须是一个数字，其最小值为value</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@DecimalMax(value)</code></td>
+<td style="text-align:left">必须是一个数字，其最大值为value</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Size(max, min)</code></td>
+<td style="text-align:left">大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Digits (integer, fraction)</code></td>
+<td style="text-align:left">必须是一个数字，其值必须在可接受的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Past</code></td>
+<td style="text-align:left">必须是一个过去的日期</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Future</code></td>
+<td style="text-align:left">必须是一个将来的日期</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>@Pattern(value)</code></td>
+<td style="text-align:left">必须符合指定的正则表达式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Hibernate-Validator-附加的-constraint"><a href="#Hibernate-Validator-附加的-constraint" class="headerlink" title="Hibernate Validator 附加的 constraint"></a>Hibernate Validator 附加的 constraint</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>Constraint</strong></th>
+<th><strong>被注解的属性：</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Email</code></td>
+<td>必须是电子邮箱地址</td>
+</tr>
+<tr>
+<td><code>@Length(min=, max=)</code></td>
+<td>必须是字符串，其大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td><strong><code>@NotEmpty</code></strong></td>
+<td><strong>若是字符串，则必须不为null；若是集合，则集合size &gt; 0</strong></td>
+</tr>
+<tr>
+<td><code>@Range(min=, max=)</code></td>
+<td>必须在合适的范围内</td>
+</tr>
+<tr>
+<td><strong><code>@NotBlank</code></strong></td>
+<td><strong>必须是字符串，且trim()后的length &gt; 0</strong></td>
+</tr>
+<tr>
+<td><code>@URL</code></td>
+<td>必须是字符串，且是一个有效的url</td>
+</tr>
+<tr>
+<td><code>@CreditCardNumber</code></td>
+<td>必须是字符串，且是合法的银行卡/信用卡</td>
+</tr>
+<tr>
+<td><code>@ScriptAssert</code></td>
+<td>要有JSR 223 - Java Scripting API的实现</td>
+</tr>
+<tr>
+<td><code>@SafeHtml</code></td>
+<td>classpath中要有jsoup包</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>随着Hibernate Validator版本的迭代，也更新了一些其他的constraint，可在IDEA右侧工具栏的Bean Validation中查看。</p>
+<h3 id="使用Hibernate-Validator"><a href="#使用Hibernate-Validator" class="headerlink" title="使用Hibernate Validator"></a>使用Hibernate Validator</h3><p>可以写一个统一的校验类，然后在service层或controller层中调用校验类的校验方法。若有参数不合法，则可使用自定义的异常类抛出参数不合法的异常信息。<a href="https://github.com/Laishiji/miaosha/tree/main/src/main/java/com/laishiji/miaosha/validator" target="_blank" rel="noopener">参考</a></p>
+<h3 id="自定义constraint"><a href="#自定义constraint" class="headerlink" title="自定义constraint"></a>自定义constraint</h3><ol>
+<li>自定义注解，参考Hibernate实现的注解。</li>
+<li>自定义validator实现<code>ConstraintValidator</code>接口，并实现isValid方法。</li>
+<li>将自定义validator赋值给<code>@Constraint</code>的validateBy属性。</li>
+</ol>
+<p>示例：自定义constraint, 校验参数必须是3的倍数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.Field&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Constraint</span>(validateBy = &#123;MultipleOfThreeForInteger<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">MultipleOfThree</span></span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "必须是3的倍数"</span>;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] groups() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    Class&lt;? extends Payload&gt;[] payload() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> MultipleOfThreeForInteger implements ConstraintValidator&lt;MultipleOfThree, Integer&gt;&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(MultipleOfThree constraintAnnotation)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(Integer value, ConstraintValidatorContext context)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value % <span class="number">3</span> == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，<code>@MultipleOfThree</code>就可以用于参数验证了。</p>
 <h2 id="Thymeleaf模板引擎"><a href="#Thymeleaf模板引擎" class="headerlink" title="Thymeleaf模板引擎"></a>Thymeleaf模板引擎</h2>
       
     </div>
