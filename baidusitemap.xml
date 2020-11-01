@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://thmasterplan.cn/Others/Git/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringBoot/</loc>
+    <lastmod>2020-11-01</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
+    <lastmod>2020-11-01</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-11-01</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B/</loc>
+    <lastmod>2020-11-01</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/</loc>
+    <lastmod>2020-10-28</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Others/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2020-10-27</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Others/Git/</loc>
     <lastmod>2020-10-26</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/Maven%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-10-25</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringMVC/</loc>
-    <lastmod>2020-10-24</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/</loc>
-    <lastmod>2020-10-24</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringIOC/</loc>
     <lastmod>2020-10-23</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/SpringAOP/</loc>
     <lastmod>2020-10-23</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B/</loc>
-    <lastmod>2020-10-21</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%AE%B9%E5%99%A8/%E6%AF%94%E8%BE%83%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
     <lastmod>2020-10-21</lastmod>
@@ -98,9 +104,6 @@
     <lastmod>2020-10-12</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E9%94%81/</loc>
-    <lastmod>2020-10-11</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-10-11</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/</loc>
