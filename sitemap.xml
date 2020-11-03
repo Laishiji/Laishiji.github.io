@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/Java%25E5%25AE%25B9%25E5%2599%25A8/%25E6%25AF%2594%25E8%25BE%2583%25E5%2599%25A8%25E4%25B8%258E%25E8%25BF%25AD%25E4%25BB%25A3%25E5%2599%25A8/</loc>
+    
+    <lastmod>2020-11-03T07:56:18.306Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/SpringBoot/</loc>
     
     <lastmod>2020-11-01T15:39:54.584Z</lastmod>
@@ -79,13 +86,6 @@
   </url>
   
   <url>
-    <loc>http://thmasterplan.cn/Java%25E5%25AE%25B9%25E5%2599%25A8/%25E6%25AF%2594%25E8%25BE%2583%25E5%2599%25A8%25E4%25B8%258E%25E8%25BF%25AD%25E4%25BB%25A3%25E5%2599%25A8/</loc>
-    
-    <lastmod>2020-10-21T02:57:30.176Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thmasterplan.cn/Java%25E5%25AE%25B9%25E5%2599%25A8/HashMap%25E6%25BA%2590%25E7%25A0%2581%25E5%2589%2596%25E6%259E%2590/</loc>
     
     <lastmod>2020-10-21T02:56:43.195Z</lastmod>
@@ -152,13 +152,6 @@
     <loc>http://thmasterplan.cn/Java%25E6%25A1%2586%25E6%259E%25B6/Spring%25E6%25A8%25A1%25E6%259D%25BF%25E7%25B1%25BBJdbcTemplate/</loc>
     
     <lastmod>2020-10-19T11:00:01.846Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/%25E8%25BD%25AF%25E4%25BB%25B6%25E5%25B7%25A5%25E7%25A8%258B/%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F/</loc>
-    
-    <lastmod>2020-10-18T11:44:50.910Z</lastmod>
     
   </url>
   
