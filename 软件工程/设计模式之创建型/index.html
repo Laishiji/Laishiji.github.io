@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: JVM | Blog Of TheMasterplan</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="TheMasterplan">
-<meta property="og:url" content="http://thmasterplan.cn/categories/JVM/index.html">
+  <title>设计模式之创建型 | Blog Of TheMasterplan</title>
+  <meta name="description" content="学习设计模式时，应当关注该模式“可以解决什么问题”。 概述软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。 设计模式的目的编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重用性，灵活性等多方面的挑战，设计模式是为了让程序(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之创建型">
+<meta property="og:url" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B/index.html">
 <meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="学习设计模式时，应当关注该模式“可以解决什么问题”。 概述软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。 设计模式的目的编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重用性，灵活性等多方面的挑战，设计模式是为了让程序(">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-03T08:41:33.000Z">
+<meta property="article:modified_time" content="2020-11-03T14:35:38.343Z">
 <meta property="article:author" content="LSJ">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/categories/JVM/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -209,96 +214,155 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: JVM</h1>
-      <p class="hidden-xs">Total 4 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/Java容器/">Java容器</a></li>
-          
-          <li><a href="/categories/JavaWeb/">JavaWeb</a></li>
-          
-          <li><a href="/categories/JVM/">JVM</a></li>
-          
-          <li><a href="/categories/Others/">Others</a></li>
-          
-          <li><a href="/categories/Java基础/">Java基础</a></li>
-          
-          <li><a href="/categories/Java并发/">Java并发</a></li>
-          
-          <li><a href="/categories/Java框架/">Java框架</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/面试刷题/">面试刷题</a></li>
-          
-          <li><a href="/categories/软件工程/">软件工程</a></li>
-          
-          <li><a href="/categories/数据结构与算法/">数据结构与算法</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseJVM" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              JVM
-            </a>
-            <small class="text-muted">(Total 4 articles)</small>
-        </h4>
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式的目的"><span class="toc-number">1.1.</span> <span class="toc-text">设计模式的目的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UML复习"><span class="toc-number">2.</span> <span class="toc-text">UML复习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例（Singleton）"><span class="toc-number">3.</span> <span class="toc-text">单例（Singleton）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单工厂（Simple-Factory）"><span class="toc-number">4.</span> <span class="toc-text">简单工厂（Simple Factory）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂方法（Factory-Method）"><span class="toc-number">5.</span> <span class="toc-text">工厂方法（Factory Method）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工厂（Abstract-Factory）"><span class="toc-number">6.</span> <span class="toc-text">抽象工厂（Abstract Factory）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型（Prototype）"><span class="toc-number">7.</span> <span class="toc-text">原型（Prototype）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建造者（Builder）"><span class="toc-number">8.</span> <span class="toc-text">建造者（Builder）</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-设计模式之创建型" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式之创建型
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B/" class="article-date">
+	  <time datetime="2020-11-03T08:41:33.000Z" itemprop="datePublished">2020-11-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
     </div>
-    <div id="collapseJVM" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingJVM">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/JVM/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-03T09:22:40.000Z" itemprop="datePublished">2020-09-03</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 虚拟机类加载机制
-</a>
-
-
-              
-                
-<a href="/JVM/GC%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-02T07:17:43.000Z" itemprop="datePublished">2020-09-02</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> GC与内存分配策略
-</a>
-
-
-              
-                
-<a href="/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-08-23T03:24:45.000Z" itemprop="datePublished">2020-08-23</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java内存区域与内存溢出异常
-</a>
-
-
-              
-                
-<a href="/JVM/%E5%8F%8D%E7%BC%96%E8%AF%91%E5%8F%8A%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-03-26T06:11:57.000Z" itemprop="datePublished">2020-03-26</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 反编译及助记符
-</a>
-
-
-              
-            </div>
-        </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>学习设计模式时，应当关注该模式“可以解决什么问题”。</strong></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。</p>
+<h3 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a>设计模式的目的</h3><p>编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重用性，灵活性等多方面的挑战，设计模式是为了让程序(软件)具有更好的：</p>
+<ul>
+<li>代码重用性 (即：相同功能的代码，不用多次编写) </li>
+<li>可读性 (即：编程规范性, 便于其他程序员的阅读和理解) </li>
+<li>可扩展性 (即：当需要增加新的功能时，非常的方便，称为可维护) </li>
+<li>可靠性 (即：当我们增加新的功能后，对原来的功能没有影响) </li>
+<li>使程序呈现高内聚，低耦合的特性</li>
+</ul>
+<h2 id="UML复习"><a href="#UML复习" class="headerlink" title="UML复习"></a>UML复习</h2><p><a href="https://www.cnblogs.com/xrq730/p/5533019.html" target="_blank" rel="noopener">UML中：关联、聚合、组合、依赖的区别</a></p>
+<h2 id="单例（Singleton）"><a href="#单例（Singleton）" class="headerlink" title="单例（Singleton）"></a>单例（Singleton）</h2><h2 id="简单工厂（Simple-Factory）"><a href="#简单工厂（Simple-Factory）" class="headerlink" title="简单工厂（Simple Factory）"></a>简单工厂（Simple Factory）</h2><h2 id="工厂方法（Factory-Method）"><a href="#工厂方法（Factory-Method）" class="headerlink" title="工厂方法（Factory Method）"></a>工厂方法（Factory Method）</h2><h2 id="抽象工厂（Abstract-Factory）"><a href="#抽象工厂（Abstract-Factory）" class="headerlink" title="抽象工厂（Abstract Factory）"></a>抽象工厂（Abstract Factory）</h2><h2 id="原型（Prototype）"><a href="#原型（Prototype）" class="headerlink" title="原型（Prototype）"></a>原型（Prototype）</h2><h2 id="建造者（Builder）"><a href="#建造者（Builder）" class="headerlink" title="建造者（Builder）"></a>建造者（Builder）</h2>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%9E%8B/" title="设计模式之创建型" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
   
- 
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/Java%E6%A1%86%E6%9E%B6/SpringBoot/" title="SpringBoot"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -352,6 +416,28 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 
