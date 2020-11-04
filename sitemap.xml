@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://thmasterplan.cn/%25E8%25BD%25AF%25E4%25BB%25B6%25E5%25B7%25A5%25E7%25A8%258B/%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F%25E4%25B9%258B%25E5%2588%259B%25E5%25BB%25BA%25E5%259E%258B/</loc>
+    <loc>http://thmasterplan.cn/%25E8%25BD%25AF%25E4%25BB%25B6%25E5%25B7%25A5%25E7%25A8%258B/%25E5%25B8%25B8%25E7%2594%25A8%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F/</loc>
     
-    <lastmod>2020-11-03T14:35:38.343Z</lastmod>
+    <lastmod>2020-11-04T11:18:17.426Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thmasterplan.cn/Java%25E5%259F%25BA%25E7%25A1%2580/Java%25E5%259F%25BA%25E7%25A1%2580/</loc>
+    
+    <lastmod>2020-11-04T09:30:20.484Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thmasterplan.cn/JVM/%25E8%2599%259A%25E6%258B%259F%25E6%259C%25BA%25E7%25B1%25BB%25E5%258A%25A0%25E8%25BD%25BD%25E6%259C%25BA%25E5%2588%25B6/</loc>
+    
+    <lastmod>2020-11-04T09:10:14.511Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>http://thmasterplan.cn/about/index.html</loc>
     
     <lastmod>2020-11-03T14:34:04.460Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/Java%25E5%259F%25BA%25E7%25A1%2580/Java%25E5%259F%25BA%25E7%25A1%2580/</loc>
-    
-    <lastmod>2020-11-03T14:00:56.786Z</lastmod>
     
   </url>
   
@@ -299,13 +306,6 @@
     <loc>http://thmasterplan.cn/Java%25E5%25B9%25B6%25E5%258F%2591/%25E7%25BA%25BF%25E7%25A8%258B%25E5%25AE%2589%25E5%2585%25A8%25E4%25B8%258E%25E9%2594%2581%25E4%25BC%2598%25E5%258C%2596/</loc>
     
     <lastmod>2020-09-21T12:11:40.100Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/JVM/%25E8%2599%259A%25E6%258B%259F%25E6%259C%25BA%25E7%25B1%25BB%25E5%258A%25A0%25E8%25BD%25BD%25E6%259C%25BA%25E5%2588%25B6/</loc>
-    
-    <lastmod>2020-09-20T10:32:29.706Z</lastmod>
     
   </url>
   

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>常用设计模式 | Blog Of TheMasterplan</title>
+  <meta name="description" content="学习设计模式时，应当关注该模式“可以解决什么问题”。 设计模式优质博客 - java_my_life. 概述软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。 设计模式的目的编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用设计模式">
+<meta property="og:url" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="学习设计模式时，应当关注该模式“可以解决什么问题”。 设计模式优质博客 - java_my_life. 概述软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。 设计模式的目的编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/uml_class.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/uml_interface.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/uml_aggregation.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/visualbility.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/uml_sequence.png">
+<meta property="article:published_time" content="2020-11-03T08:41:33.000Z">
+<meta property="article:modified_time" content="2020-11-04T11:18:17.426Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/uml_class.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 13.88px;">Java并发</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">15</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式的目的"><span class="toc-number">1.1.</span> <span class="toc-text">设计模式的目的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UML复习"><span class="toc-number">2.</span> <span class="toc-text">UML复习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类图"><span class="toc-number">2.1.</span> <span class="toc-text">类图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础"><span class="toc-number">2.1.1.</span> <span class="toc-text">基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接口与实现"><span class="toc-number">2.1.2.</span> <span class="toc-text">接口与实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#聚合"><span class="toc-number">2.1.3.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可见性"><span class="toc-number">2.1.4.</span> <span class="toc-text">可见性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时序图"><span class="toc-number">2.2.</span> <span class="toc-text">时序图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建型"><span class="toc-number"></span> <span class="toc-text">创建型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例（Singleton）"><span class="toc-number">1.</span> <span class="toc-text">单例（Singleton）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#饿汉式（立即加载）"><span class="toc-number">1.1.</span> <span class="toc-text">饿汉式（立即加载）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#静态常量"><span class="toc-number">1.1.1.</span> <span class="toc-text">静态常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态代码块"><span class="toc-number">1.1.2.</span> <span class="toc-text">静态代码块</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#懒汉式（延迟加载）"><span class="toc-number">1.2.</span> <span class="toc-text">懒汉式（延迟加载）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程不安全"><span class="toc-number">1.2.1.</span> <span class="toc-text">线程不安全</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程不安全-同步代码块"><span class="toc-number">1.2.2.</span> <span class="toc-text">线程不安全-同步代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程安全-同步方法"><span class="toc-number">1.2.3.</span> <span class="toc-text">线程安全-同步方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双重检查（Double-Check）"><span class="toc-number">1.3.</span> <span class="toc-text">双重检查（Double Check）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态内部类"><span class="toc-number">1.4.</span> <span class="toc-text">静态内部类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举"><span class="toc-number">1.5.</span> <span class="toc-text">枚举</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单工厂（Simple-Factory）"><span class="toc-number">2.</span> <span class="toc-text">简单工厂（Simple Factory）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工厂方法（Factory-Method）"><span class="toc-number">3.</span> <span class="toc-text">工厂方法（Factory Method）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工厂（Abstract-Factory）"><span class="toc-number">4.</span> <span class="toc-text">抽象工厂（Abstract Factory）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型（Prototype）"><span class="toc-number">5.</span> <span class="toc-text">原型（Prototype）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结构型"><span class="toc-number"></span> <span class="toc-text">结构型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#适配器（Adapter）"><span class="toc-number">1.</span> <span class="toc-text">适配器（Adapter）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#桥接（Bridge）"><span class="toc-number">2.</span> <span class="toc-text">桥接（Bridge）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器（Decorator）"><span class="toc-number">3.</span> <span class="toc-text">装饰器（Decorator）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理（Proxy）"><span class="toc-number">4.</span> <span class="toc-text">代理（Proxy）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#行为型"><span class="toc-number"></span> <span class="toc-text">行为型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#责任链（Chain-Of-Responsibility）"><span class="toc-number">1.</span> <span class="toc-text">责任链（Chain Of Responsibility）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#策略（Strategy）"><span class="toc-number">2.</span> <span class="toc-text">策略（Strategy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板方法（Template-Method）"><span class="toc-number">3.</span> <span class="toc-text">模板方法（Template Method）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#观察者（Observer）"><span class="toc-number">4.</span> <span class="toc-text">观察者（Observer）</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-常用设计模式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用设计模式
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+	  <time datetime="2020-11-03T08:41:33.000Z" itemprop="datePublished">2020-11-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>学习设计模式时，应当关注该模式“可以解决什么问题”。</strong></p>
+<p><a href="https://www.cnblogs.com/java-my-life/" target="_blank" rel="noopener">设计模式优质博客 - java_my_life</a>.</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>软件工程中，设计模式（design pattern）是对软件设计中普遍存在（反复出现） 的各种问题，所提出的解决方案。这个术语是由Erich Gamma等人在1990年代从建筑设计领域引入到计算机科学的。</p>
+<h3 id="设计模式的目的"><a href="#设计模式的目的" class="headerlink" title="设计模式的目的"></a>设计模式的目的</h3><p>编写软件过程中，程序员面临着来自耦合性，内聚性以及可维护性，可扩展性，重用性，灵活性等多方面的挑战，设计模式是为了让程序(软件)具有更好的：</p>
+<ul>
+<li>代码重用性 (即：相同功能的代码，不用多次编写) </li>
+<li>可读性 (即：编程规范性, 便于其他程序员的阅读和理解) </li>
+<li>可扩展性 (即：当需要增加新的功能时，非常的方便，称为可维护) </li>
+<li>可靠性 (即：当我们增加新的功能后，对原来的功能没有影响) </li>
+<li>使程序呈现高内聚，低耦合的特性</li>
+</ul>
+<h2 id="UML复习"><a href="#UML复习" class="headerlink" title="UML复习"></a>UML复习</h2><h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><p>UML中的类图用于表示类、接口、实例之间相互的静态关系。如图：</p>
+<p><img src="uml_class.png" alt=""></p>
+<p>该图中实线空心三角箭头表示继承关系。<strong>下划线</strong>表示这是一个<strong>静态</strong>字段或<strong>静态</strong>方法，<strong>斜体</strong>表示这是一个<strong>抽象</strong>类或<strong>抽象</strong>方法。</p>
+<h4 id="接口与实现"><a href="#接口与实现" class="headerlink" title="接口与实现"></a>接口与实现</h4><p><img src="uml_interface.png" alt=""></p>
+<p>该图中虚线空心三角箭头表示实现关系。接口会在类图中使用<code>&lt;&lt;interface&gt;&gt;</code>表明。</p>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p><img src="uml_aggregation.png" alt=""></p>
+<p>聚合是一种“持有”关系，比如Basket类中持有多个Fruit实例。实际上关联、聚合、组合都是一种持有关系，依赖则属于“半持有”的关系，它们的区别如下：</p>
+<p><a href="https://www.cnblogs.com/xrq730/p/5533019.html" target="_blank" rel="noopener">UML中：关联、聚合、组合、依赖的区别</a>.</p>
+<h4 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h4><p><img src="visualbility.png" alt=""></p>
+<p>该图标识了方法和字段的可见性：</p>
+<ul>
+<li>“+”表示public</li>
+<li>“-“表示private</li>
+<li>“#”表示protect</li>
+<li>“~”表示包可见</li>
+</ul>
+<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p>UML的时序图用于表示程序在工作时其内部方法的调用顺序，以及事件的发生顺序。例：</p>
+<p><img src="uml_sequence.png" alt=""></p>
+<p>时序图上方的长方形表示类的实例，长方形向下延伸的虚线表示时间的流逝。黑色实线箭头表示方法调用，虚线箭头表示方法返回。</p>
+<h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><h2 id="单例（Singleton）"><a href="#单例（Singleton）" class="headerlink" title="单例（Singleton）"></a>单例（Singleton）</h2><p><strong>作为对象的创建模式，单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。这个类称为单例类。</strong></p>
+<p>单例模式的使用场景：需要频繁进行创建和销毁的对象、创建对象耗时过多或耗费资源过多（重量级对象）但又经常用到的对象、工具类对象、频繁访问数据库或文件的对象。例如：Spring中bean对象的创建默认就是singleton。</p>
+<h3 id="饿汉式（立即加载）"><a href="#饿汉式（立即加载）" class="headerlink" title="饿汉式（立即加载）"></a>饿汉式（立即加载）</h3><h4 id="静态常量"><a href="#静态常量" class="headerlink" title="静态常量"></a>静态常量</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticFinal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">StaticFinal</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态常量，创建类实例，连接-准备阶段赋值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> StaticFinal INSTANCE = <span class="keyword">new</span> StaticFinal();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态方法，获取实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticFinal <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        StaticFinal staticFinal = StaticFinal.getInstance();</span><br><span class="line">        StaticFinal staticFinal1 = StaticFinal.getInstance();</span><br><span class="line">        System.out.println(staticFinal == staticFinal1); <span class="comment">//true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>优点：类加载（static final变量在连接-准备阶段赋值）时就完成了对象的实例化，避免了线程同步问题。</li>
+<li>缺点：如果从始至终没有用到该实例，会造成内存浪费。</li>
+</ul>
+<h4 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticBlock</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">StaticBlock</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态常量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> StaticBlock INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.静态代码块中，初始化阶段赋值</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        INSTANCE = <span class="keyword">new</span> StaticBlock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.公有静态方法，获取实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticBlock <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        StaticBlock staticBlock = StaticBlock.getInstance();<span class="comment">//调用类的静态方法-&gt;类初始化-&gt;静态代码块中创建实例</span></span><br><span class="line">        StaticBlock staticBlock1 = StaticBlock.getInstance();</span><br><span class="line">        System.out.println(staticBlock == staticBlock1); <span class="comment">//true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优缺点同上。</p>
+<h3 id="懒汉式（延迟加载）"><a href="#懒汉式（延迟加载）" class="headerlink" title="懒汉式（延迟加载）"></a>懒汉式（延迟加载）</h3><h4 id="线程不安全"><a href="#线程不安全" class="headerlink" title="线程不安全"></a>线程不安全</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoSync</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">NoSync</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> NoSync instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态方法，调用该方法时才创建实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NoSync <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</span><br><span class="line">            instance = <span class="keyword">new</span> NoSync();</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点：延迟加载，调用getInstance方法时才创建对象，不会出现浪费内存的情况。</p>
+<p>缺点：不能保证线程安全。在多线程情况下，一个线程进入if(instance == null)判断语句块，还未来得及往下执行，另一个线程也正在判断该语句，此时便会产生多个实例。</p>
+<p>实际开发中，不能使用该方式。</p>
+<h4 id="线程不安全-同步代码块"><a href="#线程不安全-同步代码块" class="headerlink" title="线程不安全-同步代码块"></a>线程不安全-同步代码块</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncBlock</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncBlock</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SyncBlock instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态方法，调用该方法时才创建实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SyncBlock <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//3.1.同步操作在条件判断之后</span></span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SyncBlock<span class="class">.<span class="keyword">class</span>)</span>&#123;</span><br><span class="line">                instance = <span class="keyword">new</span> SyncBlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不能保证线程安全，原因同上。</p>
+<h4 id="线程安全-同步方法"><a href="#线程安全-同步方法" class="headerlink" title="线程安全-同步方法"></a>线程安全-同步方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncMethod</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SyncMethod</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SyncMethod instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态同步方法，调用该方法时才创建实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SyncMethod <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</span><br><span class="line">            instance = <span class="keyword">new</span> SyncMethod();</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点：延迟加载，保证了线程安全。</p>
+<p>缺点：效率低。实例化只需要执行一次就够了，但是以后每个线程每次调用getInstance都要进行同步加锁。</p>
+<p>实际开发中，不推荐该方式。</p>
+<h3 id="双重检查（Double-Check）"><a href="#双重检查（Double-Check）" class="headerlink" title="双重检查（Double Check）"></a>双重检查（Double Check）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleCheck</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">DoubleCheck</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态volatile变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> DoubleCheck instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态方法，调用该方法时才创建实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DoubleCheck <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (DoubleCheck<span class="class">.<span class="keyword">class</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="keyword">null</span>) instance = <span class="keyword">new</span> DoubleCheck();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>双重检查是”线程不安全-同步代码块“与”线程安全-同步方法“的改进，volatile修饰变量保证可见性，即使有多个线程同时进行”第一个条件判断“，在同步代码块中也有第二个条件判断保证只会创建一个实例。同时解决了使用同步方法效率低的问题，因为线程多次调用getInstance只是第一次有同步加锁操作。</p>
+<p>实际开发中，推荐使用。</p>
+<h3 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1.构造方法私有化，其他类不能new</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">StaticInnerClass</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.私有静态内部类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Instance</span></span>&#123;</span><br><span class="line">        <span class="comment">//2.1.私有静态常量，创建对象</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> StaticInnerClass INSTANCE = <span class="keyword">new</span> StaticInnerClass();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.公有静态方法，调用该方法时调用内部类的静态常量，</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticInnerClass <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Instance.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于外部类加载时不会同时加载内部类，因此只有再调用getInstance方法时才会加载内部类，并在内部类类加载阶段的连接-准备阶段赋值。</p>
+<p>该方式是对饿汉式的改进，既能避免线程同步问题，又能做到延迟加载，避免内存的浪费。</p>
+<p>实际开发中，推荐使用。</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EnumSingleton &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        EnumSingleton enumSingleton = EnumSingleton.INSTANCE;</span><br><span class="line">        EnumSingleton enumSingleton1 = EnumSingleton.INSTANCE;</span><br><span class="line">        System.out.println(enumSingleton == enumSingleton1);<span class="comment">//true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>最简单最推荐的方式</strong>。该方式不仅能避免线程同步问题，还能防止反序列化重新创建新的对象。</p>
+<h2 id="简单工厂（Simple-Factory）"><a href="#简单工厂（Simple-Factory）" class="headerlink" title="简单工厂（Simple Factory）"></a>简单工厂（Simple Factory）</h2><p><strong>简单工厂模式是类的创建模式，又叫做静态工厂方法（Static Factory Method）模式。简单工厂模式是由一个工厂对象决定创建出哪一种产品类的实例。</strong></p>
+<h2 id="工厂方法（Factory-Method）"><a href="#工厂方法（Factory-Method）" class="headerlink" title="工厂方法（Factory Method）"></a>工厂方法（Factory Method）</h2><h2 id="抽象工厂（Abstract-Factory）"><a href="#抽象工厂（Abstract-Factory）" class="headerlink" title="抽象工厂（Abstract Factory）"></a>抽象工厂（Abstract Factory）</h2><h2 id="原型（Prototype）"><a href="#原型（Prototype）" class="headerlink" title="原型（Prototype）"></a>原型（Prototype）</h2><h1 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h1><h2 id="适配器（Adapter）"><a href="#适配器（Adapter）" class="headerlink" title="适配器（Adapter）"></a>适配器（Adapter）</h2><h2 id="桥接（Bridge）"><a href="#桥接（Bridge）" class="headerlink" title="桥接（Bridge）"></a>桥接（Bridge）</h2><h2 id="装饰器（Decorator）"><a href="#装饰器（Decorator）" class="headerlink" title="装饰器（Decorator）"></a>装饰器（Decorator）</h2><h2 id="代理（Proxy）"><a href="#代理（Proxy）" class="headerlink" title="代理（Proxy）"></a>代理（Proxy）</h2><h1 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h1><h2 id="责任链（Chain-Of-Responsibility）"><a href="#责任链（Chain-Of-Responsibility）" class="headerlink" title="责任链（Chain Of Responsibility）"></a>责任链（Chain Of Responsibility）</h2><h2 id="策略（Strategy）"><a href="#策略（Strategy）" class="headerlink" title="策略（Strategy）"></a>策略（Strategy）</h2><h2 id="模板方法（Template-Method）"><a href="#模板方法（Template-Method）" class="headerlink" title="模板方法（Template Method）"></a>模板方法（Template Method）</h2><h2 id="观察者（Observer）"><a href="#观察者（Observer）" class="headerlink" title="观察者（Observer）"></a>观察者（Observer）</h2>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="常用设计模式" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/Java%E6%A1%86%E6%9E%B6/SpringBoot/" title="SpringBoot"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
