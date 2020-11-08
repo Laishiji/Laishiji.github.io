@@ -10,4 +10,3 @@
 
 - [JavaWeb基础](https://thmasterplan.cn/categories/JavaWeb/)
 - [Spring系列](https://thmasterplan.cn/categories/Java%E6%A1%86%E6%9E%B6/)
-- [CentOS7](https://thmasterplan.cn/categories/Linux/)

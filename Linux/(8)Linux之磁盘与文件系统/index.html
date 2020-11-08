@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Linux之磁盘与文件系统 | Blog Of TheMasterplan</title>
+  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示： Linux之磁盘与文件系统\ext2.jpg)  SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux之磁盘与文件系统">
+<meta property="og:url" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示： Linux之磁盘与文件系统\ext2.jpg)  SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/dd.jpg">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="article:published_time" content="2019-11-29T07:26:51.000Z">
+<meta property="article:modified_time" content="2020-11-08T06:01:16.572Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="CentOS7">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/lsj/Desktop/Linux/(8">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS7/" style="font-size: 13.88px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统简介"><span class="toc-number">1.</span> <span class="toc-text">文件系统简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘简介"><span class="toc-number">2.</span> <span class="toc-text">磁盘简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分区管理"><span class="toc-number">3.</span> <span class="toc-text">分区管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分区原因"><span class="toc-number">3.1.</span> <span class="toc-text">分区原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MBR分区"><span class="toc-number">3.2.</span> <span class="toc-text">MBR分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPT分区"><span class="toc-number">3.3.</span> <span class="toc-text">GPT分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区管理命令"><span class="toc-number">3.4.</span> <span class="toc-text">分区管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用"><span class="toc-number">3.4.1.</span> <span class="toc-text">常用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建分区"><span class="toc-number">3.4.2.</span> <span class="toc-text">创建分区</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建MBR分区"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">创建MBR分区</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建GPT分区"><span class="toc-number">3.4.2.2.</span> <span class="toc-text">创建GPT分区</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高级分区操作"><span class="toc-number">3.4.3.</span> <span class="toc-text">高级分区操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统管理"><span class="toc-number">4.</span> <span class="toc-text">文件系统管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件系统"><span class="toc-number">4.1.</span> <span class="toc-text">创建文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理文件系统"><span class="toc-number">4.2.</span> <span class="toc-text">管理文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件系统检测和修复"><span class="toc-number">4.3.</span> <span class="toc-text">文件系统检测和修复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用工具"><span class="toc-number">4.4.</span> <span class="toc-text">常用工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂载设备"><span class="toc-number">5.</span> <span class="toc-text">挂载设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分区挂载"><span class="toc-number">5.1.</span> <span class="toc-text">分区挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swap的挂载"><span class="toc-number">5.2.</span> <span class="toc-text">swap的挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例"><span class="toc-number">5.3.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外围设备"><span class="toc-number">6.</span> <span class="toc-text">外围设备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#光盘"><span class="toc-number">6.1.</span> <span class="toc-text">光盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#USB"><span class="toc-number">6.2.</span> <span class="toc-text">USB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟内存"><span class="toc-number">7.</span> <span class="toc-text">虚拟内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RAID"><span class="toc-number">8.</span> <span class="toc-text">RAID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAID级别"><span class="toc-number">8.1.</span> <span class="toc-text">RAID级别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM"><span class="toc-number">9.</span> <span class="toc-text">LVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">9.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM示意图"><span class="toc-number">9.2.</span> <span class="toc-text">LVM示意图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用逻辑卷步骤"><span class="toc-number">9.3.</span> <span class="toc-text">使用逻辑卷步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM常用命令"><span class="toc-number">9.4.</span> <span class="toc-text">LVM常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM快照管理"><span class="toc-number">9.5.</span> <span class="toc-text">LVM快照管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用快照"><span class="toc-number">9.5.1.</span> <span class="toc-text">使用快照</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-(8)Linux之磁盘与文件系统" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux之磁盘与文件系统
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
+	  <time datetime="2019-11-29T07:26:51.000Z" itemprop="datePublished">2019-11-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CentOS7/" rel="tag">CentOS7</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="文件系统简介"><a href="#文件系统简介" class="headerlink" title="文件系统简介"></a>文件系统简介</h2><p>Linux使用的是<strong>索引式文件系统</strong>（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。</p>
+<p>下面以<strong>EXT2文件系统</strong>为例，其结构如图所示：</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\ext2.jpg)</p>
+<ul>
+<li><p><strong>SuperBlock</strong>：记录此文件系统的整体信息，包括Inode/Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。</p>
+</li>
+<li><p><strong>Inode Table</strong>：Inode表，每个Inode记录文件的属性，包括文件的权限、拥有者与群组、容量、atime/mtime/ctime和此文件的数据所在的Block地址。</p>
+<ul>
+<li>每个Inode大小均为固定128字节（ext4和xfs可设定到256字节）。</li>
+<li>每个文件仅占用一个Inode。</li>
+<li>系统读取文件时需要先找到Inode，并分析Inode所记录的权限与用户是否符合，符合则再根据Inode记录的Block地址访问数据。</li>
+</ul>
+</li>
+<li><p><strong>Data Block</strong>：实际记录文件的内容，若文件过大一般会占用多个Block。EXT2文件系统所支持的Block大小有1K，2K和4K三种。</p>
+<p>|     Block大小      | 1KB  |  2KB  | 4KB  |<br>| :————————: | :—: | :—-: | :—: |<br>|  最大单一文件限制  | 16GB | 256GB | 2TB  |<br>| 最大文件系统总容量 | 2TB  |  8TB  | 16TB |</p>
+<ul>
+<li>除非重新格式化，Block的大小与数量在格式化完成后就不能再改变。</li>
+<li>每个Block内最多只能放置一个文件的数据。</li>
+<li>若文件大于Block，则一个文件占用多个block；若文件小于Block，则该Blcok的剩余容量就不能再被使用。</li>
+</ul>
+</li>
+<li><p><code>dumpe2fs</code>：查询EXT系列SuperBlock信息的指令。</p>
+</li>
+<li><p><strong>文件系统与目录树的关系</strong></p>
+</li>
+<li>目录：<strong>当在Linux下的文件系统建立一个目录时，文件系统会分配一个Inode与至少一块Block给该目录，其中Inode记录该目录的相关权限和属性，并记录分配的那块Block地址，而该Block用于记录该目录下的文件名与该文件名占用的Inode号</strong>；<code>ls -i</code>查询当前目录下文件的Inode号码。<ul>
+<li>文件：在EXT2建立一个文件时，EXT2会分配一个Inode和对应该文件大小的一个或多个Block。</li>
+</ul>
+</li>
+</ul>
+<p>注：CentOS7之后使用XFS，它是一种日志式文件系统，具备故障恢复能力。其Block大小可从512Bytes - 64KB调整变化，其最大单一文件限制为9EB（1EB = 1024PB = 1024*1024 TB），最大文件系统总容量为18EB。</p>
+<h2 id="磁盘简介"><a href="#磁盘简介" class="headerlink" title="磁盘简介"></a>磁盘简介</h2><ul>
+<li><p>硬盘标识：/dev目录下以sd开头的设备文件，例如/dev/sda，/dev/sdb。</p>
+</li>
+<li><p>同一磁盘的不同分区：以数字区分，例如/dev/sda1，/dev/sda2。</p>
+</li>
+<li><p>磁盘使用步骤：</p>
+<ol>
+<li>磁盘分区 </li>
+<li>分区上创建文件系统</li>
+<li>将分区挂载到目录</li>
+</ol>
+</li>
+</ul>
+<h2 id="分区管理"><a href="#分区管理" class="headerlink" title="分区管理"></a>分区管理</h2><h3 id="分区原因"><a href="#分区原因" class="headerlink" title="分区原因"></a>分区原因</h3><ol>
+<li>隔离系统和程序，可安装多个操作系统。</li>
+<li>不同分区可以采用不同文件系统。</li>
+<li>优化I/O性能。</li>
+<li>实现磁盘空间配额限制</li>
+<li>提高修复速度</li>
+</ol>
+<h3 id="MBR分区"><a href="#MBR分区" class="headerlink" title="MBR分区"></a>MBR分区</h3><p>MBR分区不超过2T，一块硬盘最多有4个主分区，也可以3主分区+1扩展分区（扩展分区可包含N个逻辑分区）。MBR分区结构如下图：</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\MBR.jpg)</p>
+<h3 id="GPT分区"><a href="#GPT分区" class="headerlink" title="GPT分区"></a>GPT分区</h3><p>GPT支持128个分区，分区可达ZB级别。GPT分区结构如下图：</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\GPT.jpg)</p>
+<h3 id="分区管理命令"><a href="#分区管理命令" class="headerlink" title="分区管理命令"></a>分区管理命令</h3><h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><ul>
+<li><strong>列出块设备</strong>：<code>lsblk</code></li>
+<li><strong>查看块设备的UUID</strong>（通用唯一识别码）：<code>blkid</code></li>
+</ul>
+<h4 id="创建分区"><a href="#创建分区" class="headerlink" title="创建分区"></a>创建分区</h4><h5 id="创建MBR分区"><a href="#创建MBR分区" class="headerlink" title="创建MBR分区"></a>创建MBR分区</h5><p><code>fdisk</code>命令：</p>
+<ul>
+<li><code>fdisk -l</code>：查看当前分区情况</li>
+<li><p><code>fdisk [device]</code>，管理分区，常用子命令：</p>
+<ul>
+<li>p：分区列表</li>
+<li>t：更改分区ID（输入L查询，不同的ID标识分区的类型）</li>
+<li>n：创建新分区</li>
+<li>d：删除分区</li>
+<li><p>v：校验分区</p>
+</li>
+<li><p>u：转换单位</p>
+</li>
+<li><p>w：保存退出</p>
+</li>
+<li><p>q：不保存退出</p>
+</li>
+<li>fdisk实时更改硬盘的分区，分区完成后注意与内存分区表同步（<code>partprobe</code>），查看内核是否已经识别新的分区<code>cat /proc/partitions</code>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="创建GPT分区"><a href="#创建GPT分区" class="headerlink" title="创建GPT分区"></a>创建GPT分区</h5><p><code>gdisk</code>命令，用法与<code>fdisk</code>相似。</p>
+<h4 id="高级分区操作"><a href="#高级分区操作" class="headerlink" title="高级分区操作"></a>高级分区操作</h4><p><code>parted</code>命令。该命令操作都是实时生效，需谨慎操作。</p>
+<ul>
+<li><code>parted /dev/sdb mklabel gpt</code>：设置<code>/dev/sdb</code>这块磁盘为GPT类型。</li>
+<li><code>parted /dev/sdb print</code>：打印<code>/dev/sdb</code>的分区信息。</li>
+<li><code>parted /dev/sdb mkpart primary 1 200</code>：设置一个分区，从1MB到200MB，大小为199MB（注意分区需是连续空间）。</li>
+<li><code>parted /dev/sdb rm 1</code>：删除第一个分区。</li>
+<li><code>parted -l</code>：列出所有硬盘的分区信息。</li>
+<li>重新设置内存中的内核分区表版本：<code>partprobe</code>.</li>
+</ul>
+<h2 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h2><p>查看当前OS支持的文件系统：<code>cat /proc/filesystems</code></p>
+<h3 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h3><ul>
+<li><code>mkfs -t [type] [device]</code>，例如<code>mkfs -t xfs /dev/sdb2</code>，若要创建swap类型，使用<code>mkswap /dev/xxx</code>命令。</li>
+</ul>
+<h3 id="管理文件系统"><a href="#管理文件系统" class="headerlink" title="管理文件系统"></a>管理文件系统</h3><ul>
+<li><p><code>tune2fs</code>：重新设定ext系列文件系统参数的值</p>
+<ul>
+<li><code>-l</code>：查看指定文件系统superblock信息</li>
+<li><code>-L &#39;LABEL&#39;</code>：修改卷标</li>
+<li><code>-O</code>：文件系统属性的启用或禁用</li>
+</ul>
+</li>
+<li><p><code>dumpe2fs</code>：显示ext文件系统信息，将磁盘块分组管理</p>
+</li>
+<li><code>xfs_info 挂载点</code>：显示已挂载的xfs文件系统信息</li>
+</ul>
+<h3 id="文件系统检测和修复"><a href="#文件系统检测和修复" class="headerlink" title="文件系统检测和修复"></a>文件系统检测和修复</h3><p>文件系统故障常发生于死机或非正常关机后，注意一定要取消挂载后再执行修复命令。不同文件系统修复命令如下：<code>fsck</code> 、<code>e2fsck</code>、<code>xfs_repair</code>。</p>
+<h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><ul>
+<li><p><code>df</code>：<strong>查看文件系统和磁盘空间使用情况</strong>，常用选项<code>-T,-h</code>。</p>
+</li>
+<li><p><code>du -h /xxx/yyy</code>：<strong>查看某目录总体空间占用状态</strong>，<code>--max-depth=3</code>指定最大目录层级为3</p>
+</li>
+<li><p><code>dd</code>：用于<strong>转换与复制文件</strong>。用法：<code>dd if=/x/y of=/a/b bs=# count=#</code>。说明：</p>
+<ul>
+<li><code>if=/x/y</code>：从指定文件读取</li>
+<li><code>of=/a/b</code>：写入到指定文件</li>
+<li><code>ibs=size</code>：一次读size个字节</li>
+<li><code>obs=size</code>：一次写size个字节</li>
+<li><code>bs=size</code>：block size，指定块大小(既是ibs也是obs)</li>
+<li><code>cbs=size</code>：一次转换size个字节</li>
+<li><code>skip=blocks</code>：从开头忽略blocks个ibs大小的块，只复制之后的内容</li>
+<li><code>seek=blocks</code>：从开头忽略blocks个obs大小的块，用if中复制的内容替换blocks个obs大小的块之后的内容。</li>
+<li><code>count=n</code>：复制n个bs</li>
+<li><img src="dd.jpg" alt=""></li>
+<li><p><strong>备份</strong>：</p>
+<ul>
+<li><code>dd if=/dev/sdx of=/dev/sdy</code>：整盘备份到另一磁盘</li>
+<li><code>dd if=/dev/sdx of=/xxx/image</code>：整盘备份到文件</li>
+<li><code>dd if=/dev/sdx | gzip &gt; /xxx/image.gz</code>：整盘备份并压缩</li>
+</ul>
+</li>
+<li><p><strong>恢复</strong>：</p>
+<ul>
+<li><code>dd if=/xxx/image of=/dev/sdx</code></li>
+<li><code>gzip -dc /xxx/image.gz | dd of=/dev/sdx</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="挂载设备"><a href="#挂载设备" class="headerlink" title="挂载设备"></a>挂载设备</h2><p><strong>挂载点</strong>：<strong>挂载点一定是目录，该目录为进入该文件系统的入口</strong>。</p>
+<h3 id="分区挂载"><a href="#分区挂载" class="headerlink" title="分区挂载"></a>分区挂载</h3><p>将分区挂载到目录，则该目录下的文件都存储于该分区中；若有其他分区挂载在该目录的子目录下，则子目录下的文件存储于另一分区中。</p>
+<p>挂载点下原有文件在分区挂载完成后会被临时隐藏，因此挂载点目录一般为空。</p>
+<p>一个分区可以同时挂载在多个目录下，一个目录只能与一个分区关联。</p>
+<p><strong>分区实现永久挂载需要写入配置文件<code>/etc/fstab</code></strong>，使用<code>blkid</code>查看分区的UUID（也可使用设备分区名例如<code>/dev/sda2</code>）并按格式写入配置文件；若需要更改挂载点所属文件系统属性（是否启用acl，suid，exec等），亦可在该配置文件中更改，默认为defaults，然后<code>mount -o remount /dev/xxx</code>重新挂载使更改生效。</p>
+<h3 id="swap的挂载"><a href="#swap的挂载" class="headerlink" title="swap的挂载"></a>swap的挂载</h3><p>写入<code>/etc/fstab</code>，挂载点和文件系统均为<code>swap</code>，保存退出后键入<code>swapon -a</code>；<code>swapoff</code>命令取消交换分区。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li><p><code>mount /dev/sda2 /mnt</code>：将分区sda2挂载在/mnt目录下。</p>
+<ul>
+<li><code>-r</code>：只读挂载</li>
+</ul>
+</li>
+<li><code>-w</code>：读写挂载，默认<ul>
+<li><code>mount -B 目录1 目录2</code>：类似与软连接的效果，两个目录的文件共享。</li>
+</ul>
+</li>
+<li><code>-o options</code>：挂载文件系统的选项如下图</li>
+</ul>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\mount.jpg)</p>
+<ul>
+<li><p><code>umount /mnt</code>：取消挂载</p>
+</li>
+<li><p><code>cat /etc/mtab</code>：查看目前的挂载情况</p>
+</li>
+<li><p>查看挂载情况：<code>findmnt 挂载点/设备分区</code></p>
+</li>
+<li><p>查看正在访问指定挂载点的进程：<code>lsof 挂载点</code>、<code>fuser -v 挂载点</code></p>
+</li>
+<li><p>终止所有正在访问指定挂载点的进程：<code>fuser -km 挂载点</code></p>
+</li>
+</ul>
+<h2 id="外围设备"><a href="#外围设备" class="headerlink" title="外围设备"></a>外围设备</h2><h3 id="光盘"><a href="#光盘" class="headerlink" title="光盘"></a>光盘</h3><ul>
+<li>手动挂载：<code>mount /dev/cdrom /mnt</code></li>
+<li>操作光盘：<code>eject</code>弹出光盘；<code>eject -t</code>弹入光盘</li>
+<li>创建ISO文件：<code>cp /dev/cdrom /root/xxx.iso</code>；<code>mkisofs -r -o ./xxx.iso /etc</code>…</li>
+</ul>
+<h3 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h3><ul>
+<li>查看USB设备是否识别：<code>lsusb</code></li>
+<li>被内核探测为SCSI设备：<code>/dev/sdaX、/dev/sdbX</code>或类似的设备文件</li>
+<li>手动挂载：<code>mount /dev/sdbX /mnt</code></li>
+</ul>
+<h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><p>swap交换分区是系统内存的补充，支持虚拟内存，当没有足够的内存保存系统处理的数据时会将数据写入swap分区。可使用<code>free</code>命令查看内存使用情况。</p>
+<h2 id="RAID"><a href="#RAID" class="headerlink" title="RAID"></a>RAID</h2><p>RAID：Redundant Arrays of Independent Disks（独立冗余磁盘阵列），其作用有：</p>
+<ul>
+<li>提高<strong>IO能力</strong>：磁盘并行读写。</li>
+<li>提高<strong>容错性</strong>。</li>
+<li>多块磁盘组织在一起工作。</li>
+</ul>
+<p>RAID的实现方式有：</p>
+<ul>
+<li>外接式：通过扩展卡提供适配能力。</li>
+<li>内接式：主板集成RAID控制器，安装OS前在BIOS里配置。</li>
+<li>软件RAID：软件实现。</li>
+</ul>
+<h3 id="RAID级别"><a href="#RAID级别" class="headerlink" title="RAID级别"></a>RAID级别</h3><ul>
+<li><p>RAID-0：同一文件分块存储在多块硬盘上，读写性能提升，无容错能力。</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-0.jpg)</p>
+</li>
+<li><p>RAID-1：同一文件完全一样地存储于两块磁盘（镜像），读性能提升，写性能略有下降，有容错能力，磁盘利用率只有一半。</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-1.jpg)</p>
+</li>
+<li><p>RAID-5：读写性能提升，至少3块磁盘，有容错能力（允许最多1块磁盘损坏），每一块磁盘都划分一部分空间充当校验位。</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-5.jpg)</p>
+</li>
+<li><p>RAID-6：读写性能提升，至少4块磁盘，两个校验位，允许最多2块磁盘损坏，容错性较RAID-5高</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-6.jpg)</p>
+</li>
+<li><p>RAID-10与RAID-01（实际使用RAID-10，RAID-10容错性较RAID-01好）</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-10.jpg)</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-01.jpg)</p>
+</li>
+<li><p>RAID-50</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-50.jpg)</p>
+</li>
+<li><p>RAID-7：自身带操作系统和管理工具，理论上性能最高的RAID模式。</p>
+</li>
+</ul>
+<h2 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Logical Volume Manager（逻辑卷管理），允许对卷进行方便操作的抽象层。</p>
+<ol>
+<li><p>将物理块设备指定为物理卷；</p>
+</li>
+<li><p>用多个物理卷来创建一个卷组（物理卷是用固定大小的物理区域[PE，Physical Extent]来定义的）；</p>
+</li>
+<li><p>从卷组中划分逻辑卷，可在逻辑卷上创建文件系统，逻辑卷大小可扩展。</p>
+</li>
+</ol>
+<h3 id="LVM示意图"><a href="#LVM示意图" class="headerlink" title="LVM示意图"></a>LVM示意图</h3><p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\LVM-2.jpg)</p>
+<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\LVM-1.jpg)</p>
+<h3 id="使用逻辑卷步骤"><a href="#使用逻辑卷步骤" class="headerlink" title="使用逻辑卷步骤"></a>使用逻辑卷步骤</h3><ol>
+<li>将设备指定为物理卷，例如<code>pvcreate /dev/sdb1 /dev/sdd</code>或<code>pvcreate /dev/sd{b1,d}</code>，同时将分区和磁盘指定为物理卷。（如果是分区，需要将分区ID改为<code>8e</code>，表示Linux LVM类型）</li>
+<li>用多个物理卷创建卷组，<code>vgcreate [选项] vgName pv1 pv2 ...</code>，例如<code>vgcreate -s 16M vg0 /dev/sdb1 /dev/sdd</code>，选项<code>-s</code>指定PE大小。</li>
+<li>从卷组中划分逻辑卷，<code>lvcreate -n mysql -L 8G vg0</code>，<code>-n</code>指定逻辑卷名，<code>-L</code>指定大小，<code>-l</code>也是指定大小但是单位是PE个数。</li>
+<li><code>ll /dev/vg0/mysql</code>发现<code>/dev/vg0/mysql</code>为软链接，指向<code>/dev/dm-0</code>，其另一软链接为<code>/dev/mapper/vg0-mysql</code>，若继续创建逻辑卷，其真实设备名依次为<code>/dev/dm-1</code>、<code>/dev/dm-2</code>…</li>
+<li>在逻辑卷上创建文件系统，<code>mkfs.xfs /dev/vg0/mysql</code>。</li>
+<li>挂载，<code>mount /dev/vg0/mysql /mnt/mysql</code>；将挂载写入配置文件<code>/etc/fstab</code>，在vim扩展命令模式下键入<code>r!blkid /dev/vg0/mysql</code>进行修改。</li>
+</ol>
+<h3 id="LVM常用命令"><a href="#LVM常用命令" class="headerlink" title="LVM常用命令"></a>LVM常用命令</h3><ul>
+<li>列出现有的物理卷：<code>pvs</code>、<code>pvdisplay</code></li>
+<li>列出现有卷组：<code>vgs</code>、<code>vgdisplay</code></li>
+<li>列出现有逻辑卷：<code>lvs</code>、<code>lvdisplay</code></li>
+<li><p>扩展现有逻辑卷：<code>lvextend -l +48%free /dev/vg0/mysql</code>：剩余卷组的48%分配给逻辑卷，亦可使用PE数进行分配<code>lvextend -l +200 /dev/vg0/mysql</code>；此时使用<code>lsblk</code>或者<code>fdisk -l</code>查看已分配成功，但是<code>df</code>查看并未改变，还需要<strong>为新扩展的逻辑卷创建相同的文件系统</strong></p>
+<ul>
+<li><p>xfs：<code>xfs_growfs 挂载点</code></p>
+</li>
+<li><p>ext：<code>resize2fs 逻辑卷名</code>（注意xfs与ext的区别）</p>
+</li>
+<li>亦可一次搞定（加上<code>-r</code>选项）：<code>lvextend -r -l +xxx /dev/vg0/mysql</code></li>
+</ul>
+</li>
+<li>扩展现有的卷组：<code>vgextend vg0 PV名</code></li>
+<li>删除逻辑卷、卷组、物理卷：迁移数据 -&gt; <code>umount /mnt/mysql</code> -&gt; <code>lvremove /dev/vg0/mysql</code> -&gt; <code>vgremove vg0</code> -&gt; <code>pvremove /dev/sdb1 /dev/sdd</code> </li>
+</ul>
+<h3 id="LVM快照管理"><a href="#LVM快照管理" class="headerlink" title="LVM快照管理"></a>LVM快照管理</h3><p>逻辑卷的快照需要与该逻辑卷在同一个卷组，且快照的容量小于等于逻辑卷；</p>
+<p>逻辑卷中每一个发生修改的文件都会备份到快照中；</p>
+<h4 id="使用快照"><a href="#使用快照" class="headerlink" title="使用快照"></a>使用快照</h4><ul>
+<li><code>lvcreate -n mysql_snapshot -s -L 1G /dev/vg0/mysql</code>：创建逻辑卷mysql的快照，选项<code>-s</code>用于创建快照，快照上的文件系统与原逻辑卷相同。</li>
+<li>挂载快照到目录：<code>mount -o nouuid /dev/vg0/mysql_snapshot /mnt/snap</code>，由于快照的UUID与原逻辑卷一样，所以挂载时需要指定nouuid选项，不然挂载不上（xfs是这样，ext4不用）。</li>
+<li>还原快照到逻辑卷（逻辑卷恢复为快照）：<ul>
+<li><code>umount /mnt/snap</code>,<code>umount /mnt/mysql</code>：卸载快照和逻辑卷。</li>
+<li><code>lvconvert --merge /dev/vg0/mysql_snapshot</code>：还原，此时快照已经删除。</li>
+<li><code>mount /dev/vg0/mysql /mnt/mysql</code>：重新挂载。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="Linux之磁盘与文件系统" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/Linux/(9)Linux%E4%B9%8B%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" title="Linux之进程管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/" title="Linux之软件安装和包管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>

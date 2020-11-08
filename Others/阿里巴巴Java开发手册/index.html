@@ -17,23 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>阿里Java开发规范 | Blog Of TheMasterplan</title>
-  <meta name="description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 阿里巴巴 Java 开发手册 v1.2.0前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响">
+  <title>阿里巴巴 Java 开发手册 v1.2.0 | Blog Of TheMasterplan</title>
+  <meta name="description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阿里Java开发规范">
-<meta property="og:url" content="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:title" content="阿里巴巴 Java 开发手册 v1.2.0">
+<meta property="og:url" content="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 阿里巴巴 Java 开发手册 v1.2.0前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响">
+<meta property="og:description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="e:/ChromeDownload/alibaba-java-specification-master/app_layout.png">
+<meta property="og:image" content="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/app_layout.png">
 <meta property="article:published_time" content="2020-10-02T08:42:19.000Z">
-<meta property="article:modified_time" content="2020-10-13T07:22:16.195Z">
+<meta property="article:modified_time" content="2020-11-08T01:34:17.248Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Others">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="e:/ChromeDownload/alibaba-java-specification-master/app_layout.png">
+<meta name="twitter:image" content="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/app_layout.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -187,7 +187,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -197,7 +197,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.29px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.71px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.71px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.86px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.14px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.29px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.43px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.57px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.14px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.14px;">软件工程</a>
+      <a href="/tags/CentOS7/" style="font-size: 13.88px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a>
     </div>
   </div>
 
@@ -206,7 +206,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -221,21 +221,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阿里巴巴-Java-开发手册-v1-2-0"><span class="toc-number">1.</span> <span class="toc-text">阿里巴巴 Java 开发手册 v1.2.0</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.2.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程规范"><span class="toc-number">1.3.</span> <span class="toc-text">编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名风格"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">命名风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量定义"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码格式"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">代码格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OOP-规约"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">OOP 规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合处理"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发处理"><span class="toc-number">1.3.0.6.</span> <span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制语句"><span class="toc-number">1.3.0.7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注释规约"><span class="toc-number">1.3.0.8.</span> <span class="toc-text">注释规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">1.3.0.9.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常日志"><span class="toc-number">1.4.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常处理"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志规约"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">日志规约</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MYSQL-数据库"><span class="toc-number">1.5.</span> <span class="toc-text">MYSQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建表规约"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">建表规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引规约"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">索引规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL-语句"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">SQL 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ORM-映射"><span class="toc-number">1.5.0.4.</span> <span class="toc-text">ORM 映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程结构"><span class="toc-number">1.6.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用分层"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">应用分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二方库依赖"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">二方库依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器"><span class="toc-number">1.6.0.3.</span> <span class="toc-text">服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全规约"><span class="toc-number">1.7.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-1：版本历史"><span class="toc-number">1.8.</span> <span class="toc-text">附 1：版本历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-2：本手册专有名词"><span class="toc-number">1.9.</span> <span class="toc-text">附 2：本手册专有名词</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程规范"><span class="toc-number">3.</span> <span class="toc-text">编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名风格"><span class="toc-number">3.0.1.</span> <span class="toc-text">命名风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量定义"><span class="toc-number">3.0.2.</span> <span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码格式"><span class="toc-number">3.0.3.</span> <span class="toc-text">代码格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OOP-规约"><span class="toc-number">3.0.4.</span> <span class="toc-text">OOP 规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合处理"><span class="toc-number">3.0.5.</span> <span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发处理"><span class="toc-number">3.0.6.</span> <span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制语句"><span class="toc-number">3.0.7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注释规约"><span class="toc-number">3.0.8.</span> <span class="toc-text">注释规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">3.0.9.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常日志"><span class="toc-number">4.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常处理"><span class="toc-number">4.0.1.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志规约"><span class="toc-number">4.0.2.</span> <span class="toc-text">日志规约</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MYSQL-数据库"><span class="toc-number">5.</span> <span class="toc-text">MYSQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建表规约"><span class="toc-number">5.0.1.</span> <span class="toc-text">建表规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引规约"><span class="toc-number">5.0.2.</span> <span class="toc-text">索引规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL-语句"><span class="toc-number">5.0.3.</span> <span class="toc-text">SQL 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ORM-映射"><span class="toc-number">5.0.4.</span> <span class="toc-text">ORM 映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程结构"><span class="toc-number">6.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用分层"><span class="toc-number">6.0.1.</span> <span class="toc-text">应用分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二方库依赖"><span class="toc-number">6.0.2.</span> <span class="toc-text">二方库依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器"><span class="toc-number">6.0.3.</span> <span class="toc-text">服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全规约"><span class="toc-number">7.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-1：版本历史"><span class="toc-number">8.</span> <span class="toc-text">附 1：版本历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-2：本手册专有名词"><span class="toc-number">9.</span> <span class="toc-text">附 2：本手册专有名词</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-阿里Java开发规范" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-阿里巴巴Java开发手册" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      阿里Java开发规范
+      阿里巴巴 Java 开发手册 v1.2.0
     </h1>
   
 
@@ -243,7 +243,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
+	<a href="/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" class="article-date">
 	  <time datetime="2020-10-02T08:42:19.000Z" itemprop="datePublished">2020-10-02</time>
 	</a>
 </span>
@@ -262,14 +262,14 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <p>本文转载自：<a href="https://github.com/mysterin/alibaba-java-specification" target="_blank" rel="noopener">https://github.com/mysterin/alibaba-java-specification</a></p>
-<h1 id="阿里巴巴-Java-开发手册-v1-2-0"><a href="#阿里巴巴-Java-开发手册-v1-2-0" class="headerlink" title="阿里巴巴 Java 开发手册 v1.2.0"></a>阿里巴巴 Java 开发手册 v1.2.0</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构和索引设计缺陷可能带来软件上的架构缺陷或性能风险；工程结构混乱导致后续维护艰难；没有鉴权的漏洞代码易被黑客攻击等等。所以本手册以 Java 开发者为中心视角，划分为编程规约、异常日志、MySQL 数据库、工程结构、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱及故障敏感性，规约依次分为强制、推荐、参考三大类。对于规约条目的延伸信息中，“说明”对内容做了引申和解释；“正例”提倡什么样的编码和实现方式；“反例”说明需要提防的雷区，以及真实的错误案例。  </p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构和索引设计缺陷可能带来软件上的架构缺陷或性能风险；工程结构混乱导致后续维护艰难；没有鉴权的漏洞代码易被黑客攻击等等。所以本手册以 Java 开发者为中心视角，划分为编程规约、异常日志、MySQL 数据库、工程结构、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱及故障敏感性，规约依次分为强制、推荐、参考三大类。对于规约条目的延伸信息中，“说明”对内容做了引申和解释；“正例”提倡什么样的编码和实现方式；“反例”说明需要提防的雷区，以及真实的错误案例。  </p>
 <p>本手册的愿景是码出高效、码出质量。代码的字里行间流淌的是软件生命中的血<br>液，质量的提升是尽可能少踩坑，杜绝踩重复的坑，切实提升质量意识。另外，现代<br>软件架构都需要协同开发完成，高效协作即降低协同成本，提升沟通效率，所谓无规<br>矩不成方圆，无规范不能协作。众所周知，制订交通法规表面上是要限制行车权，实<br>际上是保障公众的人身安全。试想如果没有限速，没有红绿灯，谁还敢上路行驶。对<br>软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度<br>个性化，以一种普遍认可的统一方式一起做事，提升协作效率。  </p>
 <p>《阿里巴巴 Java 开发手册》，开放包容地认真听取社区、博客、论坛的反馈，及时修正，保持与时俱进。请关注手册末页的“阿里技术”和“云栖社区”公众号获取最新版本。  </p>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- MarkdownTOC -->
@@ -875,7 +875,7 @@ private static final Logger logger = LoggerFactory.getLogger(Abc.class);
 </ol>
 <h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><h4 id="应用分层"><a href="#应用分层" class="headerlink" title="应用分层"></a>应用分层</h4><ol>
 <li><p>【推荐】图中默认上层依赖于下层，箭头关系表示可直接依赖，如：开放接口层可以依赖于 Web 层，也可以直接依赖于 Service 层，依此类推：</p>
-<p><img src="E:/ChromeDownload/alibaba-java-specification-master/app_layout.png" alt="未加载图片"></p>
+<p><img src="app_layout.png" alt="未加载图片"></p>
 <ul>
 <li><strong>开放接口层：</strong>可直接封装 Service 方法暴露成 RPC 接口；通过 Web 封装成 http 接口；进行网关安全控制、流量控制等。</li>
 <li><strong>终端显示层：</strong>各个端的模板渲染并执行显示的层。当前主要是 velocity 渲染，JS 渲染，JSP 渲染，移动端展示等。</li>
@@ -1037,7 +1037,7 @@ private static final Logger logger = LoggerFactory.getLogger(Abc.class);
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8CJava%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" title="阿里Java开发规范" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/" title="阿里巴巴 Java 开发手册 v1.2.0" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     

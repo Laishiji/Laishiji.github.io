@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Linux之权限与用户组管理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log，其含义如下：  第1位：  -：表示普通文件。 d：目录。 b：设备文件（块文件，即可以用来存储的设备文件）。 c：设备文件（字符文件，不能用来存储的设备文件）。 l：软链接（快捷方式）。  p：管道文件pipe。  s：套接字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux之权限与用户组管理">
+<meta property="og:url" content="http://thmasterplan.cn/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log，其含义如下：  第1位：  -：表示普通文件。 d：目录。 b：设备文件（块文件，即可以用来存储的设备文件）。 c：设备文件（字符文件，不能用来存储的设备文件）。 l：软链接（快捷方式）。  p：管道文件pipe。  s：套接字">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-17T16:16:20.000Z">
+<meta property="article:modified_time" content="2020-11-08T06:49:52.723Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="CentOS7">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS7/" style="font-size: 13.88px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件权限"><span class="toc-number">1.</span> <span class="toc-text">文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限概述"><span class="toc-number">1.1.</span> <span class="toc-text">权限概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#r-w-x权限对于目录的意义"><span class="toc-number">1.2.</span> <span class="toc-text">r&#x2F;w&#x2F;x权限对于目录的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改权限"><span class="toc-number">1.3.</span> <span class="toc-text">更改权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认权限"><span class="toc-number">1.4.</span> <span class="toc-text">默认权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊权限"><span class="toc-number">1.5.</span> <span class="toc-text">特殊权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL"><span class="toc-number">1.6.</span> <span class="toc-text">ACL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限与指令间的关系-在用户模式下"><span class="toc-number">1.7.</span> <span class="toc-text">权限与指令间的关系(在用户模式下)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件隐藏属性"><span class="toc-number">1.8.</span> <span class="toc-text">文件隐藏属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户组管理"><span class="toc-number">2.</span> <span class="toc-text">用户组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chown"><span class="toc-number">2.1.</span> <span class="toc-text">chown</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chgrp"><span class="toc-number">2.2.</span> <span class="toc-text">chgrp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户和组的配置文件"><span class="toc-number">2.3.</span> <span class="toc-text">用户和组的配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户和组的增删改"><span class="toc-number">2.4.</span> <span class="toc-text">用户和组的增删改</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-(4)Linux之权限与用户组管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux之权限与用户组管理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" class="article-date">
+	  <time datetime="2019-11-17T16:16:20.000Z" itemprop="datePublished">2019-11-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CentOS7/" rel="tag">CentOS7</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><h3 id="权限概述"><a href="#权限概述" class="headerlink" title="权限概述"></a>权限概述</h3><p>使用命令 <code>ls -l file</code>可列出该文件的权限信息 ，例如<code>-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log</code>，其含义如下：</p>
+<ul>
+<li><p>第1位：</p>
+<ul>
+<li>-：表示普通文件。</li>
+<li>d：目录。</li>
+<li>b：设备文件（块文件，即可以用来存储的设备文件）。</li>
+<li>c：设备文件（字符文件，不能用来存储的设备文件）。</li>
+<li><p>l：软链接（快捷方式）。</p>
+</li>
+<li><p>p：管道文件pipe。</p>
+</li>
+<li><p>s：套接字文件socket。</p>
+</li>
+</ul>
+</li>
+<li><p>后9位：r表示可读，w表示可写，x表示可执行。</p>
+<ul>
+<li>2-4位：用户的权限范围。</li>
+<li>5-7位：组的权限范围。</li>
+<li>8-10位：其余人的权限范围。</li>
+</ul>
+</li>
+<li><p>1表示该文件的硬链接数。</p>
+</li>
+<li><p>第一个root表示该文件的所有者用户。</p>
+</li>
+<li><p>第二个root表示该文件所属的组。</p>
+</li>
+<li><p>4.0K表示该文件的大小。</p>
+</li>
+<li><p>后面为最后一次修改的时间戳和文件名。</p>
+</li>
+</ul>
+<h3 id="r-w-x权限对于目录的意义"><a href="#r-w-x权限对于目录的意义" class="headerlink" title="r/w/x权限对于目录的意义"></a>r/w/x权限对于目录的意义</h3><ul>
+<li>r权限：可读取目录结构列表，即可查看目录下的文件名和子目录名。（注意：只有r权限不能查看文件内容）</li>
+<li>w权限：可创建文件和目录，可删除，可重命名，可转移。</li>
+<li>x权限：可进入该目录。</li>
+</ul>
+<h3 id="更改权限"><a href="#更改权限" class="headerlink" title="更改权限"></a>更改权限</h3><p>使用<code>chmod</code>更改权限。</p>
+<ul>
+<li><code>chmod u+x,g+w,o-r abc.log</code>：abc.log权限由<code>-rw-r--r--</code>变为<code>-rwxrw----</code>。</li>
+<li><code>chmod a=r file</code>或者<code>chmod +r file</code>：表示对file的u/g/o同时都赋予可读权限。</li>
+<li>Linux中也可通过数字更改权限，r = 4，w = 2， x = 1，即u/g/o的权限分别可用一个整数表示，例如<code>chmod 741 file</code>表示file的u/g/o权限为<code>-rwxr----x</code>。</li>
+<li>参数-R：R及recursive（递归）；<code>chmod -R 741 directory</code>，表示改变目录及目录下所有文件的权限为741。</li>
+</ul>
+<h3 id="默认权限"><a href="#默认权限" class="headerlink" title="默认权限"></a>默认权限</h3><p>文件预设权限：在没有umask的情况下，目录默认权限为777，文件的默认权限为666。但是使用<code>umask</code>命令发现Linux默认设置umask值为0022，它表示创建文件和目录，g和o都过滤掉写(w/2)权限，因此创建目录默认权限为755，创建文件默认权限为644。</p>
+<p>umask的第一位表示过滤特殊权限。</p>
+<h3 id="特殊权限"><a href="#特殊权限" class="headerlink" title="特殊权限"></a>特殊权限</h3><ul>
+<li><strong>SUID</strong>（最常用）：<code>chmod u+s file</code>，使file文件x权限上显示为S，表示非所属者可以获得所属者的所有权限。注意事项：<ul>
+<li><strong>SUID权限仅对二进制程序有效，不能用在脚本和目录上</strong>。</li>
+<li>执行者对于该程序有x的可执行权限。</li>
+<li>SUID权限仅在执行程序的过程中有效。</li>
+<li>让本没有相应权限的用户运行该程序时，可以获得其原本没有权限访问的资源。</li>
+</ul>
+</li>
+<li><p>SGID：非所属组成员获得所属组的权限。</p>
+<ul>
+<li>非组成员对于该程序需要具备x的权限。</li>
+<li>SGID<strong>主要用于目录, 在该目录下创建的任何文件及子目录属于该目录所拥有的组</strong> 。</li>
+</ul>
+</li>
+<li>SBIT: 目前只针对目录有效，且只能分配给其他人（o）;对于目录的作用是：当用户在该目录下建立文件或目录时，仅有<strong>自己与 root</strong>才有权力<strong>删除</strong>，例如/tmp。</li>
+<li><strong>SUID/SGID/SBIT权限设置</strong> ：<ul>
+<li><strong>文字法</strong> ：SUID: <strong>u+s</strong> ，SGID: <strong>g+s</strong>，SBIT: <strong>o+t</strong></li>
+<li><strong>数字法</strong>：将原来的三位数扩展为四位数即可，SUID为4，SGID为2，SBIT为1，把它们放在权限数字的最开头。例如设置SUID，可以写成4777，设置SGID可以写成，2777 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p>ACL即Access Control List，当一个用户(组)不是某文件的所有者(所属组)，又需要其对该文件拥有某些权限，可指定用户(u)或组(g)的权限，相当于特殊列表，用于实现灵活权限控制。权限优先级：所有者&gt;ACL权限(用户&gt;组&gt;other)。</p>
+<ul>
+<li><code>setfacl -m u:用户名:权限 file</code>。例如<code>setfacl -m u:Tom:rw abc.txt</code>，即指定Tom对abc.txt具有r和w权限。</li>
+<li><code>setfacl -x g:用户名 file</code>：删除权限。</li>
+<li><code>setfacl -R -b dir/</code>：删除dir下所有的ACL权限。</li>
+<li><code>getfacl file</code>：显示file的ACL权限。</li>
+</ul>
+<h3 id="权限与指令间的关系-在用户模式下"><a href="#权限与指令间的关系-在用户模式下" class="headerlink" title="权限与指令间的关系(在用户模式下)"></a>权限与指令间的关系(在用户模式下)</h3><p>用户能进入某目录：需要权限x</p>
+<ul>
+<li>进入目录后能利用ls查阅：需要权限r</li>
+<li>进入目录后能够创建文件和目录：需要权限w</li>
+</ul>
+<p>用户在目录内打开读取文件：</p>
+<ul>
+<li>目录需要权限x</li>
+<li>文件需要权限r</li>
+</ul>
+<h3 id="文件隐藏属性"><a href="#文件隐藏属性" class="headerlink" title="文件隐藏属性"></a>文件隐藏属性</h3><p><code>lsattr -a</code>：显示所有隐藏属性。</p>
+<p><code>chattr [-RV][-v][+/-/=&lt;属性&gt;] [文件或目录]</code>:</p>
+<ul>
+<li>-R：递归处理，将指定目录下的所有文件及子目录一并处理</li>
+<li>-v：&lt;版本编号&gt; 设置文件或目录版本</li>
+<li>-V： 显示指令执行过程</li>
+<li>+&lt;属性&gt;： 开启文件或目录的该项属性</li>
+<li>-&lt;属性&gt; ：关闭文件或目录的该项属</li>
+<li>=&lt;属性&gt;： 指定文件或目录的该项属性</li>
+<li>属性：<ul>
+<li><strong>a：让文件或目录只能加数据</strong>。</li>
+<li><strong>i：不得任意更动文件或目录</strong>。</li>
+<li>b：不更新文件或目录的最后存取时间。</li>
+<li>c：将文件或目录压缩后存放。</li>
+<li>d：将文件或目录排除在倾倒操作之外。</li>
+<li>s：保密性删除文件或目录。</li>
+<li>S：即时更新文件或目录。</li>
+<li>u：预防意外删除。</li>
+</ul>
+</li>
+</ul>
+<p>例如<code>chattr +a /var/log/messages</code>:让某个文件只能往里面追加数据，但不能删除，适用于各种日志文件</p>
+<h2 id="用户组管理"><a href="#用户组管理" class="headerlink" title="用户组管理"></a>用户组管理</h2><h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>更改文件的所有者。示例：</p>
+<ul>
+<li><code>chown user file</code>：将file的所有者改为user。</li>
+<li><code>chown user.group file</code>：将file的所有者改为user，同时更改其组为group。</li>
+<li><code>chown -R user directory</code>：若要更改目录的权限，则需要加-R（表示递归）才能将其里面所有文件的权限更改。</li>
+</ul>
+<h3 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h3><p>更改文件的所有组。示例：<code>chgrp root file</code>， 将file的所有组改为root。</p>
+<p>Linux组的类别有：</p>
+<ul>
+<li>用户的主要组：<strong>用户必须属于一个且只有一个主组</strong>，组名同用户名，且仅包含用户自己。</li>
+<li>用户的附加组：一个用户可属于0或多个附加组。</li>
+<li><code>id 用户名</code>：查看用户的uid、gid（主组）、groups的id。管理员root的uid和gid为0。</li>
+</ul>
+<h3 id="用户和组的配置文件"><a href="#用户和组的配置文件" class="headerlink" title="用户和组的配置文件"></a>用户和组的配置文件</h3><ul>
+<li><code>/etc/passwd</code>：用户及其属性信息(名称、UID、主组ID)。</li>
+<li><code>/etc/group</code>：组及其属性信息。</li>
+<li><code>/etc/shadow</code>：用户密码及其相关属性。</li>
+<li><code>/etc/gshadow</code>：组密码及其相关信息。</li>
+<li><code>/etc/default/useradd</code>：创建用户时的默认设置。</li>
+</ul>
+<h3 id="用户和组的增删改"><a href="#用户和组的增删改" class="headerlink" title="用户和组的增删改"></a>用户和组的增删改</h3><ul>
+<li><code>useradd</code>，<code>userdel</code>，<code>usermod</code></li>
+<li><code>groupadd</code>，<code>groupdel</code>，<code>groupmod</code></li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/" title="Linux之权限与用户组管理" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/Others/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/" title="网络安全总结"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/Linux/(3)Linux%E4%B9%8B%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="Linux之目录与文件"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>

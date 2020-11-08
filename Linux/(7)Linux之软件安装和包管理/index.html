@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Linux之软件安装和包管理 | Blog Of TheMasterplan</title>
+  <meta name="description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。 ldd 命令：查看二进制程序所依赖的共享库文件。 ldconfig -p：查看本机已经缓存的所有可用库文件名及文件路径映射关系。  程序包的来源获取程序包的途径：官方服务器，镜像站点，epel源（Extra Pack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux之软件安装和包管理">
+<meta property="og:url" content="http://thmasterplan.cn/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="软件运行环境 静态链接：libxxx.a，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。 动态链接：libxxx.so，只把依赖做一个动态链接，占用空间少。 ldd 命令：查看二进制程序所依赖的共享库文件。 ldconfig -p：查看本机已经缓存的所有可用库文件名及文件路径映射关系。  程序包的来源获取程序包的途径：官方服务器，镜像站点，epel源（Extra Pack">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-25T04:47:01.000Z">
+<meta property="article:modified_time" content="2020-11-08T06:55:47.478Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="CentOS7">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS7/" style="font-size: 13.88px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#软件运行环境"><span class="toc-number">1.</span> <span class="toc-text">软件运行环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序包的来源"><span class="toc-number">2.</span> <span class="toc-text">程序包的来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm包管理"><span class="toc-number">3.</span> <span class="toc-text">rpm包管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum管理"><span class="toc-number">4.</span> <span class="toc-text">yum管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码编译安装"><span class="toc-number">5.</span> <span class="toc-text">源码编译安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#压缩、解压缩工具"><span class="toc-number">6.</span> <span class="toc-text">压缩、解压缩工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包-存档-和解包工具"><span class="toc-number">7.</span> <span class="toc-text">打包(存档)和解包工具</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-(7)Linux之软件安装和包管理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux之软件安装和包管理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/" class="article-date">
+	  <time datetime="2019-11-25T04:47:01.000Z" itemprop="datePublished">2019-11-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CentOS7/" rel="tag">CentOS7</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="软件运行环境"><a href="#软件运行环境" class="headerlink" title="软件运行环境"></a>软件运行环境</h3><ul>
+<li>静态链接：<code>libxxx.a</code>，程序对应的依赖库复制到程序包，占用空间多,迁移容易，升级难，需重新编译。</li>
+<li>动态链接：<code>libxxx.so</code>，只把依赖做一个动态链接，占用空间少。</li>
+<li><code>ldd 命令</code>：查看二进制程序所依赖的共享库文件。</li>
+<li><code>ldconfig -p</code>：查看本机已经缓存的所有可用库文件名及文件路径映射关系。</li>
+</ul>
+<h3 id="程序包的来源"><a href="#程序包的来源" class="headerlink" title="程序包的来源"></a>程序包的来源</h3><p>获取程序包的途径：官方服务器，镜像站点，epel源（Extra Packages for Enterprise Linux）。</p>
+<p>管理程序包：</p>
+<ul>
+<li>使用包管理器：<code>rpm</code></li>
+<li>使用前端工具：<code>yum</code>, <code>dnf</code></li>
+</ul>
+<h3 id="rpm包管理"><a href="#rpm包管理" class="headerlink" title="rpm包管理"></a>rpm包管理</h3><p>rpm(redhat package manager)，rpm包中是<strong>已经编译好的程序文件</strong>。</p>
+<ul>
+<li>/var/lib/rpm/：数据库，其中包含了所有rpm包的名称及版本，依赖关系，功能说明，包安装后生成的各文件路径及校验码信息。</li>
+<li><code>rpm -ivh [install-options] PACKAGE_FILES</code>：<ul>
+<li><code>-i</code>：安装</li>
+<li><code>-v</code>：显示安装过程</li>
+<li><code>-h</code>：显示程序包管理执行进度</li>
+<li><code>-q</code>：查询包是否安装，与<code>-l</code>一起使用，列出包中的文件；与<code>-f</code>使用，查询文件的所属包；<code>-a</code>，查询所有安装的包</li>
+<li><code>-e</code>：卸载</li>
+<li><code>-U</code>：升级</li>
+<li><code>-V</code>：包校验</li>
+<li>…其余查询man帮助</li>
+</ul>
+</li>
+</ul>
+<h3 id="yum管理"><a href="#yum管理" class="headerlink" title="yum管理"></a>yum管理</h3><p>YUM：Yellowdog Update Modifier，rpm的前端程序，基于C/S架构，可解决软件包相关依赖性，可在多个库之间定位软件包。</p>
+<p>配置yum源：<code>/etc/yum.repos.d/</code>路径下<code>xxx.repo</code>中配置源服务器路径，yum命令安装时，查询本地repo源 -&gt; 查询服务器端元数据 -&gt; 下载元数据到缓冲区 -&gt; 下载rpm包到缓冲区 -&gt; 按依赖顺序安装包。</p>
+<ul>
+<li><p>使用本地光盘配置yum源</p>
+<ol>
+<li><p>检查是否安装autofs(自动挂载服务)</p>
+</li>
+<li><p><code>systemctl start autofs</code>：启动</p>
+</li>
+<li><p><code>systemctl enable autofs</code>：设置开机自启动</p>
+</li>
+<li><p><code>systemctl status autofs</code>：查看服务状态</p>
+</li>
+<li><p><code>ls /misc/cd -&gt; df</code>：光盘<code>/dev/sr0</code>已自动挂载到<code>/misc/cd</code>目录下</p>
+</li>
+<li><p><code>cd /etc/yum.repos.d/</code>，将原有的国外源删除（备份），创建一个新的以.repo结尾的配置文件，例如创建<code>base.repo</code>,配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name&#x3D;cdrom base</span><br><span class="line">baseurl&#x3D;file:&#x2F;&#x2F;&#x2F;misc&#x2F;cd</span><br><span class="line">gpgcheck&#x3D;0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>yum repolist</code>：查看可用的repo列表</p>
+</li>
+</ol>
+</li>
+<li><p>网络源配置</p>
+<ol>
+<li><p>可单独创建一个xxx.repo，也可在现有的repo中追加，例如在<code>base.repo</code>中追加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[epel]</span><br><span class="line">name&#x3D;aliyun epel</span><br><span class="line">baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;epel&#x2F;$releasever&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;0</span><br></pre></td></tr></table></figure>
+<p>其中releasever变量代表当前OS发行版本，basearch代表cpu架构</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>其他常用指令：</p>
+<ul>
+<li><code>yum clean all</code>：清空yum源缓存</li>
+<li><code>yum list</code>：列出repo源所有包</li>
+<li><code>yum install xxx</code>：安装</li>
+<li><code>yum remove xxx</code>：删除</li>
+<li><code>yum update pkgxxx</code>：更新</li>
+<li><code>yum info xxx</code>：查看详细信息</li>
+</ul>
+<h3 id="源码编译安装"><a href="#源码编译安装" class="headerlink" title="源码编译安装"></a>源码编译安装</h3><p>首先使用<code>wget URL</code>下载好源码包，再根据语言选择编译安装方式：</p>
+<ul>
+<li><code>C/C++</code>：make项目管理器<ol>
+<li>安装<code>gcc</code></li>
+<li>解压，进入到源码包目录中，运行<code>./configure</code>，通过选项传递参数指定启用特性、安装路径等；执行时会参考用户的指定以及Makefile.in文件生成Makefile（安装前查看源码包中的说明帮助文档README、INSTALL等，亦可通过<code>./configure --help</code>查看可选项）</li>
+<li><code>make -j n</code>根据Makefile文件，构建应用程序，j选项表示多线程并行编译。</li>
+<li><code>make install</code></li>
+<li>更改PATH</li>
+</ol>
+</li>
+<li><code>Java</code>：maven</li>
+</ul>
+<h3 id="压缩、解压缩工具"><a href="#压缩、解压缩工具" class="headerlink" title="压缩、解压缩工具"></a>压缩、解压缩工具</h3><ul>
+<li><code>.Z</code>后缀</li>
+<li><p><code>compress</code>：压缩后会删除原文件，可读取STDOUT内容进行压缩，支持管道</p>
+<ul>
+<li><code>-c</code>：结果输出至标准输出，不删除原文件。常见用法：<code>compress -c file &gt; file.Z</code></li>
+<li><code>-v</code>：显示详情</li>
+</ul>
+</li>
+<li><p><code>uncompress file.Z</code></p>
+<ul>
+<li><code>zcat file.Z</code>：不显示解压缩的前提下查看文本文件内容</li>
+</ul>
+</li>
+<li><p><code>.gz</code>后缀</p>
+<ul>
+<li><code>gzip</code>：<ul>
+<li><code>-c</code>：同<code>compress -c</code></li>
+<li><code>-#</code>：#取1-9，指定压缩比，值越大压缩比越大</li>
+</ul>
+</li>
+<li><code>gunzip file.gz</code></li>
+<li><code>zcat file.Z</code></li>
+</ul>
+</li>
+<li><p><code>.bz2</code>后缀</p>
+<ul>
+<li><p><code>bzip2</code>：</p>
+<ul>
+<li><code>-k</code>：</li>
+<li><code>-#</code>：默认为9</li>
+</ul>
+</li>
+<li><p><code>bunzip2 file.bz2</code></p>
+</li>
+<li><code>bzcat file.bz2</code></li>
+</ul>
+</li>
+<li><p><code>.xz</code></p>
+<ul>
+<li><p><code>xz</code>：</p>
+<ul>
+<li><code>-k</code>：</li>
+<li><code>-#</code>：默认为6</li>
+</ul>
+</li>
+<li><p><code>unxz</code></p>
+</li>
+<li><code>xzcat</code></li>
+</ul>
+</li>
+<li><p>一般来说压缩比：<code>xz &gt; bzip2 &gt; gz &gt; compress</code>，均不能压缩目录</p>
+</li>
+<li><code>.zip</code><ul>
+<li><code>zip</code>：支持压缩目录</li>
+<li><code>unzip</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="打包-存档-和解包工具"><a href="#打包-存档-和解包工具" class="headerlink" title="打包(存档)和解包工具"></a>打包(存档)和解包工具</h3><ul>
+<li><code>tar</code>常见用法：具体选项见man帮助</li>
+<li><p>打包，保留权限：<code>tar -cpvf xxx.tar file1 file2 file3...</code></p>
+<ul>
+<li>追加文件至xxx.tar：<code>tar -rf xxx.tar file1 file2..</code>注：不支持对压缩文件追加</li>
+<li>查看包中的文件列表：<code>tar -tf xxx.tar</code></li>
+<li>解包<code>tar -xf xxx.tar [可选：-C /PATH]</code></li>
+<li>结合压缩工具，打包并压缩：<ul>
+<li><code>tar zcvf xxx.tar.gz [可选：/PATH]</code>；<code>.tar.gz</code>也可写成<code>.tgz</code></li>
+<li><code>tar jcvf xxx.tar.bz2 [可选：/PATH]</code></li>
+<li><code>tar Jcvf xxx.tar.xz [可选：/PATH]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>--eclude=/PATH/文件名</code>：打包时排除某文件：<code>tar -zcvf xxx.tgz --exclude=/a/b/abc.txt</code></p>
+<ul>
+<li><code>-T</code>：指定打包列表；<code>-X</code>：指定排除列表<ul>
+<li><code>tar -zcvf xxx.tgz -T /a/list -X /a/excludeList</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>split</code>：分割一个文件为多份小文件</p>
+<ul>
+<li><code>split -b SIZE  xxx.tgz yyy</code>：<code>yyy</code>为切割后的文件前缀，SIZE为每份大小</li>
+<li>合并：<code>cat yyy* &gt; xxx.tgz</code></li>
+</ul>
+</li>
+<li><p><code>cpio</code>：一种老的存档格式。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/Linux/(7)Linux%E4%B9%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86/" title="Linux之软件安装和包管理" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="Linux之磁盘与文件系统"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/Linux/(6)Linux%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE/" title="Linux之文件查找"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
