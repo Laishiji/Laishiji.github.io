@@ -18,33 +18,33 @@
   
   
   <title>Linux之磁盘与文件系统 | Blog Of TheMasterplan</title>
-  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示： Linux之磁盘与文件系统\ext2.jpg)  SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。">
+  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。  Inode Table：Inode表，每个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux之磁盘与文件系统">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示： Linux之磁盘与文件系统\ext2.jpg)  SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。">
+<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。  Inode Table：Inode表，每个">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/ext2.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/MBR.jpg">
+<meta property="og:image" content="d:/myblog/github/source/_posts/GPT.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/dd.jpg">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
-<meta property="og:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/mount.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-0.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-1.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-5.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-6.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-10.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-01.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/RAID-50.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-2.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-1.jpg">
 <meta property="article:published_time" content="2019-11-29T07:26:51.000Z">
-<meta property="article:modified_time" content="2020-11-08T06:01:16.572Z">
+<meta property="article:modified_time" content="2020-11-08T13:02:55.533Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/lsj/Desktop/Linux/(8">
+<meta name="twitter:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/ext2.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
   
@@ -283,7 +283,7 @@
       
         <h2 id="文件系统简介"><a href="#文件系统简介" class="headerlink" title="文件系统简介"></a>文件系统简介</h2><p>Linux使用的是<strong>索引式文件系统</strong>（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。</p>
 <p>下面以<strong>EXT2文件系统</strong>为例，其结构如图所示：</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\ext2.jpg)</p>
+<p><img src="ext2.jpg" alt=""></p>
 <ul>
 <li><p><strong>SuperBlock</strong>：记录此文件系统的整体信息，包括Inode/Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。</p>
 </li>
@@ -306,7 +306,8 @@
 </li>
 <li><p><strong>文件系统与目录树的关系</strong></p>
 </li>
-<li>目录：<strong>当在Linux下的文件系统建立一个目录时，文件系统会分配一个Inode与至少一块Block给该目录，其中Inode记录该目录的相关权限和属性，并记录分配的那块Block地址，而该Block用于记录该目录下的文件名与该文件名占用的Inode号</strong>；<code>ls -i</code>查询当前目录下文件的Inode号码。<ul>
+<li><p>目录：<strong>当在Linux下的文件系统建立一个目录时，文件系统会分配一个Inode与至少一块Block给该目录，其中Inode记录该目录的相关权限和属性，并记录分配的那块Block地址，而该Block用于记录该目录下的文件名与该文件名占用的Inode号</strong>；<code>ls -i</code>查询当前目录下文件的Inode号码。</p>
+<ul>
 <li>文件：在EXT2建立一个文件时，EXT2会分配一个Inode和对应该文件大小的一个或多个Block。</li>
 </ul>
 </li>
@@ -333,9 +334,9 @@
 <li>提高修复速度</li>
 </ol>
 <h3 id="MBR分区"><a href="#MBR分区" class="headerlink" title="MBR分区"></a>MBR分区</h3><p>MBR分区不超过2T，一块硬盘最多有4个主分区，也可以3主分区+1扩展分区（扩展分区可包含N个逻辑分区）。MBR分区结构如下图：</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\MBR.jpg)</p>
+<p><img src="MBR.jpg" alt=""></p>
 <h3 id="GPT分区"><a href="#GPT分区" class="headerlink" title="GPT分区"></a>GPT分区</h3><p>GPT支持128个分区，分区可达ZB级别。GPT分区结构如下图：</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\GPT.jpg)</p>
+<p><img src="D:/myblog/github/source/_posts/GPT.jpg" alt=""></p>
 <h3 id="分区管理命令"><a href="#分区管理命令" class="headerlink" title="分区管理命令"></a>分区管理命令</h3><h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><ul>
 <li><strong>列出块设备</strong>：<code>lsblk</code></li>
 <li><strong>查看块设备的UUID</strong>（通用唯一识别码）：<code>blkid</code></li>
@@ -439,7 +440,7 @@
 </li>
 <li><code>-o options</code>：挂载文件系统的选项如下图</li>
 </ul>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\mount.jpg)</p>
+<p><img src="mount.jpg" alt=""></p>
 <ul>
 <li><p><code>umount /mnt</code>：取消挂载</p>
 </li>
@@ -477,23 +478,23 @@
 </ul>
 <h3 id="RAID级别"><a href="#RAID级别" class="headerlink" title="RAID级别"></a>RAID级别</h3><ul>
 <li><p>RAID-0：同一文件分块存储在多块硬盘上，读写性能提升，无容错能力。</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-0.jpg)</p>
+<p><img src="RAID-0.jpg" alt=""></p>
 </li>
 <li><p>RAID-1：同一文件完全一样地存储于两块磁盘（镜像），读性能提升，写性能略有下降，有容错能力，磁盘利用率只有一半。</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-1.jpg)</p>
+<p><img src="RAID-1.jpg" alt=""></p>
 </li>
 <li><p>RAID-5：读写性能提升，至少3块磁盘，有容错能力（允许最多1块磁盘损坏），每一块磁盘都划分一部分空间充当校验位。</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-5.jpg)</p>
+<p><img src="RAID-5.jpg" alt=""></p>
 </li>
 <li><p>RAID-6：读写性能提升，至少4块磁盘，两个校验位，允许最多2块磁盘损坏，容错性较RAID-5高</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-6.jpg)</p>
+<p><img src="RAID-6.jpg" alt=""></p>
 </li>
 <li><p>RAID-10与RAID-01（实际使用RAID-10，RAID-10容错性较RAID-01好）</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-10.jpg)</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-01.jpg)</p>
+<p><img src="RAID-10.jpg" alt=""></p>
+<p><img src="RAID-01.jpg" alt=""></p>
 </li>
 <li><p>RAID-50</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\RAID-50.jpg)</p>
+<p><img src="RAID-50.jpg" alt=""></p>
 </li>
 <li><p>RAID-7：自身带操作系统和管理工具，理论上性能最高的RAID模式。</p>
 </li>
@@ -507,8 +508,8 @@
 <li><p>从卷组中划分逻辑卷，可在逻辑卷上创建文件系统，逻辑卷大小可扩展。</p>
 </li>
 </ol>
-<h3 id="LVM示意图"><a href="#LVM示意图" class="headerlink" title="LVM示意图"></a>LVM示意图</h3><p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\LVM-2.jpg)</p>
-<p><img src="C:\Users\lsj\Desktop\Linux\(8" alt="">Linux之磁盘与文件系统\LVM-1.jpg)</p>
+<h3 id="LVM示意图"><a href="#LVM示意图" class="headerlink" title="LVM示意图"></a>LVM示意图</h3><p><img src="LVM-2.jpg" alt=""></p>
+<p><img src="LVM-1.jpg" alt=""></p>
 <h3 id="使用逻辑卷步骤"><a href="#使用逻辑卷步骤" class="headerlink" title="使用逻辑卷步骤"></a>使用逻辑卷步骤</h3><ol>
 <li>将设备指定为物理卷，例如<code>pvcreate /dev/sdb1 /dev/sdd</code>或<code>pvcreate /dev/sd{b1,d}</code>，同时将分区和磁盘指定为物理卷。（如果是分区，需要将分区ID改为<code>8e</code>，表示Linux LVM类型）</li>
 <li>用多个物理卷创建卷组，<code>vgcreate [选项] vgName pv1 pv2 ...</code>，例如<code>vgcreate -s 16M vg0 /dev/sdb1 /dev/sdd</code>，选项<code>-s</code>指定PE大小。</li>

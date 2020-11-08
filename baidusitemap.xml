@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/Others/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2020-11-08</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2020-11-08</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Linux/(5)Linux%E4%B9%8B%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2020-11-08</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/Linux/(9)Linux%E4%B9%8B%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2020-11-08</lastmod>
   </url>  <url>
@@ -13,16 +22,10 @@
     <loc>http://thmasterplan.cn/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2020-11-08</lastmod>
   </url>  <url>
-    <loc>http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2020-11-08</lastmod>
-  </url>  <url>
     <loc>http://thmasterplan.cn/Linux/(3)Linux%E4%B9%8B%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2020-11-08</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/(1)Linux%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2020-11-08</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Linux/(5)Linux%E4%B9%8B%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/</loc>
     <lastmod>2020-11-08</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Others/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/</loc>
@@ -60,9 +63,6 @@
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E6%A1%86%E6%9E%B6/MyBatis/</loc>
     <lastmod>2020-10-28</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Others/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2020-10-27</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Others/Git/</loc>
     <lastmod>2020-10-26</lastmod>
