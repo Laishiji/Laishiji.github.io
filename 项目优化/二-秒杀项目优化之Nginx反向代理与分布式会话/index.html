@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>(二)秒杀项目优化之Nginx反向代理与分布式会话 | Blog Of TheMasterplan</title>
+  <meta name="description" content="水平扩展Spring Boot应用部署之前的压测MySQL与Tomcat在同一台主机上，因此我们需要分布式扩展服务器，引入Nignx做动静分离和负载均衡，静态请求由Ningx处理（注意企业级应用一般会使用NAS存储），动态请求转发给Tomcat，MySQL单独占用一台主机。其结构图如下：  本实验使用阿里云ECS服务器，如图所示：  修改阿里云安全组，添加开放端口号：  接着配置好各台主机的开发环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(二)秒杀项目优化之Nginx反向代理与分布式会话">
+<meta property="og:url" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="水平扩展Spring Boot应用部署之前的压测MySQL与Tomcat在同一台主机上，因此我们需要分布式扩展服务器，引入Nignx做动静分离和负载均衡，静态请求由Ningx处理（注意企业级应用一般会使用NAS存储），动态请求转发给Tomcat，MySQL单独占用一台主机。其结构图如下：  本实验使用阿里云ECS服务器，如图所示：  修改阿里云安全组，添加开放端口号：  接着配置好各台主机的开发环">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/struc.PNG">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/aliyun_ecs.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/aliyun_ecs_sec.PNG">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/test0.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/test0_result1.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/test0_result2.png">
+<meta property="article:published_time" content="2020-11-11T15:21:00.000Z">
+<meta property="article:modified_time" content="2020-11-11T15:23:15.898Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="项目优化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/struc.PNG">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%AE%B9%E5%99%A8/">Java容器</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E6%A1%86%E6%9E%B6/">Java框架</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E5%88%B7%E9%A2%98/">面试刷题</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">项目优化</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS7/" style="font-size: 13.88px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.25px;">JVM</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 13.63px;">Java基础</a> <a href="/tags/Java%E5%AE%B9%E5%99%A8/" style="font-size: 13.75px;">Java容器</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 14px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/Others/" style="font-size: 13.25px;">Others</a> <a href="/tags/Spring/" style="font-size: 13.38px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/leetcode/" style="font-size: 13.5px;">leetcode</a> <a href="/tags/lintcode/" style="font-size: 13px;">lintcode</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.13px;">数据结构与算法</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" style="font-size: 13.13px;">项目优化</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#水平扩展"><span class="toc-number">1.</span> <span class="toc-text">水平扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot应用部署"><span class="toc-number">1.1.</span> <span class="toc-text">Spring Boot应用部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL授权给远端连接"><span class="toc-number">1.2.</span> <span class="toc-text">MySQL授权给远端连接</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nignx反向代理"><span class="toc-number">2.</span> <span class="toc-text">Nignx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装OpenResty"><span class="toc-number">2.1.</span> <span class="toc-text">安装OpenResty</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态资源部署"><span class="toc-number">2.2.</span> <span class="toc-text">静态资源部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态请求转发"><span class="toc-number">2.3.</span> <span class="toc-text">动态请求转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置upstream-server"><span class="toc-number">2.3.1.</span> <span class="toc-text">设置upstream server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置动态请求location为proxy-pass路径"><span class="toc-number">2.3.2.</span> <span class="toc-text">设置动态请求location为proxy pass路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启tomcat-access-log"><span class="toc-number">2.3.3.</span> <span class="toc-text">开启tomcat access log</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#水平扩展后的性能压测"><span class="toc-number">3.</span> <span class="toc-text">水平扩展后的性能压测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#考虑局域网连接的建立与释放的消耗"><span class="toc-number">3.1.</span> <span class="toc-text">考虑局域网连接的建立与释放的消耗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx高性能原因"><span class="toc-number">3.2.</span> <span class="toc-text">Nginx高性能原因</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式会话管理"><span class="toc-number">4.</span> <span class="toc-text">分布式会话管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie方式"><span class="toc-number">4.1.</span> <span class="toc-text">Cookie方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token方式"><span class="toc-number">4.2.</span> <span class="toc-text">Token方式</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-二-秒杀项目优化之Nginx反向代理与分布式会话" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      (二)秒杀项目优化之Nginx反向代理与分布式会话
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/" class="article-date">
+	  <time datetime="2020-11-11T15:21:00.000Z" itemprop="datePublished">2020-11-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">项目优化</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" rel="tag">项目优化</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.9k(words)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="水平扩展"><a href="#水平扩展" class="headerlink" title="水平扩展"></a>水平扩展</h1><h2 id="Spring-Boot应用部署"><a href="#Spring-Boot应用部署" class="headerlink" title="Spring Boot应用部署"></a>Spring Boot应用部署</h2><p>之前的压测MySQL与Tomcat在同一台主机上，因此我们需要分布式扩展服务器，引入Nignx做动静分离和负载均衡，静态请求由Ningx处理（注意企业级应用一般会使用NAS存储），动态请求转发给Tomcat，MySQL单独占用一台主机。其结构图如下：</p>
+<p><img src="struc.PNG" alt=""></p>
+<p>本实验使用阿里云ECS服务器，如图所示：</p>
+<p><img src="aliyun_ecs.png" alt=""></p>
+<p>修改阿里云安全组，添加开放端口号：</p>
+<p><img src="aliyun_ecs_sec.PNG" alt=""></p>
+<p>接着配置好各台主机的开发环境。</p>
+<p>部署好开发环境后，将项目jar包上传到各台应用服务器上，在application配置文件中配置数据库连接池地址，覆盖我们开发时配置的本机地址：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.datasource.url</span>=<span class="string">jdbc:mysql://172.30.215.166:3306/miaosha?useUnicode=true&amp;characterEncoding=UTF-8</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>telnet</code>命令测试能否连接数据库：<code>telnet 172.30.215.166 3306</code>，结果显示连接不被允许：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Trying 172.30.215.166...</span><br><span class="line">Connected to 172.30.215.166.</span><br><span class="line">Escape character is &#39;^]&#39;.</span><br><span class="line">HHost &#39;172.30.19.131&#39; is not allowed to connect to this MariaDB serverConnection closed by foreign host.</span><br></pre></td></tr></table></figure>
+<h2 id="MySQL授权给远端连接"><a href="#MySQL授权给远端连接" class="headerlink" title="MySQL授权给远端连接"></a>MySQL授权给远端连接</h2><p>我们需要MySQL授权给应用服务器，切换至MySQL服务器进入MySQL：</p>
+<p><code>grant all privileges on *.* to USERNAME@&#39;%&#39; identified by &#39;PASSWORD&#39;;</code>，只要用户名和密码正确，授权来自任何域名的数据库访问。</p>
+<p><code>flush privileges;</code>：刷新权限。</p>
+<h1 id="Nignx反向代理"><a href="#Nignx反向代理" class="headerlink" title="Nignx反向代理"></a>Nignx反向代理</h1><p>OpenResty是一个基于 Nginx与 Lua 的高性能 Web 平台，参考<a href="http://openresty.org/cn/" target="_blank" rel="noopener">OpenResty中文官网</a>。</p>
+<h2 id="安装OpenResty"><a href="#安装OpenResty" class="headerlink" title="安装OpenResty"></a>安装OpenResty</h2><ol>
+<li>安装依赖库：<code>yum install pcre-devel openssl-devel gcc curl</code></li>
+<li>下载预编译包：<code>wget https://openresty.org/download/openresty-1.17.8.2.tar.gz</code></li>
+<li>解包：<code>tar -xvzf openresty-1.17.8.2.tar.gz</code></li>
+<li>编译：<code>./configure</code> -&gt; <code>make</code></li>
+<li>安装：<code>make install</code>，默认安装路径为/usr/local/openresty</li>
+<li>启动服务器：<ol>
+<li><code>cd /usr/local/openresty/nginx</code></li>
+<li>指定以nginx.conf配置启动，<code>sbin/nginx -c conf/nginx.conf</code></li>
+<li>启动后若修改配置文件，<code>sbin/nginx -s reload</code>可无缝重启</li>
+</ol>
+</li>
+</ol>
+<h2 id="静态资源部署"><a href="#静态资源部署" class="headerlink" title="静态资源部署"></a>静态资源部署</h2><p>将前端相关资源上传到//usr/local/openresty/nginx/html目录下，新建目录resources，将html目录下所有静态资源移动到resources目录下。</p>
+<p>修改nginx.conf：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">   root html;</span><br><span class="line">   index index.html index htm;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#修改为</span></span><br><span class="line">location /resources/ &#123;</span><br><span class="line">   <span class="comment">#当访问路径命中/resources/时，将路径替换为以下路径</span></span><br><span class="line">   alias /usr/local/openresty/nginx/html/resources/;</span><br><span class="line">   index index.html index htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态请求转发"><a href="#动态请求转发" class="headerlink" title="动态请求转发"></a>动态请求转发</h2><p>所有的静态页面都由Nnigx处理，例如访问<a href="http://nginxserver/resources/templates/register.html；所有的动态请求都转发给Tomcat，例如访问http://nginxserver/item/get?id=1。" target="_blank" rel="noopener">http://nginxserver/resources/templates/register.html；所有的动态请求都转发给Tomcat，例如访问http://nginxserver/item/get?id=1。</a></p>
+<h3 id="设置upstream-server"><a href="#设置upstream-server" class="headerlink" title="设置upstream server"></a>设置upstream server</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置两台应用服务器的地址，轮流访问</span></span><br><span class="line"><span class="comment">#weight即权重，两台服务器各承担一半的请求</span></span><br><span class="line">upstream backend_server &#123;</span><br><span class="line">      server <span class="number">172.30</span><span class="number">.215</span><span class="number">.165</span> weight=<span class="number">1</span>;</span><br><span class="line">      server <span class="number">172.30</span><span class="number">.19</span><span class="number">.131</span> weight=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="设置动态请求location为proxy-pass路径"><a href="#设置动态请求location为proxy-pass路径" class="headerlink" title="设置动态请求location为proxy pass路径"></a>设置动态请求location为proxy pass路径</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">      proxy_pass http:<span class="comment">//backend_server; #反向代理</span></span><br><span class="line">      proxy_set_header Host $http_host:$proxy_port; <span class="comment">#设置Http的host字段</span></span><br><span class="line">      proxy_set_header X-Real-IP $remote_addr; <span class="comment">#设置客户端访问的IP，不设置则应用服务器拿到的是nginx服务器的地址</span></span><br><span class="line">      proxy_set_header X-Forwarded-<span class="keyword">For</span> %proxy_add_x_forwarded_for;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="开启tomcat-access-log"><a href="#开启tomcat-access-log" class="headerlink" title="开启tomcat access log"></a>开启tomcat access log</h3><p>开启tomcat访问日志记录，修改application配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">server.tomcat.accesslog.enabled</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">server.tomcat.accesslog.directory</span>=<span class="string">/var/www/miaosha/tomcat</span></span><br><span class="line"><span class="meta">server.tomcat.accesslog.pattern</span>=<span class="string">%h %l %u %t "%r" %s %b %D</span></span><br></pre></td></tr></table></figure>
+<h1 id="水平扩展后的性能压测"><a href="#水平扩展后的性能压测" class="headerlink" title="水平扩展后的性能压测"></a>水平扩展后的性能压测</h1><p>调整云端Nginx服务器带宽为20Mbps，以尽可能减少带宽带来的影响。由于另外三台服务器使用内网带宽，足以满足要求，因此不需要提升带宽。调整压测参数，一共10w次请求，如图：</p>
+<p><img src="test0.png" alt=""></p>
+<p>压测结果如图所示（并发请求最大时截图）：</p>
+<p><img src="test0_result1.png" alt=""></p>
+<p><img src="test0_result2.png" alt=""></p>
+<p>关注4台server的us，sy，load average等参数，发现压力测试依然还有很大的提升空间。</p>
+<h2 id="考虑局域网连接的建立与释放的消耗"><a href="#考虑局域网连接的建立与释放的消耗" class="headerlink" title="考虑局域网连接的建立与释放的消耗"></a>考虑局域网连接的建立与释放的消耗</h2><p>由于Nginx反向代理服务器默认配置与后端服务器的连接是没有配置keepAlive的，因此大量动态资源请求时，Nginx与Tomcat的连接是短连接，会有大量连接的建立与释放，而Druid管理下应用服务器与数据库服务器之间连接则默认保持长连接。</p>
+<p><strong>Nginx配置keepalive</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">upstream backend_server &#123;</span><br><span class="line">      server <span class="number">172.30</span><span class="number">.215</span><span class="number">.165</span> weight=<span class="number">1</span>;</span><br><span class="line">      server <span class="number">172.30</span><span class="number">.19</span><span class="number">.131</span> weight=<span class="number">1</span>;</span><br><span class="line">      keepalive <span class="number">30</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server&#123;</span><br><span class="line"></span><br><span class="line">   其他配置...</span><br><span class="line"></span><br><span class="line">   location / &#123;</span><br><span class="line">         proxy_pass http:<span class="comment">//backend_server; #反向代理</span></span><br><span class="line">         proxy_set_header Host $http_host:$proxy_port; <span class="comment">#设置Http的host字段</span></span><br><span class="line">         proxy_set_header X-Real-IP $remote_addr; <span class="comment">#设置客户端访问的IP，不设置则应用服务器拿到的是nginx服务器的地址</span></span><br><span class="line">         proxy_set_header X-Forwarded-<span class="keyword">For</span> %proxy_add_x_forwarded_for;</span><br><span class="line">         </span><br><span class="line">         proxy_http_version <span class="number">1.1</span>;<span class="comment">#Nginx默认采用http1.0，http1.1才有keepalive</span></span><br><span class="line">         proxy_set_header Connection <span class="string">""</span>;<span class="comment">#Connection为空就表示设置keepalive</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx高性能原因"><a href="#Nginx高性能原因" class="headerlink" title="Nginx高性能原因"></a>Nginx高性能原因</h2><ul>
+<li><p>epoll多路复用</p>
+</li>
+<li><p>master worker进程模型</p>
+</li>
+<li><p>协程机制</p>
+</li>
+</ul>
+<h1 id="分布式会话管理"><a href="#分布式会话管理" class="headerlink" title="分布式会话管理"></a>分布式会话管理</h1><p>我们<strong>通过将session保存到Redis服务器来实现分布式会话</strong>，有两种实现方式：</p>
+<ul>
+<li>基于Cookie传输JSESSIONID：Tomcat容器session实现迁移到Redis。</li>
+<li>基于Token传输类似sessionid：Java代码session实现迁移到Redis。</li>
+</ul>
+<p>Windows下安装Redis用于调试程序：</p>
+<ol>
+<li><a href="https://github.com/microsoftarchive/redis/releases" target="_blank" rel="noopener">下载地址</a></li>
+<li>安装完成后切换到安装目录，启动cmd</li>
+<li>启动Redis服务器：<code>redis-server.exe redis.windows.conf</code></li>
+<li>启动客户端：<code>redis-cli -h 127.0.0.1 -p 6379</code></li>
+</ol>
+<h2 id="Cookie方式"><a href="#Cookie方式" class="headerlink" title="Cookie方式"></a>Cookie方式</h2><ol>
+<li><p>导入依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.session<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-session-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置application.properties：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置SpringBoot对Redis的依赖</span></span><br><span class="line"><span class="meta">spring.redis.host</span>=<span class="string">127.0.0.1</span></span><br><span class="line"><span class="meta">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="comment">#Redis默认16个数据库，指定其中某一个</span></span><br><span class="line"><span class="meta">spring.redis.database</span>=<span class="string">10</span></span><br><span class="line"><span class="comment">#spring.redis.password=</span></span><br><span class="line"><span class="comment">#设置Jedis连接池连接数量</span></span><br><span class="line"><span class="meta">spring.redis.jedis.pool.max-active</span>=<span class="string">50</span></span><br><span class="line"><span class="meta">spring.redis.jedis.pool.min-idle</span>=<span class="string">20</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加RedisConfig配置类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@EnableRedisHttpSession</span>(maxInactiveIntervalInSeconds = <span class="number">3600</span>) <span class="comment">//设置session失效时间，默认30min，修改为1h</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Session存储的对象需要实现Serializable接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request.getSession().setAttribute(<span class="string">"LOGIN_USER"</span>, userModel);</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserModel</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地调试登录功能，查看Redis服务器10号数据库是否有数据。</p>
+</li>
+<li><p>调试完没有问题后，重新生成jar包上传到应用服务器，然后云端搭建Redis服务器（为节省成本，这里Redis与MySQL使用同一台服务器）：</p>
+<ol>
+<li>yum安装或编译安装均可，yum安装会将相关命令放入/usr/bin，可以直接在任何地方访问，并且配置文件redis.conf在/etc/目录下。</li>
+<li>修改redis.conf的server地址为服务器的局域网地址，以该配置文件启动：<code>redis-server /etc/redis.conf &amp;</code></li>
+<li>修改两台应用服务器的application配置文件，配置spring.redis.host=redis所在服务器地址，启动应用。</li>
+</ol>
+</li>
+</ol>
+<h2 id="Token方式"><a href="#Token方式" class="headerlink" title="Token方式"></a>Token方式</h2><p>企业开发中应该使用这种方式，考虑到客户端的多平台特性，某些客户端可能不支持Cookie方式。</p>
+<p>UserController的login方法中，原来的方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">request.getSession().setAttribute(<span class="string">"IS_LOGIN"</span>,<span class="keyword">true</span>);</span><br><span class="line">request.getSession().setAttribute(<span class="string">"LOGIN_USER"</span>, userModel);</span><br><span class="line"><span class="keyword">return</span> CommonReturnType.create(uuidToken);</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3.修改为使用token的方式，将token和用户模型一起存入redis中</span></span><br><span class="line"><span class="comment">//生成登录凭证token</span></span><br><span class="line">String uuidToken = UUID.randomUUID().toString().replace(<span class="string">"-"</span>,<span class="string">""</span>);</span><br><span class="line"><span class="comment">//建立token和用户登录态之间的联系</span></span><br><span class="line">redisTemplate.opsForValue().set(uuidToken, userModel);</span><br><span class="line"><span class="comment">//设置超时时间</span></span><br><span class="line">redisTemplate.expire(uuidToken, <span class="number">1</span>, TimeUnit.HOURS);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> CommonReturnType.create(uuidToken);</span><br></pre></td></tr></table></figure>
+<p>前端代码修改：</p>
+<p>login.html，登录的ajax请求success回调函数中，若登录成功添加token：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> token = data.data;</span><br><span class="line"><span class="built_in">window</span>.localStorage[<span class="string">"token"</span>] = token;</span><br></pre></td></tr></table></figure>
+<p>获取商品下单时判断是否持有token：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> token = <span class="built_in">window</span>.localStorage[<span class="string">"token"</span>];</span><br><span class="line"><span class="keyword">if</span>(token == <span class="literal">null</span>)&#123;</span><br><span class="line">    alert(<span class="string">"没有登录，不能下单"</span>);</span><br><span class="line">    <span class="built_in">window</span>.location.href=<span class="string">"login.html"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改ajax请求url，添加token登录凭证</span></span><br><span class="line">url:<span class="string">"http://"</span>+g_host+<span class="string">"/order/create?token="</span>+token,</span><br></pre></td></tr></table></figure>
+<p>下单的Controller验证token：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String token = request.getParameterMap().get(<span class="string">"token"</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">if</span>(StringUtils.isEmpty(token))</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(EnumBusinessError.USER_NOT_LOGIN,<span class="string">"用户未登录，无法下单"</span>);</span><br><span class="line">UserModel userModel = (UserModel) redisTemplate.opsForValue().get(token);</span><br><span class="line"><span class="keyword">if</span>(userModel == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(EnumBusinessError.USER_NOT_LOGIN,<span class="string">"用户未登录，无法下单"</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%BA%8C-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8BNginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BC%9A%E8%AF%9D/" title="(二)秒杀项目优化之Nginx反向代理与分布式会话" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>練習時長兩年半のCV戰士</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/%E4%B8%80-%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E4%B9%8B%E5%AE%9A%E5%88%B6%E5%8C%96Tomcat%E9%85%8D%E7%BD%AE/" title="(一)秒杀项目优化之定制化Tomcat配置"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
