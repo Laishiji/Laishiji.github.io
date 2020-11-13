@@ -18,12 +18,12 @@
   
   
   <title>Linux之磁盘与文件系统 | Blog Of TheMasterplan</title>
-  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。  Inode Table：Inode表，每个">
+  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。 Inode Table：Inode表，每个I">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux之磁盘与文件系统">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。  Inode Table：Inode表，每个">
+<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。 Inode Table：Inode表，每个I">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/ext2.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/MBR.jpg">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-2.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-1.jpg">
 <meta property="article:published_time" content="2019-11-29T07:26:51.000Z">
-<meta property="article:modified_time" content="2020-11-13T14:29:09.865Z">
+<meta property="article:modified_time" content="2020-11-13T14:36:43.728Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -290,8 +290,7 @@
 <p>下面以<strong>EXT2文件系统</strong>为例，其结构如图所示：</p>
 <p><img src="ext2.jpg" alt=""></p>
 <ul>
-<li><p><strong>SuperBlock</strong>：记录此文件系统的整体信息，包括Inode/Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。</p>
-</li>
+<li><strong>SuperBlock</strong>：记录此文件系统的整体信息，包括Inode/Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。</li>
 <li><p><strong>Inode Table</strong>：Inode表，每个Inode记录文件的属性，包括文件的权限、拥有者与群组、容量、atime/mtime/ctime和此文件的数据所在的Block地址。</p>
 <ul>
 <li>每个Inode大小均为固定128字节（ext4和xfs可设定到256字节）。</li>
@@ -299,7 +298,12 @@
 <li>系统读取文件时需要先找到Inode，并分析Inode所记录的权限与用户是否符合，符合则再根据Inode记录的Block地址访问数据。</li>
 </ul>
 </li>
-<li><p><strong>Data Block</strong>：实际记录文件的内容，若文件过大一般会占用多个Block。EXT2文件系统所支持的Block大小有1K，2K和4K三种。</p>
+<li><strong>Data Block</strong>：实际记录文件的内容，若文件过大一般会占用多个Block。EXT2文件系统所支持的Block大小有1K，2K和4K三种。<ul>
+<li>除非重新格式化，Block的大小与数量在格式化完成后就不能再改变。</li>
+<li>每个Block内最多只能放置一个文件的数据。</li>
+<li>若文件大于Block，则一个文件占用多个block；若文件小于Block，则该Blcok的剩余容量就不能再被使用。</li>
+<li><code>dumpe2fs</code>：查询EXT系列SuperBlock信息的指令。</li>
+</ul>
 </li>
 </ul>
 <div class="table-container">
@@ -329,18 +333,12 @@
 </table>
 </div>
 <ul>
-<li>除非重新格式化，Block的大小与数量在格式化完成后就不能再改变。</li>
-<li>每个Block内最多只能放置一个文件的数据。</li>
-<li>若文件大于Block，则一个文件占用多个block；若文件小于Block，则该Blcok的剩余容量就不能再被使用。</li>
-</ul>
-<ul>
-<li><p><code>dumpe2fs</code>：查询EXT系列SuperBlock信息的指令。</p>
-</li>
 <li><p><strong>文件系统与目录树的关系</strong></p>
-</li>
-<li><p>目录：<strong>当在Linux下的文件系统建立一个目录时，文件系统会分配一个Inode与至少一块Block给该目录，其中Inode记录该目录的相关权限和属性，并记录分配的那块Block地址，而该Block用于记录该目录下的文件名与该文件名占用的Inode号</strong>；<code>ls -i</code>查询当前目录下文件的Inode号码。</p>
 <ul>
-<li>文件：在EXT2建立一个文件时，EXT2会分配一个Inode和对应该文件大小的一个或多个Block。</li>
+<li><p>目录：<strong>当在Linux下的文件系统建立一个目录时，文件系统会分配一个Inode与至少一块Block给该目录，其中Inode记录该目录的相关权限和属性，并记录分配的那块Block地址，而该Block用于记录该目录下的文件名与该文件名占用的Inode号</strong>；<code>ls -i</code>查询当前目录下文件的Inode号码。</p>
+</li>
+<li><p>文件：在EXT2建立一个文件时，EXT2会分配一个Inode和对应该文件大小的一个或多个Block。</p>
+</li>
 </ul>
 </li>
 </ul>

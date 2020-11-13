@@ -26,7 +26,7 @@
 <meta property="og:description" content="简介Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在内存中，所以读写速度非常快，因此Redis被广泛应用于缓存方向。另外，redis也可用来做分布式锁（推荐使用Zookeeper），redis提供了多种数据类型来支持不同的业务场景。除此之外，Redis 支">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-13T14:04:39.000Z">
-<meta property="article:modified_time" content="2020-11-13T14:28:17.734Z">
+<meta property="article:modified_time" content="2020-11-13T14:37:05.748Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Redis/Redis%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.2k(words)</span>
 	
 	
 
@@ -351,9 +351,6 @@
 </tbody>
 </table>
 </div>
-<ol>
-<li>运行脚本启动。</li>
-</ol>
 <h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><ul>
 <li><code>SELECT [n]</code>：Redis默认有16个数据库，可以通过配置参数databases修改。该命令用于选择数据库，n取0到15。</li>
 <li><code>DBSIZE</code>：查看当前数据库键值对数量。</li>
