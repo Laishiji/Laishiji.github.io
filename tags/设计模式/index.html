@@ -228,9 +228,9 @@
           
           <li><a href="/tags/Git/">Git</a></li>
           
-          <li><a href="/tags/Java基础/">Java基础</a></li>
-          
           <li><a href="/tags/Others/">Others</a></li>
+          
+          <li><a href="/tags/Java基础/">Java基础</a></li>
           
           <li><a href="/tags/Java并发/">Java并发</a></li>
           
@@ -240,9 +240,9 @@
           
           <li><a href="/tags/Redis/">Redis</a></li>
           
-          <li><a href="/tags/SpringBoot/">SpringBoot</a></li>
-          
           <li><a href="/tags/Spring/">Spring</a></li>
+          
+          <li><a href="/tags/SpringBoot/">SpringBoot</a></li>
           
           <li><a href="/tags/项目优化/">项目优化</a></li>
           
@@ -252,9 +252,9 @@
           
           <li><a href="/tags/设计模式/">设计模式</a></li>
           
-          <li><a href="/tags/软件工程/">软件工程</a></li>
-          
           <li><a href="/tags/数据结构与算法/">数据结构与算法</a></li>
+          
+          <li><a href="/tags/软件工程/">软件工程</a></li>
           
         </ul>
       </nav>
@@ -381,6 +381,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

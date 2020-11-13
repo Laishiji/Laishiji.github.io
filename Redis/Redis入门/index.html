@@ -18,15 +18,15 @@
   
   
   <title>Redis入门 | Blog Of TheMasterplan</title>
-  <meta name="description" content="简介Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在内存中，所以读写速度非常快，因此Redis被广泛应用于缓存方向。另外，redis也经常用来做分布式锁，redis提供了多种数据类型来支持不同的业务场景。除此之外，Redis 支持事务 、持久化、LUA脚本">
+  <meta name="description" content="简介Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在内存中，所以读写速度非常快，因此Redis被广泛应用于缓存方向。另外，redis也可用来做分布式锁（推荐使用Zookeeper），redis提供了多种数据类型来支持不同的业务场景。除此之外，Redis 支">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis入门">
 <meta property="og:url" content="http://thmasterplan.cn/Redis/Redis%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="简介Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在内存中，所以读写速度非常快，因此Redis被广泛应用于缓存方向。另外，redis也经常用来做分布式锁，redis提供了多种数据类型来支持不同的业务场景。除此之外，Redis 支持事务 、持久化、LUA脚本">
+<meta property="og:description" content="简介Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在内存中，所以读写速度非常快，因此Redis被广泛应用于缓存方向。另外，redis也可用来做分布式锁（推荐使用Zookeeper），redis提供了多种数据类型来支持不同的业务场景。除此之外，Redis 支">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-13T14:04:39.000Z">
-<meta property="article:modified_time" content="2020-11-13T14:05:33.020Z">
+<meta property="article:modified_time" content="2020-11-13T14:28:17.734Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Redis/Redis%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
 	
 	
 
@@ -271,7 +271,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在<strong>内存</strong>中，所以<strong>读写速度非常快</strong>，因此Redis被广泛应用于<strong>缓存</strong>方向。另外，redis也经常用来做<strong>分布式锁</strong>，redis提供了多种数据类型来支持不同的业务场景。除此之外，<strong>Redis 支持事务</strong> 、<strong>持久化</strong>、<strong>LUA脚本</strong>、<strong>LRU驱动事件</strong>、<strong>多种集群</strong>方案。</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Redis(Remote Dictionary Server)即远程字典服务器，它以字典结构存储数据，并允许其他应用通过TCP协议读写字典中的内容。Redis与传统数据库不同的是其数据库是存在<strong>内存</strong>中，所以<strong>读写速度非常快</strong>，因此Redis被广泛应用于<strong>缓存</strong>方向。另外，redis也可用来做<strong>分布式锁</strong>（推荐使用Zookeeper），redis提供了多种数据类型来支持不同的业务场景。除此之外，<strong>Redis 支持事务</strong> 、<strong>持久化</strong>、<strong>LUA脚本</strong>、<strong>LRU驱动事件</strong>、<strong>多种集群</strong>方案。</p>
 <p>附：<a href="http://doc.redisfans.com/" target="_blank" rel="noopener">Redis命令参考及文档</a>。</p>
 <h2 id="启动Redis"><a href="#启动Redis" class="headerlink" title="启动Redis"></a>启动Redis</h2><p>Redis的可执行文件及其含义如下表：</p>
 <div class="table-container">
@@ -316,10 +316,43 @@
 <li><p>将redis_init_script复制到/etc/init.d目录下，修改文件名为redis_端口号，修改脚本文件中的REDISPORT变量为相同的端口号。</p>
 </li>
 <li><p>将redis.conf复制到/etc/redis目录下，以端口号.conf命名，按需求修改配置文件参数：</p>
-<p>|   参数    |           取值            |          说明          |<br>| :———-: | :———————————-: | :——————————: |<br>| daemonize |            yes            |   以守护进程模式运行   |<br>|  pidfile  | /var/run/redis_端口号.pid |    设置PID文件位置     |<br>|   port    |          端口号           |     设置监听端口号     |<br>|    dir    |     /var/redis/端口号     | 设置持久化文件存放位置 |</p>
 </li>
-<li><p>运行脚本启动。</p>
-</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">daemonize</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">以守护进程模式运行</td>
+</tr>
+<tr>
+<td style="text-align:center">pidfile</td>
+<td style="text-align:center">/var/run/redis_端口号.pid</td>
+<td style="text-align:center">设置PID文件位置</td>
+</tr>
+<tr>
+<td style="text-align:center">port</td>
+<td style="text-align:center">端口号</td>
+<td style="text-align:center">设置监听端口号</td>
+</tr>
+<tr>
+<td style="text-align:center">dir</td>
+<td style="text-align:center">/var/redis/端口号</td>
+<td style="text-align:center">设置持久化文件存放位置</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>运行脚本启动。</li>
 </ol>
 <h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><ul>
 <li><code>SELECT [n]</code>：Redis默认有16个数据库，可以通过配置参数databases修改。该命令用于选择数据库，n取0到15。</li>
@@ -655,6 +688,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>

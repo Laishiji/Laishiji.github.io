@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-2.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-1.jpg">
 <meta property="article:published_time" content="2019-11-29T07:26:51.000Z">
-<meta property="article:modified_time" content="2020-11-08T13:02:55.533Z">
+<meta property="article:modified_time" content="2020-11-13T14:29:09.865Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -300,13 +300,40 @@
 </ul>
 </li>
 <li><p><strong>Data Block</strong>：实际记录文件的内容，若文件过大一般会占用多个Block。EXT2文件系统所支持的Block大小有1K，2K和4K三种。</p>
-<p>|     Block大小      | 1KB  |  2KB  | 4KB  |<br>| :————————: | :—: | :—-: | :—: |<br>|  最大单一文件限制  | 16GB | 256GB | 2TB  |<br>| 最大文件系统总容量 | 2TB  |  8TB  | 16TB |</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Block大小</th>
+<th style="text-align:center">1KB</th>
+<th style="text-align:center">2KB</th>
+<th style="text-align:center">4KB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最大单一文件限制</td>
+<td style="text-align:center">16GB</td>
+<td style="text-align:center">256GB</td>
+<td style="text-align:center">2TB</td>
+</tr>
+<tr>
+<td style="text-align:center">最大文件系统总容量</td>
+<td style="text-align:center">2TB</td>
+<td style="text-align:center">8TB</td>
+<td style="text-align:center">16TB</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
 <li>除非重新格式化，Block的大小与数量在格式化完成后就不能再改变。</li>
 <li>每个Block内最多只能放置一个文件的数据。</li>
 <li>若文件大于Block，则一个文件占用多个block；若文件小于Block，则该Blcok的剩余容量就不能再被使用。</li>
 </ul>
-</li>
+<ul>
 <li><p><code>dumpe2fs</code>：查询EXT系列SuperBlock信息的指令。</p>
 </li>
 <li><p><strong>文件系统与目录树的关系</strong></p>
@@ -752,6 +779,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
 </body>
 </html>
