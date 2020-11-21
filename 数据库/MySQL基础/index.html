@@ -26,7 +26,7 @@
 <meta property="og:description" content="一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 12345678SHOW DATABASES; -- 查询所有数据库SHOW TABLES; -- 查看所有表-- 以下语句效果相同：查看单表的信息SHOW COLUMNS FROM my_table;DESC my_table;EXPLAIN my_table;DESCRIBE my_table;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-18T04:30:33.000Z">
-<meta property="article:modified_time" content="2020-11-18T15:16:49.274Z">
+<meta property="article:modified_time" content="2020-11-18T15:29:44.142Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -386,6 +386,10 @@
 <li><p>匹配特殊字符</p>
 <p>为了匹配特殊字符，需要使用<code>\\</code>作为转义字符。例如<code>\\-</code>匹配<code>-</code>，<code>\\.</code>匹配<code>.</code>。</p>
 </li>
+<li><p>定位符</p>
+<p>使用<code>^</code>锚定文本的开始，使用<code>$</code>锚定文本的结尾。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> col2 REGEXP <span class="string">'^[ab]bug$'</span>; <span class="comment">-- 匹配以a或b开头，以g结尾的值</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>匹配多个实例</p>
 </li>
 </ol>
@@ -417,12 +421,6 @@
 </tbody>
 </table>
 </div>
-<ol>
-<li><p>定位符</p>
-<p>使用<code>^</code>锚定文本的开始，使用<code>$</code>锚定文本的结尾。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> col2 REGEXP <span class="string">'^[ab]bug$'</span>; <span class="comment">-- 匹配以a或b开头，以g结尾的值</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
 <h1 id="八-计算字段"><a href="#八-计算字段" class="headerlink" title="八.计算字段"></a>八.计算字段</h1><p>在数据库服务器上完成数据的转换和格式化的工作往往比客户端上快得多，并且转换和格式化后的数据量更少的话可以减少网络通信量。</p>
 <p>计算字段通常需要使用 <strong>AS</strong> 来取别名，否则输出的时候字段名为计算表达式。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1 * column2 <span class="keyword">AS</span> <span class="keyword">alias</span> <span class="keyword">FROM</span> my_table; <span class="comment">-- MySQL支持+, -, *, /</span></span><br></pre></td></tr></table></figure>
