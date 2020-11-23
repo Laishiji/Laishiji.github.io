@@ -18,15 +18,15 @@
   
   
   <title>Redis入门 | Blog Of TheMasterplan</title>
-  <meta name="description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String))  哈希(Hash))  列表(List))  集合(Set))  有序集合(ZSet))   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式方式)  配置文件  SAVE&#x2F;BGSAVE  FLUS">
+  <meta name="description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String)  哈希(Hash)  列表(List)  集合(Set)  有序集合(ZSet)   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式 配置文件     SAVE&#x2F;BGSAVE  FLUSHALL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis入门">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String))  哈希(Hash))  列表(List))  集合(Set))  有序集合(ZSet))   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式方式)  配置文件  SAVE&#x2F;BGSAVE  FLUS">
+<meta property="og:description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String)  哈希(Hash)  列表(List)  集合(Set)  有序集合(ZSet)   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式 配置文件     SAVE&#x2F;BGSAVE  FLUSHALL">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-13T14:04:39.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.078Z">
+<meta property="article:modified_time" content="2020-11-23T14:49:15.762Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Redis"><span class="toc-number">1.1.</span> <span class="toc-text">启动Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础命令"><span class="toc-number">1.2.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理"><span class="toc-number">1.3.</span> <span class="toc-text">管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据类型"><span class="toc-number">2.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串-String"><span class="toc-number">2.1.</span> <span class="toc-text">字符串(String)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希-Hash"><span class="toc-number">2.2.</span> <span class="toc-text">哈希(Hash)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表-List"><span class="toc-number">2.3.</span> <span class="toc-text">列表(List)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合-Set"><span class="toc-number">2.4.</span> <span class="toc-text">集合(Set)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序集合-ZSet"><span class="toc-number">2.5.</span> <span class="toc-text">有序集合(ZSet)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis进阶"><span class="toc-number">3.</span> <span class="toc-text">Redis进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">3.1.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">3.1.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务中的错误处理"><span class="toc-number">3.1.2.</span> <span class="toc-text">事务中的错误处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期时间"><span class="toc-number">3.2.</span> <span class="toc-text">过期时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现缓存"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-number">3.3.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管道"><span class="toc-number">3.4.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#持久化"><span class="toc-number">4.</span> <span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RDB-Redis-DataBase-方式"><span class="toc-number">4.1.</span> <span class="toc-text">RDB(Redis DataBase)方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件"><span class="toc-number">4.1.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAVE-BGSAVE"><span class="toc-number">4.1.2.</span> <span class="toc-text">SAVE&#x2F;BGSAVE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FLUSHALL"><span class="toc-number">4.1.3.</span> <span class="toc-text">FLUSHALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制"><span class="toc-number">4.1.4.</span> <span class="toc-text">复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快照原理"><span class="toc-number">4.1.5.</span> <span class="toc-text">快照原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOF-Append-Only-File-方式"><span class="toc-number">4.2.</span> <span class="toc-text">AOF(Append Only File)方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步硬盘数据"><span class="toc-number">4.2.1.</span> <span class="toc-text">同步硬盘数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-number">5.</span> <span class="toc-text">集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">5.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制的原理"><span class="toc-number">5.2.</span> <span class="toc-text">主从复制的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵机制"><span class="toc-number">5.3.</span> <span class="toc-text">哨兵机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">5.3.2.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">5.3.3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">5.3.4.</span> <span class="toc-text">部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群-1"><span class="toc-number">5.4.</span> <span class="toc-text">集群</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Data-Redis"><span class="toc-number">6.</span> <span class="toc-text">Spring Data Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见面试问题"><span class="toc-number">7.</span> <span class="toc-text">常见面试问题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Redis"><span class="toc-number">1.1.</span> <span class="toc-text">启动Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础命令"><span class="toc-number">1.2.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理"><span class="toc-number">1.3.</span> <span class="toc-text">管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据类型"><span class="toc-number">2.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-number">2.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希"><span class="toc-number">2.2.</span> <span class="toc-text">哈希</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-number">2.3.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-number">2.4.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序集合"><span class="toc-number">2.5.</span> <span class="toc-text">有序集合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis进阶"><span class="toc-number">3.</span> <span class="toc-text">Redis进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">3.1.</span> <span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-number">3.1.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务中的错误处理"><span class="toc-number">3.1.2.</span> <span class="toc-text">事务中的错误处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期时间"><span class="toc-number">3.2.</span> <span class="toc-text">过期时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现缓存"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序"><span class="toc-number">3.3.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管道"><span class="toc-number">3.4.</span> <span class="toc-text">管道</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#持久化"><span class="toc-number">4.</span> <span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RDB方式"><span class="toc-number">4.1.</span> <span class="toc-text">RDB方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件"><span class="toc-number">4.1.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAVE-BGSAVE"><span class="toc-number">4.1.2.</span> <span class="toc-text">SAVE&#x2F;BGSAVE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FLUSHALL"><span class="toc-number">4.1.3.</span> <span class="toc-text">FLUSHALL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制"><span class="toc-number">4.1.4.</span> <span class="toc-text">复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快照原理"><span class="toc-number">4.1.5.</span> <span class="toc-text">快照原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOF方式"><span class="toc-number">4.2.</span> <span class="toc-text">AOF方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步硬盘数据"><span class="toc-number">4.2.1.</span> <span class="toc-text">同步硬盘数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群"><span class="toc-number">5.</span> <span class="toc-text">集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">5.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制的原理"><span class="toc-number">5.2.</span> <span class="toc-text">主从复制的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哨兵机制"><span class="toc-number">5.3.</span> <span class="toc-text">哨兵机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介-1"><span class="toc-number">5.3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">5.3.2.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">5.3.3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">5.3.4.</span> <span class="toc-text">部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群-1"><span class="toc-number">5.4.</span> <span class="toc-text">集群</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Data-Redis"><span class="toc-number">6.</span> <span class="toc-text">Spring Data Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见面试问题"><span class="toc-number">7.</span> <span class="toc-text">常见面试问题</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -282,15 +282,15 @@
 </ul>
 <p><a href="#数据类型">数据类型</a></p>
 <ul>
-<li><p><a href="#字符串(String">字符串(String)</a>)</p>
+<li><p><a href="#字符串">字符串(String)</a></p>
 </li>
-<li><p><a href="#哈希(Hash">哈希(Hash)</a>)</p>
+<li><p><a href="#哈希">哈希(Hash)</a></p>
 </li>
-<li><p><a href="#列表(List">列表(List)</a>)</p>
+<li><p><a href="#列表">列表(List)</a></p>
 </li>
-<li><p><a href="#集合(Set">集合(Set)</a>)</p>
+<li><p><a href="#集合">集合(Set)</a></p>
 </li>
-<li><p><a href="#有序集合(ZSet">有序集合(ZSet)</a>)</p>
+<li><p><a href="#有序集合">有序集合(ZSet)</a></p>
 </li>
 </ul>
 <p><a href="#Redis进阶">Redis进阶</a></p>
@@ -318,10 +318,12 @@
 </ul>
 <p><a href="#持久化">持久化</a></p>
 <ul>
-<li><p><a href="#RDB(Redis DataBase">RDB(Redis DataBase)方式</a>方式)</p>
-<ul>
-<li><p><a href="#配置文件">配置文件</a></p>
+<li><a href="#RDB方式">RDB(Redis DataBase)方式</a><ul>
+<li><a href="#配置文件">配置文件</a></li>
+</ul>
 </li>
+</ul>
+<ul>
 <li><p><a href="#SAVE/BGSAVE">SAVE/BGSAVE</a></p>
 </li>
 <li><p><a href="#FLUSHALL">FLUSHALL</a></p>
@@ -329,17 +331,12 @@
 <li><p><a href="#复制">复制</a></p>
 </li>
 <li><p><a href="#快照原理">快照原理</a></p>
-</li>
+<ul>
+<li><a href="#AOF方式">AOF(Append Only File)方式</a></li>
 </ul>
 </li>
-<li><p><a href="#AOF(Append Only File">AOF(Append Only File)方式</a>方式)</p>
-<ul>
 <li><a href="#同步硬盘数据">同步硬盘数据</a></li>
 </ul>
-</li>
-</ul>
-<p><a href="#appendfsync always 每次写入都同步">appendfsync always 每次写入都同步</a></p>
-<p><a href="#appendfsync no 不主动进行同步">appendfsync no 不主动进行同步</a></p>
 <p><a href="#集群">集群</a></p>
 <ul>
 <li><p><a href="#主从复制">主从复制</a></p>
@@ -458,20 +455,20 @@
 </ul>
 <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>Redis一共有字符串，哈希，列表，集合和有序集合五种数据类型。</p>
 <p>Redis的数据类型都不支持数据类型嵌套，比如集合类型的每个元素都只能是字符串，不能是另一个集合或哈希表。</p>
-<h2 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h2><p>字符串类型能存储任何形式的字符串，包括二进制数据，一个字符串的最大容量为512MB。常用命令如下：</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串类型能存储任何形式的字符串，包括二进制数据，一个字符串的最大容量为512MB。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SETGET&#x2F;DEL&#x2F;APPEND&#x2F;STRLEN</span><br><span class="line">INCR&#x2F;DECR&#x2F;INCRBY&#x2F;DECRBY：整数的加减。</span><br><span class="line">GETRANGE&#x2F;SETRANGE key 0 5：获取&#x2F;设置字符串下标0到5的片段。</span><br><span class="line">SETEX&#x2F;SETNX：赋值的同时设置过期时间。</span><br><span class="line">MSET&#x2F;MGET&#x2F;MSETNX：同时获取&#x2F;设置多个键值对。</span><br><span class="line">GETSET：先GET再SET。</span><br></pre></td></tr></table></figure>
-<h2 id="哈希-Hash"><a href="#哈希-Hash" class="headerlink" title="哈希(Hash)"></a>哈希(Hash)</h2><p>散列类型是字段和字段值的映射，字段值只能是字符串，一个散列类型最多支持2³²-1个字段。</p>
+<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>散列类型是字段和字段值的映射，字段值只能是字符串，一个散列类型最多支持2³²-1个字段。</p>
 <p>散列类型适合存储对象。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HSET&#x2F;HGET&#x2F;HMSET&#x2F;HMGET&#x2F;HGETALL&#x2F;HDEL</span><br><span class="line">HLEN：获取哈希表键值对个数。</span><br><span class="line">HEXISTS</span><br><span class="line">HKEYS&#x2F;HVALS</span><br><span class="line">HINCRBY&#x2F;HINCYBYFLOAT</span><br><span class="line">HSETNX</span><br></pre></td></tr></table></figure>
-<h2 id="列表-List"><a href="#列表-List" class="headerlink" title="列表(List)"></a>列表(List)</h2><p>列表类型内部实现为一个双向链表，常用操作是向两端添加元素或列表的一个片段，也可以把列表当作队列使用，一个列表类型最多支持2³²-1个元素。</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表类型内部实现为一个双向链表，常用操作是向两端添加元素或列表的一个片段，也可以把列表当作队列使用，一个列表类型最多支持2³²-1个元素。</p>
 <p>使用列表的代价是通过索引访问元素比较慢。</p>
 <p>另外可以通过<code>LRANGE</code>命令，就是从某个元素开始读取多少个元素，可以基于List实现分页查询，这个很棒的一个功能，基于Redis实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西（一页一页的往下走），性能高。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LPUSH&#x2F;RPUSH&#x2F;LRANGE&#x2F;LPOP&#x2F;RPOP</span><br><span class="line">LINDEX&#x2F;LLEN&#x2F;LREM</span><br><span class="line">LTRIM key startindex endindex</span><br><span class="line">RPOPLPUSH 源列表 目的列表</span><br><span class="line">LSET key index value</span><br><span class="line">LINSERT key before&#x2F;after value</span><br></pre></td></tr></table></figure>
-<h2 id="集合-Set"><a href="#集合-Set" class="headerlink" title="集合(Set)"></a>集合(Set)</h2><p>集合对外提供的功能与列表类似，特殊之处在于集合是可以<strong>自动排重</strong>的。当你需要存储一个列表数据，又不希望出现重复数据时，集合是一个很好的选择。多个集合之间可以进行并集、交集和差集运算。</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合对外提供的功能与列表类似，特殊之处在于集合是可以<strong>自动排重</strong>的。当你需要存储一个列表数据，又不希望出现重复数据时，集合是一个很好的选择。多个集合之间可以进行并集、交集和差集运算。</p>
 <p>集合在Redis内部是使用值为空的哈希表实现的。</p>
 <p>比如：在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis可以非常方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SADD&#x2F;SMEMBERS&#x2F;SISMEMBER</span><br><span class="line">SCARD</span><br><span class="line">SREM</span><br><span class="line">SRANDMEMBER</span><br><span class="line">SPOP</span><br><span class="line">SMOVE</span><br><span class="line">SDIFF&#x2F;SINTER&#x2F;SUNION：差集&#x2F;交集&#x2F;并集。</span><br></pre></td></tr></table></figure>
-<h2 id="有序集合-ZSet"><a href="#有序集合-ZSet" class="headerlink" title="有序集合(ZSet)"></a>有序集合(ZSet)</h2><p>和集合相比，有序集合增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。</p>
+<h2 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h2><p>和集合相比，有序集合增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。</p>
 <p>举例： 在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息，适合使用有序集合存储。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZADD&#x2F;ZRANGE</span><br><span class="line">ZRANGEBYSCORE</span><br><span class="line">ZREM key e [e...]：删除一个或多个元素。</span><br><span class="line">ZCARD：获得集合中元素的数量</span><br><span class="line">ZCOUNT key min max：获得指定分数范围的元素个数。</span><br><span class="line">ZREVRANK</span><br><span class="line">ZREVRANGE</span><br><span class="line">ZREVRANGEBYSCORE</span><br></pre></td></tr></table></figure>
 <h1 id="Redis进阶"><a href="#Redis进阶" class="headerlink" title="Redis进阶"></a>Redis进阶</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>如下表所示：</p>
@@ -588,7 +585,7 @@
 <p><strong>Spring Data Redis对管道的支持</strong>： If you do not care about the results of the pipelined operations, you can use the standard <code>execute</code> method, passing <code>true</code> for the <code>pipeline</code> argument. The <code>executePipelined</code> methods run the provided <code>RedisCallback</code> or <code>SessionCallback</code> in a pipeline and return the results, as shown in the following example:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//pop a specified number of items from a queue</span></span><br><span class="line">List&lt;Object&gt; results = stringRedisTemplate.executePipelined(</span><br><span class="line">  <span class="keyword">new</span> RedisCallback&lt;Object&gt;() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">doInRedis</span><span class="params">(RedisConnection connection)</span> <span class="keyword">throws</span> DataAccessException </span>&#123;</span><br><span class="line">      StringRedisConnection stringRedisConn = (StringRedisConnection)connection;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; batchSize; i++) &#123;</span><br><span class="line">        stringRedisConn.rPop(<span class="string">"myqueue"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h1 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h1><p>Redis支持RDB和AOF两种持久化方式，实际生产中常一起使用。一起使用时重启Redis会优先采用AOF文件恢复。</p>
-<h2 id="RDB-Redis-DataBase-方式"><a href="#RDB-Redis-DataBase-方式" class="headerlink" title="RDB(Redis DataBase)方式"></a>RDB(Redis DataBase)方式</h2><p>Redis会在以下几种情况下自动将内存中的<strong>所有数据</strong>生产一份副本并存储在硬盘上，这个过程称为<strong>快照</strong>：</p>
+<h2 id="RDB方式"><a href="#RDB方式" class="headerlink" title="RDB方式"></a>RDB方式</h2><p>Redis会在以下几种情况下自动将内存中的<strong>所有数据</strong>生产一份副本并存储在硬盘上，这个过程称为<strong>快照</strong>：</p>
 <ul>
 <li>根据配置文件指定的规则进行自动快照；</li>
 <li>用户执行了<code>SAVE</code>或<code>BGSAVE</code>命令；</li>
@@ -614,7 +611,7 @@
 <li>当子进程写入完毕后，用临时文件替换旧的RDB文件，至此一次快照操作完成。</li>
 </ol>
 <p>注意：在执行fork函数时Linux会采用<strong>写时复制策略</strong>，即fork函数发生的一刻父子进程共享同一内存数据，快照过程中若父进程要更改某片数据，操作系统会将该片数据复制一份，共享内存中的数据不会被修改，因此<strong>新RDB文件不会受快照过程中的修改的影响</strong>。</p>
-<h2 id="AOF-Append-Only-File-方式"><a href="#AOF-Append-Only-File-方式" class="headerlink" title="AOF(Append Only File)方式"></a>AOF(Append Only File)方式</h2><p>通过RDB方式实现持久化，一旦Redis异常退出，就会丢失最后一次快照以后更改的所有数据，因此开发者除了需要通过组合配置自动快照的条件以外，最好结合AOF一起使用。</p>
+<h2 id="AOF方式"><a href="#AOF方式" class="headerlink" title="AOF方式"></a>AOF方式</h2><p>通过RDB方式实现持久化，一旦Redis异常退出，就会丢失最后一次快照以后更改的所有数据，因此开发者除了需要通过组合配置自动快照的条件以外，最好结合AOF一起使用。</p>
 <p>AOF可以将Redis执行的每一条<strong>写</strong>命令追加到硬盘文件中，默认文件名为<strong>appendonly.aof</strong>，可通过参数<code>appendfilename</code>修改。Redis启动时会逐个执行AOF文件中的命令来将硬盘中的数据载入到内存中，载入速度较RDB文件慢一些。</p>
 <p>默认情况下Redis是没有开启AOF方式的，我们可以通过配置<code>appendonly yes</code>参数来启动。</p>
 <p>考虑以下三条写命令：</p>
