@@ -18,19 +18,19 @@
   
   
   <title>JUC概述 | Blog Of TheMasterplan</title>
-  <meta name="description" content="OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray 引用AtomicReference，AtomicMarkableReference，AtomicStampedReference FieldUpdaterAtomicInte">
+  <meta name="description" content="OverView 原子包  基础类型  数组  引用  FieldUpdater  Adder和Accumulator   锁和工具类 并发集合 线程池 多线程开发的良好习惯 OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC概述">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray 引用AtomicReference，AtomicMarkableReference，AtomicStampedReference FieldUpdaterAtomicInte">
+<meta property="og:description" content="OverView 原子包  基础类型  数组  引用  FieldUpdater  Adder和Accumulator   锁和工具类 并发集合 线程池 多线程开发的良好习惯 OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-1.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-lock.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java_collections_overview.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-executors-1.png">
 <meta property="article:published_time" content="2020-09-19T10:05:19.000Z">
-<meta property="article:modified_time" content="2020-09-27T02:40:50.098Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.057Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子包"><span class="toc-number">2.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础类型"><span class="toc-number">2.1.</span> <span class="toc-text">基础类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组"><span class="toc-number">2.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用"><span class="toc-number">2.3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FieldUpdater"><span class="toc-number">2.4.</span> <span class="toc-text">FieldUpdater</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Adder和Accumulator"><span class="toc-number">2.5.</span> <span class="toc-text">Adder和Accumulator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁和工具类"><span class="toc-number">3.</span> <span class="toc-text">锁和工具类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发集合"><span class="toc-number">4.</span> <span class="toc-text">并发集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程池"><span class="toc-number">5.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程开发的良好习惯"><span class="toc-number">6.</span> <span class="toc-text">多线程开发的良好习惯</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原子包"><span class="toc-number">2.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础类型"><span class="toc-number">2.1.</span> <span class="toc-text">基础类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-number">2.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">2.3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FieldUpdater"><span class="toc-number">2.4.</span> <span class="toc-text">FieldUpdater</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adder和Accumulator"><span class="toc-number">2.5.</span> <span class="toc-text">Adder和Accumulator</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#锁和工具类"><span class="toc-number">3.</span> <span class="toc-text">锁和工具类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发集合"><span class="toc-number">4.</span> <span class="toc-text">并发集合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程池"><span class="toc-number">5.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程开发的良好习惯"><span class="toc-number">6.</span> <span class="toc-text">多线程开发的良好习惯</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -268,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 301(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 338(words)</span>
 	
 	
 
@@ -276,16 +276,34 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h3><p><img src="java-thread-x-juc-overview-1.png" alt=""></p>
-<h3 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h3><h4 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h4><p>AtomicBoolean，AtomicInteger，AtomicLong</p>
-<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</p>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>AtomicReference，AtomicMarkableReference，AtomicStampedReference</p>
-<h4 id="FieldUpdater"><a href="#FieldUpdater" class="headerlink" title="FieldUpdater"></a>FieldUpdater</h4><p>AtomicIntegerFieldUpdater, AtomicLongFieldUpdater，AtomicReferenceFieldUpdate</p>
-<h4 id="Adder和Accumulator"><a href="#Adder和Accumulator" class="headerlink" title="Adder和Accumulator"></a>Adder和Accumulator</h4><p>LongAdder, DoubleAdder, LongAccmulator, DoubleAccumulator</p>
-<h3 id="锁和工具类"><a href="#锁和工具类" class="headerlink" title="锁和工具类"></a>锁和工具类</h3><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
-<h3 id="并发集合"><a href="#并发集合" class="headerlink" title="并发集合"></a>并发集合</h3><p><img src="java_collections_overview.png" alt=""></p>
-<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p><img src="java-thread-x-juc-executors-1.png" alt=""></p>
-<h3 id="多线程开发的良好习惯"><a href="#多线程开发的良好习惯" class="headerlink" title="多线程开发的良好习惯"></a>多线程开发的良好习惯</h3><ul>
+        <p><a href="#OverView">OverView</a></p>
+<p><a href="#原子包">原子包</a></p>
+<ul>
+<li><p><a href="#基础类型">基础类型</a></p>
+</li>
+<li><p><a href="#数组">数组</a></p>
+</li>
+<li><p><a href="#引用">引用</a></p>
+</li>
+<li><p><a href="#FieldUpdater">FieldUpdater</a></p>
+</li>
+<li><p><a href="#Adder和Accumulator">Adder和Accumulator</a></p>
+</li>
+</ul>
+<p><a href="#锁和工具类">锁和工具类</a></p>
+<p><a href="#并发集合">并发集合</a></p>
+<p><a href="#线程池">线程池</a></p>
+<p><a href="#多线程开发的良好习惯">多线程开发的良好习惯</a></p>
+<h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><p><img src="java-thread-x-juc-overview-1.png" alt=""></p>
+<h1 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h1><h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><p>AtomicBoolean，AtomicInteger，AtomicLong</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>AtomicReference，AtomicMarkableReference，AtomicStampedReference</p>
+<h2 id="FieldUpdater"><a href="#FieldUpdater" class="headerlink" title="FieldUpdater"></a>FieldUpdater</h2><p>AtomicIntegerFieldUpdater, AtomicLongFieldUpdater，AtomicReferenceFieldUpdate</p>
+<h2 id="Adder和Accumulator"><a href="#Adder和Accumulator" class="headerlink" title="Adder和Accumulator"></a>Adder和Accumulator</h2><p>LongAdder, DoubleAdder, LongAccmulator, DoubleAccumulator</p>
+<h1 id="锁和工具类"><a href="#锁和工具类" class="headerlink" title="锁和工具类"></a>锁和工具类</h1><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
+<h1 id="并发集合"><a href="#并发集合" class="headerlink" title="并发集合"></a>并发集合</h1><p><img src="java_collections_overview.png" alt=""></p>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p><img src="java-thread-x-juc-executors-1.png" alt=""></p>
+<h1 id="多线程开发的良好习惯"><a href="#多线程开发的良好习惯" class="headerlink" title="多线程开发的良好习惯"></a>多线程开发的良好习惯</h1><ul>
 <li>给线程起个有意义的名字，这样可以方便找 Bug。</li>
 <li>缩小同步范围，从而减少锁争用。例如对于 synchronized，应该尽量使用同步块而不是同步方法。</li>
 <li>多用同步工具少用 wait() 和 notify()。首先，CountDownLatch, CyclicBarrier, Semaphore 和 Exchanger 这些同步类简化了编码操作，而用 wait() 和 notify() 很难实现复杂控制流；其次，这些同步类是由最好的企业编写和维护，在后续的 JDK 中还会不断优化和完善。</li>

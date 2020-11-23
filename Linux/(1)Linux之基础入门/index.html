@@ -18,15 +18,15 @@
   
   
   <title>Linux入门 | Blog Of TheMasterplan</title>
-  <meta name="description" content="命令帮助简单说明 whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法 help：列出所有的内部命令  详细说明 info 命令 man 章节号 命令：命令更详细的用法 man -k &quot;String&quot;：查找所有包含String的命令  小工具 日期：date。 日历：cal。 计算器：bc。 文本编辑器：nano。  常用命令常用 获取root">
+  <meta name="description" content="命令帮助  简单说明  详细说明    小工具  常用命令  常用  开关机  图形化界面  文件与目录  系统设置  内部命令与外部命令  命令别名  远程连接与文件上传    技巧与快捷键  标准IO和重定向  默认I&#x2F;O  I&#x2F;O重定向至文件  管道     命令帮助简单说明 whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法 help：列出所有的内部命">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux入门">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(1)Linux%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="命令帮助简单说明 whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法 help：列出所有的内部命令  详细说明 info 命令 man 章节号 命令：命令更详细的用法 man -k &quot;String&quot;：查找所有包含String的命令  小工具 日期：date。 日历：cal。 计算器：bc。 文本编辑器：nano。  常用命令常用 获取root">
+<meta property="og:description" content="命令帮助  简单说明  详细说明    小工具  常用命令  常用  开关机  图形化界面  文件与目录  系统设置  内部命令与外部命令  命令别名  远程连接与文件上传    技巧与快捷键  标准IO和重定向  默认I&#x2F;O  I&#x2F;O重定向至文件  管道     命令帮助简单说明 whatis 命令：列出命令的作用以及man帮助的章节。 命令 --help：命令用法 help：列出所有的内部命">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-17T16:11:48.000Z">
-<meta property="article:modified_time" content="2020-11-10T08:24:34.216Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:20.903Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(1)Linux%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.4k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.5k(words)</span>
 	
 	
 
@@ -271,7 +271,51 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h2><h3 id="简单说明"><a href="#简单说明" class="headerlink" title="简单说明"></a>简单说明</h3><ul>
+        <ul>
+<li><p><a href="#命令帮助">命令帮助</a></p>
+<ul>
+<li><p><a href="#简单说明">简单说明</a></p>
+</li>
+<li><p><a href="#详细说明">详细说明</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#小工具">小工具</a></p>
+</li>
+<li><p><a href="#常用命令">常用命令</a></p>
+<ul>
+<li><p><a href="#常用">常用</a></p>
+</li>
+<li><p><a href="#开关机">开关机</a></p>
+</li>
+<li><p><a href="#图形化界面">图形化界面</a></p>
+</li>
+<li><p><a href="#文件与目录">文件与目录</a></p>
+</li>
+<li><p><a href="#系统设置">系统设置</a></p>
+</li>
+<li><p><a href="#内部命令与外部命令">内部命令与外部命令</a></p>
+</li>
+<li><p><a href="#命令别名">命令别名</a></p>
+</li>
+<li><p><a href="#远程连接与文件上传">远程连接与文件上传</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#技巧与快捷键">技巧与快捷键</a></p>
+</li>
+<li><p><a href="#标准IO和重定向">标准IO和重定向</a></p>
+<ul>
+<li><p><a href="#默认I/O">默认I/O</a></p>
+</li>
+<li><p><a href="#I/O重定向至文件">I/O重定向至文件</a></p>
+</li>
+<li><p><a href="#管道">管道</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h2><h3 id="简单说明"><a href="#简单说明" class="headerlink" title="简单说明"></a>简单说明</h3><ul>
 <li><code>whatis 命令</code>：列出命令的作用以及man帮助的章节。</li>
 <li><code>命令 --help</code>：命令用法</li>
 <li><code>help</code>：列出所有的内部命令</li>

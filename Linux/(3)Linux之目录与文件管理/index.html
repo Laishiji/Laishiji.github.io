@@ -18,15 +18,15 @@
   
   
   <title>Linux之目录与文件 | Blog Of TheMasterplan</title>
-  <meta name="description" content="目录结构在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：     目录 存放：     &#x2F;bin 二进制文件，常用命令。该目录不能有子目录。   &#x2F;boot 引导加载程序的静态文件，内核   &#x2F;dev 设备文件，CPU、硬盘等   &#x2F;etc 配置文件。该目录下不能有二进制文件。   &#x2F;home 用户家目录，每个用户在&#x2F;home下都有一个目录   &#x2F;lib 必须的共享库和内核模">
+  <meta name="description" content="目录结构  文件与目录管理  文件的三个时间属性  文件名规则  文件通配符  常用文件操作命令    文件链接  硬链接  软链接（符号链接）  区别     目录结构在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：     目录 存放：     &#x2F;bin 二进制文件，常用命令。该目录不能有子目录。   &#x2F;boot 引导加载程序的静态文件，内核   &#x2F;dev 设备文件，C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux之目录与文件">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(3)Linux%E4%B9%8B%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="目录结构在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：     目录 存放：     &#x2F;bin 二进制文件，常用命令。该目录不能有子目录。   &#x2F;boot 引导加载程序的静态文件，内核   &#x2F;dev 设备文件，CPU、硬盘等   &#x2F;etc 配置文件。该目录下不能有二进制文件。   &#x2F;home 用户家目录，每个用户在&#x2F;home下都有一个目录   &#x2F;lib 必须的共享库和内核模">
+<meta property="og:description" content="目录结构  文件与目录管理  文件的三个时间属性  文件名规则  文件通配符  常用文件操作命令    文件链接  硬链接  软链接（符号链接）  区别     目录结构在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：     目录 存放：     &#x2F;bin 二进制文件，常用命令。该目录不能有子目录。   &#x2F;boot 引导加载程序的静态文件，内核   &#x2F;dev 设备文件，C">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-17T16:14:20.000Z">
-<meta property="article:modified_time" content="2020-11-08T04:58:52.977Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:20.921Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -271,7 +271,33 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：</p>
+        <ul>
+<li><p><a href="#目录结构">目录结构</a></p>
+</li>
+<li><p><a href="#文件与目录管理">文件与目录管理</a></p>
+<ul>
+<li><p><a href="#文件的三个时间属性">文件的三个时间属性</a></p>
+</li>
+<li><p><a href="#文件名规则">文件名规则</a></p>
+</li>
+<li><p><a href="#文件通配符">文件通配符</a></p>
+</li>
+<li><p><a href="#常用文件操作命令">常用文件操作命令</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#文件链接">文件链接</a></p>
+<ul>
+<li><p><a href="#硬链接">硬链接</a></p>
+</li>
+<li><p><a href="#软链接（符号链接）">软链接（符号链接）</a></p>
+</li>
+<li><p><a href="#区别">区别</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>在Linux系统中，一切皆文件。根目录下的所有目录及其用处如下表所示：</p>
 <div class="table-container">
 <table>
 <thead>

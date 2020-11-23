@@ -18,12 +18,12 @@
   
   
   <title>Linux之磁盘与文件系统 | Blog Of TheMasterplan</title>
-  <meta name="description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。 Inode Table：Inode表，每个I">
+  <meta name="description" content="文件系统简介  磁盘简介  分区管理  分区原因  MBR分区  GPT分区  分区管理命令  常用  创建分区  创建MBR分区  创建GPT分区    高级分区操作      文件系统管理  创建文件系统  管理文件系统  文件系统检测和修复  常用工具    挂载设备  分区挂载  swap的挂载  示例    外围设备  光盘  USB    虚拟内存  RAID  RAID级别   L">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux之磁盘与文件系统">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="文件系统简介Linux使用的是索引式文件系统（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。 下面以EXT2文件系统为例，其结构如图所示：   SuperBlock：记录此文件系统的整体信息，包括Inode&#x2F;Block的总量、使用量、剩余量，以及文件系统的格式与相关信息等。SuperBlock一般为1024字节。 Inode Table：Inode表，每个I">
+<meta property="og:description" content="文件系统简介  磁盘简介  分区管理  分区原因  MBR分区  GPT分区  分区管理命令  常用  创建分区  创建MBR分区  创建GPT分区    高级分区操作      文件系统管理  创建文件系统  管理文件系统  文件系统检测和修复  常用工具    挂载设备  分区挂载  swap的挂载  示例    外围设备  光盘  USB    虚拟内存  RAID  RAID级别   L">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/ext2.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/MBR.jpg">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-2.jpg">
 <meta property="og:image" content="http://thmasterplan.cn/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/LVM-1.jpg">
 <meta property="article:published_time" content="2019-11-29T07:26:51.000Z">
-<meta property="article:modified_time" content="2020-11-13T14:38:39.818Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:20.955Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -278,7 +278,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(8)Linux%E4%B9%8B%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.4k(words)</span>
 	
 	
 
@@ -286,7 +286,93 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="文件系统简介"><a href="#文件系统简介" class="headerlink" title="文件系统简介"></a>文件系统简介</h2><p>Linux使用的是<strong>索引式文件系统</strong>（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。</p>
+        <ul>
+<li><p><a href="#文件系统简介">文件系统简介</a></p>
+</li>
+<li><p><a href="#磁盘简介">磁盘简介</a></p>
+</li>
+<li><p><a href="#分区管理">分区管理</a></p>
+<ul>
+<li><p><a href="#分区原因">分区原因</a></p>
+</li>
+<li><p><a href="#MBR分区">MBR分区</a></p>
+</li>
+<li><p><a href="#GPT分区">GPT分区</a></p>
+</li>
+<li><p><a href="#分区管理命令">分区管理命令</a></p>
+<ul>
+<li><p><a href="#常用">常用</a></p>
+</li>
+<li><p><a href="#创建分区">创建分区</a></p>
+<ul>
+<li><p><a href="#创建MBR分区">创建MBR分区</a></p>
+</li>
+<li><p><a href="#创建GPT分区">创建GPT分区</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#高级分区操作">高级分区操作</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#文件系统管理">文件系统管理</a></p>
+<ul>
+<li><p><a href="#创建文件系统">创建文件系统</a></p>
+</li>
+<li><p><a href="#管理文件系统">管理文件系统</a></p>
+</li>
+<li><p><a href="#文件系统检测和修复">文件系统检测和修复</a></p>
+</li>
+<li><p><a href="#常用工具">常用工具</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#挂载设备">挂载设备</a></p>
+<ul>
+<li><p><a href="#分区挂载">分区挂载</a></p>
+</li>
+<li><p><a href="#swap的挂载">swap的挂载</a></p>
+</li>
+<li><p><a href="#示例">示例</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#外围设备">外围设备</a></p>
+<ul>
+<li><p><a href="#光盘">光盘</a></p>
+</li>
+<li><p><a href="#USB">USB</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#虚拟内存">虚拟内存</a></p>
+</li>
+<li><p><a href="#RAID">RAID</a></p>
+<ul>
+<li><a href="#RAID级别">RAID级别</a></li>
+</ul>
+</li>
+<li><p><a href="#LVM">LVM</a></p>
+<ul>
+<li><p><a href="#概述">概述</a></p>
+</li>
+<li><p><a href="#LVM示意图">LVM示意图</a></p>
+</li>
+<li><p><a href="#使用逻辑卷步骤">使用逻辑卷步骤</a></p>
+</li>
+<li><p><a href="#LVM常用命令">LVM常用命令</a></p>
+</li>
+<li><p><a href="#LVM快照管理">LVM快照管理</a></p>
+<ul>
+<li><a href="#使用快照">使用快照</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件系统简介"><a href="#文件系统简介" class="headerlink" title="文件系统简介"></a>文件系统简介</h2><p>Linux使用的是<strong>索引式文件系统</strong>（B+树实现）：文件的属性放置到Inode中，文件的实际数据放在Data Block中。</p>
 <p>下面以<strong>EXT2文件系统</strong>为例，其结构如图所示：</p>
 <p><img src="ext2.jpg" alt=""></p>
 <ul>

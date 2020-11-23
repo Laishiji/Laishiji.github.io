@@ -18,15 +18,15 @@
   
   
   <title>SpringAOP | Blog Of TheMasterplan</title>
-  <meta name="description" content="AOP概述AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。 SpringAOPSpring中的AOP是通过配置的方式实现的。 AOP相关概念连接点（Joinpoint">
+  <meta name="description" content="AOP概述  SpringAOP  AOP相关概念  连接点（Joinpoint）  切入点（Pointcut）  通知&#x2F;增强（Advice）  引介（Introduction）  目标对象（Target）  织入（Weaving）  代理（Proxy）  切面（Aspect）    SpringAOP编程流程  基于XML的AOP配置  一个简单案例  配置通知  前置通知  后置通知  异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringAOP">
 <meta property="og:url" content="http://thmasterplan.cn/JavaWeb/SpringAOP/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="AOP概述AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。 SpringAOPSpring中的AOP是通过配置的方式实现的。 AOP相关概念连接点（Joinpoint">
+<meta property="og:description" content="AOP概述  SpringAOP  AOP相关概念  连接点（Joinpoint）  切入点（Pointcut）  通知&#x2F;增强（Advice）  引介（Introduction）  目标对象（Target）  织入（Weaving）  代理（Proxy）  切面（Aspect）    SpringAOP编程流程  基于XML的AOP配置  一个简单案例  配置通知  前置通知  后置通知  异常">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-23T08:36:02.000Z">
-<meta property="article:modified_time" content="2020-11-15T14:17:38.542Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.084Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/SpringAOP/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.4k(words)</span>
 	
 	
 
@@ -271,7 +271,65 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="AOP概述"><a href="#AOP概述" class="headerlink" title="AOP概述"></a>AOP概述</h2><p>AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过<strong>预编译方式和运行期间动态代理</strong>实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+        <ul>
+<li><p><a href="#AOP概述">AOP概述</a></p>
+</li>
+<li><p><a href="#SpringAOP">SpringAOP</a></p>
+<ul>
+<li><p><a href="#AOP相关概念">AOP相关概念</a></p>
+<ul>
+<li><p><a href="#连接点（Joinpoint）">连接点（Joinpoint）</a></p>
+</li>
+<li><p><a href="#切入点（Pointcut）">切入点（Pointcut）</a></p>
+</li>
+<li><p><a href="#通知/增强（Advice）">通知/增强（Advice）</a></p>
+</li>
+<li><p><a href="#引介（Introduction）">引介（Introduction）</a></p>
+</li>
+<li><p><a href="#目标对象（Target）">目标对象（Target）</a></p>
+</li>
+<li><p><a href="#织入（Weaving）">织入（Weaving）</a></p>
+</li>
+<li><p><a href="#代理（Proxy）">代理（Proxy）</a></p>
+</li>
+<li><p><a href="#切面（Aspect）">切面（Aspect）</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#SpringAOP编程流程">SpringAOP编程流程</a></p>
+</li>
+<li><p><a href="#基于XML的AOP配置">基于XML的AOP配置</a></p>
+<ul>
+<li><p><a href="#一个简单案例">一个简单案例</a></p>
+</li>
+<li><p><a href="#配置通知">配置通知</a></p>
+<ul>
+<li><p><a href="#前置通知">前置通知</a></p>
+</li>
+<li><p><a href="#后置通知">后置通知</a></p>
+</li>
+<li><p><a href="#异常通知">异常通知</a></p>
+</li>
+<li><p><a href="#最终通知">最终通知</a></p>
+</li>
+<li><p><a href="#环绕通知">环绕通知</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#切入点表达式">切入点表达式</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#基于注解的AOP配置">基于注解的AOP配置</a></p>
+</li>
+<li><p><a href="#AOP实现事务控制">AOP实现事务控制</a></p>
+</li>
+<li><p><a href="#SpringAOP Doc">SpringAOP Doc</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="AOP概述"><a href="#AOP概述" class="headerlink" title="AOP概述"></a>AOP概述</h2><p>AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过<strong>预编译方式和运行期间动态代理</strong>实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
 <h2 id="SpringAOP"><a href="#SpringAOP" class="headerlink" title="SpringAOP"></a>SpringAOP</h2><p>Spring中的AOP是通过配置的方式实现的。</p>
 <h3 id="AOP相关概念"><a href="#AOP相关概念" class="headerlink" title="AOP相关概念"></a>AOP相关概念</h3><h4 id="连接点（Joinpoint）"><a href="#连接点（Joinpoint）" class="headerlink" title="连接点（Joinpoint）"></a>连接点（Joinpoint）</h4><p>指被拦截到的点。在Spring中，这些点指的是方法，因为Spring只支持方法类型的连接点。</p>
 <p>例如：<strong>业务层接口</strong>中的所有方法都是连接点，JDK动态代理中InvocationHandler的invoke方法具有拦截的功能，能拦截被代理对象中的所有方法，使得<strong>代理对象中实现的事务控制</strong>与<strong>被代理对象（业务层实现类对象）中的业务</strong>成为一个完整的业务逻辑，<a href="https://github.com/Laishiji/SpringLearningDemo/tree/master/iocDemoPlusTransferAndProxy/src" target="_blank" rel="noopener">参见该例</a>。</p>

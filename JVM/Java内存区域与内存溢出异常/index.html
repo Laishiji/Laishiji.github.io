@@ -18,19 +18,19 @@
   
   
   <title>Java内存区域与内存溢出异常 | Blog Of TheMasterplan</title>
-  <meta name="description" content="运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。每个方法在执行时都会创建一个栈帧，用于存储局部变量表、操作数栈等。每个方法从调用到执">
+  <meta name="description" content="运行时数据区域 直接内存 常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存区域与内存溢出异常">
 <meta property="og:url" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。每个方法在执行时都会创建一个栈帧，用于存储局部变量表、操作数栈等。每个方法从调用到执">
+<meta property="og:description" content="运行时数据区域 直接内存 常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JVM_Runtime_DataArea.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JIT_flow.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/Constant_pool.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/OOM.jpg">
 <meta property="article:published_time" content="2020-08-23T03:24:45.000Z">
-<meta property="article:modified_time" content="2020-10-11T07:17:30.267Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.011Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">3.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的OOM原因"><span class="toc-number">4.</span> <span class="toc-text">常见的OOM原因</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#堆"><span class="toc-number">4.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法区"><span class="toc-number">4.2.</span> <span class="toc-text">方法区</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">3.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的OOM原因"><span class="toc-number">4.</span> <span class="toc-text">常见的OOM原因</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-number">4.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-number">4.2.</span> <span class="toc-text">方法区</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -276,7 +276,17 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h3><p>​            <img src="JVM_Runtime_DataArea.png" alt=""></p>
+        <p><a href="#运行时数据区域">运行时数据区域</a></p>
+<p><a href="#直接内存">直接内存</a></p>
+<p><a href="#常见的VM堆栈参数">常见的VM堆栈参数</a></p>
+<p><a href="#常见的OOM原因">常见的OOM原因</a></p>
+<ul>
+<li><p><a href="#堆">堆</a></p>
+</li>
+<li><p><a href="#方法区">方法区</a></p>
+</li>
+</ul>
+<h1 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h1><p>​            <img src="JVM_Runtime_DataArea.png" alt=""></p>
 <ul>
 <li><p><strong>线程私有：与线程生命周期相同</strong></p>
 <ul>
@@ -331,11 +341,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
+<h1 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h1><ul>
 <li>直接内存并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但这部分内存也会频繁使用，可能导致OOM异常。</li>
 <li>JDK1.4中加入了NIO类（New Input/Output），引入了一种基于Channel与Buffer的I/O方式，<strong>它可以使用本地函数库直接分配堆外内存</strong>，然后通过一个存储在Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。</li>
 </ul>
-<h3 id="常见的VM堆栈参数"><a href="#常见的VM堆栈参数" class="headerlink" title="常见的VM堆栈参数"></a>常见的VM堆栈参数</h3><ul>
+<h1 id="常见的VM堆栈参数"><a href="#常见的VM堆栈参数" class="headerlink" title="常见的VM堆栈参数"></a>常见的VM堆栈参数</h1><ul>
 <li>-Xms: 设置堆的最小值，如<code>-Xms20m</code></li>
 <li>-Xmx: 设置堆的最大值，如<code>-Xmx20m</code></li>
 <li>-Xmn: 设置堆新生代值</li>
@@ -344,8 +354,8 @@
 <li><code>-XX:Permsize=10M</code>: 设置方法区大小为10M</li>
 <li><code>-XX:MaxDirectMemorySize=10M</code>: 设置本机直接内存大小为10M</li>
 </ul>
-<h3 id="常见的OOM原因"><a href="#常见的OOM原因" class="headerlink" title="常见的OOM原因"></a>常见的OOM原因</h3><p><img src="OOM.jpg" alt=""></p>
-<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>堆内存没有足够空间存放新创建的对象。常见异常：<code>java.lang.OutOfMemoryError:Javaheap space</code>; <code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code></p>
+<h1 id="常见的OOM原因"><a href="#常见的OOM原因" class="headerlink" title="常见的OOM原因"></a>常见的OOM原因</h1><p><img src="OOM.jpg" alt=""></p>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>堆内存没有足够空间存放新创建的对象。常见异常：<code>java.lang.OutOfMemoryError:Javaheap space</code>; <code>java.lang.OutOfMemoryError:GC overhead limit exceeded</code></p>
 <p>常见原因：</p>
 <ol>
 <li>创建了一个<strong>超大对象</strong>，比如大数组</li>
@@ -359,7 +369,7 @@
 <li>如果是业务峰值压力，可以考虑添加机器资源，或者做限流降级。</li>
 <li>如果是内存泄漏，需要找到持有的对象，修改代码设计，比如关闭没有释放的连接。</li>
 </ol>
-<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>常见原因：对象数组和类型数组所关联的class太多。</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>常见原因：对象数组和类型数组所关联的class太多。</p>
 <p>解决方案：</p>
 <ol>
 <li>修改 <code>-XX:MaxPermSize</code> 启动参数，调大永久代空间。</li>

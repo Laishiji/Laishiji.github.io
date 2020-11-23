@@ -18,12 +18,12 @@
   
   
   <title>Java内存模型 | Blog Of TheMasterplan</title>
-  <meta name="description" content="Java指令重排序Java内存模型允许编译器和处理器对指令重排序以提高运行性能，并且只会对不存在数据依赖性的指令重排序。但是指令重排在多线程程序中可能会出问题。 主内存与工作内存Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。（C&#x2F;C++直接使用物理硬件和操作系统的内存模型，因此可能会由于平台差异">
+  <meta name="description" content="Java指令重排序 主内存与工作内存 内存间交互操作 内存模型三大特征  原子性  可见性  有序性   先行发生原则（Happens-Before规则）  程序次序规则（Program Order Rule）  管程锁定规则（Monitor Lock Rule）  volatile变量规则（Volatile Variable Rule）  线程启动规则（Thread Start Rule）  线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存模型">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Java指令重排序Java内存模型允许编译器和处理器对指令重排序以提高运行性能，并且只会对不存在数据依赖性的指令重排序。但是指令重排在多线程程序中可能会出问题。 主内存与工作内存Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。（C&#x2F;C++直接使用物理硬件和操作系统的内存模型，因此可能会由于平台差异">
+<meta property="og:description" content="Java指令重排序 主内存与工作内存 内存间交互操作 内存模型三大特征  原子性  可见性  有序性   先行发生原则（Happens-Before规则）  程序次序规则（Program Order Rule）  管程锁定规则（Monitor Lock Rule）  volatile变量规则（Volatile Variable Rule）  线程启动规则（Thread Start Rule）  线">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/JMM_Model.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/CPU_Cache.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/CPU_Cache.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/CPU_Cache.jpg">
 <meta property="article:published_time" content="2020-09-12T12:39:07.000Z">
-<meta property="article:modified_time" content="2020-09-22T09:22:40.836Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.013Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java指令重排序"><span class="toc-number">1.</span> <span class="toc-text">Java指令重排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主内存与工作内存"><span class="toc-number">2.</span> <span class="toc-text">主内存与工作内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存间交互操作"><span class="toc-number">3.</span> <span class="toc-text">内存间交互操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存模型三大特征"><span class="toc-number">4.</span> <span class="toc-text">内存模型三大特征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原子性"><span class="toc-number">4.1.</span> <span class="toc-text">原子性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可见性"><span class="toc-number">4.2.</span> <span class="toc-text">可见性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有序性"><span class="toc-number">4.3.</span> <span class="toc-text">有序性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#先行发生原则（Happens-Before规则）"><span class="toc-number">5.</span> <span class="toc-text">先行发生原则（Happens-Before规则）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序次序规则（Program-Order-Rule）"><span class="toc-number">5.1.</span> <span class="toc-text">程序次序规则（Program Order Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#管程锁定规则（Monitor-Lock-Rule）"><span class="toc-number">5.2.</span> <span class="toc-text">管程锁定规则（Monitor Lock Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile变量规则（Volatile-Variable-Rule）"><span class="toc-number">5.3.</span> <span class="toc-text">volatile变量规则（Volatile Variable Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程启动规则（Thread-Start-Rule）"><span class="toc-number">5.4.</span> <span class="toc-text">线程启动规则（Thread Start Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程加入规则（Thread-Join-Rule）"><span class="toc-number">5.5.</span> <span class="toc-text">线程加入规则（Thread Join Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程中断规则（Thread-Interruption-Rule）"><span class="toc-number">5.6.</span> <span class="toc-text">线程中断规则（Thread Interruption Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对象终结规则（Finalizer-Rule）"><span class="toc-number">5.7.</span> <span class="toc-text">对象终结规则（Finalizer Rule）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#传递性（Transitivity）"><span class="toc-number">5.8.</span> <span class="toc-text">传递性（Transitivity）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪共享"><span class="toc-number">6.</span> <span class="toc-text">伪共享</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缓存一致性（Cache-Coherence）"><span class="toc-number">6.1.</span> <span class="toc-text">缓存一致性（Cache Coherence）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#局部性原理"><span class="toc-number">6.2.</span> <span class="toc-text">局部性原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#伪共享-1"><span class="toc-number">6.3.</span> <span class="toc-text">伪共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#避免伪共享"><span class="toc-number">6.4.</span> <span class="toc-text">避免伪共享</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java指令重排序"><span class="toc-number">1.</span> <span class="toc-text">Java指令重排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主内存与工作内存"><span class="toc-number">2.</span> <span class="toc-text">主内存与工作内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存间交互操作"><span class="toc-number">3.</span> <span class="toc-text">内存间交互操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存模型三大特征"><span class="toc-number">4.</span> <span class="toc-text">内存模型三大特征</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原子性"><span class="toc-number">4.1.</span> <span class="toc-text">原子性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可见性"><span class="toc-number">4.2.</span> <span class="toc-text">可见性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序性"><span class="toc-number">4.3.</span> <span class="toc-text">有序性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#先行发生原则（Happens-Before规则）"><span class="toc-number">5.</span> <span class="toc-text">先行发生原则（Happens-Before规则）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序次序规则（Program-Order-Rule）"><span class="toc-number">5.1.</span> <span class="toc-text">程序次序规则（Program Order Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管程锁定规则（Monitor-Lock-Rule）"><span class="toc-number">5.2.</span> <span class="toc-text">管程锁定规则（Monitor Lock Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile变量规则（Volatile-Variable-Rule）"><span class="toc-number">5.3.</span> <span class="toc-text">volatile变量规则（Volatile Variable Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程启动规则（Thread-Start-Rule）"><span class="toc-number">5.4.</span> <span class="toc-text">线程启动规则（Thread Start Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程加入规则（Thread-Join-Rule）"><span class="toc-number">5.5.</span> <span class="toc-text">线程加入规则（Thread Join Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程中断规则（Thread-Interruption-Rule）"><span class="toc-number">5.6.</span> <span class="toc-text">线程中断规则（Thread Interruption Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象终结规则（Finalizer-Rule）"><span class="toc-number">5.7.</span> <span class="toc-text">对象终结规则（Finalizer Rule）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传递性（Transitivity）"><span class="toc-number">5.8.</span> <span class="toc-text">传递性（Transitivity）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伪共享"><span class="toc-number">6.</span> <span class="toc-text">伪共享</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存一致性（Cache-Coherence）"><span class="toc-number">6.1.</span> <span class="toc-text">缓存一致性（Cache Coherence）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#局部性原理"><span class="toc-number">6.2.</span> <span class="toc-text">局部性原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪共享-1"><span class="toc-number">6.3.</span> <span class="toc-text">伪共享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免伪共享"><span class="toc-number">6.4.</span> <span class="toc-text">避免伪共享</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -269,7 +269,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.1k(words)</span>
 	
 	
 
@@ -277,8 +277,50 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="Java指令重排序"><a href="#Java指令重排序" class="headerlink" title="Java指令重排序"></a>Java指令重排序</h3><p>Java内存模型允许编译器和处理器对指令重排序以提高运行性能，并且只会对不存在数据依赖性的指令重排序。但是指令重排在多线程程序中可能会出问题。</p>
-<h3 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h3><p>Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。（C/C++直接使用物理硬件和操作系统的内存模型，因此可能会由于平台差异导致同一份代码无法正常运行。）</p>
+        <p><a href="#Java指令重排序">Java指令重排序</a></p>
+<p><a href="#主内存与工作内存">主内存与工作内存</a></p>
+<p><a href="#内存间交互操作">内存间交互操作</a></p>
+<p><a href="#内存模型三大特征">内存模型三大特征</a></p>
+<ul>
+<li><p><a href="#原子性">原子性</a></p>
+</li>
+<li><p><a href="#可见性">可见性</a></p>
+</li>
+<li><p><a href="#有序性">有序性</a></p>
+</li>
+</ul>
+<p><a href="#先行发生原则（Happens-Before规则）">先行发生原则（Happens-Before规则）</a></p>
+<ul>
+<li><p><a href="#程序次序规则（Program Order Rule）">程序次序规则（Program Order Rule）</a></p>
+</li>
+<li><p><a href="#管程锁定规则（Monitor Lock Rule）">管程锁定规则（Monitor Lock Rule）</a></p>
+</li>
+<li><p><a href="#volatile变量规则（Volatile Variable Rule）">volatile变量规则（Volatile Variable Rule）</a></p>
+</li>
+<li><p><a href="#线程启动规则（Thread Start Rule）">线程启动规则（Thread Start Rule）</a></p>
+</li>
+<li><p><a href="#线程加入规则（Thread Join Rule）">线程加入规则（Thread Join Rule）</a></p>
+</li>
+<li><p><a href="#线程中断规则（Thread Interruption Rule）">线程中断规则（Thread Interruption Rule）</a></p>
+</li>
+<li><p><a href="#对象终结规则（Finalizer Rule）">对象终结规则（Finalizer Rule）</a></p>
+</li>
+<li><p><a href="#传递性（Transitivity）">传递性（Transitivity）</a></p>
+</li>
+</ul>
+<p><a href="#伪共享">伪共享</a></p>
+<ul>
+<li><p><a href="#缓存一致性（Cache Coherence）">缓存一致性（Cache Coherence）</a></p>
+</li>
+<li><p><a href="#局部性原理">局部性原理</a></p>
+</li>
+<li><p><a href="#伪共享">伪共享</a></p>
+</li>
+<li><p><a href="#避免伪共享">避免伪共享</a></p>
+</li>
+</ul>
+<h1 id="Java指令重排序"><a href="#Java指令重排序" class="headerlink" title="Java指令重排序"></a>Java指令重排序</h1><p>Java内存模型允许编译器和处理器对指令重排序以提高运行性能，并且只会对不存在数据依赖性的指令重排序。但是指令重排在多线程程序中可能会出问题。</p>
+<h1 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h1><p>Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。（C/C++直接使用物理硬件和操作系统的内存模型，因此可能会由于平台差异导致同一份代码无法正常运行。）</p>
 <p>JMM规定了所有的变量都存储在主内存中。注意：</p>
 <ol>
 <li><strong>此处的变量不包括局部变量与方法参数</strong>，<strong>因为它们是线程私有的</strong>。</li>
@@ -289,7 +331,7 @@
 <p><img src="JMM_Model.png" alt=""></p>
 <p>这与硬件的缓存访问操作很相似：</p>
 <p><img src="CPU_Cache.png" alt=""></p>
-<h3 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h3><p>JMM定义了8种操作来完成主内存和工作内存之间的交互，<strong>这些操作是原子的、不可再分的</strong>。</p>
+<h1 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h1><p>JMM定义了8种操作来完成主内存和工作内存之间的交互，<strong>这些操作是原子的、不可再分的</strong>。</p>
 <p><img src="JMM_Operation.png" alt=""></p>
 <ul>
 <li>lock: 作用于主内存，把一个变量标识为一条线程独占。</li>
@@ -301,13 +343,13 @@
 <li>store: 把工作内存的一个变量值传输到主内存。</li>
 <li>write: 把store传的值放入主内存的变量中。</li>
 </ul>
-<h3 id="内存模型三大特征"><a href="#内存模型三大特征" class="headerlink" title="内存模型三大特征"></a>内存模型三大特征</h3><p>Java内存模型是围绕着并发过程中如何处理原子性、可见性和有序性这3个特征来建立的。</p>
-<h4 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h4><p>原子性的含义理解：一个操作或者多个操作要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</p>
+<h1 id="内存模型三大特征"><a href="#内存模型三大特征" class="headerlink" title="内存模型三大特征"></a>内存模型三大特征</h1><p>Java内存模型是围绕着并发过程中如何处理原子性、可见性和有序性这3个特征来建立的。</p>
+<h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>原子性的含义理解：一个操作或者多个操作要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</p>
 <p>由JMM直接保证的原子性变量操作包括read/load/use/assign/store/write。</p>
 <p>如果应用场景需要一个更大范围的原子性保证，JMM还提供了lock和unlock来满足这种需求，对应的更高层次的字节码指令为monitorenter和monitorexit隐式使用这两个操作，反应到代码中就是synchronized关键字的使用，也即synchronized块的操作也具有原子性。也即<code>lock-&gt;{read-&gt;load-&gt;use-&gt;assign-&gt;store-&gt;write}-&gt;unlock</code>保证了<code>{}</code>中一连串操作具有原子性。而volatile关键字不满足原子性的原因就是，虽然其通过{assign-&gt;store-&gt;write}和{read-&gt;load-&gt;use}满足了可见性，但是<u><strong>只要{read-&gt;load-&gt;use-&gt;assign-&gt;store-&gt;write}不是原子的，那么一个线程对一个变量的操作就不是原子的</strong></u>。</p>
 <p>synchronized关键字经过编译后，会在同步块前后分别形成monitorenter和moniterexit两个字节码指令，这两个字节码指令都需要一个reference类型的参数来指明锁对象（monitorenter含义：获得对象的锁；monitorexit含义：释放对象的锁），比如同步块的this/某个对象，或者synchronized方法对应的实例对象，以及静态synchronized方法对应的类Class对象。</p>
 <p>Tip: 通过<code>javap</code>反编译发现，临界区代码后有两个monitorexit字节码指令，是因为如果出现异常退出也需要释放锁。</p>
-<h4 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h4><p>可见性是指：当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。</p>
+<h2 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h2><p>可见性是指：当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。</p>
 <p>JMM如何实现可见性？</p>
 <p>答：volatile，在变量<strong>修改后</strong>将新值<strong>同步回主内存</strong>{assign-&gt;store-&gt;write}，变量<strong>使用前从主内存刷新到工作内存</strong>{read-&gt;load-&gt;use}。</p>
 <p>Java哪些关键字可以保证可见性？</p>
@@ -316,33 +358,33 @@
 <li>synchronized: 对一个变量执行<strong>lock操作</strong>后，<strong>从主内存刷新到工作内存</strong>{lock-&gt;read-&gt;load-&gt;use}；对一个变量执行<strong>unlock操作</strong>之前，必须先把变量值<strong>同步回主内存</strong>{assign-&gt;store-&gt;write-&gt;unlock}。</li>
 <li>final: 被 final 修饰的字段在构造器中一旦初始化完成，那么其它线程就能看见 final 字段的值。</li>
 </ul>
-<h4 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h4><p>有序性是指：在本线程内观察，所有操作都是有序的。在一个线程观察另一个线程，所有操作都是无序的，无序是因为发生了<strong>指令重排序</strong>以及<strong>工作内存与主内存同步有延迟</strong>。在 Java 内存模型中，允许<strong>编译器和处理器对指令进行重排序</strong>，重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。</p>
+<h2 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h2><p>有序性是指：在本线程内观察，所有操作都是有序的。在一个线程观察另一个线程，所有操作都是无序的，无序是因为发生了<strong>指令重排序</strong>以及<strong>工作内存与主内存同步有延迟</strong>。在 Java 内存模型中，允许<strong>编译器和处理器对指令进行重排序</strong>，重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。</p>
 <p>volatile 关键字通过<strong>添加内存屏障的方式来禁止指令重排</strong>，即重排序时不能把后面的指令放到内存屏障之前。</p>
 <p>也可以通过 synchronized 来保证有序性，它保证每个时刻只有一个线程执行同步代码（也即<strong>锁的作用</strong>），相当于是让线程顺序执行同步代码。</p>
-<h3 id="先行发生原则（Happens-Before规则）"><a href="#先行发生原则（Happens-Before规则）" class="headerlink" title="先行发生原则（Happens-Before规则）"></a>先行发生原则（Happens-Before规则）</h3><p>先行发生是JMM中定义的两项操作之间的偏序关系，如果说操作A先行发生于操作B，其含义是：B发生之前，A产生的影响能被B观察到。“影响”包括修改了内存中共享变量的、发送了消息、调用了方法等。</p>
+<h1 id="先行发生原则（Happens-Before规则）"><a href="#先行发生原则（Happens-Before规则）" class="headerlink" title="先行发生原则（Happens-Before规则）"></a>先行发生原则（Happens-Before规则）</h1><p>先行发生是JMM中定义的两项操作之间的偏序关系，如果说操作A先行发生于操作B，其含义是：B发生之前，A产生的影响能被B观察到。“影响”包括修改了内存中共享变量的、发送了消息、调用了方法等。</p>
 <p>JMM中一些天然的先行发生关系如下：</p>
-<h4 id="程序次序规则（Program-Order-Rule）"><a href="#程序次序规则（Program-Order-Rule）" class="headerlink" title="程序次序规则（Program Order Rule）"></a>程序次序规则（Program Order Rule）</h4><p>在一个线程内，在程序前面的操作先行发生于后面的操作。</p>
-<h4 id="管程锁定规则（Monitor-Lock-Rule）"><a href="#管程锁定规则（Monitor-Lock-Rule）" class="headerlink" title="管程锁定规则（Monitor Lock Rule）"></a>管程锁定规则（Monitor Lock Rule）</h4><p>一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。</p>
-<h4 id="volatile变量规则（Volatile-Variable-Rule）"><a href="#volatile变量规则（Volatile-Variable-Rule）" class="headerlink" title="volatile变量规则（Volatile Variable Rule）"></a>volatile变量规则（Volatile Variable Rule）</h4><p>对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。</p>
-<h4 id="线程启动规则（Thread-Start-Rule）"><a href="#线程启动规则（Thread-Start-Rule）" class="headerlink" title="线程启动规则（Thread Start Rule）"></a>线程启动规则（Thread Start Rule）</h4><p>Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。</p>
-<h4 id="线程加入规则（Thread-Join-Rule）"><a href="#线程加入规则（Thread-Join-Rule）" class="headerlink" title="线程加入规则（Thread Join Rule）"></a>线程加入规则（Thread Join Rule）</h4><p>Thread 对象的结束先行发生于 join() 方法返回。</p>
-<h4 id="线程中断规则（Thread-Interruption-Rule）"><a href="#线程中断规则（Thread-Interruption-Rule）" class="headerlink" title="线程中断规则（Thread Interruption Rule）"></a>线程中断规则（Thread Interruption Rule）</h4><p>对线程 interrupt() 方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过 interrupted() 方法检测到是否有中断发生。</p>
-<h4 id="对象终结规则（Finalizer-Rule）"><a href="#对象终结规则（Finalizer-Rule）" class="headerlink" title="对象终结规则（Finalizer Rule）"></a>对象终结规则（Finalizer Rule）</h4><p>一个对象的初始化完成（构造函数执行结束）先行发生于它的 finalize() 方法的开始。</p>
-<h4 id="传递性（Transitivity）"><a href="#传递性（Transitivity）" class="headerlink" title="传递性（Transitivity）"></a>传递性（Transitivity）</h4><p>如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。</p>
-<h3 id="伪共享"><a href="#伪共享" class="headerlink" title="伪共享"></a>伪共享</h3><h4 id="缓存一致性（Cache-Coherence）"><a href="#缓存一致性（Cache-Coherence）" class="headerlink" title="缓存一致性（Cache Coherence）"></a>缓存一致性（Cache Coherence）</h4><p>在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存，如图所示：</p>
+<h2 id="程序次序规则（Program-Order-Rule）"><a href="#程序次序规则（Program-Order-Rule）" class="headerlink" title="程序次序规则（Program Order Rule）"></a>程序次序规则（Program Order Rule）</h2><p>在一个线程内，在程序前面的操作先行发生于后面的操作。</p>
+<h2 id="管程锁定规则（Monitor-Lock-Rule）"><a href="#管程锁定规则（Monitor-Lock-Rule）" class="headerlink" title="管程锁定规则（Monitor Lock Rule）"></a>管程锁定规则（Monitor Lock Rule）</h2><p>一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。</p>
+<h2 id="volatile变量规则（Volatile-Variable-Rule）"><a href="#volatile变量规则（Volatile-Variable-Rule）" class="headerlink" title="volatile变量规则（Volatile Variable Rule）"></a>volatile变量规则（Volatile Variable Rule）</h2><p>对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。</p>
+<h2 id="线程启动规则（Thread-Start-Rule）"><a href="#线程启动规则（Thread-Start-Rule）" class="headerlink" title="线程启动规则（Thread Start Rule）"></a>线程启动规则（Thread Start Rule）</h2><p>Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。</p>
+<h2 id="线程加入规则（Thread-Join-Rule）"><a href="#线程加入规则（Thread-Join-Rule）" class="headerlink" title="线程加入规则（Thread Join Rule）"></a>线程加入规则（Thread Join Rule）</h2><p>Thread 对象的结束先行发生于 join() 方法返回。</p>
+<h2 id="线程中断规则（Thread-Interruption-Rule）"><a href="#线程中断规则（Thread-Interruption-Rule）" class="headerlink" title="线程中断规则（Thread Interruption Rule）"></a>线程中断规则（Thread Interruption Rule）</h2><p>对线程 interrupt() 方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过 interrupted() 方法检测到是否有中断发生。</p>
+<h2 id="对象终结规则（Finalizer-Rule）"><a href="#对象终结规则（Finalizer-Rule）" class="headerlink" title="对象终结规则（Finalizer Rule）"></a>对象终结规则（Finalizer Rule）</h2><p>一个对象的初始化完成（构造函数执行结束）先行发生于它的 finalize() 方法的开始。</p>
+<h2 id="传递性（Transitivity）"><a href="#传递性（Transitivity）" class="headerlink" title="传递性（Transitivity）"></a>传递性（Transitivity）</h2><p>如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。</p>
+<h1 id="伪共享"><a href="#伪共享" class="headerlink" title="伪共享"></a>伪共享</h1><h2 id="缓存一致性（Cache-Coherence）"><a href="#缓存一致性（Cache-Coherence）" class="headerlink" title="缓存一致性（Cache Coherence）"></a>缓存一致性（Cache Coherence）</h2><p>在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存，如图所示：</p>
 <p><img src="CPU_Cache.png" alt=""></p>
 <p>当多个处理器的运算任务都涉及同一块主内存区域时，将可能导致各自的缓存数据不一致，那么在同步数据回主内存时该以谁的缓存数据为准呢？为了解决一致性问题，需要处理器访问缓存时都遵循一些协议，也即<strong>缓存一致性协议</strong>，在读写时根据协议来操作，这类协议有MSI，MESI，MOSI等等。</p>
-<h4 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h4><p>局部性原理: CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。</p>
+<h2 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h2><p>局部性原理: CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。</p>
 <p>时间局部性：如果一个信息项正在被访问，那么在近期它很可能还会被再次访问。</p>
 <p>空间局部性：在最近的将来将用到的信息很可能与现在正在使用的信息在空间地址上是临近的。</p>
-<h4 id="伪共享-1"><a href="#伪共享-1" class="headerlink" title="伪共享"></a>伪共享</h4><p>伪共享：多线程下访问同一个Cache行中的多个不同变量时产生。</p>
+<h2 id="伪共享-1"><a href="#伪共享-1" class="headerlink" title="伪共享"></a>伪共享</h2><p>伪共享：多线程下访问同一个Cache行中的多个不同变量时产生。</p>
 <p>在Cache内部是按行存储的，其中每一行称为一个Cache行。Cache行是与主内存进行数据交换的单位，其大小一般为2的幂次数字节。</p>
 <p>当CPU访问某个变量时，首先会检查CPUCache内是否有该变量，如果有则直接读取，否则就向下级缓存找，直到主内存。然后将找到的变量所在内存区域的一个Cache行大小的内存复制到Cache中。由于存放到Cache行的是内存块而不是单个变量，所以可能会把多个变量存放到一个Cache行中。</p>
 <p>由程序运行的局部性原理可知，程序会把变量所在内存中大小为Cache行的内存（地址连续的内存）放入CPUCache中。<strong>当多个线程同时写入Cache行中不同的变量时</strong>，由于缓存一致性协议，此时只能有一个线程操作Cache行，所以相比将每个变量放到一个Cache行，性能会有所下降，这就是<strong>伪共享</strong>。以下图为例：</p>
 <p><img src="CPU_Cache.jpg" alt=""></p>
 <p>上图中变量x,y所在的内存区域同时被复制到了<strong>CPU1和CPU2的Cache行</strong>以及<strong>二级缓存</strong>中，当线程1使用CPU1对x进行更新时，首先修改CPU1Cache1变量x所在的缓存行，<strong>此时由于缓存一致性协议，CPU2中变量x对应的缓存行失效</strong>，那么线程2在写入变量y时就只能从二级缓存查找了。</p>
 <p>在创建数组时，数组里的多个元素就会被放入同一个缓存行，对于单线程程序而言，如果顺序访问数组中的元素，就会充分利用程序运行的局部性原则，从而加速了程序的运行。</p>
-<h4 id="避免伪共享"><a href="#避免伪共享" class="headerlink" title="避免伪共享"></a>避免伪共享</h4><p>jdk1.8之前一般通过<strong>字节填充</strong>的方式来避免伪共享，也就是创建一个变量时使用无关字段填充该变量所在的缓存行，这样就避免了将多个变量存放在同一个缓存行中。例如如下代码：</p>
+<h2 id="避免伪共享"><a href="#避免伪共享" class="headerlink" title="避免伪共享"></a>避免伪共享</h2><p>jdk1.8之前一般通过<strong>字节填充</strong>的方式来避免伪共享，也就是创建一个变量时使用无关字段填充该变量所在的缓存行，这样就避免了将多个变量存放在同一个缓存行中。例如如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FilledLong</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> value = <span class="number">0L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用<code>CPU-Z</code>查看发现我的电脑CPU一级缓存行大小为64Byte，由于一个长整型变量占8Byte，那么以上代码变量总共占了56个Byte，其中6个变量48Byte为填充字节，而类对象的字节码的对象头占用8Byte，所以一个FilledLong对象实际会占用64Byte。</p>
 <p><strong>jdk1.8提供了一个sun.misc.Contended注解来解决伪共享问题</strong>。将上面的代码修改如下：</p>

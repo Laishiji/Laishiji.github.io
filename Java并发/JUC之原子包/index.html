@@ -18,19 +18,19 @@
   
   
   <title>JUC之原子包 | Blog Of TheMasterplan</title>
-  <meta name="description" content="CAS操作CAS（Compare-And-Swap）比较并交换(Compare-and-Swap，CAS)是硬件支持的原子性操作之一。 CAS 指令有 3 个操作数，分别是内存地址 V、旧的值 A 和新值 B。当CAS指令执行时，只有当 V 的值等于旧值A，才将 V 的值更新为 B。简单来说，就是CAS操作执行时，要检测旧值是否发生变化，如果变化了则不更新，没有变化才更新。CAS指令从硬件上保证了">
+  <meta name="description" content="CAS操作  CAS（Compare-And-Swap）  CAS使用示例：AtomicInteger  CAS的问题  ABA问题  若自旋时间过长则开销大  只能保证单个共享变量的原子操作     Unsafe类 原子包  AtomicInteger  常用方法  源码分析    原子更新基本类型  原子更新数组  原子更新引用类型  原子更新Field  JDK8新增的原子操作类LongAd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC之原子包">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="CAS操作CAS（Compare-And-Swap）比较并交换(Compare-and-Swap，CAS)是硬件支持的原子性操作之一。 CAS 指令有 3 个操作数，分别是内存地址 V、旧的值 A 和新值 B。当CAS指令执行时，只有当 V 的值等于旧值A，才将 V 的值更新为 B。简单来说，就是CAS操作执行时，要检测旧值是否发生变化，如果变化了则不更新，没有变化才更新。CAS指令从硬件上保证了">
+<meta property="og:description" content="CAS操作  CAS（Compare-And-Swap）  CAS使用示例：AtomicInteger  CAS的问题  ABA问题  若自旋时间过长则开销大  只能保证单个共享变量的原子操作     Unsafe类 原子包  AtomicInteger  常用方法  源码分析    原子更新基本类型  原子更新数组  原子更新引用类型  原子更新Field  JDK8新增的原子操作类LongAd">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/java-thread-x-atomicinteger-unsafe.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/juc_atomic.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/AtomicLong.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/LongAdder.png">
 <meta property="article:published_time" content="2020-09-19T11:56:16.000Z">
-<meta property="article:modified_time" content="2020-09-27T02:52:28.747Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.026Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAS操作"><span class="toc-number">1.</span> <span class="toc-text">CAS操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CAS（Compare-And-Swap）"><span class="toc-number">1.1.</span> <span class="toc-text">CAS（Compare-And-Swap）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CAS使用示例：AtomicInteger"><span class="toc-number">1.2.</span> <span class="toc-text">CAS使用示例：AtomicInteger</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CAS的问题"><span class="toc-number">1.3.</span> <span class="toc-text">CAS的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ABA问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">ABA问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#若自旋时间过长则开销大"><span class="toc-number">1.3.2.</span> <span class="toc-text">若自旋时间过长则开销大</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#只能保证单个共享变量的原子操作"><span class="toc-number">1.3.3.</span> <span class="toc-text">只能保证单个共享变量的原子操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsafe类"><span class="toc-number">2.</span> <span class="toc-text">Unsafe类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子包"><span class="toc-number">3.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AtomicInteger"><span class="toc-number">3.1.</span> <span class="toc-text">AtomicInteger</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用方法"><span class="toc-number">3.1.1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#源码分析"><span class="toc-number">3.1.2.</span> <span class="toc-text">源码分析</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原子更新基本类型"><span class="toc-number">3.2.</span> <span class="toc-text">原子更新基本类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原子更新数组"><span class="toc-number">3.3.</span> <span class="toc-text">原子更新数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原子更新引用类型"><span class="toc-number">3.4.</span> <span class="toc-text">原子更新引用类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原子更新Field"><span class="toc-number">3.5.</span> <span class="toc-text">原子更新Field</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK8新增的原子操作类LongAdder和DoubleAdder"><span class="toc-number">3.6.</span> <span class="toc-text">JDK8新增的原子操作类LongAdder和DoubleAdder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LongAccmulator和DoubleAccumulator"><span class="toc-number">3.7.</span> <span class="toc-text">LongAccmulator和DoubleAccumulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何实现AtomicByte-AtomicFloat-AtomicDouble"><span class="toc-number">3.8.</span> <span class="toc-text">如何实现AtomicByte&#x2F;AtomicFloat&#x2F;AtomicDouble?</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CAS操作"><span class="toc-number">1.</span> <span class="toc-text">CAS操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAS（Compare-And-Swap）"><span class="toc-number">1.1.</span> <span class="toc-text">CAS（Compare-And-Swap）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAS使用示例：AtomicInteger"><span class="toc-number">1.2.</span> <span class="toc-text">CAS使用示例：AtomicInteger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAS的问题"><span class="toc-number">1.3.</span> <span class="toc-text">CAS的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ABA问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">ABA问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#若自旋时间过长则开销大"><span class="toc-number">1.3.2.</span> <span class="toc-text">若自旋时间过长则开销大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#只能保证单个共享变量的原子操作"><span class="toc-number">1.3.3.</span> <span class="toc-text">只能保证单个共享变量的原子操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unsafe类"><span class="toc-number">2.</span> <span class="toc-text">Unsafe类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原子包"><span class="toc-number">3.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AtomicInteger"><span class="toc-number">3.1.</span> <span class="toc-text">AtomicInteger</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">3.1.1.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码分析"><span class="toc-number">3.1.2.</span> <span class="toc-text">源码分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原子更新基本类型"><span class="toc-number">3.2.</span> <span class="toc-text">原子更新基本类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原子更新数组"><span class="toc-number">3.3.</span> <span class="toc-text">原子更新数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原子更新引用类型"><span class="toc-number">3.4.</span> <span class="toc-text">原子更新引用类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原子更新Field"><span class="toc-number">3.5.</span> <span class="toc-text">原子更新Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8新增的原子操作类LongAdder和DoubleAdder"><span class="toc-number">3.6.</span> <span class="toc-text">JDK8新增的原子操作类LongAdder和DoubleAdder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LongAccmulator和DoubleAccumulator"><span class="toc-number">3.7.</span> <span class="toc-text">LongAccmulator和DoubleAccumulator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现AtomicByte-AtomicFloat-AtomicDouble"><span class="toc-number">3.8.</span> <span class="toc-text">如何实现AtomicByte&#x2F;AtomicFloat&#x2F;AtomicDouble?</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -268,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.8k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.9k(words)</span>
 	
 	
 
@@ -276,8 +276,51 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h3 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h3><h4 id="CAS（Compare-And-Swap）"><a href="#CAS（Compare-And-Swap）" class="headerlink" title="CAS（Compare-And-Swap）"></a>CAS（Compare-And-Swap）</h4><p>比较并交换(Compare-and-Swap，CAS)是硬件支持的原子性操作之一。 CAS 指令有 3 个操作数，分别是内存地址 V、旧的值 A 和新值 B。当CAS指令执行时，<strong>只有当 V 的值等于旧值A，才将 V 的值更新为 B</strong>。简单来说，就是CAS操作执行时，要检测旧值是否发生变化，如果变化了则不更新，没有变化才更新。<strong>CAS指令从硬件上保证了对单个变量的“读取-修改-写回”的原子性</strong>，因此多线程并发时使用CAS更新单个变量时不需要锁，JDK中大量使用了CAS来更新数据。</p>
-<h4 id="CAS使用示例：AtomicInteger"><a href="#CAS使用示例：AtomicInteger" class="headerlink" title="CAS使用示例：AtomicInteger"></a>CAS使用示例：AtomicInteger</h4><p>java.util.concurrent.atomic包中的整数原子类AtomicInteger，其中的修改变量值的方法都采用了Unsafe类的CAS方法。以下代码使用了AtomicInteger执行了自增的操作：</p>
+        <p><a href="#CAS操作">CAS操作</a></p>
+<ul>
+<li><p><a href="#CAS（Compare-And-Swap）">CAS（Compare-And-Swap）</a></p>
+</li>
+<li><p><a href="#CAS使用示例：AtomicInteger">CAS使用示例：AtomicInteger</a></p>
+</li>
+<li><p><a href="#CAS的问题">CAS的问题</a></p>
+<ul>
+<li><p><a href="#ABA问题">ABA问题</a></p>
+</li>
+<li><p><a href="#若自旋时间过长则开销大">若自旋时间过长则开销大</a></p>
+</li>
+<li><p><a href="#只能保证单个共享变量的原子操作">只能保证单个共享变量的原子操作</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="#Unsafe类">Unsafe类</a></p>
+<p><a href="#原子包">原子包</a></p>
+<ul>
+<li><p><a href="#AtomicInteger">AtomicInteger</a></p>
+<ul>
+<li><p><a href="#常用方法">常用方法</a></p>
+</li>
+<li><p><a href="#源码分析">源码分析</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#原子更新基本类型">原子更新基本类型</a></p>
+</li>
+<li><p><a href="#原子更新数组">原子更新数组</a></p>
+</li>
+<li><p><a href="#原子更新引用类型">原子更新引用类型</a></p>
+</li>
+<li><p><a href="#原子更新Field">原子更新Field</a></p>
+</li>
+<li><p><a href="#JDK8新增的原子操作类LongAdder和DoubleAdder">JDK8新增的原子操作类LongAdder和DoubleAdder</a></p>
+</li>
+<li><p><a href="#LongAccmulator和DoubleAccumulator">LongAccmulator和DoubleAccumulator</a></p>
+</li>
+<li><p><a href="#如何实现AtomicByte/AtomicFloat/AtomicDouble?">如何实现AtomicByte/AtomicFloat/AtomicDouble?</a></p>
+</li>
+</ul>
+<h1 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h1><h2 id="CAS（Compare-And-Swap）"><a href="#CAS（Compare-And-Swap）" class="headerlink" title="CAS（Compare-And-Swap）"></a>CAS（Compare-And-Swap）</h2><p>比较并交换(Compare-and-Swap，CAS)是硬件支持的原子性操作之一。 CAS 指令有 3 个操作数，分别是内存地址 V、旧的值 A 和新值 B。当CAS指令执行时，<strong>只有当 V 的值等于旧值A，才将 V 的值更新为 B</strong>。简单来说，就是CAS操作执行时，要检测旧值是否发生变化，如果变化了则不更新，没有变化才更新。<strong>CAS指令从硬件上保证了对单个变量的“读取-修改-写回”的原子性</strong>，因此多线程并发时使用CAS更新单个变量时不需要锁，JDK中大量使用了CAS来更新数据。</p>
+<h2 id="CAS使用示例：AtomicInteger"><a href="#CAS使用示例：AtomicInteger" class="headerlink" title="CAS使用示例：AtomicInteger"></a>CAS使用示例：AtomicInteger</h2><p>java.util.concurrent.atomic包中的整数原子类AtomicInteger，其中的修改变量值的方法都采用了Unsafe类的CAS方法。以下代码使用了AtomicInteger执行了自增的操作：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add0</span><span class="params">()</span></span>&#123;count.incrementAndGet();&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add1</span><span class="params">()</span></span>&#123;count.getAndIncrement();&#125;</span><br></pre></td></tr></table></figure>
 <p>以下代码是AtomicInteger中上述两个自增方法的源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">incrementAndGet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -286,11 +329,11 @@
 <p>参数的含义分别是：var1指示对象的起始内存地址，var2指示该字段相对对象内存地址的偏移，var1和var2决定了对象在内存中的位置。var4指示需要加的值，此处为1。</p>
 <p>通过 getIntVolatile(var1, var2) 得到对象的旧值，通过调用 compareAndSwapInt() 来进行 CAS 比较，如果该字段内存地址中的值等于 var5(即没有被改变)，那么就更新内存地址为 var1+var2 的变量为 var5+var4。其中 compareAndSwapInt() 方法在Unsafe类中是native方法。我们注意到该方法在while循环中不断执行，对应的逻辑就是<strong>“如果发生冲突则不断尝试执行CAS操作”，这就是基于冲突检测的乐观并发策略</strong>。</p>
 <p>最后需要注意的是，getAndAddInt()方法返回了var5，该值是<strong>旧值</strong>。其实add0和add1方法的执行效果是一样的，都是整数原子对象的值+1，由于incrementAndGet()和getAndIncrement()的返回值是整型，而前者的返回值比后者大1，因此容易误会。<strong>注意整数原子对象的值+1与它们的返回值无关，它的值是通过CAS操作直接修改的！</strong></p>
-<h4 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h4><h5 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h5><p>如果一个变量初次读取的时候是A值，并且准备赋值时检测到其仍然是A值，那么我们能说它的值没有被其他线程修改过吗？</p>
+<h2 id="CAS的问题"><a href="#CAS的问题" class="headerlink" title="CAS的问题"></a>CAS的问题</h2><h3 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h3><p>如果一个变量初次读取的时候是A值，并且准备赋值时检测到其仍然是A值，那么我们能说它的值没有被其他线程修改过吗？</p>
 <p>如果这段时间它的值曾被其他线程修改为B，后来又被改回了A，那么CAS操作就会误认为它从未改变过，该漏洞称为“ABA”问题。J.U.C包为了解决该问题，提供了一个带有时间戳的原子引用类AtomicStampedReference。不过绝大部分情况ABA问题并不会影响程序开发的正确性，因此该类不常使用。</p>
-<h5 id="若自旋时间过长则开销大"><a href="#若自旋时间过长则开销大" class="headerlink" title="若自旋时间过长则开销大"></a>若自旋时间过长则开销大</h5><p>如果自旋CAS长时间不成功，那么它会一直占用CPU资源。</p>
-<h5 id="只能保证单个共享变量的原子操作"><a href="#只能保证单个共享变量的原子操作" class="headerlink" title="只能保证单个共享变量的原子操作"></a>只能保证单个共享变量的原子操作</h5><p>如果要保证对多个共享变量操作的原子性，可以将多个共享变量放入AtomicReference对象中，来保证原子性。</p>
-<h3 id="Unsafe类"><a href="#Unsafe类" class="headerlink" title="Unsafe类"></a>Unsafe类</h3><p>JDK中的rt.jar中sun.misc包中的<em>Unsafe</em>类提供了硬件级别的原子性操作，<em>Unsafe</em>类中的方法绝大部分都是native方法，它们使用JNI访问本地C++实现库。</p>
+<h3 id="若自旋时间过长则开销大"><a href="#若自旋时间过长则开销大" class="headerlink" title="若自旋时间过长则开销大"></a>若自旋时间过长则开销大</h3><p>如果自旋CAS长时间不成功，那么它会一直占用CPU资源。</p>
+<h3 id="只能保证单个共享变量的原子操作"><a href="#只能保证单个共享变量的原子操作" class="headerlink" title="只能保证单个共享变量的原子操作"></a>只能保证单个共享变量的原子操作</h3><p>如果要保证对多个共享变量操作的原子性，可以将多个共享变量放入AtomicReference对象中，来保证原子性。</p>
+<h1 id="Unsafe类"><a href="#Unsafe类" class="headerlink" title="Unsafe类"></a>Unsafe类</h1><p>JDK中的rt.jar中sun.misc包中的<em>Unsafe</em>类提供了硬件级别的原子性操作，<em>Unsafe</em>类中的方法绝大部分都是native方法，它们使用JNI访问本地C++实现库。</p>
 <p>Unsafe类主要提供一些用于执行低级别、不安全操作的方法，如直接访问系统内存资源、自主管理内存资源等，这些方法在提升Java运行效率、增强Java语言底层资源操作能力方面起到了很大的作用。但由于Unsafe类使Java语言拥有了类似C语言指针一样操作内存空间的能力，这无疑也增加了程序发生相关指针问题的风险。因此JDK开发组限制了开发人员通过一般方式使用Unsafe类，比如如下代码会报异常：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">priavte <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();</span><br></pre></td></tr></table></figure>
 <p>J.U.C中原子类获取Unsafe对象就是如此，Unsafe类提供静态方法getUnsafe()返回Unsafe对象，但是如果<strong>在用户程序中这样写就会报异常</strong>。原因在于getUnsafe()方法源码：</p>
@@ -303,14 +346,14 @@
 <p>其中原子操作只支持如下三个方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapObject</span><span class="params">(Object paramObject1, <span class="keyword">long</span> paramLong, Object paramObject2, Object paramObject3)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapInt</span><span class="params">(Object paramObject, <span class="keyword">long</span> paramLong, <span class="keyword">int</span> paramInt1, <span class="keyword">int</span> paramInt2)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapLong</span><span class="params">(Object paramObject, <span class="keyword">long</span> paramLong1, <span class="keyword">long</span> paramLong2, <span class="keyword">long</span> paramLong3)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>其余关于CAS的常用方法有：getAndAddInt, getAndAddLong, getAndSetInt, getAndSetLong, getAndSetObject。</p>
-<h3 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h3><p>原子包即java.util.concurrent.atomic包，它包含了一系列的原子性操作类，这些类都是使用非阻塞算法CAS实现的。一共有如下类：</p>
+<h1 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h1><p>原子包即java.util.concurrent.atomic包，它包含了一系列的原子性操作类，这些类都是使用非阻塞算法CAS实现的。一共有如下类：</p>
 <p><img src="juc_atomic.png" alt=""></p>
-<h4 id="AtomicInteger"><a href="#AtomicInteger" class="headerlink" title="AtomicInteger"></a>AtomicInteger</h4><p>依旧以AtomicInteger为例，其余原子类原理类似。</p>
-<h5 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h5><p>public final int get()：获取当前值<br>public final int getAndSet(int newValue)：获取当前值，并设置新值<br>public final int getAndIncrement()：获取当前值，并自增<br>public final int getAndDecrement()：获取当前值，并自减<br>public final int getAndAdd(int delta)：获取当前值，并加上预期的值<br>void lazySet(int newValue): 最终会设置成newValue, 使用lazySet设置值后，可能导致其他线程在之后的一小段时间内还是可以读到旧的值。</p>
-<h5 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h5><p>以下为部分源码：</p>
+<h2 id="AtomicInteger"><a href="#AtomicInteger" class="headerlink" title="AtomicInteger"></a>AtomicInteger</h2><p>依旧以AtomicInteger为例，其余原子类原理类似。</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>public final int get()：获取当前值<br>public final int getAndSet(int newValue)：获取当前值，并设置新值<br>public final int getAndIncrement()：获取当前值，并自增<br>public final int getAndDecrement()：获取当前值，并自减<br>public final int getAndAdd(int delta)：获取当前值，并加上预期的值<br>void lazySet(int newValue): 最终会设置成newValue, 使用lazySet设置值后，可能导致其他线程在之后的一小段时间内还是可以读到旧的值。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>以下为部分源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AtomicInteger</span> <span class="keyword">extends</span> <span class="title">Number</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> valueOffset;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//用于获取value字段相对当前对象的“起始地址”的偏移量</span></span><br><span class="line">            valueOffset = unsafe.objectFieldOffset(AtomicInteger.class.getDeclaredField("value"));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123; <span class="keyword">throw</span> <span class="keyword">new</span> Error(ex); &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回当前值</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//递增加detla</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndAdd</span><span class="params">(<span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//三个参数，1、当前的实例 2、value实例变量的偏移量 3、当前value要加上的数(value+delta)。</span></span><br><span class="line">        <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, delta);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由源码可知：使用volatile修饰变量，保证了变量的可见性与有序性；使用CAS操作变量，保证了操作的原子性。因此最终效果与使用synchronized一致。</p>
-<h4 id="原子更新基本类型"><a href="#原子更新基本类型" class="headerlink" title="原子更新基本类型"></a>原子更新基本类型</h4><ul>
+<h2 id="原子更新基本类型"><a href="#原子更新基本类型" class="headerlink" title="原子更新基本类型"></a>原子更新基本类型</h2><ul>
 <li><p>AtomicBoolean</p>
 </li>
 <li><p>AtomicInteger</p>
@@ -319,18 +362,18 @@
 </li>
 </ul>
 <p>上述三个原子类类似。</p>
-<h4 id="原子更新数组"><a href="#原子更新数组" class="headerlink" title="原子更新数组"></a>原子更新数组</h4><p>使更新数组的某个元素满足原子性</p>
+<h2 id="原子更新数组"><a href="#原子更新数组" class="headerlink" title="原子更新数组"></a>原子更新数组</h2><p>使更新数组的某个元素满足原子性</p>
 <ul>
 <li>AtomicIntegerArray: 原子更新整型数组里的元素。</li>
 <li>AtomicLongArray: 原子更新长整型数组里的元素。</li>
 <li>AtomicReferenceArray: 原子更新引用类型数组里的元素。</li>
 </ul>
-<h4 id="原子更新引用类型"><a href="#原子更新引用类型" class="headerlink" title="原子更新引用类型"></a>原子更新引用类型</h4><ul>
+<h2 id="原子更新引用类型"><a href="#原子更新引用类型" class="headerlink" title="原子更新引用类型"></a>原子更新引用类型</h2><ul>
 <li>AtomicReference: 原子更新引用类型。</li>
 <li>AtomicStampedReference: 原子更新引用类型, 内部使用Pair来存储元素值及其版本号。</li>
 <li>AtomicMarkableReference: 原子更新带有标记位的引用类型。</li>
 </ul>
-<h4 id="原子更新Field"><a href="#原子更新Field" class="headerlink" title="原子更新Field"></a>原子更新Field</h4><ul>
+<h2 id="原子更新Field"><a href="#原子更新Field" class="headerlink" title="原子更新Field"></a>原子更新Field</h2><ul>
 <li>AtomicIntegerFieldUpdater: 原子更新整型的字段的更新器。</li>
 <li>AtomicLongFieldUpdater: 原子更新长整型字段的更新器。</li>
 <li>AtomicReferenceFieldUpdater: 原子更新引用类型字段的更新器。</li>
@@ -340,7 +383,7 @@
 <li>第一步，因为原子更新字段类都是抽象类，每次使用的时候必须使用静态方法newUpdater()创建一个更新器，并且需要设置想要更新的类和属性。</li>
 <li>第二步，更新类的字段必须使用public volatile修饰。</li>
 </ul>
-<h4 id="JDK8新增的原子操作类LongAdder和DoubleAdder"><a href="#JDK8新增的原子操作类LongAdder和DoubleAdder" class="headerlink" title="JDK8新增的原子操作类LongAdder和DoubleAdder"></a>JDK8新增的原子操作类LongAdder和DoubleAdder</h4><p>使用AtomicLong时，在高并发下大量线程会同时去竞争更新同一个原子变量，那么就会由大量线程因为不断自旋而浪费CPU资源。因此JDK8新增了LongAdder用于克服在高并发下使用AtomicLong的缺点，提升性能。</p>
+<h2 id="JDK8新增的原子操作类LongAdder和DoubleAdder"><a href="#JDK8新增的原子操作类LongAdder和DoubleAdder" class="headerlink" title="JDK8新增的原子操作类LongAdder和DoubleAdder"></a>JDK8新增的原子操作类LongAdder和DoubleAdder</h2><p>使用AtomicLong时，在高并发下大量线程会同时去竞争更新同一个原子变量，那么就会由大量线程因为不断自旋而浪费CPU资源。因此JDK8新增了LongAdder用于克服在高并发下使用AtomicLong的缺点，提升性能。</p>
 <p>如图所示，使用AtomicLong时，是多个线程同时竞争同一个原子变量：</p>
 <p><img src="AtomicLong.png" alt=""></p>
 <p>而使用LongAdder时，则为：</p>
@@ -350,12 +393,12 @@
 <p>Cell类使用了<code>@sun.misc.Contended</code>修饰进行字节填充，这是因为数组元素的内存地址连续，为了避免伪共享。</p>
 <p>总结：LongAdder在AtomicLong的基础上<strong>将单个变量的更新压力分散到各Cell</strong>，在<strong>低并发的时候通过对base的直接更新可以很好的保障与AtomicLong的性能基本保持一致，而在高并发的时候通过分散提高了性能。</strong><br><strong>缺点是LongAdder在求和的时候如果有并发更新，可能导致统计的数据有误差</strong>。</p>
 <p>DoubleAdder与LongAdder类似。</p>
-<h4 id="LongAccmulator和DoubleAccumulator"><a href="#LongAccmulator和DoubleAccumulator" class="headerlink" title="LongAccmulator和DoubleAccumulator"></a>LongAccmulator和DoubleAccumulator</h4><p>LongAdder可以看作是LongAccumulator的一个特例。LongAccumulator的构造方法如下：</p>
+<h2 id="LongAccmulator和DoubleAccumulator"><a href="#LongAccmulator和DoubleAccumulator" class="headerlink" title="LongAccmulator和DoubleAccumulator"></a>LongAccmulator和DoubleAccumulator</h2><p>LongAdder可以看作是LongAccumulator的一个特例。LongAccumulator的构造方法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LongAccumulator</span><span class="params">(LongBinaryOperator accumulatorFunction, <span class="keyword">long</span> identity)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.function = accumulatorFunction;</span><br><span class="line">    base = <span class="keyword">this</span>.identity = identity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LongBinaryOperator</span></span>&#123;</span><br><span class="line">    <span class="comment">//根据两个参数计算并返回一个值，具体的运算由用户自定义</span></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">applyAsLong</span><span class="params">(<span class="keyword">long</span> left, <span class="keyword">long</span> right)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用LongAdder其实就相当于如下使用LongAccumulator:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LongAccumulator accumulator = <span class="keyword">new</span> LongAccumulator(<span class="keyword">new</span> LongBinaryOperator()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">applyAsLong</span><span class="params">(<span class="keyword">long</span> left, <span class="keyword">long</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left + right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 <p>LongAccumulator可以<strong>自定义双目运算规则</strong>（<strong>applyAsLong()的返回值就是要更新的值</strong>。在LongAdder中该值就是<code>base+x</code>，<code>x</code>为其add方法的参数），并且可以<strong>指定base的初始值</strong>，而LongAdder只能默认base为0。</p>
-<h4 id="如何实现AtomicByte-AtomicFloat-AtomicDouble"><a href="#如何实现AtomicByte-AtomicFloat-AtomicDouble" class="headerlink" title="如何实现AtomicByte/AtomicFloat/AtomicDouble?"></a>如何实现AtomicByte/AtomicFloat/AtomicDouble?</h4><p>查看atomic包文档描述，结尾处写道：Additionally, classes are provided only for those types that are commonly useful in intended applications. For example, there is no atomic class for representing <code>byte</code>. In those infrequent cases where you would like to do so, you can use an <code>AtomicInteger</code> to hold <code>byte</code> values, and cast appropriately. You can also hold floats using <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html#floatToRawIntBits-float-" target="_blank" rel="noopener"><code>Float.floatToRawIntBits(float)</code></a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html#intBitsToFloat-int-" target="_blank" rel="noopener"><code>Float.intBitsToFloat(int)</code></a> conversions, and doubles using <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#doubleToRawLongBits-double-" target="_blank" rel="noopener"><code>Double.doubleToRawLongBits(double)</code></a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#longBitsToDouble-long-" target="_blank" rel="noopener"><code>Double.longBitsToDouble(long)</code></a> conversions.</p>
+<h2 id="如何实现AtomicByte-AtomicFloat-AtomicDouble"><a href="#如何实现AtomicByte-AtomicFloat-AtomicDouble" class="headerlink" title="如何实现AtomicByte/AtomicFloat/AtomicDouble?"></a>如何实现AtomicByte/AtomicFloat/AtomicDouble?</h2><p>查看atomic包文档描述，结尾处写道：Additionally, classes are provided only for those types that are commonly useful in intended applications. For example, there is no atomic class for representing <code>byte</code>. In those infrequent cases where you would like to do so, you can use an <code>AtomicInteger</code> to hold <code>byte</code> values, and cast appropriately. You can also hold floats using <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html#floatToRawIntBits-float-" target="_blank" rel="noopener"><code>Float.floatToRawIntBits(float)</code></a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html#intBitsToFloat-int-" target="_blank" rel="noopener"><code>Float.intBitsToFloat(int)</code></a> conversions, and doubles using <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#doubleToRawLongBits-double-" target="_blank" rel="noopener"><code>Double.doubleToRawLongBits(double)</code></a> and <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html#longBitsToDouble-long-" target="_blank" rel="noopener"><code>Double.longBitsToDouble(long)</code></a> conversions.</p>
 <p>由文档描述可知，使用Float和Double的方法转换并包装AtomicInteger即可。</p>
 <p>参考：</p>
 <p>《Java并发编程之美》</p>

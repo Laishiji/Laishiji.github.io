@@ -18,16 +18,16 @@
   
   
   <title>集合知识体系结构 | Blog Of TheMasterplan</title>
-  <meta name="description" content="集合知识体系结构 CollectionListArrayList 基于动态数组实现，支持随机访问。  Vector 和 ArrayList 类似，但它是线程安全的。  StackLinkedList 基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList 还可以用作栈、队列和双向队列。  QueueLinkedList 同上  PriorityQue">
+  <meta name="description" content="集合知识体系结构  Collection  List  ArrayList  Vector  Stack   LinkedList    Queue  LinkedList  PriorityQueue  Deque&lt;&gt;  ArrayDeque     Set  HashSet  LinkedHashSet  TreeSet      Map  HashMap  LinkedHash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集合知识体系结构">
 <meta property="og:url" content="http://thmasterplan.cn/Java/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="集合知识体系结构 CollectionListArrayList 基于动态数组实现，支持随机访问。  Vector 和 ArrayList 类似，但它是线程安全的。  StackLinkedList 基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList 还可以用作栈、队列和双向队列。  QueueLinkedList 同上  PriorityQue">
+<meta property="og:description" content="集合知识体系结构  Collection  List  ArrayList  Vector  Stack   LinkedList    Queue  LinkedList  PriorityQueue  Deque&lt;&gt;  ArrayDeque     Set  HashSet  LinkedHashSet  TreeSet      Map  HashMap  LinkedHash">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/java_collections_overview.png">
 <meta property="article:published_time" content="2020-09-07T09:17:52.000Z">
-<meta property="article:modified_time" content="2020-11-15T14:16:12.249Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.146Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -265,7 +265,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java/%E9%9B%86%E5%90%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 418(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 452(words)</span>
 	
 	
 
@@ -273,7 +273,65 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="集合知识体系结构"><a href="#集合知识体系结构" class="headerlink" title="集合知识体系结构"></a>集合知识体系结构</h2><p><img src="java_collections_overview.png" alt=""></p>
+        <ul>
+<li><p><a href="#集合知识体系结构">集合知识体系结构</a></p>
+</li>
+<li><p><a href="#*Collection*"><em>Collection</em></a></p>
+<ul>
+<li><p><a href="#*List*"><em>List</em></a></p>
+<ul>
+<li><p><a href="#*ArrayList*"><em>ArrayList</em></a></p>
+</li>
+<li><p><a href="#*Vector*"><em>Vector</em></a></p>
+<ul>
+<li><a href="#*Stack*"><em>Stack</em></a></li>
+</ul>
+</li>
+<li><p><a href="#*LinkedList*"><em>LinkedList</em></a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#*Queue*"><em>Queue</em></a></p>
+<ul>
+<li><p><a href="#*LinkedList*"><em>LinkedList</em></a></p>
+</li>
+<li><p><a href="#*PriorityQueue*"><em>PriorityQueue</em></a></p>
+</li>
+<li><p><a href="#*Deque&lt;&lt;Interface&gt;&gt;*"><em>Deque&lt;<Interface>&gt;</em></a></p>
+<ul>
+<li><a href="#*ArrayDeque*"><em>ArrayDeque</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#*Set*"><em>Set</em></a></p>
+<ul>
+<li><p><a href="#*HashSet*"><em>HashSet</em></a></p>
+</li>
+<li><p><a href="#*LinkedHashSet*"><em>LinkedHashSet</em></a></p>
+</li>
+<li><p><a href="#*TreeSet*"><em>TreeSet</em></a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#*Map*"><em>Map</em></a></p>
+<ul>
+<li><p><a href="#*HashMap*"><em>HashMap</em></a></p>
+</li>
+<li><p><a href="#*LinkedHashMap*"><em>LinkedHashMap</em></a></p>
+</li>
+<li><p><a href="#*HashTable*"><em>HashTable</em></a></p>
+</li>
+<li><p><a href="#*TreeMap*"><em>TreeMap</em></a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#*Collections*工具类"><em>Collections</em>工具类</a></p>
+</li>
+</ul>
+<h2 id="集合知识体系结构"><a href="#集合知识体系结构" class="headerlink" title="集合知识体系结构"></a>集合知识体系结构</h2><p><img src="java_collections_overview.png" alt=""></p>
 <h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a><em>Collection</em></h2><h3 id="List"><a href="#List" class="headerlink" title="List"></a><em>List</em></h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a><em>ArrayList</em></h4><ul>
 <li>基于动态数组实现，支持随机访问。</li>
 </ul>

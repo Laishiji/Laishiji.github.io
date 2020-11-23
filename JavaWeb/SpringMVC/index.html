@@ -18,19 +18,19 @@
   
   
   <title>SpringMVC | Blog Of TheMasterplan</title>
-  <meta name="description" content="SpringMVC Doc B&#x2F;S三层架构与MVC模型三层架构 表现层：WEB层，用来和客户端进行数据交互。表现层一般会采用MVC的设计模型 。 业务层：处理公司具体的业务逻辑 。 持久层：用来操作数据库。  MVC模型 MVC全名是Model View Controller 模型视图控制器，每个部分各司其职。  Model：数据模型，JavaBean的类，用来进行数据封装。  View：指JSP">
+  <meta name="description" content="B&#x2F;S三层架构与MVC模型  三层架构  MVC模型    环境搭建  简单案例  案例代码  简单案例的执行流程  Spring MVC九大组件  HandlerMapping  HandlerAdapters  ViewResolver  HandlerExceptionResolver  MultipartResolver  LocaleResolver  ThemeResolver  R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC">
 <meta property="og:url" content="http://thmasterplan.cn/JavaWeb/SpringMVC/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="SpringMVC Doc B&#x2F;S三层架构与MVC模型三层架构 表现层：WEB层，用来和客户端进行数据交互。表现层一般会采用MVC的设计模型 。 业务层：处理公司具体的业务逻辑 。 持久层：用来操作数据库。  MVC模型 MVC全名是Model View Controller 模型视图控制器，每个部分各司其职。  Model：数据模型，JavaBean的类，用来进行数据封装。  View：指JSP">
+<meta property="og:description" content="B&#x2F;S三层架构与MVC模型  三层架构  MVC模型    环境搭建  简单案例  案例代码  简单案例的执行流程  Spring MVC九大组件  HandlerMapping  HandlerAdapters  ViewResolver  HandlerExceptionResolver  MultipartResolver  LocaleResolver  ThemeResolver  R">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/JavaWeb/SpringMVC/webproj_dirstructure.png">
 <meta property="og:image" content="http://thmasterplan.cn/JavaWeb/SpringMVC/serverdeploy.png">
 <meta property="og:image" content="http://thmasterplan.cn/JavaWeb/SpringMVC/serverdeploy2.png">
 <meta property="og:image" content="http://thmasterplan.cn/JavaWeb/SpringMVC/springmvc_flow.jpg">
 <meta property="article:published_time" content="2020-10-18T06:42:34.000Z">
-<meta property="article:modified_time" content="2020-11-15T14:18:05.335Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.096Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -268,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/SpringMVC/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 8k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 8.3k(words)</span>
 	
 	
 
@@ -276,8 +276,152 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><a href="https://docs.spring.io/spring-framework/docs/5.2.5.RELEASE/spring-framework-reference/web.html#mvc" target="_blank" rel="noopener">SpringMVC Doc</a></p>
-<h2 id="B-S三层架构与MVC模型"><a href="#B-S三层架构与MVC模型" class="headerlink" title="B/S三层架构与MVC模型"></a>B/S三层架构与MVC模型</h2><h3 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h3><ul>
+        <ul>
+<li><p><a href="#B/S三层架构与MVC模型">B/S三层架构与MVC模型</a></p>
+<ul>
+<li><p><a href="#三层架构">三层架构</a></p>
+</li>
+<li><p><a href="#MVC模型">MVC模型</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#环境搭建">环境搭建</a></p>
+</li>
+<li><p><a href="#简单案例">简单案例</a></p>
+<ul>
+<li><p><a href="#案例代码">案例代码</a></p>
+</li>
+<li><p><a href="#简单案例的执行流程">简单案例的执行流程</a></p>
+</li>
+<li><p><a href="#Spring MVC九大组件">Spring MVC九大组件</a></p>
+<ul>
+<li><p><a href="#HandlerMapping">HandlerMapping</a></p>
+</li>
+<li><p><a href="#HandlerAdapters">HandlerAdapters</a></p>
+</li>
+<li><p><a href="#ViewResolver">ViewResolver</a></p>
+</li>
+<li><p><a href="#HandlerExceptionResolver">HandlerExceptionResolver</a></p>
+</li>
+<li><p><a href="#MultipartResolver">MultipartResolver</a></p>
+</li>
+<li><p><a href="#LocaleResolver">LocaleResolver</a></p>
+</li>
+<li><p><a href="#ThemeResolver">ThemeResolver</a></p>
+</li>
+<li><p><a href="#RequestToViewNameTranslator">RequestToViewNameTranslator</a></p>
+</li>
+<li><p><a href="#FlashMapManager">FlashMapManager</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#请求参数的绑定">请求参数的绑定</a></p>
+<ul>
+<li><p><a href="#基本数据类型与字符串对象的绑定">基本数据类型与字符串对象的绑定</a></p>
+</li>
+<li><p><a href="#POJO类及其关联类对象的绑定">POJO类及其关联类对象的绑定</a></p>
+</li>
+<li><p><a href="#集合类型对象的绑定">集合类型对象的绑定</a></p>
+</li>
+<li><p><a href="#请求参数中文乱码解决">请求参数中文乱码解决</a></p>
+<ul>
+<li><p><a href="#POST请求方式">POST请求方式</a></p>
+</li>
+<li><p><a href="#GET请求方式">GET请求方式</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#自定义类型转换器">自定义类型转换器</a></p>
+</li>
+<li><p><a href="#在控制器中使用原生的ServletAPI">在控制器中使用原生的ServletAPI</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#常用注解">常用注解</a></p>
+<ul>
+<li><p><a href="#@RequestMapping">@RequestMapping</a></p>
+</li>
+<li><p><a href="#@RequestParam">@RequestParam</a></p>
+</li>
+<li><p><a href="#@RequestBody">@RequestBody</a></p>
+</li>
+<li><p><a href="#@PathVarible">@PathVarible</a></p>
+</li>
+<li><p><a href="#@RequestHeader">@RequestHeader</a></p>
+</li>
+<li><p><a href="#@CookieValue">@CookieValue</a></p>
+</li>
+<li><p><a href="#@ModelAttribute">@ModelAttribute</a></p>
+</li>
+<li><p><a href="#@SessionAttributes">@SessionAttributes</a></p>
+</li>
+<li><p><a href="#@CrossOrigin">@CrossOrigin</a></p>
+<ul>
+<li><p><a href="#[前端解决方案](https://zhuanlan.zhihu.com/p/50416743"><a href="https://zhuanlan.zhihu.com/p/50416743" target="_blank" rel="noopener">前端解决方案</a></a>)</p>
+</li>
+<li><p><a href="#[后端Spring MVC解决方案](https://docs.spring.io/spring-framework/docs/5.2.5.RELEASE/spring-framework-reference/web.htmlmvc-cors"><a href="https://docs.spring.io/spring-framework/docs/5.2.5.RELEASE/spring-framework-reference/web.htmlmvc-cors" target="_blank" rel="noopener">后端Spring MVC解决方案</a></a>)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#控制器方法返回值类型与结果视图">控制器方法返回值类型与结果视图</a></p>
+<ul>
+<li><p><a href="#返回字符串">返回字符串</a></p>
+</li>
+<li><p><a href="#返回类型为void">返回类型为void</a></p>
+</li>
+<li><p><a href="#返回类型为ModelAndView">返回类型为ModelAndView</a></p>
+</li>
+<li><p><a href="#转发与重定向">转发与重定向</a></p>
+<ul>
+<li><p><a href="#转发">转发</a></p>
+</li>
+<li><p><a href="#重定向">重定向</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#@ResponseBody响应JSON">@ResponseBody响应JSON</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#文件上传">文件上传</a></p>
+<ul>
+<li><p><a href="#本服务器文件上传">本服务器文件上传</a></p>
+</li>
+<li><p><a href="#跨服务器文件上传">跨服务器文件上传</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#异常处理">异常处理</a></p>
+<ul>
+<li><p><a href="#自定义异常类">自定义异常类</a></p>
+</li>
+<li><p><a href="#自定义异常处理器并配置">自定义异常处理器并配置</a></p>
+</li>
+<li><p><a href="#@ExceptionHandler">@ExceptionHandler</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#拦截器">拦截器</a></p>
+<ul>
+<li><p><a href="#自定义拦截器">自定义拦截器</a></p>
+</li>
+<li><p><a href="#HandlerInterceptor接口方法">HandlerInterceptor接口方法</a></p>
+</li>
+<li><p><a href="#preHandle">preHandle</a></p>
+</li>
+<li><p><a href="#postHandle">postHandle</a></p>
+</li>
+<li><p><a href="#afterCompletion">afterCompletion</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="B-S三层架构与MVC模型"><a href="#B-S三层架构与MVC模型" class="headerlink" title="B/S三层架构与MVC模型"></a>B/S三层架构与MVC模型</h2><p><a href="https://docs.spring.io/spring-framework/docs/5.2.5.RELEASE/spring-framework-reference/web.html#mvc" target="_blank" rel="noopener">SpringMVC Doc</a>.</p>
+<h3 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h3><ul>
 <li>表现层：WEB层，用来和客户端进行数据交互。表现层一般会采用MVC的设计模型 。</li>
 <li>业务层：处理公司具体的业务逻辑 。</li>
 <li>持久层：用来操作数据库。</li>

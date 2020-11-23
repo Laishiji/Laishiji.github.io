@@ -18,19 +18,19 @@
   
   
   <title>数据结构与算法概述 | Blog Of TheMasterplan</title>
-  <meta name="description" content="OverView 数组 优点：存取速度快。 缺点：a.事先必须知道数组的长度。b.需要大块连续的内存块。c.插入删除元素的效率低 Java中主要类似的实现为ArrayList，其他一些容器底层也几乎都会用数组存储数据。  链表 优点：插入删除元素快；无空间限制。 缺点：查找存取慢。 分类：单向链表；双向链表；循环链表 Java中主要类似的实现为LinkedList，其他一些容器底层也会用到链表。">
+  <meta name="description" content="OverView 数组 链表 哈希表 栈和队列 树  基础  二叉树  满二叉树  完全二叉树    二叉查找树（BST）  平衡二叉树（AVL）  2-3查找树  红黑树（R-B Tree）  B树  B+树  B*树  R树  哈夫曼树   堆 图  基础  存储结构  BFS和DFS  最小生成树  最短路径算法  拓扑排序  AOE网与关键路径   高级数据结构与算法  布隆过滤器(Blo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法概述">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="OverView 数组 优点：存取速度快。 缺点：a.事先必须知道数组的长度。b.需要大块连续的内存块。c.插入删除元素的效率低 Java中主要类似的实现为ArrayList，其他一些容器底层也几乎都会用数组存储数据。  链表 优点：插入删除元素快；无空间限制。 缺点：查找存取慢。 分类：单向链表；双向链表；循环链表 Java中主要类似的实现为LinkedList，其他一些容器底层也会用到链表。">
+<meta property="og:description" content="OverView 数组 链表 哈希表 栈和队列 树  基础  二叉树  满二叉树  完全二叉树    二叉查找树（BST）  平衡二叉树（AVL）  2-3查找树  红黑树（R-B Tree）  B树  B+树  B*树  R树  哈夫曼树   堆 图  基础  存储结构  BFS和DFS  最小生成树  最短路径算法  拓扑排序  AOE网与关键路径   高级数据结构与算法  布隆过滤器(Blo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/alg-overview-x.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/alg-tree-3.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/alg-tree-5.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/alg-tree-6.png">
 <meta property="article:published_time" content="2020-09-10T03:05:44.000Z">
-<meta property="article:modified_time" content="2020-11-17T13:01:23.416Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.125Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
@@ -268,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 623(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 755(words)</span>
 	
 	
 
@@ -276,7 +276,77 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><p><img src="alg-overview-x.png" alt=""></p>
+        <p><a href="#OverView">OverView</a></p>
+<p><a href="#数组">数组</a></p>
+<p><a href="#链表">链表</a></p>
+<p><a href="#哈希表">哈希表</a></p>
+<p><a href="#栈和队列">栈和队列</a></p>
+<p><a href="#树">树</a></p>
+<ul>
+<li><p><a href="#基础">基础</a></p>
+<ul>
+<li><p><a href="#二叉树">二叉树</a></p>
+</li>
+<li><p><a href="#满二叉树">满二叉树</a></p>
+</li>
+<li><p><a href="#完全二叉树">完全二叉树</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#二叉查找树（BST）">二叉查找树（BST）</a></p>
+</li>
+<li><p><a href="#平衡二叉树（AVL）">平衡二叉树（AVL）</a></p>
+</li>
+<li><p><a href="#2-3查找树">2-3查找树</a></p>
+</li>
+<li><p><a href="#红黑树（R-B Tree）">红黑树（R-B Tree）</a></p>
+</li>
+<li><p><a href="#B树">B树</a></p>
+</li>
+<li><p><a href="#B+树">B+树</a></p>
+</li>
+<li><p><a href="#B*树">B*树</a></p>
+</li>
+<li><p><a href="#R树">R树</a></p>
+</li>
+<li><p><a href="#哈夫曼树">哈夫曼树</a></p>
+</li>
+</ul>
+<p><a href="#堆">堆</a></p>
+<p><a href="#图">图</a></p>
+<ul>
+<li><p><a href="#基础">基础</a></p>
+</li>
+<li><p><a href="#存储结构">存储结构</a></p>
+</li>
+<li><p><a href="#BFS和DFS">BFS和DFS</a></p>
+</li>
+<li><p><a href="#最小生成树">最小生成树</a></p>
+</li>
+<li><p><a href="#最短路径算法">最短路径算法</a></p>
+</li>
+<li><p><a href="#拓扑排序">拓扑排序</a></p>
+</li>
+<li><p><a href="#AOE网与关键路径">AOE网与关键路径</a></p>
+</li>
+</ul>
+<p><a href="#高级数据结构与算法">高级数据结构与算法</a></p>
+<ul>
+<li><p><a href="#布隆过滤器(Bloom Filter">布隆过滤器(Bloom Filter)</a>)</p>
+</li>
+<li><p><a href="#BitMap">BitMap</a></p>
+</li>
+<li><p><a href="#并查集(Union Find">并查集(Union Find)</a>)</p>
+</li>
+<li><p><a href="#符号表">符号表</a></p>
+</li>
+<li><p><a href="#KMP算法(Knuth Morris Pratt">KMP算法(Knuth Morris Pratt)</a>)</p>
+</li>
+<li><p><a href="#跳跃表(SkipList">跳跃表(SkipList)</a>)</p>
+</li>
+</ul>
+<p><a href="#Blog推荐">Blog推荐</a></p>
+<h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><p><img src="alg-overview-x.png" alt=""></p>
 <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><ul>
 <li>优点：存取速度快。</li>
 <li>缺点：a.事先必须知道数组的长度。b.需要大块连续的内存块。c.插入删除元素的效率低</li>

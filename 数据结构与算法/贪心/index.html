@@ -18,15 +18,15 @@
   
   
   <title>贪心 | Blog Of TheMasterplan</title>
-  <meta name="description" content="解决贪心问题的步骤 将原问题分解为子问题 找出贪心策略（寻找局部最优解） 得到每一个子问题的最优解 将所有局部最优解的集合构成称为原问题的一个解  经典例题leetcode455：分发饼干123456789101112131415class Solution &amp;#123;    public int findContentChildren(int[] g, int[] s) &amp;#123;">
+  <meta name="description" content="解决贪心问题的步骤 经典例题  leetcode455：分发饼干  leetcode435：无重叠区间  leetcode452：用最少数量的箭引爆气球  leetcode406：根据身高重建队列  leetcode121：买卖股票的最佳时机  leetcode122：买卖股票的最佳时机2  leetcode605：种花问题  leetcode392：判断子序列  leetcode53：最大子数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="贪心">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="解决贪心问题的步骤 将原问题分解为子问题 找出贪心策略（寻找局部最优解） 得到每一个子问题的最优解 将所有局部最优解的集合构成称为原问题的一个解  经典例题leetcode455：分发饼干123456789101112131415class Solution &amp;#123;    public int findContentChildren(int[] g, int[] s) &amp;#123;">
+<meta property="og:description" content="解决贪心问题的步骤 经典例题  leetcode455：分发饼干  leetcode435：无重叠区间  leetcode452：用最少数量的箭引爆气球  leetcode406：根据身高重建队列  leetcode121：买卖股票的最佳时机  leetcode122：买卖股票的最佳时机2  leetcode605：种花问题  leetcode392：判断子序列  leetcode53：最大子数组">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-26T06:11:35.000Z">
-<meta property="article:modified_time" content="2020-11-17T13:08:41.565Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.138Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.4k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.5k(words)</span>
 	
 	
 
@@ -271,7 +271,31 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="解决贪心问题的步骤"><a href="#解决贪心问题的步骤" class="headerlink" title="解决贪心问题的步骤"></a>解决贪心问题的步骤</h1><ol>
+        <p><a href="#解决贪心问题的步骤">解决贪心问题的步骤</a></p>
+<p><a href="#经典例题">经典例题</a></p>
+<ul>
+<li><p><a href="#leetcode455：分发饼干">leetcode455：分发饼干</a></p>
+</li>
+<li><p><a href="#leetcode435：无重叠区间">leetcode435：无重叠区间</a></p>
+</li>
+<li><p><a href="#leetcode452：用最少数量的箭引爆气球">leetcode452：用最少数量的箭引爆气球</a></p>
+</li>
+<li><p><a href="#leetcode406：根据身高重建队列">leetcode406：根据身高重建队列</a></p>
+</li>
+<li><p><a href="#leetcode121：买卖股票的最佳时机">leetcode121：买卖股票的最佳时机</a></p>
+</li>
+<li><p><a href="#leetcode122：买卖股票的最佳时机2">leetcode122：买卖股票的最佳时机2</a></p>
+</li>
+<li><p><a href="#leetcode605：种花问题">leetcode605：种花问题</a></p>
+</li>
+<li><p><a href="#leetcode392：判断子序列">leetcode392：判断子序列</a></p>
+</li>
+<li><p><a href="#leetcode53：最大子数组和">leetcode53：最大子数组和</a></p>
+</li>
+<li><p><a href="#leetcode763：划分字母区间">leetcode763：划分字母区间</a></p>
+</li>
+</ul>
+<h1 id="解决贪心问题的步骤"><a href="#解决贪心问题的步骤" class="headerlink" title="解决贪心问题的步骤"></a>解决贪心问题的步骤</h1><ol>
 <li>将原问题分解为子问题</li>
 <li>找出贪心策略（寻找局部最优解）</li>
 <li>得到每一个子问题的最优解</li>

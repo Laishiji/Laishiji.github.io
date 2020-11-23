@@ -18,12 +18,12 @@
   
   
   <title>JUC容器之并发队列 | Blog Of TheMasterplan</title>
-  <meta name="description" content="JUC提供了一系列场景的并发安全队列，按照实现方式的不同可分为阻塞队列和非阻塞队列，前者使用锁实现，后者使用CAS非阻塞算法实现。 非阻塞队列ConcurrentLinkedQueueConcurrentLinkedQueue是线程安全的无界非阻塞队列，其底层使用单向链表实现，对于入队和出队操作使用CAS来实现线程安全，因此执行该队列的方法失败不会导致线程阻塞。 类图结构 底层实现1234&#x2F;&#x2F;默认">
+  <meta name="description" content="概述  非阻塞队列  ConcurrentLinkedQueue  类图结构  底层实现  常用方法  延迟更新策略  适用场景      阻塞队列  BlockingQueue  BlockingQueue常见方法   BlockingDeque  BlockingDeque常见方法     BlockingQueue实现类  LinkedBlockingQueue  ArrayBlockin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC容器之并发队列">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="JUC提供了一系列场景的并发安全队列，按照实现方式的不同可分为阻塞队列和非阻塞队列，前者使用锁实现，后者使用CAS非阻塞算法实现。 非阻塞队列ConcurrentLinkedQueueConcurrentLinkedQueue是线程安全的无界非阻塞队列，其底层使用单向链表实现，对于入队和出队操作使用CAS来实现线程安全，因此执行该队列的方法失败不会导致线程阻塞。 类图结构 底层实现1234&#x2F;&#x2F;默认">
+<meta property="og:description" content="概述  非阻塞队列  ConcurrentLinkedQueue  类图结构  底层实现  常用方法  延迟更新策略  适用场景      阻塞队列  BlockingQueue  BlockingQueue常见方法   BlockingDeque  BlockingDeque常见方法     BlockingQueue实现类  LinkedBlockingQueue  ArrayBlockin">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/ConcurrentLinkedQueue.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/java-thread-x-blocking-queue-1.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/PriorityBlockingQueue.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/DelayQueue_uml.png">
 <meta property="article:published_time" content="2020-09-27T02:30:32.000Z">
-<meta property="article:modified_time" content="2020-10-01T09:48:09.289Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.055Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞队列"><span class="toc-number">1.</span> <span class="toc-text">非阻塞队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentLinkedQueue"><span class="toc-number">1.1.</span> <span class="toc-text">ConcurrentLinkedQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类图结构"><span class="toc-number">1.1.1.</span> <span class="toc-text">类图结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#底层实现"><span class="toc-number">1.1.2.</span> <span class="toc-text">底层实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">1.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#延迟更新策略"><span class="toc-number">1.1.4.</span> <span class="toc-text">延迟更新策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用场景"><span class="toc-number">1.1.5.</span> <span class="toc-text">适用场景</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞队列"><span class="toc-number">2.</span> <span class="toc-text">阻塞队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BlockingQueue"><span class="toc-number">2.1.</span> <span class="toc-text">BlockingQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BlockingQueue常见方法"><span class="toc-number">2.1.1.</span> <span class="toc-text">BlockingQueue常见方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BlockingDeque"><span class="toc-number">2.2.</span> <span class="toc-text">BlockingDeque</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BlockingDeque常见方法"><span class="toc-number">2.2.1.</span> <span class="toc-text">BlockingDeque常见方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingQueue实现类"><span class="toc-number">3.</span> <span class="toc-text">BlockingQueue实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedBlockingQueue"><span class="toc-number">3.1.</span> <span class="toc-text">LinkedBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayBlockingQueue"><span class="toc-number">3.2.</span> <span class="toc-text">ArrayBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PriorityBlockingQueue"><span class="toc-number">3.3.</span> <span class="toc-text">PriorityBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DelayQueue"><span class="toc-number">3.4.</span> <span class="toc-text">DelayQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SynchronousQueue"><span class="toc-number">3.5.</span> <span class="toc-text">SynchronousQueue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingDeque实现类"><span class="toc-number">4.</span> <span class="toc-text">BlockingDeque实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedBlockingDeque"><span class="toc-number">4.1.</span> <span class="toc-text">LinkedBlockingDeque</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingQueue实现生产者消费者"><span class="toc-number">5.</span> <span class="toc-text">BlockingQueue实现生产者消费者</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞队列"><span class="toc-number">2.</span> <span class="toc-text">非阻塞队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentLinkedQueue"><span class="toc-number">2.1.</span> <span class="toc-text">ConcurrentLinkedQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类图结构"><span class="toc-number">2.1.1.</span> <span class="toc-text">类图结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#底层实现"><span class="toc-number">2.1.2.</span> <span class="toc-text">底层实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">2.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#延迟更新策略"><span class="toc-number">2.1.4.</span> <span class="toc-text">延迟更新策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#适用场景"><span class="toc-number">2.1.5.</span> <span class="toc-text">适用场景</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞队列"><span class="toc-number">3.</span> <span class="toc-text">阻塞队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BlockingQueue"><span class="toc-number">3.1.</span> <span class="toc-text">BlockingQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BlockingQueue常见方法"><span class="toc-number">3.1.1.</span> <span class="toc-text">BlockingQueue常见方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BlockingDeque"><span class="toc-number">3.2.</span> <span class="toc-text">BlockingDeque</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BlockingDeque常见方法"><span class="toc-number">3.2.1.</span> <span class="toc-text">BlockingDeque常见方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingQueue实现类"><span class="toc-number">4.</span> <span class="toc-text">BlockingQueue实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedBlockingQueue"><span class="toc-number">4.1.</span> <span class="toc-text">LinkedBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayBlockingQueue"><span class="toc-number">4.2.</span> <span class="toc-text">ArrayBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PriorityBlockingQueue"><span class="toc-number">4.3.</span> <span class="toc-text">PriorityBlockingQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DelayQueue"><span class="toc-number">4.4.</span> <span class="toc-text">DelayQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SynchronousQueue"><span class="toc-number">4.5.</span> <span class="toc-text">SynchronousQueue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingDeque实现类"><span class="toc-number">5.</span> <span class="toc-text">BlockingDeque实现类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedBlockingDeque"><span class="toc-number">5.1.</span> <span class="toc-text">LinkedBlockingDeque</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BlockingQueue实现生产者消费者"><span class="toc-number">6.</span> <span class="toc-text">BlockingQueue实现生产者消费者</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -276,7 +276,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E5%AE%B9%E5%99%A8%E4%B9%8B%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.8k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.9k(words)</span>
 	
 	
 
@@ -284,7 +284,64 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>JUC提供了一系列场景的并发安全队列，按照实现方式的不同可分为阻塞队列和非阻塞队列，前者使用锁实现，后者使用CAS非阻塞算法实现。</p>
+        <ul>
+<li><p><a href="#概述">概述</a></p>
+</li>
+<li><p><a href="#非阻塞队列">非阻塞队列</a></p>
+<ul>
+<li><p><a href="#ConcurrentLinkedQueue">ConcurrentLinkedQueue</a></p>
+<ul>
+<li><p><a href="#类图结构">类图结构</a></p>
+</li>
+<li><p><a href="#底层实现">底层实现</a></p>
+</li>
+<li><p><a href="#常用方法">常用方法</a></p>
+</li>
+<li><p><a href="#延迟更新策略">延迟更新策略</a></p>
+</li>
+<li><p><a href="#适用场景">适用场景</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#阻塞队列">阻塞队列</a></p>
+<ul>
+<li><p><a href="#BlockingQueue">BlockingQueue</a></p>
+<ul>
+<li><a href="#BlockingQueue常见方法">BlockingQueue常见方法</a></li>
+</ul>
+</li>
+<li><p><a href="#BlockingDeque">BlockingDeque</a></p>
+<ul>
+<li><a href="#BlockingDeque常见方法">BlockingDeque常见方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#BlockingQueue实现类">BlockingQueue实现类</a></p>
+<ul>
+<li><p><a href="#LinkedBlockingQueue">LinkedBlockingQueue</a></p>
+</li>
+<li><p><a href="#ArrayBlockingQueue">ArrayBlockingQueue</a></p>
+</li>
+<li><p><a href="#PriorityBlockingQueue">PriorityBlockingQueue</a></p>
+</li>
+<li><p><a href="#DelayQueue">DelayQueue</a></p>
+</li>
+<li><p><a href="#SynchronousQueue">SynchronousQueue</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#BlockingDeque实现类">BlockingDeque实现类</a></p>
+<ul>
+<li><a href="#LinkedBlockingDeque">LinkedBlockingDeque</a></li>
+</ul>
+</li>
+<li><p><a href="#BlockingQueue实现生产者消费者">BlockingQueue实现生产者消费者</a></p>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>JUC提供了一系列场景的并发安全队列，按照实现方式的不同可分为阻塞队列和非阻塞队列，前者使用锁实现，后者使用CAS非阻塞算法实现。</p>
 <h2 id="非阻塞队列"><a href="#非阻塞队列" class="headerlink" title="非阻塞队列"></a>非阻塞队列</h2><h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>ConcurrentLinkedQueue是线程安全的<strong>无界非阻塞</strong>队列，其底层使用单向链表实现，对于入队和出队操作使用CAS来实现线程安全，因此执行该队列的方法失败不会导致线程阻塞。</p>
 <h4 id="类图结构"><a href="#类图结构" class="headerlink" title="类图结构"></a>类图结构</h4><p><img src="ConcurrentLinkedQueue.png" alt=""></p>
 <h4 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认头尾节点都是指向item为null的哨兵节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ConcurrentLinkedQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    head = tail = <span class="keyword">new</span> Node&lt;E&gt;(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

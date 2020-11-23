@@ -18,12 +18,12 @@
   
   
   <title>网络安全总结 | Blog Of TheMasterplan</title>
-  <meta name="description" content="Security一、    介绍 网络安全五个特征： 保密性：信息不泄露给非授权用户、实体或过程，或供其利用的特性。  完整性：数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。  可用性：可被授权实体访问并按需求使用的特性。即当需要时能否存取所需网络安全解决措施的信息。例如网络环境下拒绝服务、破坏网络和有关系统的正常运行等都属于对可用性的攻击；  可控性">
+  <meta name="description" content="一、    介绍 二、    古典加密技术 三、    对称加密 四、    公钥加密 五、    消息鉴别 六、    密钥建立和管理 七、    用户认证 八、    身份认证协议 九、    互联网安全协议和标准 十、    Hacking 十一、    信息收集（选择题） 十二、    缓冲区溢出 十三、    Web脚本攻击 十四、    DOS攻击 十五、    恶意代码、病毒、蠕虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络安全总结">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="Security一、    介绍 网络安全五个特征： 保密性：信息不泄露给非授权用户、实体或过程，或供其利用的特性。  完整性：数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。  可用性：可被授权实体访问并按需求使用的特性。即当需要时能否存取所需网络安全解决措施的信息。例如网络环境下拒绝服务、破坏网络和有关系统的正常运行等都属于对可用性的攻击；  可控性">
+<meta property="og:description" content="一、    介绍 二、    古典加密技术 三、    对称加密 四、    公钥加密 五、    消息鉴别 六、    密钥建立和管理 七、    用户认证 八、    身份认证协议 九、    互联网安全协议和标准 十、    Hacking 十一、    信息收集（选择题） 十二、    缓冲区溢出 十三、    Web脚本攻击 十四、    DOS攻击 十五、    恶意代码、病毒、蠕虫">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/1.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/2.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/9.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/10.png">
 <meta property="article:published_time" content="2019-11-19T10:21:36.000Z">
-<meta property="article:modified_time" content="2020-11-18T04:32:33.739Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.135Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Security"><span class="toc-number">1.</span> <span class="toc-text">Security</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-介绍"><span class="toc-number">1.1.</span> <span class="toc-text">一、    介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-古典加密技术"><span class="toc-number">1.2.</span> <span class="toc-text">二、    古典加密技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、-对称加密"><span class="toc-number">1.3.</span> <span class="toc-text">三、    对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、-公钥加密"><span class="toc-number">1.4.</span> <span class="toc-text">四、    公钥加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、-消息鉴别"><span class="toc-number">1.5.</span> <span class="toc-text">五、    消息鉴别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、-密钥建立和管理"><span class="toc-number">1.6.</span> <span class="toc-text">六、    密钥建立和管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、-用户认证"><span class="toc-number">1.7.</span> <span class="toc-text">七、    用户认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、-身份认证协议"><span class="toc-number">1.8.</span> <span class="toc-text">八、    身份认证协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、-互联网安全协议和标准"><span class="toc-number">1.9.</span> <span class="toc-text">九、    互联网安全协议和标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、-Hacking"><span class="toc-number">1.10.</span> <span class="toc-text">十、    Hacking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十一、-信息收集（选择题）"><span class="toc-number">1.11.</span> <span class="toc-text">十一、    信息收集（选择题）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十二、-缓冲区溢出"><span class="toc-number">1.12.</span> <span class="toc-text">十二、    缓冲区溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十三、-Web脚本攻击"><span class="toc-number">1.13.</span> <span class="toc-text">十三、    Web脚本攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十四、-DOS攻击"><span class="toc-number">1.14.</span> <span class="toc-text">十四、    DOS攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十五、-恶意代码、病毒、蠕虫"><span class="toc-number">1.15.</span> <span class="toc-text">十五、    恶意代码、病毒、蠕虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十六、-防火墙"><span class="toc-number">1.16.</span> <span class="toc-text">十六、    防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十七、-入侵检测IDS"><span class="toc-number">1.17.</span> <span class="toc-text">十七、    入侵检测IDS</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、-介绍"><span class="toc-number">1.</span> <span class="toc-text">一、    介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、-古典加密技术"><span class="toc-number">2.</span> <span class="toc-text">二、    古典加密技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、-对称加密"><span class="toc-number">3.</span> <span class="toc-text">三、    对称加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、-公钥加密"><span class="toc-number">4.</span> <span class="toc-text">四、    公钥加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、-消息鉴别"><span class="toc-number">5.</span> <span class="toc-text">五、    消息鉴别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、-密钥建立和管理"><span class="toc-number">6.</span> <span class="toc-text">六、    密钥建立和管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、-用户认证"><span class="toc-number">7.</span> <span class="toc-text">七、    用户认证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八、-身份认证协议"><span class="toc-number">8.</span> <span class="toc-text">八、    身份认证协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九、-互联网安全协议和标准"><span class="toc-number">9.</span> <span class="toc-text">九、    互联网安全协议和标准</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十、-Hacking"><span class="toc-number">10.</span> <span class="toc-text">十、    Hacking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十一、-信息收集（选择题）"><span class="toc-number">11.</span> <span class="toc-text">十一、    信息收集（选择题）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十二、-缓冲区溢出"><span class="toc-number">12.</span> <span class="toc-text">十二、    缓冲区溢出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十三、-Web脚本攻击"><span class="toc-number">13.</span> <span class="toc-text">十三、    Web脚本攻击</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十四、-DOS攻击"><span class="toc-number">14.</span> <span class="toc-text">十四、    DOS攻击</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十五、-恶意代码、病毒、蠕虫"><span class="toc-number">15.</span> <span class="toc-text">十五、    恶意代码、病毒、蠕虫</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十六、-防火墙"><span class="toc-number">16.</span> <span class="toc-text">十六、    防火墙</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十七、-入侵检测IDS"><span class="toc-number">17.</span> <span class="toc-text">十七、    入侵检测IDS</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -274,7 +274,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%9D%82%E9%A1%B9/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.8k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.9k(words)</span>
 	
 	
 
@@ -282,7 +282,24 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><h3 id="一、-介绍"><a href="#一、-介绍" class="headerlink" title="一、    介绍"></a>一、    介绍</h3><ol>
+        <p><a href="#一、    介绍">一、    介绍</a></p>
+<p><a href="#二、    古典加密技术">二、    古典加密技术</a></p>
+<p><a href="#三、    对称加密">三、    对称加密</a></p>
+<p><a href="#四、    公钥加密">四、    公钥加密</a></p>
+<p><a href="#五、    消息鉴别">五、    消息鉴别</a></p>
+<p><a href="#六、    密钥建立和管理">六、    密钥建立和管理</a></p>
+<p><a href="#七、    用户认证">七、    用户认证</a></p>
+<p><a href="#八、    身份认证协议">八、    身份认证协议</a></p>
+<p><a href="#九、    互联网安全协议和标准">九、    互联网安全协议和标准</a></p>
+<p><a href="#十、    Hacking">十、    Hacking</a></p>
+<p><a href="#十一、    信息收集（选择题）">十一、    信息收集（选择题）</a></p>
+<p><a href="#十二、    缓冲区溢出">十二、    缓冲区溢出</a></p>
+<p><a href="#十三、    Web脚本攻击">十三、    Web脚本攻击</a></p>
+<p><a href="#十四、    DOS攻击">十四、    DOS攻击</a></p>
+<p><a href="#十五、    恶意代码、病毒、蠕虫">十五、    恶意代码、病毒、蠕虫</a></p>
+<p><a href="#十六、    防火墙">十六、    防火墙</a></p>
+<p><a href="#十七、    入侵检测IDS">十七、    入侵检测IDS</a></p>
+<h1 id="一、-介绍"><a href="#一、-介绍" class="headerlink" title="一、    介绍"></a>一、    介绍</h1><ol>
 <li><strong>网络安全五个特征</strong>：<ul>
 <li>保密性：信息不泄露给非授权用户、实体或过程，或供其利用的特性。 </li>
 <li>完整性：数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。 </li>
@@ -312,7 +329,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="二、-古典加密技术"><a href="#二、-古典加密技术" class="headerlink" title="二、    古典加密技术"></a>二、    古典加密技术</h3><ol>
+<h1 id="二、-古典加密技术"><a href="#二、-古典加密技术" class="headerlink" title="二、    古典加密技术"></a>二、    古典加密技术</h1><ol>
 <li><strong>代替密码</strong>：明文中的每个字符被替换成密文中的另一个字符<ul>
 <li>凯撒码<ul>
 <li><img src="1.png" alt=""></li>
@@ -348,7 +365,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="三、-对称加密"><a href="#三、-对称加密" class="headerlink" title="三、    对称加密"></a>三、    对称加密</h3><ol>
+<h1 id="三、-对称加密"><a href="#三、-对称加密" class="headerlink" title="三、    对称加密"></a>三、    对称加密</h1><ol>
 <li><strong>分组密码的设计原则</strong><ul>
 <li>混乱原则：密码设计应保证明文与密文之间的依赖关系足够复杂。</li>
 <li>扩散原则：密码设计应保证密钥的每位数字能够影响密文中的多位数字（避免对密钥逐段破译），同时应保证明文的每位数字能够影响密文中的多位数字（隐藏明文的统计特性）。</li>
@@ -408,7 +425,7 @@
 </li>
 <li><strong>对称密钥编码问题</strong>：通信密钥太多，管理与分发困难</li>
 </ol>
-<h3 id="四、-公钥加密"><a href="#四、-公钥加密" class="headerlink" title="四、    公钥加密"></a>四、    公钥加密</h3><ol>
+<h1 id="四、-公钥加密"><a href="#四、-公钥加密" class="headerlink" title="四、    公钥加密"></a>四、    公钥加密</h1><ol>
 <li><strong>RSA原理</strong><ul>
 <li><img src="4.png" alt=""></li>
 </ul>
@@ -417,7 +434,7 @@
 <li><strong>RSA实现上的问题</strong><br>在构造n时应选择p和q的长度相差不大</li>
 <li><strong>RSA适合低频少量数据交换，如密钥分发；不适合数据量大，实时性强的场合（因为运算量大，慢）</strong></li>
 </ol>
-<h3 id="五、-消息鉴别"><a href="#五、-消息鉴别" class="headerlink" title="五、    消息鉴别"></a>五、    消息鉴别</h3><ol>
+<h1 id="五、-消息鉴别"><a href="#五、-消息鉴别" class="headerlink" title="五、    消息鉴别"></a>五、    消息鉴别</h1><ol>
 <li><strong>概念</strong>：消息接收者对消息进行验证（真实性：确认并非假冒）（完整性：内容未被篡改）。</li>
 <li><strong>网络通信安全威胁</strong>：泄露、伪造、篡改、行为抵赖</li>
 <li><strong>鉴别与保密</strong>：鉴别不能自动提供保密性，保密性不能自动提供鉴别功能。</li>
@@ -443,7 +460,7 @@
 <li><strong>生日悖论攻击</strong>：伪造消息报文使hash值不变</li>
 <li><strong>中间符合攻击概念</strong></li>
 </ol>
-<h3 id="六、-密钥建立和管理"><a href="#六、-密钥建立和管理" class="headerlink" title="六、    密钥建立和管理"></a>六、    密钥建立和管理</h3><ol>
+<h1 id="六、-密钥建立和管理"><a href="#六、-密钥建立和管理" class="headerlink" title="六、    密钥建立和管理"></a>六、    密钥建立和管理</h1><ol>
 <li><strong>密钥建立的模式</strong>：点到点（通信双方直接通信，分布式）；密钥分配中心KDC（用户与KDC有共享主密钥，KDC生成并分配会话密钥，集中式）；密钥转换中心KTC（只负责转发，集中式）</li>
 <li><strong>Diff-Hellman密钥交换</strong><ul>
 <li><img src="5.png" alt=""></li>
@@ -455,14 +472,14 @@
 <li><strong>伪随机数生成器</strong>:线性同余算法；基于密码算法的随机数生成器（循环加密方式，DES的OFB模式）；BBS生成器；</li>
 <li><strong>密钥控制技术</strong>：密钥标签（DES的64位密钥中的8个校验位作为控制使用这一密钥的标签）；控制矢量</li>
 </ol>
-<h3 id="七、-用户认证"><a href="#七、-用户认证" class="headerlink" title="七、    用户认证"></a>七、    用户认证</h3><ol>
+<h1 id="七、-用户认证"><a href="#七、-用户认证" class="headerlink" title="七、    用户认证"></a>七、    用户认证</h1><ol>
 <li><strong>身份认证</strong>：密码，令牌（磁条卡，存储卡，智能卡），生物识别（虹膜，视网膜，指纹，签名，声音，脸）</li>
 <li><strong>口令破解</strong>：字典攻击，密码猜测，彩虹表攻击（可见密码不能明文存储，要求哈希后加salt，盐：随机字符）</li>
 <li><strong>口令的脆弱性</strong>：离线字典攻击；特定账户攻击；流行密码的攻击；单个用户的密码猜测；工作站劫持；电子监控；利用用户失误</li>
 <li><strong>Bad Passwords</strong>:过短的密码；易猜测的密码</li>
 <li><strong>Countermeasures</strong>：阻止未经授权访问密码文件；入侵检测措施；帐户锁定机制；自动工作站注销；加密的网络链接</li>
 </ol>
-<h3 id="八、-身份认证协议"><a href="#八、-身份认证协议" class="headerlink" title="八、    身份认证协议"></a>八、    身份认证协议</h3><ol>
+<h1 id="八、-身份认证协议"><a href="#八、-身份认证协议" class="headerlink" title="八、    身份认证协议"></a>八、    身份认证协议</h1><ol>
 <li><strong>Kerberos身份认证协议</strong>：集中式的认证服务器结构，认证服务器的功能是实现用户与其访问的服务器间的相互鉴别；采用对称加密技术</li>
 <li><strong>数字签名</strong>：直接数字签名仅涉及通信双方<ul>
 <li>使用公钥算法进行数字签名</li>
@@ -487,7 +504,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="九、-互联网安全协议和标准"><a href="#九、-互联网安全协议和标准" class="headerlink" title="九、    互联网安全协议和标准"></a>九、    互联网安全协议和标准</h3><ol>
+<h1 id="九、-互联网安全协议和标准"><a href="#九、-互联网安全协议和标准" class="headerlink" title="九、    互联网安全协议和标准"></a>九、    互联网安全协议和标准</h1><ol>
 <li><strong>IPSec</strong>:提供认证、保密性、密钥管理。优点：在传输层下，因而对应用程序、用户透明；抵抗旁路攻击；保护路由架构…</li>
 <li><strong>IPSec架构</strong>：<ul>
 <li><img src="7.png" alt=""></li>
@@ -540,12 +557,12 @@
 </ul>
 </li>
 </ol>
-<h3 id="十、-Hacking"><a href="#十、-Hacking" class="headerlink" title="十、    Hacking"></a>十、    Hacking</h3><ol>
+<h1 id="十、-Hacking"><a href="#十、-Hacking" class="headerlink" title="十、    Hacking"></a>十、    Hacking</h1><ol>
 <li><strong>攻击思路</strong>：信息收集，获取权限，安装后门（木马），扩大影响（攻击该网络其他主机），清除痕迹</li>
 <li><strong>安全评估</strong></li>
 <li><strong>TCSEC，CC</strong></li>
 </ol>
-<h3 id="十一、-信息收集（选择题）"><a href="#十一、-信息收集（选择题）" class="headerlink" title="十一、    信息收集（选择题）"></a>十一、    信息收集（选择题）</h3><ol>
+<h1 id="十一、-信息收集（选择题）"><a href="#十一、-信息收集（选择题）" class="headerlink" title="十一、    信息收集（选择题）"></a>十一、    信息收集（选择题）</h1><ol>
 <li><strong>Web与搜索引擎服务</strong></li>
 <li><strong>目标</strong>：获取目标网络或公司的URL，获取目标网络的拓扑结构</li>
 <li><strong>扫描目的</strong>：查看目标网络中哪些主机是存活的，查看存活的主机运行了哪些服务，查看主机提供的服务有无漏洞<ul>
@@ -560,7 +577,7 @@
 </li>
 <li><strong>操作系统类型探测</strong></li>
 </ol>
-<h3 id="十二、-缓冲区溢出"><a href="#十二、-缓冲区溢出" class="headerlink" title="十二、    缓冲区溢出"></a>十二、    缓冲区溢出</h3><ol>
+<h1 id="十二、-缓冲区溢出"><a href="#十二、-缓冲区溢出" class="headerlink" title="十二、    缓冲区溢出"></a>十二、    缓冲区溢出</h1><ol>
 <li><strong>缓冲区</strong>：应用程序保存用户输入数据，程序临时数据的内存空间。缓冲区本质：数组。位置：堆、栈、数据段</li>
 <li><strong>溢出</strong>：用户输入数据长度超出了程序为其分配的内存空间，这些数据会覆盖其他程序数据的内存空间。</li>
 <li><strong>危害</strong>：程序异常，系统崩溃，程序跳到恶意代码，控制权被窃</li>
@@ -576,7 +593,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="十三、-Web脚本攻击"><a href="#十三、-Web脚本攻击" class="headerlink" title="十三、    Web脚本攻击"></a>十三、    Web脚本攻击</h3><ol>
+<h1 id="十三、-Web脚本攻击"><a href="#十三、-Web脚本攻击" class="headerlink" title="十三、    Web脚本攻击"></a>十三、    Web脚本攻击</h1><ol>
 <li><strong>SQL注入攻击</strong> ：把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串中，最终达到欺骗服务器执行恶意的SQL命令。<br>步骤<ul>
 <li>绕过认证：conditions：账号密码的查询是同一条查询语句；密码没有加密保护</li>
 <li>判断能否进行SQL注入</li>
@@ -600,13 +617,13 @@
 </ul>
 </li>
 </ol>
-<h3 id="十四、-DOS攻击"><a href="#十四、-DOS攻击" class="headerlink" title="十四、    DOS攻击"></a>十四、    DOS攻击</h3><ol>
+<h1 id="十四、-DOS攻击"><a href="#十四、-DOS攻击" class="headerlink" title="十四、    DOS攻击"></a>十四、    DOS攻击</h1><ol>
 <li><strong>概念</strong>：利用网络协议漏洞或其他系统以及应用软件的漏洞耗尽被攻击目标资源，使得被攻击目标无法正常提供服务，直至系统停止响应甚至崩溃的攻击方式。</li>
 <li><strong>原理</strong>：攻击者向服务器发送众多的带有虚假地址的请求，服务器发送回复信息后无限等待进而无法释放资源，连接超时后攻击者再度发送虚假请求。</li>
 <li><strong>DOS分类</strong>：SYN Flood（请求方不发送ACK），ping of death（ping请求数据包声称超过64K，接收方TCP/IP堆栈崩溃），teardrop…</li>
 <li><strong>发现僵尸网络</strong>：IDS（提取僵尸程序指纹信息），行为监测（僵尸程序行为模式），蜜獾捕获（捕获僵尸程序样本）</li>
 </ol>
-<h3 id="十五、-恶意代码、病毒、蠕虫"><a href="#十五、-恶意代码、病毒、蠕虫" class="headerlink" title="十五、    恶意代码、病毒、蠕虫"></a>十五、    恶意代码、病毒、蠕虫</h3><ol>
+<h1 id="十五、-恶意代码、病毒、蠕虫"><a href="#十五、-恶意代码、病毒、蠕虫" class="headerlink" title="十五、    恶意代码、病毒、蠕虫"></a>十五、    恶意代码、病毒、蠕虫</h1><ol>
 <li><strong>计算机病毒</strong>：是一个指令序列，能够把自身拷贝插入到其他主程序中</li>
 <li><strong>病毒模块</strong>：引导、传染、表现</li>
 <li><strong>病毒按链接方式分类</strong>：<ul>
@@ -625,7 +642,7 @@
 </li>
 <li><strong>蠕虫</strong>：一种可以通过网络连接进行自身复制的程序，与以往病毒方式不同，文件型病毒、宏病毒需要在计算机的硬盘、软盘或文件系统中繁殖，而典型的蠕虫只会在内存中维持一个活动副本，甚至根本不向硬盘写入任何信息。</li>
 </ol>
-<h3 id="十六、-防火墙"><a href="#十六、-防火墙" class="headerlink" title="十六、    防火墙"></a>十六、    防火墙</h3><ol>
+<h1 id="十六、-防火墙"><a href="#十六、-防火墙" class="headerlink" title="十六、    防火墙"></a>十六、    防火墙</h1><ol>
 <li><strong>概念</strong>：防火墙指应用于内部网络和外部网络之间的，用来保护内部网络免受非法访问和破坏的网络安全系统。</li>
 <li><strong>主要功能</strong>：<ul>
 <li>过滤进出网络的数据</li>
@@ -651,7 +668,7 @@
 <li><strong>NAT优缺点</strong>：管理方便并且节约IP地址资源，隐藏内部IP地址信息；外部应用程序不能方便地与NAT网关后的应用程序联系。-</li>
 <li><strong>理解防火墙的四种体系结构</strong></li>
 </ol>
-<h3 id="十七、-入侵检测IDS"><a href="#十七、-入侵检测IDS" class="headerlink" title="十七、    入侵检测IDS"></a>十七、    入侵检测IDS</h3><ol>
+<h1 id="十七、-入侵检测IDS"><a href="#十七、-入侵检测IDS" class="headerlink" title="十七、    入侵检测IDS"></a>十七、    入侵检测IDS</h1><ol>
 <li><strong>由于防火墙无法发现和阻止</strong>:a.对合法服务的攻击。b.源自其他入口的攻击。c.来自内部网络的攻击。d.来自木马的威胁。入侵检测技术通过对计算机网络或计算机系统中若干关键点信息的收集和分析，从中发现网络或系统中是否有违反安全策略行为和被攻击迹象的一种安全技术。</li>
 <li><img src="10.png" alt=""></li>
 <li><strong>IDS任务</strong>：从系统正常运行产生的和攻击者进行攻击时产生的混合数据中找出入侵痕迹。</li>

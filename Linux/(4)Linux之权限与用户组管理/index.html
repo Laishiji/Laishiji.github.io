@@ -18,15 +18,15 @@
   
   
   <title>Linux之权限与用户组管理 | Blog Of TheMasterplan</title>
-  <meta name="description" content="文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log，其含义如下：  第1位：  -：表示普通文件。 d：目录。 b：设备文件（块文件，即可以用来存储的设备文件）。 c：设备文件（字符文件，不能用来存储的设备文件）。 l：软链接（快捷方式）。  p：管道文件pipe。  s：套接字">
+  <meta name="description" content="文件权限  权限概述  r&#x2F;w&#x2F;x权限对于目录的意义  更改权限  默认权限  特殊权限  ACL  权限与指令间的关系(在用户模式下))  文件隐藏属性    用户组管理  chown  chgrp  用户和组的配置文件  用户和组的增删改     文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux之权限与用户组管理">
 <meta property="og:url" content="http://thmasterplan.cn/Linux/(4)Linux%E4%B9%8B%E6%9D%83%E9%99%90%E4%B8%8E%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log，其含义如下：  第1位：  -：表示普通文件。 d：目录。 b：设备文件（块文件，即可以用来存储的设备文件）。 c：设备文件（字符文件，不能用来存储的设备文件）。 l：软链接（快捷方式）。  p：管道文件pipe。  s：套接字">
+<meta property="og:description" content="文件权限  权限概述  r&#x2F;w&#x2F;x权限对于目录的意义  更改权限  默认权限  特殊权限  ACL  权限与指令间的关系(在用户模式下))  文件隐藏属性    用户组管理  chown  chgrp  用户和组的配置文件  用户和组的增删改     文件权限权限概述使用命令 ls -l file可列出该文件的权限信息 ，例如-rw-r--r-- 1 root root 4.0K 07-19 0">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-17T16:16:20.000Z">
-<meta property="article:modified_time" content="2020-11-08T06:49:52.723Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:20.932Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -271,7 +271,41 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><h3 id="权限概述"><a href="#权限概述" class="headerlink" title="权限概述"></a>权限概述</h3><p>使用命令 <code>ls -l file</code>可列出该文件的权限信息 ，例如<code>-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log</code>，其含义如下：</p>
+        <ul>
+<li><p><a href="#文件权限">文件权限</a></p>
+<ul>
+<li><p><a href="#权限概述">权限概述</a></p>
+</li>
+<li><p><a href="#r/w/x权限对于目录的意义">r/w/x权限对于目录的意义</a></p>
+</li>
+<li><p><a href="#更改权限">更改权限</a></p>
+</li>
+<li><p><a href="#默认权限">默认权限</a></p>
+</li>
+<li><p><a href="#特殊权限">特殊权限</a></p>
+</li>
+<li><p><a href="#ACL">ACL</a></p>
+</li>
+<li><p><a href="#权限与指令间的关系(在用户模式下">权限与指令间的关系(在用户模式下)</a>)</p>
+</li>
+<li><p><a href="#文件隐藏属性">文件隐藏属性</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#用户组管理">用户组管理</a></p>
+<ul>
+<li><p><a href="#chown">chown</a></p>
+</li>
+<li><p><a href="#chgrp">chgrp</a></p>
+</li>
+<li><p><a href="#用户和组的配置文件">用户和组的配置文件</a></p>
+</li>
+<li><p><a href="#用户和组的增删改">用户和组的增删改</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><h3 id="权限概述"><a href="#权限概述" class="headerlink" title="权限概述"></a>权限概述</h3><p>使用命令 <code>ls -l file</code>可列出该文件的权限信息 ，例如<code>-rw-r--r-- 1 root root 4.0K 07-19 01:02 abc.log</code>，其含义如下：</p>
 <ul>
 <li><p>第1位：</p>
 <ul>

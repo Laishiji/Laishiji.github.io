@@ -18,15 +18,15 @@
   
   
   <title>Java泛型 | Blog Of TheMasterplan</title>
-  <meta name="description" content="概述 在创建接口、类、方法时，为了代码复用和类型安全，使用泛型来作为类型。泛型可以看作形式参数，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如 123class List&lt;T&gt;&amp;#123;    private T element;  &amp;#125; 12345678class TestList&amp;#123;    public static void main(">
+  <meta name="description" content="概述  为什么引入泛型   泛型的基本使用  泛型类  泛型接口  泛型方法  泛型的上下限     概述 在创建接口、类、方法时，为了代码复用和类型安全，使用泛型来作为类型。泛型可以看作形式参数，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如 123class List&lt;T&gt;&amp;#123;    private T element;  &amp;#125; 1234">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java泛型">
 <meta property="og:url" content="http://thmasterplan.cn/Java/Java%E6%B3%9B%E5%9E%8B/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="概述 在创建接口、类、方法时，为了代码复用和类型安全，使用泛型来作为类型。泛型可以看作形式参数，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如 123class List&lt;T&gt;&amp;#123;    private T element;  &amp;#125; 12345678class TestList&amp;#123;    public static void main(">
+<meta property="og:description" content="概述  为什么引入泛型   泛型的基本使用  泛型类  泛型接口  泛型方法  泛型的上下限     概述 在创建接口、类、方法时，为了代码复用和类型安全，使用泛型来作为类型。泛型可以看作形式参数，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如 123class List&lt;T&gt;&amp;#123;    private T element;  &amp;#125; 1234">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-04T11:06:21.000Z">
-<meta property="article:modified_time" content="2020-11-15T14:12:44.457Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.019Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -271,7 +271,26 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+        <ul>
+<li><p><a href="#概述">概述</a></p>
+<ul>
+<li><a href="#为什么引入泛型">为什么引入泛型</a></li>
+</ul>
+</li>
+<li><p><a href="#泛型的基本使用">泛型的基本使用</a></p>
+<ul>
+<li><p><a href="#泛型类">泛型类</a></p>
+</li>
+<li><p><a href="#泛型接口">泛型接口</a></p>
+</li>
+<li><p><a href="#泛型方法">泛型方法</a></p>
+</li>
+<li><p><a href="#泛型的上下限">泛型的上下限</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
 <li><p>在创建接口、类、方法时，为了<strong>代码复用</strong>和<strong>类型安全</strong>，使用泛型来作为类型。<strong>泛型可以看作形式参数</strong>，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T element;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestList</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> List&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> List&lt;&gt;();</span><br><span class="line">        List&lt;Double&gt; list = <span class="keyword">new</span> List&lt;&gt;();</span><br><span class="line">        <span class="comment">//使用类时才指定List中元素具体的类型</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

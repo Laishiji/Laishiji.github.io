@@ -18,16 +18,16 @@
   
   
   <title>阿里巴巴 Java 开发手册 v1.2.0 | Blog Of TheMasterplan</title>
-  <meta name="description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构">
+  <meta name="description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约  索引规约  SQL 语句  ORM 映射    工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词   前言《阿里巴巴 Java 开发手">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里巴巴 Java 开发手册 v1.2.0">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="本文转载自：https:&#x2F;&#x2F;github.com&#x2F;mysterin&#x2F;alibaba-java-specification 前言《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构">
+<meta property="og:description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约  索引规约  SQL 语句  ORM 映射    工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词   前言《阿里巴巴 Java 开发手">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/app_layout.png">
 <meta property="article:published_time" content="2020-10-02T08:42:19.000Z">
-<meta property="article:modified_time" content="2020-11-18T04:31:40.556Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.144Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary">
@@ -221,7 +221,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程规范"><span class="toc-number">3.</span> <span class="toc-text">编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名风格"><span class="toc-number">3.0.1.</span> <span class="toc-text">命名风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量定义"><span class="toc-number">3.0.2.</span> <span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码格式"><span class="toc-number">3.0.3.</span> <span class="toc-text">代码格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OOP-规约"><span class="toc-number">3.0.4.</span> <span class="toc-text">OOP 规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合处理"><span class="toc-number">3.0.5.</span> <span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发处理"><span class="toc-number">3.0.6.</span> <span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制语句"><span class="toc-number">3.0.7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注释规约"><span class="toc-number">3.0.8.</span> <span class="toc-text">注释规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">3.0.9.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常日志"><span class="toc-number">4.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常处理"><span class="toc-number">4.0.1.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志规约"><span class="toc-number">4.0.2.</span> <span class="toc-text">日志规约</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MYSQL-数据库"><span class="toc-number">5.</span> <span class="toc-text">MYSQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建表规约"><span class="toc-number">5.0.1.</span> <span class="toc-text">建表规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引规约"><span class="toc-number">5.0.2.</span> <span class="toc-text">索引规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL-语句"><span class="toc-number">5.0.3.</span> <span class="toc-text">SQL 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ORM-映射"><span class="toc-number">5.0.4.</span> <span class="toc-text">ORM 映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程结构"><span class="toc-number">6.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用分层"><span class="toc-number">6.0.1.</span> <span class="toc-text">应用分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二方库依赖"><span class="toc-number">6.0.2.</span> <span class="toc-text">二方库依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器"><span class="toc-number">6.0.3.</span> <span class="toc-text">服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全规约"><span class="toc-number">7.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-1：版本历史"><span class="toc-number">8.</span> <span class="toc-text">附 1：版本历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-2：本手册专有名词"><span class="toc-number">9.</span> <span class="toc-text">附 2：本手册专有名词</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程规范"><span class="toc-number">2.</span> <span class="toc-text">编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名风格"><span class="toc-number">2.0.1.</span> <span class="toc-text">命名风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量定义"><span class="toc-number">2.0.2.</span> <span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码格式"><span class="toc-number">2.0.3.</span> <span class="toc-text">代码格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OOP-规约"><span class="toc-number">2.0.4.</span> <span class="toc-text">OOP 规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合处理"><span class="toc-number">2.0.5.</span> <span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发处理"><span class="toc-number">2.0.6.</span> <span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制语句"><span class="toc-number">2.0.7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注释规约"><span class="toc-number">2.0.8.</span> <span class="toc-text">注释规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">2.0.9.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常日志"><span class="toc-number">3.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异常处理"><span class="toc-number">3.0.1.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志规约"><span class="toc-number">3.0.2.</span> <span class="toc-text">日志规约</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MYSQL-数据库"><span class="toc-number">4.</span> <span class="toc-text">MYSQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建表规约"><span class="toc-number">4.0.1.</span> <span class="toc-text">建表规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#索引规约"><span class="toc-number">4.0.2.</span> <span class="toc-text">索引规约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL-语句"><span class="toc-number">4.0.3.</span> <span class="toc-text">SQL 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ORM-映射"><span class="toc-number">4.0.4.</span> <span class="toc-text">ORM 映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程结构"><span class="toc-number">5.</span> <span class="toc-text">工程结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用分层"><span class="toc-number">5.0.1.</span> <span class="toc-text">应用分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二方库依赖"><span class="toc-number">5.0.2.</span> <span class="toc-text">二方库依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器"><span class="toc-number">5.0.3.</span> <span class="toc-text">服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全规约"><span class="toc-number">6.</span> <span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-1：版本历史"><span class="toc-number">7.</span> <span class="toc-text">附 1：版本历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附-2：本手册专有名词"><span class="toc-number">8.</span> <span class="toc-text">附 2：本手册专有名词</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -273,47 +273,71 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>本文转载自：<a href="https://github.com/mysterin/alibaba-java-specification" target="_blank" rel="noopener">https://github.com/mysterin/alibaba-java-specification</a></p>
+        <ul>
+<li><p><a href="#前言">前言</a></p>
+</li>
+<li><p><a href="#编程规范">编程规范</a></p>
+<ul>
+<li><p><a href="#命名风格">命名风格</a></p>
+</li>
+<li><p><a href="#常量定义">常量定义</a></p>
+</li>
+<li><p><a href="#代码格式">代码格式</a></p>
+</li>
+<li><p><a href="#OOP 规约">OOP 规约</a></p>
+</li>
+<li><p><a href="#集合处理">集合处理</a></p>
+</li>
+<li><p><a href="#并发处理">并发处理</a></p>
+</li>
+<li><p><a href="#控制语句">控制语句</a></p>
+</li>
+<li><p><a href="#注释规约">注释规约</a></p>
+</li>
+<li><p><a href="#其他">其他</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#异常日志">异常日志</a></p>
+<ul>
+<li><p><a href="#异常处理">异常处理</a></p>
+</li>
+<li><p><a href="#日志规约">日志规约</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#MYSQL 数据库">MYSQL 数据库</a></p>
+<ul>
+<li><p><a href="#建表规约">建表规约</a></p>
+</li>
+<li><p><a href="#索引规约">索引规约</a></p>
+</li>
+<li><p><a href="#SQL 语句">SQL 语句</a></p>
+</li>
+<li><p><a href="#ORM 映射">ORM 映射</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#工程结构">工程结构</a></p>
+<ul>
+<li><p><a href="#应用分层">应用分层</a></p>
+</li>
+<li><p><a href="#二方库依赖">二方库依赖</a></p>
+</li>
+<li><p><a href="#服务器">服务器</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#安全规约">安全规约</a></p>
+</li>
+<li><p><a href="#附 1：版本历史">附 1：版本历史</a></p>
+</li>
+<li><p><a href="#附 2：本手册专有名词">附 2：本手册专有名词</a></p>
+</li>
+</ul>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构和索引设计缺陷可能带来软件上的架构缺陷或性能风险；工程结构混乱导致后续维护艰难；没有鉴权的漏洞代码易被黑客攻击等等。所以本手册以 Java 开发者为中心视角，划分为编程规约、异常日志、MySQL 数据库、工程结构、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱及故障敏感性，规约依次分为强制、推荐、参考三大类。对于规约条目的延伸信息中，“说明”对内容做了引申和解释；“正例”提倡什么样的编码和实现方式；“反例”说明需要提防的雷区，以及真实的错误案例。  </p>
 <p>本手册的愿景是码出高效、码出质量。代码的字里行间流淌的是软件生命中的血<br>液，质量的提升是尽可能少踩坑，杜绝踩重复的坑，切实提升质量意识。另外，现代<br>软件架构都需要协同开发完成，高效协作即降低协同成本，提升沟通效率，所谓无规<br>矩不成方圆，无规范不能协作。众所周知，制订交通法规表面上是要限制行车权，实<br>际上是保障公众的人身安全。试想如果没有限速，没有红绿灯，谁还敢上路行驶。对<br>软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度<br>个性化，以一种普遍认可的统一方式一起做事，提升协作效率。  </p>
 <p>《阿里巴巴 Java 开发手册》，开放包容地认真听取社区、博客、论坛的反馈，及时修正，保持与时俱进。请关注手册末页的“阿里技术”和“云栖社区”公众号获取最新版本。  </p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- MarkdownTOC -->
-<ul>
-<li><a href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83">编程规范</a><ul>
-<li><a href="#%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC">命名风格</a></li>
-<li><a href="#%E5%B8%B8%E9%87%8F%E5%AE%9A%E4%B9%89">常量定义</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F">代码格式</a></li>
-<li><a href="#oop-%E8%A7%84%E7%BA%A6">OOP 规约</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86">集合处理</a></li>
-<li><a href="#%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86">并发处理</a></li>
-<li><a href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5">控制语句</a></li>
-<li><a href="#%E6%B3%A8%E9%87%8A%E8%A7%84%E7%BA%A6">注释规约</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97">异常日志</a><ul>
-<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a></li>
-<li><a href="#%E6%97%A5%E5%BF%97%E8%A7%84%E7%BA%A6">日志规约</a></li>
-</ul>
-</li>
-<li><a href="#mysql-%E6%95%B0%E6%8D%AE%E5%BA%93">MYSQL 数据库</a><ul>
-<li><a href="#%E5%BB%BA%E8%A1%A8%E8%A7%84%E7%BA%A6">建表规约</a></li>
-<li><a href="#%E7%B4%A2%E5%BC%95%E8%A7%84%E7%BA%A6">索引规约</a></li>
-<li><a href="#sql-%E8%AF%AD%E5%8F%A5">SQL 语句</a></li>
-<li><a href="#orm-%E6%98%A0%E5%B0%84">ORM 映射</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84">工程结构</a><ul>
-<li><a href="#%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82">应用分层</a></li>
-<li><a href="#%E4%BA%8C%E6%96%B9%E5%BA%93%E4%BE%9D%E8%B5%96">二方库依赖</a></li>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E5%99%A8">服务器</a></li>
-</ul>
-</li>
-<li><a href="#%E5%AE%89%E5%85%A8%E8%A7%84%E7%BA%A6">安全规约</a></li>
-<li><a href="#%E9%99%84-1%EF%BC%9A%E7%89%88%E6%9C%AC%E5%8E%86%E5%8F%B2">附 1：版本历史</a></li>
-<li><a href="#%E9%99%84-2%EF%BC%9A%E6%9C%AC%E6%89%8B%E5%86%8C%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D">附 2：本手册专有名词</a></li>
-</ul>
-<!-- /MarkdownTOC -->
 <h2 id="编程规范"><a href="#编程规范" class="headerlink" title="编程规范"></a>编程规范</h2><h4 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h4><ol>
 <li><p>【强制】代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。<br><strong>反例：</strong> <code>_name / __name / $Object / name_ / name$ / Object$</code></p>
 </li>
@@ -1011,27 +1035,18 @@ private static final Logger logger = LoggerFactory.getLogger(Abc.class);
 </table>
 </div>
 <h2 id="附-2：本手册专有名词"><a href="#附-2：本手册专有名词" class="headerlink" title="附 2：本手册专有名词"></a>附 2：本手册专有名词</h2><ol>
-<li><p><strong>POJO</strong>（Plain Ordinary Java Object）：在本手册中，POJO 专指只有 setter / getter<br>/ toString 的简单类，包括 DO/DTO/BO/VO 等。</p>
-</li>
-<li><p><strong>DO</strong>（Data Object）：本手册指数据库表一一对应的 POJO 类。</p>
-</li>
-<li><p><strong>GAV</strong>（GroupId、ArtifactctId、Version）：Maven 坐标，是用来唯一标识 jar 包。</p>
-</li>
-<li><p><strong>OOP</strong>（Object Oriented Programming）: 本手册泛指类、对象的编程处理方式。</p>
-</li>
-<li><p><strong>ORM</strong>（Object Relation Mapping）: 对象关系映射，对象领域模型与底层数据之间的转换，<br>本文泛指 iBATIS, mybatis 等框架。</p>
-</li>
-<li><p><strong>NPE</strong>（java.lang.NullPointerException）: 空指针异常。</p>
-</li>
-<li><p><strong>SOA</strong>（Service-Oriented Architecture）: 面向服务架构，它可以根据需求通过网络对松散<br>耦合的粗粒度应用组件进行分布式部署、组合和使用，有利于提升组件可重用性，可维护性。</p>
-</li>
-<li><p><strong>一方库</strong>：本工程内部子项目模块依赖的库（jar 包）。</p>
-</li>
-<li><p><strong>二方库</strong>：公司内部发布到中央仓库，可供公司内部其它应用依赖的库（jar 包）。</p>
-</li>
-<li><p><strong>三方库</strong>：公司之外的开源库（jar 包）。</p>
-</li>
+<li><strong>POJO</strong>（Plain Ordinary Java Object）：在本手册中，POJO 专指只有 setter / getter<br>/ toString 的简单类，包括 DO/DTO/BO/VO 等。</li>
+<li><strong>DO</strong>（Data Object）：本手册指数据库表一一对应的 POJO 类。</li>
+<li><strong>GAV</strong>（GroupId、ArtifactctId、Version）：Maven 坐标，是用来唯一标识 jar 包。</li>
+<li><strong>OOP</strong>（Object Oriented Programming）: 本手册泛指类、对象的编程处理方式。</li>
+<li><strong>ORM</strong>（Object Relation Mapping）: 对象关系映射，对象领域模型与底层数据之间的转换，<br>本文泛指 iBATIS, mybatis 等框架。</li>
+<li><strong>NPE</strong>（java.lang.NullPointerException）: 空指针异常。</li>
+<li><strong>SOA</strong>（Service-Oriented Architecture）: 面向服务架构，它可以根据需求通过网络对松散<br>耦合的粗粒度应用组件进行分布式部署、组合和使用，有利于提升组件可重用性，可维护性。</li>
+<li><strong>一方库</strong>：本工程内部子项目模块依赖的库（jar 包）。</li>
+<li><strong>二方库</strong>：公司内部发布到中央仓库，可供公司内部其它应用依赖的库（jar 包）。</li>
+<li><strong>三方库</strong>：公司之外的开源库（jar 包）。</li>
 </ol>
+<p>本文转载自：<a href="https://github.com/mysterin/alibaba-java-specification" target="_blank" rel="noopener">https://github.com/mysterin/alibaba-java-specification</a></p>
 
       
     </div>

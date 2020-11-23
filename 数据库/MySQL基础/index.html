@@ -18,15 +18,15 @@
   
   
   <title>MySQL基础 | Blog Of TheMasterplan</title>
-  <meta name="description" content="一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 12345678SHOW DATABASES; -- 查询所有数据库SHOW TABLES; -- 查看所有表-- 以下语句效果相同：查看单表的信息SHOW COLUMNS FROM my_table;DESC my_table;EXPLAIN my_table;DESCRIBE my_table;">
+  <meta name="description" content="一.基础 二.增删改 三.查询  DISTINCT  LIMIT   四.排序 五.过滤 六.通配符 七.正则表达式 八.计算字段 九.函数 十.分组 十一.子查询 十二.JOIN  内连接  自连接  外部连接   十三.UNION 十四.视图 十五.事务管理 十六.安全管理 参考 一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 12345678S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL基础">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 12345678SHOW DATABASES; -- 查询所有数据库SHOW TABLES; -- 查看所有表-- 以下语句效果相同：查看单表的信息SHOW COLUMNS FROM my_table;DESC my_table;EXPLAIN my_table;DESCRIBE my_table;">
+<meta property="og:description" content="一.基础 二.增删改 三.查询  DISTINCT  LIMIT   四.排序 五.过滤 六.通配符 七.正则表达式 八.计算字段 九.函数 十.分组 十一.子查询 十二.JOIN  内连接  自连接  外部连接   十三.UNION 十四.视图 十五.事务管理 十六.安全管理 参考 一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 12345678S">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-18T04:30:33.000Z">
-<meta property="article:modified_time" content="2020-11-18T15:29:44.142Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.071Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-基础"><span class="toc-number">1.</span> <span class="toc-text">一.基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-增删改"><span class="toc-number">2.</span> <span class="toc-text">二.增删改</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-查询"><span class="toc-number">3.</span> <span class="toc-text">三.查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DISTINCT"><span class="toc-number">3.1.</span> <span class="toc-text">DISTINCT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LIMIT"><span class="toc-number">3.2.</span> <span class="toc-text">LIMIT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-排序"><span class="toc-number">4.</span> <span class="toc-text">四.排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-过滤"><span class="toc-number">5.</span> <span class="toc-text">五.过滤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-通配符"><span class="toc-number">6.</span> <span class="toc-text">六.通配符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-正则表达式"><span class="toc-number">7.</span> <span class="toc-text">七.正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八-计算字段"><span class="toc-number">8.</span> <span class="toc-text">八.计算字段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九-函数"><span class="toc-number">9.</span> <span class="toc-text">九.函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十-分组"><span class="toc-number">10.</span> <span class="toc-text">十.分组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十一-子查询"><span class="toc-number">11.</span> <span class="toc-text">十一.子查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十二-JOIN"><span class="toc-number">12.</span> <span class="toc-text">十二.JOIN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内连接"><span class="toc-number">12.1.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自连接"><span class="toc-number">12.2.</span> <span class="toc-text">自连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部连接"><span class="toc-number">12.3.</span> <span class="toc-text">外部连接</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十三-UNION"><span class="toc-number">13.</span> <span class="toc-text">十三.UNION</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十四-事务管理"><span class="toc-number">14.</span> <span class="toc-text">十四.事务管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十五-安全管理"><span class="toc-number">15.</span> <span class="toc-text">十五.安全管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">16.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-基础"><span class="toc-number">1.</span> <span class="toc-text">一.基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-增删改"><span class="toc-number">2.</span> <span class="toc-text">二.增删改</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-查询"><span class="toc-number">3.</span> <span class="toc-text">三.查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DISTINCT"><span class="toc-number">3.1.</span> <span class="toc-text">DISTINCT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LIMIT"><span class="toc-number">3.2.</span> <span class="toc-text">LIMIT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-排序"><span class="toc-number">4.</span> <span class="toc-text">四.排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-过滤"><span class="toc-number">5.</span> <span class="toc-text">五.过滤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-通配符"><span class="toc-number">6.</span> <span class="toc-text">六.通配符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-正则表达式"><span class="toc-number">7.</span> <span class="toc-text">七.正则表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八-计算字段"><span class="toc-number">8.</span> <span class="toc-text">八.计算字段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九-函数"><span class="toc-number">9.</span> <span class="toc-text">九.函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十-分组"><span class="toc-number">10.</span> <span class="toc-text">十.分组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十一-子查询"><span class="toc-number">11.</span> <span class="toc-text">十一.子查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十二-JOIN"><span class="toc-number">12.</span> <span class="toc-text">十二.JOIN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内连接"><span class="toc-number">12.1.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自连接"><span class="toc-number">12.2.</span> <span class="toc-text">自连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部连接"><span class="toc-number">12.3.</span> <span class="toc-text">外部连接</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十三-UNION"><span class="toc-number">13.</span> <span class="toc-text">十三.UNION</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十四-视图"><span class="toc-number">14.</span> <span class="toc-text">十四.视图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十五-事务管理"><span class="toc-number">15.</span> <span class="toc-text">十五.事务管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十六-安全管理"><span class="toc-number">16.</span> <span class="toc-text">十六.安全管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">17.</span> <span class="toc-text">参考</span></a></li></ol>
     </nav>
   </div>
 </aside>
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.3k(words)</span>
 	
 	
 
@@ -271,7 +271,38 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="一-基础"><a href="#一-基础" class="headerlink" title="一.基础"></a>一.基础</h1><ol>
+        <p><a href="#一.基础">一.基础</a></p>
+<p><a href="#二.增删改">二.增删改</a></p>
+<p><a href="#三.查询">三.查询</a></p>
+<ul>
+<li><p><a href="#DISTINCT">DISTINCT</a></p>
+</li>
+<li><p><a href="#LIMIT">LIMIT</a></p>
+</li>
+</ul>
+<p><a href="#四.排序">四.排序</a></p>
+<p><a href="#五.过滤">五.过滤</a></p>
+<p><a href="#六.通配符">六.通配符</a></p>
+<p><a href="#七.正则表达式">七.正则表达式</a></p>
+<p><a href="#八.计算字段">八.计算字段</a></p>
+<p><a href="#九.函数">九.函数</a></p>
+<p><a href="#十.分组">十.分组</a></p>
+<p><a href="#十一.子查询">十一.子查询</a></p>
+<p><a href="#十二.JOIN">十二.JOIN</a></p>
+<ul>
+<li><p><a href="#内连接">内连接</a></p>
+</li>
+<li><p><a href="#自连接">自连接</a></p>
+</li>
+<li><p><a href="#外部连接">外部连接</a></p>
+</li>
+</ul>
+<p><a href="#十三.UNION">十三.UNION</a></p>
+<p><a href="#十四.视图">十四.视图</a></p>
+<p><a href="#十五.事务管理">十五.事务管理</a></p>
+<p><a href="#十六.安全管理">十六.安全管理</a></p>
+<p><a href="#参考">参考</a></p>
+<h1 id="一-基础"><a href="#一-基础" class="headerlink" title="一.基础"></a>一.基础</h1><ol>
 <li><p>注释：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 注释</span></span><br><span class="line"><span class="comment">-- 注释</span></span><br><span class="line"><span class="comment">/* 注释</span></span><br><span class="line"><span class="comment">   注释*/</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -509,7 +540,14 @@
 <p>只能包含一个 ORDER BY 子句，并且必须位于语句的最后。</p>
 <p>实现全外连接：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 由于不存在有订单信息却没有没有顾客信息的情况，因此该例没有实际意义，仅作全外连接实现的演示</span></span><br><span class="line"><span class="keyword">SELECT</span> Customers.cust_id, Customer.cust_name, Orders.order_id</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders</span><br><span class="line"><span class="keyword">ON</span> Customers.cust_id = Orders.cust_id</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> Customers.cust_id, Customer.cust_name, Orders.order_id</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> Orders</span><br><span class="line"><span class="keyword">ON</span> Customers.cust_id = Orders.cust_id;</span><br></pre></td></tr></table></figure>
-<h1 id="十四-事务管理"><a href="#十四-事务管理" class="headerlink" title="十四.事务管理"></a>十四.事务管理</h1><p><strong>事务术语</strong>：</p>
+<h1 id="十四-视图"><a href="#十四-视图" class="headerlink" title="十四.视图"></a>十四.视图</h1><p>视图是虚拟的表，它由一个SQL查询来定义，可以当作表使用。与持久表不同的是，视图中的数据没有实际的物理存储，因此不能对其进行索引操作。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> myview <span class="keyword">AS</span> <span class="keyword">SELECT</span>语句;</span><br></pre></td></tr></table></figure>
+<p>视图的作用：</p>
+<ul>
+<li>可只使用实际表的一部分数据。</li>
+<li>通过只给用户访问视图的权限，保证数据的安全性。</li>
+</ul>
+<h1 id="十五-事务管理"><a href="#十五-事务管理" class="headerlink" title="十五.事务管理"></a>十五.事务管理</h1><p><strong>事务术语</strong>：</p>
 <ul>
 <li><p>事务（transaction）：指一组SQL语句。</p>
 </li>
@@ -531,7 +569,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SAVEPOINT</span> delete1;</span><br><span class="line"><span class="comment">-- Some SQL statements;</span></span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> delete1; <span class="comment">-- 回退到保留点delete1</span></span><br></pre></td></tr></table></figure>
 <p>保留点在事务处理完成后自动释放，也可明确释放保留点：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RELEASE</span> <span class="keyword">SAVEPOINT</span> delete1;</span><br></pre></td></tr></table></figure>
-<h1 id="十五-安全管理"><a href="#十五-安全管理" class="headerlink" title="十五.安全管理"></a>十五.安全管理</h1><p><strong>MySQL 的账户信息保存在 mysql 这个数据库中</strong>。</p>
+<h1 id="十六-安全管理"><a href="#十六-安全管理" class="headerlink" title="十六.安全管理"></a>十六.安全管理</h1><p><strong>MySQL 的账户信息保存在 mysql 这个数据库中</strong>。</p>
 <p><strong>查看用户</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> mysql;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>创建账户</strong></p>
@@ -560,7 +598,6 @@
 <p><strong>更改密码</strong></p>
 <p>必须使用 Password() 函数进行加密。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> PASSWROD <span class="keyword">FOR</span> myuser = <span class="keyword">Password</span>(<span class="string">'new_password'</span>);</span><br><span class="line"><span class="keyword">SET</span> PASSWROD = <span class="keyword">Password</span>(<span class="string">'new_password'</span>); <span class="comment">--不指定用户名则更新当前登录用户的密码</span></span><br></pre></td></tr></table></figure>
-<p>============视图，存储过程，游标，触发器待补充============</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>MySQL 必知必会 / (英) Forta, B 著；刘晓霞，钟铭译. -北京：人民邮电出版社，2009.1</li>
 <li><a href="www.cyc2018.xyz">CS-Notes</a></li>

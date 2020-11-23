@@ -18,15 +18,15 @@
   
   
   <title>线程安全与锁优化 | Blog Of TheMasterplan</title>
-  <meta name="description" content="线程安全Java中的线程安全线程安全不是一个非真即假的命题，可以将共享数据按照安全程度的强弱顺序分成以下五类: 不可变、绝对线程安全、相对线程安全、线程兼容和线程对立。 不可变不可变的对象一定是线程安全的，因此不需要再采取任何的线程安全保障措施。 不可变的类型：  final修饰的基本数据类型 String 枚举类型 java.lang.Number的部分子类，如 Long 和 Double 等数">
+  <meta name="description" content="线程安全  Java中的线程安全  不可变  绝对线程安全*  相对线程安全  线程兼容  线程对立*    线程安全  互斥同步  非阻塞同步  CAS（Compare-And-Swap）  ABA问题    无同步方案  可重入代码  线程本地存储        锁优化  自旋锁与自适应自旋  锁消除  锁粗化  轻量级锁  偏向锁     线程安全Java中的线程安全线程安全不是一个非真即">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线程安全与锁优化">
 <meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E9%94%81%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="线程安全Java中的线程安全线程安全不是一个非真即假的命题，可以将共享数据按照安全程度的强弱顺序分成以下五类: 不可变、绝对线程安全、相对线程安全、线程兼容和线程对立。 不可变不可变的对象一定是线程安全的，因此不需要再采取任何的线程安全保障措施。 不可变的类型：  final修饰的基本数据类型 String 枚举类型 java.lang.Number的部分子类，如 Long 和 Double 等数">
+<meta property="og:description" content="线程安全  Java中的线程安全  不可变  绝对线程安全*  相对线程安全  线程兼容  线程对立*    线程安全  互斥同步  非阻塞同步  CAS（Compare-And-Swap）  ABA问题    无同步方案  可重入代码  线程本地存储        锁优化  自旋锁与自适应自旋  锁消除  锁粗化  轻量级锁  偏向锁     线程安全Java中的线程安全线程安全不是一个非真即">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-12T12:39:28.000Z">
-<meta property="article:modified_time" content="2020-09-21T12:11:40.100Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.133Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E9%94%81%E4%BC%98%E5%8C%96/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.4k(words)</span>
 	
 	
 
@@ -271,7 +271,63 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="Java中的线程安全"><a href="#Java中的线程安全" class="headerlink" title="Java中的线程安全"></a>Java中的线程安全</h3><p>线程安全不是一个非真即假的命题，可以<strong>将共享数据按照安全程度的强弱顺序分成以下五类</strong>: 不可变、绝对线程安全、相对线程安全、线程兼容和线程对立。</p>
+        <ul>
+<li><p><a href="#线程安全">线程安全</a></p>
+<ul>
+<li><p><a href="#Java中的线程安全">Java中的线程安全</a></p>
+<ul>
+<li><p><a href="#不可变">不可变</a></p>
+</li>
+<li><p><a href="#绝对线程安全*">绝对线程安全*</a></p>
+</li>
+<li><p><a href="#相对线程安全">相对线程安全</a></p>
+</li>
+<li><p><a href="#线程兼容">线程兼容</a></p>
+</li>
+<li><p><a href="#线程对立*">线程对立*</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#线程安全">线程安全</a></p>
+<ul>
+<li><p><a href="#互斥同步">互斥同步</a></p>
+</li>
+<li><p><a href="#非阻塞同步">非阻塞同步</a></p>
+<ul>
+<li><p><a href="#CAS（Compare-And-Swap）">CAS（Compare-And-Swap）</a></p>
+</li>
+<li><p><a href="#ABA问题">ABA问题</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#无同步方案">无同步方案</a></p>
+<ul>
+<li><p><a href="#可重入代码">可重入代码</a></p>
+</li>
+<li><p><a href="#线程本地存储">线程本地存储</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#锁优化">锁优化</a></p>
+<ul>
+<li><p><a href="#自旋锁与自适应自旋">自旋锁与自适应自旋</a></p>
+</li>
+<li><p><a href="#锁消除">锁消除</a></p>
+</li>
+<li><p><a href="#锁粗化">锁粗化</a></p>
+</li>
+<li><p><a href="#轻量级锁">轻量级锁</a></p>
+</li>
+<li><p><a href="#偏向锁">偏向锁</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><h3 id="Java中的线程安全"><a href="#Java中的线程安全" class="headerlink" title="Java中的线程安全"></a>Java中的线程安全</h3><p>线程安全不是一个非真即假的命题，可以<strong>将共享数据按照安全程度的强弱顺序分成以下五类</strong>: 不可变、绝对线程安全、相对线程安全、线程兼容和线程对立。</p>
 <h4 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h4><p>不可变的对象一定是线程安全的，因此不需要再采取任何的线程安全保障措施。</p>
 <p>不可变的类型：</p>
 <ul>

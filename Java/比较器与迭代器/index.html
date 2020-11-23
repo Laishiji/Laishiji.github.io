@@ -18,16 +18,16 @@
   
   
   <title>比较器与迭代器 | Blog Of TheMasterplan</title>
-  <meta name="description" content="比较器Comparable java.lang.Comparable源码： 123public interface Comparable&lt;T&gt; &amp;#123;    public int compareTo(T o);&amp;#125;  Comparable的实现类，其实例化对象和同类型对象比较。 其compareTo方法只有一个参数，一个和自己比较的对象，返回值为分为负整数、0、正整数三种">
+  <meta name="description" content="比较器  Comparable  Comparator  二者的选择    迭代器  概述  Iterable  Iterator     比较器Comparable java.lang.Comparable源码： 123public interface Comparable&lt;T&gt; &amp;#123;    public int compareTo(T o);&amp;#125;  Compara">
 <meta property="og:type" content="article">
 <meta property="og:title" content="比较器与迭代器">
 <meta property="og:url" content="http://thmasterplan.cn/Java/%E6%AF%94%E8%BE%83%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="比较器Comparable java.lang.Comparable源码： 123public interface Comparable&lt;T&gt; &amp;#123;    public int compareTo(T o);&amp;#125;  Comparable的实现类，其实例化对象和同类型对象比较。 其compareTo方法只有一个参数，一个和自己比较的对象，返回值为分为负整数、0、正整数三种">
+<meta property="og:description" content="比较器  Comparable  Comparator  二者的选择    迭代器  概述  Iterable  Iterator     比较器Comparable java.lang.Comparable源码： 123public interface Comparable&lt;T&gt; &amp;#123;    public int compareTo(T o);&amp;#125;  Compara">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/Java/%E6%AF%94%E8%BE%83%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/list_iterator_modCount.png">
 <meta property="article:published_time" content="2020-09-07T09:17:29.000Z">
-<meta property="article:modified_time" content="2020-11-15T14:16:23.577Z">
+<meta property="article:modified_time" content="2020-11-23T14:23:21.130Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -273,7 +273,29 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h2><h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h3><ul>
+        <ul>
+<li><p><a href="#比较器">比较器</a></p>
+<ul>
+<li><p><a href="#Comparable">Comparable</a></p>
+</li>
+<li><p><a href="#Comparator">Comparator</a></p>
+</li>
+<li><p><a href="#二者的选择">二者的选择</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#迭代器">迭代器</a></p>
+<ul>
+<li><p><a href="#概述">概述</a></p>
+</li>
+<li><p><a href="#Iterable">Iterable</a></p>
+</li>
+<li><p><a href="#Iterator">Iterator</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h2><h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h3><ul>
 <li><p>java.lang.Comparable源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T o)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
