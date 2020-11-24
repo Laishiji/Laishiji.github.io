@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>MySQL之锁 | Blog Of TheMasterplan</title>
+  <meta name="description" content="锁概述  读写锁  锁粒度  意向锁  悲观锁和乐观锁  悲观锁  乐观锁    查看MySQL中的锁信息   InnoDB存储引擎中的锁  一致性非锁定读  一致性锁定读   加行锁的3种算法  为什么Next-Key Lock解决了幻读问题？  锁问题  丢失修改  脏读  不可重复读  幻读   死锁 参考 锁概述读写锁读锁：读锁是共享锁（S Lock）。多个用户在同一时刻可同时读取同一资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL之锁">
+<meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/index.html">
+<meta property="og:site_name" content="TheMasterplan">
+<meta property="og:description" content="锁概述  读写锁  锁粒度  意向锁  悲观锁和乐观锁  悲观锁  乐观锁    查看MySQL中的锁信息   InnoDB存储引擎中的锁  一致性非锁定读  一致性锁定读   加行锁的3种算法  为什么Next-Key Lock解决了幻读问题？  锁问题  丢失修改  脏读  不可重复读  幻读   死锁 参考 锁概述读写锁读锁：读锁是共享锁（S Lock）。多个用户在同一时刻可同时读取同一资源">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/mvcc.jpg">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/next-key-lock.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/next-key-lock1.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/next-key-lock2.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/next-key-lock3.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/next-key-lock4.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/change-lost.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/dirty-read.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/unrepeatable-read.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/phantom-read.png">
+<meta property="article:published_time" content="2020-11-24T11:05:46.000Z">
+<meta property="article:modified_time" content="2020-11-24T11:13:39.449Z">
+<meta property="article:author" content="LSJ">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/mvcc.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-white" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/Laishiji" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">TheMasterplan</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎访问~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/">项目优化</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS7/" style="font-size: 13.75px;">CentOS7</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/JVM/" style="font-size: 13.38px;">JVM</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 13.63px;">JavaWeb</a> <a href="/tags/Java%E5%B9%B6%E5%8F%91/" style="font-size: 13.88px;">Java并发</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 13.13px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 13.13px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/Spring/" style="font-size: 13.5px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 13px;">SpringBoot</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.75px;">数据结构与算法</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 13.38px;">杂项</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.13px;">软件工程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" style="font-size: 13.25px;">项目优化</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#锁概述"><span class="toc-number">1.</span> <span class="toc-text">锁概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#读写锁"><span class="toc-number">1.1.</span> <span class="toc-text">读写锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁粒度"><span class="toc-number">1.2.</span> <span class="toc-text">锁粒度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#意向锁"><span class="toc-number">1.3.</span> <span class="toc-text">意向锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#悲观锁和乐观锁"><span class="toc-number">1.4.</span> <span class="toc-text">悲观锁和乐观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#悲观锁"><span class="toc-number">1.4.1.</span> <span class="toc-text">悲观锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#乐观锁"><span class="toc-number">1.4.2.</span> <span class="toc-text">乐观锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看MySQL中的锁信息"><span class="toc-number">1.5.</span> <span class="toc-text">查看MySQL中的锁信息</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InnoDB存储引擎中的锁"><span class="toc-number">2.</span> <span class="toc-text">InnoDB存储引擎中的锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一致性非锁定读"><span class="toc-number">2.1.</span> <span class="toc-text">一致性非锁定读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一致性锁定读"><span class="toc-number">2.2.</span> <span class="toc-text">一致性锁定读</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加行锁的3种算法"><span class="toc-number">3.</span> <span class="toc-text">加行锁的3种算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么Next-Key-Lock解决了幻读问题？"><span class="toc-number">3.1.</span> <span class="toc-text">为什么Next-Key Lock解决了幻读问题？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#锁问题"><span class="toc-number">4.</span> <span class="toc-text">锁问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#丢失修改"><span class="toc-number">4.1.</span> <span class="toc-text">丢失修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脏读"><span class="toc-number">4.2.</span> <span class="toc-text">脏读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不可重复读"><span class="toc-number">4.3.</span> <span class="toc-text">不可重复读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#幻读"><span class="toc-number">4.4.</span> <span class="toc-text">幻读</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#死锁"><span class="toc-number">5.</span> <span class="toc-text">死锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-MySQL之锁" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL之锁
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/" class="article-date">
+	  <time datetime="2020-11-24T11:05:46.000Z" itemprop="datePublished">2020-11-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.6k(words)</span>
+	
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><a href="#锁概述">锁概述</a></p>
+<ul>
+<li><p><a href="#读写锁">读写锁</a></p>
+</li>
+<li><p><a href="#锁粒度">锁粒度</a></p>
+</li>
+<li><p><a href="#意向锁">意向锁</a></p>
+</li>
+<li><p><a href="#悲观锁和乐观锁">悲观锁和乐观锁</a></p>
+<ul>
+<li><p><a href="#悲观锁">悲观锁</a></p>
+</li>
+<li><p><a href="#乐观锁">乐观锁</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#查看MySQL中的锁信息">查看MySQL中的锁信息</a></p>
+</li>
+</ul>
+<p><a href="#InnoDB存储引擎中的锁">InnoDB存储引擎中的锁</a></p>
+<ul>
+<li><p><a href="#一致性非锁定读">一致性非锁定读</a></p>
+</li>
+<li><p><a href="#一致性锁定读">一致性锁定读</a></p>
+</li>
+</ul>
+<p><a href="#加行锁的3种算法">加行锁的3种算法</a></p>
+<ul>
+<li><a href="#为什么Next-Key Lock解决了幻读问题？">为什么Next-Key Lock解决了幻读问题？</a></li>
+</ul>
+<p><a href="#锁问题">锁问题</a></p>
+<ul>
+<li><p><a href="#丢失修改">丢失修改</a></p>
+</li>
+<li><p><a href="#脏读">脏读</a></p>
+</li>
+<li><p><a href="#不可重复读">不可重复读</a></p>
+</li>
+<li><p><a href="#幻读">幻读</a></p>
+</li>
+</ul>
+<p><a href="#死锁">死锁</a></p>
+<p><a href="#参考">参考</a></p>
+<h1 id="锁概述"><a href="#锁概述" class="headerlink" title="锁概述"></a>锁概述</h1><h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p><strong>读锁</strong>：读锁是<strong>共享锁（S Lock）</strong>。多个用户在同一时刻可同时读取同一资源，互不干扰。</p>
+<p><strong>写锁</strong>：写锁是<strong>排他锁（X Lock）</strong>。一个写锁会阻塞其他的写请求和读请求。写锁的优先级高于读锁，因此一个写请求可能会被插入到读请求队列的前面，反之则不行。</p>
+<h2 id="锁粒度"><a href="#锁粒度" class="headerlink" title="锁粒度"></a>锁粒度</h2><p>应该尽量只锁定需要修改的那部分数据，而不是所有的资源。锁定的数据量越少，发生锁争用的可能就越小，系统的并发程度就越高。</p>
+<p>但是加锁需要消耗资源，锁的各种操作（包括获取锁、释放锁、以及检查锁状态）都会增加系统开销。因此封锁粒度越小，系统开销就越大。</p>
+<p>在选择封锁粒度时，需要在锁开销和并发程度之间做一个权衡。</p>
+<p><strong>MySQL的Server层中实现了表锁，而存储引擎层则部分支持行锁（如InnoDB和XtraDB，行锁又分为S锁和X锁），部分支持表锁</strong>。</p>
+<h2 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h2><p>InnoDB存储引擎支持多粒度锁定，它允许事务在行级上的锁和在表级上的锁上同时存在，由此引发一个问题：假如现有事务T₁对某表中的一行添加了行级S锁，与此同时事务T₂申请该表的表级X锁，显然T₁持有的S锁与T₂申请的锁冲突，那么T₂如何知道这个冲突呢？如果采用遍历整张表的每一行来查看是否某行有锁存在，显然得不偿失。</p>
+<p>因此，为了支持多粒度加锁操作，InnoDB支持表级别的意向锁（Intention Lock）：</p>
+<ol>
+<li><strong>意向共享锁（IS Lock）</strong>：事务想要获得一张表中某几行的共享锁。</li>
+<li><strong>意向排他锁（IX Lock）</strong>：事务想要获得一张表中某几行的排他锁。</li>
+</ol>
+<p>如果事务需要对行记录X加锁，那么它应先对行所在的表加意向锁IX，如果该表已有锁存在，那么该事务需要等待。</p>
+<p>回到开始的问题，事务T₁对表某行添加了行级S锁，那么必须先添加表级IS锁，事务T₂申请表级X锁，由于不兼容，因此需要等待。</p>
+<p><strong>InnoDB存储引擎中锁的兼容性如下表所示</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">T₁/T₂</th>
+<th style="text-align:center">IS</th>
+<th style="text-align:center">IX</th>
+<th style="text-align:center">S</th>
+<th style="text-align:center">X</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>IS</strong></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>IX</strong></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>S</strong></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>X</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h2><h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>悲观锁对数据被外界修改持悲观态度，因此，在整个数据处理过程中，将数据处于锁定状态。读取数据时需要<strong>一致性锁定读</strong>，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。</p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>相对悲观锁而言，乐观锁机制采取了更加宽松的加锁机制。悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。但随之而来的就是数据库性能的大量开销，特别是对长事务而言，这样的开销往往无法承受。</p>
+<p>而乐观锁机制在一定程度上解决了这个问题，InnoDB中乐观锁通过<strong>一致性非锁定读</strong>实现。</p>
+<h2 id="查看MySQL中的锁信息"><a href="#查看MySQL中的锁信息" class="headerlink" title="查看MySQL中的锁信息"></a>查看MySQL中的锁信息</h2><p>可通过命令<code>SHOW ENGINE INNODB STATUS;</code>以及information_schema架构下的INNODB_TRX、INNODB_LOCKS、INNODB_LOCK_WAITS来观察锁的信息。</p>
+<h1 id="InnoDB存储引擎中的锁"><a href="#InnoDB存储引擎中的锁" class="headerlink" title="InnoDB存储引擎中的锁"></a>InnoDB存储引擎中的锁</h1><h2 id="一致性非锁定读"><a href="#一致性非锁定读" class="headerlink" title="一致性非锁定读"></a>一致性非锁定读</h2><p>一致性非锁定读（consistent nonlocking read）指InndoDB存储引擎通过多版本并发控制（Multi Version Concurrency Control）的方式来读取行数据。</p>
+<p>举例：如果事务T₁正在对某行执行写操作，该行上有X锁，此时事务T₂要读取该行数据，那么T₂并不会等待T₁释放锁，而是读取该行的一个快照数据。如图所示：</p>
+<p><img src="mvcc.jpg" alt=""></p>
+<p>快照数据是指该行之前版本的数据，通过undo段（undo segment，位于共享表空间内）实现。undo段用于在事务中回滚数据，因此快照数据本身没有额外的开销。此外，读取快照数据是不需要上锁的，因为没有事务需要对历史数据进行修改操作。</p>
+<p>InnoDB存储引擎在READ COMMITTED和REPEATABLE READ隔离级别下都是采用一致性非锁定读实现。然而它们读取的快照数据版本是不同的：</p>
+<ul>
+<li>READ COMMITTED：若T₁被锁定行提交，T₂<strong>读取被锁定行的最新一份快照数据。</strong></li>
+<li>EPEATABLE READ：若T₁被锁定行提交，T₂依旧<strong>读取当前事务开始时的行数据版本。解决了不可重复读的问题</strong>。</li>
+</ul>
+<h2 id="一致性锁定读"><a href="#一致性锁定读" class="headerlink" title="一致性锁定读"></a>一致性锁定读</h2><p>在数据逻辑一致性要求较高时，用户需要显式地对数据库读取操作加锁。InnoDB对于SELECT语句支持两种一致性锁定读（locking read）操作：</p>
+<ul>
+<li><code>SELECT...FOR UPDATE;</code>：对读取的行记录加一个X锁。</li>
+<li><code>SELECT...LOCK IN SHARE MODE;</code>：对读取的行记录加一个S锁。</li>
+</ul>
+<p>注意以上两个语句必须要在事务中，因此务必使用<code>BEGIN</code>、<code>START TRANSACTION</code>或<code>SET AUTOCOMMIT=0</code>。</p>
+<h1 id="加行锁的3种算法"><a href="#加行锁的3种算法" class="headerlink" title="加行锁的3种算法"></a>加行锁的3种算法</h1><ol>
+<li>Record Lock：锁定单个行记录，<strong>通过锁定索引（一般为主键）实现</strong>。<strong>在RC隔离级别下，InnoDB采用Record Lock</strong>。</li>
+<li>Gap Lock：间隙锁，锁定一个范围，但不包含记录本身。</li>
+<li>Next-Key Lock：Record Lock+Gap Lock，<strong>锁定一个范围，并且锁定记录本身</strong>。在默认隔离级别RR下，InnoDB通过Next-Key Locking技术解决了幻读问题，但当查询的列是唯一索引时，InnoDB不再采用Next-Key Lock而是Record Lock。</li>
+</ol>
+<p>创建表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> z(a <span class="built_in">INT</span>, b <span class="built_in">INT</span>, PRIMARY <span class="keyword">KEY</span>(a), <span class="keyword">KEY</span>(b)); <span class="comment">-- a是唯一索引，b是非唯一索引</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">1</span>,<span class="number">1</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">3</span>,<span class="number">1</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">5</span>,<span class="number">3</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">7</span>,<span class="number">6</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">10</span>,<span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+<p>在会话A中进行事务T₁：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> z <span class="keyword">WHERE</span> b=<span class="number">3</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>; <span class="comment">-- 对5,3这一行加一个X锁，采用Next-Key Lock算法，锁定a=5,b=[1,6]</span></span><br></pre></td></tr></table></figure>
+<p><img src="next-key-lock.png" alt=""></p>
+<p>在会话B中：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> z <span class="keyword">WHERE</span> a=<span class="number">5</span> <span class="keyword">LOCK</span> <span class="keyword">IN</span> <span class="keyword">SHARE</span> <span class="keyword">MODE</span>; <span class="comment">--对5,3这一行加一个S锁</span></span><br></pre></td></tr></table></figure>
+<p>结果为阻塞：</p>
+<p><img src="next-key-lock1.png" alt=""></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">6</span>,<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>结果为阻塞：</p>
+<p><img src="next-key-lock2.png" alt=""></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">6</span>,<span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<p>结果为阻塞：</p>
+<p><img src="next-key-lock3.png" alt=""></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> z <span class="keyword">SELECT</span> <span class="number">6</span>,<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+<p>可正常插入：</p>
+<p><img src="next-key-lock4.png" alt=""></p>
+<p>由此实验可见，对于唯一索引，Next-Key Locking降级为Record Lock，本例中只锁定a=5；对于非唯一索引，则锁定一个范围，本例中锁定b的闭区间为[1,6]。</p>
+<h2 id="为什么Next-Key-Lock解决了幻读问题？"><a href="#为什么Next-Key-Lock解决了幻读问题？" class="headerlink" title="为什么Next-Key Lock解决了幻读问题？"></a>为什么Next-Key Lock解决了幻读问题？</h2><p>幻读是指在同一事务下，连续两次执行同样的SQL语句获取了不同的结果。对于上述示例而言，在事务T₁中，假如将隔离级别改为RC：<code>SET SESSION tx_isolation=&#39;READ-COMMITTED;&#39;</code>，然后执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> z <span class="keyword">WHERE</span> b&gt;<span class="number">3</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;<span class="comment">-- RC级别采用Record Lock算法，只锁定5,3一行</span></span><br></pre></td></tr></table></figure>
+<p>在另一会话中执行<code>INSERT INTO z SELECT 11,11;</code>，那么显然可以插入成功，此时再次在事务T₁中执行<code>SELECT * FROM z WHERE b&gt;3 FOR UPDATE;</code>，返回的结果比第一次多了一行数据(11,11)，这就是幻读。而若隔离级别为RR，对于b而言锁定的是[3,+∞]，在另一个事务中根本无法插入数据。</p>
+<h1 id="锁问题"><a href="#锁问题" class="headerlink" title="锁问题"></a>锁问题</h1><h2 id="丢失修改"><a href="#丢失修改" class="headerlink" title="丢失修改"></a>丢失修改</h2><p>事务T₁修改数据后还未提交，事务T₂覆盖数据，两个事务依次提交，则T₁的修改丢失了。</p>
+<p><img src="change-lost.png" alt=""></p>
+<h2 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h2><p><strong>脏读是指一个事务读取了另一个事务未提交的数据</strong>。事务T₁修改一个数据但未提交，事务T₂随后读取这个数据。如果T₁撤销了这次修改，那么T₂读取的数据是脏数据。</p>
+<p><img src="dirty-read.png" alt=""></p>
+<h2 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h2><p><strong>不可重复读是指在一个事务内多次读取同一数据集合</strong>。事务T₂读取一个数据，事务T₁对该数据做了修改。如果T₂再次读取这个数据，此时读取的结果和第一次读取的数据不一致。</p>
+<p>InnoDB中通过<strong>一致性非锁定读中的读取事务开始时的行数据版本</strong>解决了不可重复读问题。</p>
+<p><img src="unrepeatable-read.png" alt=""></p>
+<h2 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h2><p>幻读是指<strong>同一事务中连续执行两次相同的SQL语句返回的结果不同</strong>，本质是不可重复读问题。。事务T₁读取某个范围的数据，事务T₂在这个范围内插入新的数据，T1 再次读取这个范围的数据，此时读取的结果和和第一次读取的结果不同。</p>
+<p>InnoDB中通过<strong>加行锁的Next-Key Lock算法</strong>解决了幻读问题。</p>
+<p><img src="phantom-read.png" alt=""></p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>当多个事务在同一资源上相互占用，并请求锁定对方占用的资源时，产生死锁。例如如下两个事务同时处理stock_price表并同时执行完第一条更新语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 事务1</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">45</span> <span class="keyword">WHERE</span> stock_id=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">20</span> <span class="keyword">WHERE</span> stock_id=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 事务2</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">100</span> <span class="keyword">WHERE</span> stock_id=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">10</span> <span class="keyword">WHERE</span> stock_id=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>死锁检测</strong>：超时机制，超时则回滚；等待图（wait-for graph）方式，InnoDB就采用这种方式。等待图是指：数据库保存锁的信息链表和事务等待链表，通过上述链表构造一张图，若存在回路就代表存在死锁。</p>
+<p><strong>死锁解决</strong>：死锁发生以后，只有部分或完全回滚其中一个事务才能打破死锁。InnoDB处理死锁的方法是，将持有最少行级排他锁的事务进行回滚。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://www.cyc2018.xyz/" target="_blank" rel="noopener">http://www.cyc2018.xyz/</a></li>
+<li>MySQL技术内幕:InnoDB存储引擎[M].姜承尧著.北京:机械工业出版社,2013.6</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/" title="MySQL之锁" target="_blank" rel="external">Blog of TheMasterplan</a>
+    </li>
+
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Laishiji" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Laishiji" target="_blank"><span class="text-dark">TheMasterplan</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>練習時長兩年半のCV戰士</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NzU5OS8yNDA5OQ==">
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>    
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%9F%BA%E7%A1%80/" title="MySQL基础"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/Laishiji" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 LSJ
+        
+    </div>
+</footer>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script defer type="text/javascript">
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') { return; }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+</body>
+</html>
