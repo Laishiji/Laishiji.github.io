@@ -18,16 +18,16 @@
   
   
   <title>阿里巴巴 Java 开发手册 v1.2.0 | Blog Of TheMasterplan</title>
-  <meta name="description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约  索引规约  SQL 语句  ORM 映射    工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词   前言《阿里巴巴 Java 开发手">
+  <meta name="description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约     索引规约  SQL 语句  ORM 映射  工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词     前言《阿里巴巴 Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里巴巴 Java 开发手册 v1.2.0">
 <meta property="og:url" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约  索引规约  SQL 语句  ORM 映射    工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词   前言《阿里巴巴 Java 开发手">
+<meta property="og:description" content="前言  编程规范  命名风格  常量定义  代码格式  OOP 规约  集合处理  并发处理  控制语句  注释规约  其他    异常日志  异常处理  日志规约    MYSQL 数据库  建表规约     索引规约  SQL 语句  ORM 映射  工程结构  应用分层  二方库依赖  服务器    安全规约  附 1：版本历史  附 2：本手册专有名词     前言《阿里巴巴 Java">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%9D%82%E9%A1%B9/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C/app_layout.png">
 <meta property="article:published_time" content="2020-10-02T08:42:19.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.144Z">
+<meta property="article:modified_time" content="2020-11-25T04:16:05.563Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary">
@@ -284,7 +284,7 @@
 </li>
 <li><p><a href="#代码格式">代码格式</a></p>
 </li>
-<li><p><a href="#OOP 规约">OOP 规约</a></p>
+<li><p><a href="#OOP-规约">OOP 规约</a></p>
 </li>
 <li><p><a href="#集合处理">集合处理</a></p>
 </li>
@@ -306,18 +306,19 @@
 </li>
 </ul>
 </li>
-<li><p><a href="#MYSQL 数据库">MYSQL 数据库</a></p>
+<li><p><a href="#MYSQL-数据库">MYSQL 数据库</a></p>
 <ul>
-<li><p><a href="#建表规约">建表规约</a></p>
-</li>
-<li><p><a href="#索引规约">索引规约</a></p>
-</li>
-<li><p><a href="#SQL 语句">SQL 语句</a></p>
-</li>
-<li><p><a href="#ORM 映射">ORM 映射</a></p>
-</li>
+<li><a href="#建表规约">建表规约</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li><p><a href="#索引规约">索引规约</a></p>
+</li>
+<li><p><a href="#SQL-语句">SQL 语句</a></p>
+</li>
+<li><p><a href="#ORM-映射">ORM 映射</a></p>
+<ul>
 <li><p><a href="#工程结构">工程结构</a></p>
 <ul>
 <li><p><a href="#应用分层">应用分层</a></p>
@@ -333,6 +334,8 @@
 <li><p><a href="#附 1：版本历史">附 1：版本历史</a></p>
 </li>
 <li><p><a href="#附 2：本手册专有名词">附 2：本手册专有名词</a></p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>《阿里巴巴 Java 开发手册》是阿里巴巴集团技术团队的集体经验总结，经历了多次大规模一线实战的检验及不断的完善，反馈给广大开发者。现代软件行业的高速发展对开发者的综合素质要求越来越高，因为不仅是编程知识点，其它维度的知识点也会影响到软件的最终交付质量。比如：数据库的表结构和索引设计缺陷可能带来软件上的架构缺陷或性能风险；工程结构混乱导致后续维护艰难；没有鉴权的漏洞代码易被黑客攻击等等。所以本手册以 Java 开发者为中心视角，划分为编程规约、异常日志、MySQL 数据库、工程结构、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱及故障敏感性，规约依次分为强制、推荐、参考三大类。对于规约条目的延伸信息中，“说明”对内容做了引申和解释；“正例”提倡什么样的编码和实现方式；“反例”说明需要提防的雷区，以及真实的错误案例。  </p>
@@ -822,10 +825,15 @@ private static final Logger logger = LoggerFactory.getLogger(Abc.class);
 <li><p>【推荐】单表行数超过 500 万行或者单表容量超过 2GB，才推荐进行分库分表。<br><strong>说明：</strong> 如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表。</p>
 </li>
 <li><p>【参考】合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。<br><strong>正例：</strong> 如下表，其中无符号值可以避免误存负数，且扩大了表示范围。</p>
-<p>| 对象     | 年龄区间   | 类型              | 表示范围                       |<br>| :———- | :————- | :———————— | :——————————————- |<br>| 人       | 150 岁之内 | unsigned tinyint  | 无符号值：0 到 255             |<br>| 龟       | 数百岁     | unsigned smallint | 无符号值：0 到 65535           |<br>| 恐龙化石 | 数千万年   | unsigned int      | 无符号值：0 到约 42.9 亿       |<br>| 太阳     | 约 50 亿年 | unsigned bigint   | 无符号值：0 到约 10 的 19 次方 |</p>
 </li>
 </ol>
-<h4 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h4><ol>
+<pre><code>| 对象     | 年龄区间   | 类型              | 表示范围                       |
+| :------- | :--------- | :---------------- | :----------------------------- |
+| 人       | 150 岁之内 | unsigned tinyint  | 无符号值：0 到 255             |
+| 龟       | 数百岁     | unsigned smallint | 无符号值：0 到 65535           |
+| 恐龙化石 | 数千万年   | unsigned int      | 无符号值：0 到约 42.9 亿       |
+| 太阳     | 约 50 亿年 | unsigned bigint   | 无符号值：0 到约 10 的 19 次方 |
+</code></pre><h4 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h4><ol>
 <li><p>【强制】业务上具有唯一特性的字段，即使是多个字段的组合，也必须建成唯一索引。<br>说明：不要以为唯一索引影响了 insert 速度，这个速度损耗可以忽略，但提高查找速度是明显的；另外，即使在应用层做了非常完善的校验控制，只要没有唯一索引，根据墨菲定律，必然有脏数据产生。</p>
 </li>
 <li><p>【强制】 超过三个表禁止 join。需要 join 的字段，数据类型必须绝对一致；多表关联查询时，保证被关联的字段需要有索引。<br><strong>说明：</strong> 即使双表 join 也要注意表索引、SQL 性能。</p>
