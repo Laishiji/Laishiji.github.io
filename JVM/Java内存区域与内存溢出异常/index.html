@@ -18,19 +18,19 @@
   
   
   <title>Java内存区域与内存溢出异常 | Blog Of TheMasterplan</title>
-  <meta name="description" content="运行时数据区域 直接内存 常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。">
+  <meta name="description" content="运行时数据区域 直接内存 HotSpot对象  对象创建流程  对象的内存布局   常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存区域与内存溢出异常">
 <meta property="og:url" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="运行时数据区域 直接内存 常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的区域。 Java虚拟机栈：描述Java方法执行的内存模型。">
+<meta property="og:description" content="运行时数据区域 直接内存 HotSpot对象  对象创建流程  对象的内存布局   常见的VM堆栈参数 常见的OOM原因  堆  方法区   运行时数据区域​              线程私有：与线程生命周期相同  程序计数器（Program Counter Register）：记住下一条JVM字节码指令的地址。每条线程都有一个独立的PCR。此内存区域是唯一一个在JVM规范中没有任何OOM情况的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JVM_Runtime_DataArea.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/JIT_flow.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/Constant_pool.png">
 <meta property="og:image" content="http://thmasterplan.cn/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/OOM.jpg">
 <meta property="article:published_time" content="2020-08-23T03:24:45.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.011Z">
+<meta property="article:modified_time" content="2021-01-06T10:22:31.384Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">3.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的OOM原因"><span class="toc-number">4.</span> <span class="toc-text">常见的OOM原因</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-number">4.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-number">4.2.</span> <span class="toc-text">方法区</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时数据区域"><span class="toc-number">1.</span> <span class="toc-text">运行时数据区域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接内存"><span class="toc-number">2.</span> <span class="toc-text">直接内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HotSpot对象"><span class="toc-number">3.</span> <span class="toc-text">HotSpot对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象创建流程"><span class="toc-number">3.1.</span> <span class="toc-text">对象创建流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的内存布局"><span class="toc-number">3.2.</span> <span class="toc-text">对象的内存布局</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的VM堆栈参数"><span class="toc-number">4.</span> <span class="toc-text">常见的VM堆栈参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的OOM原因"><span class="toc-number">5.</span> <span class="toc-text">常见的OOM原因</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#堆"><span class="toc-number">5.1.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-number">5.2.</span> <span class="toc-text">方法区</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -268,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JVM/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.5k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
 	
 	
 
@@ -278,6 +278,13 @@
       
         <p><a href="#运行时数据区域">运行时数据区域</a></p>
 <p><a href="#直接内存">直接内存</a></p>
+<p><a href="#HotSpot对象">HotSpot对象</a></p>
+<ul>
+<li><p><a href="#对象创建流程">对象创建流程</a></p>
+</li>
+<li><p><a href="#对象的内存布局">对象的内存布局</a></p>
+</li>
+</ul>
 <p><a href="#常见的VM堆栈参数">常见的VM堆栈参数</a></p>
 <p><a href="#常见的OOM原因">常见的OOM原因</a></p>
 <ul>
@@ -344,6 +351,18 @@
 <h1 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h1><ul>
 <li>直接内存并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但这部分内存也会频繁使用，可能导致OOM异常。</li>
 <li>JDK1.4中加入了NIO类（New Input/Output），引入了一种基于Channel与Buffer的I/O方式，<strong>它可以使用本地函数库直接分配堆外内存</strong>，然后通过一个存储在Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。</li>
+</ul>
+<h1 id="HotSpot对象"><a href="#HotSpot对象" class="headerlink" title="HotSpot对象"></a>HotSpot对象</h1><h2 id="对象创建流程"><a href="#对象创建流程" class="headerlink" title="对象创建流程"></a>对象创建流程</h2><ol>
+<li><strong>类加载检查</strong>：虚拟机遇到一条 new 指令时，首先将去检查这个指令的参数是否能在常量池中定位到这个类的符号引用，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</li>
+<li><strong>分配内存</strong>：分配方式有 “指针碰撞” 和 “空闲列表” 两种，选择那种分配方式由 Java 堆是否规整决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。采用指针碰撞时的GC有Serial、ParNew等，采用空闲列表时的GC有CMS。</li>
+<li><strong>初始化零值</strong>：内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值（不包括对象头），这一步操作保证了对象的实例字段在 Java 代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。</li>
+<li><strong>设置对象头信息</strong>：初始化零值完成之后，<strong>虚拟机要对对象进行必要的设置</strong>，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的 GC 分代年龄等信息。 <strong>这些信息存放在对象头中。</strong> 另外，根据虚拟机当前运行状态的不同，如是否启用偏向锁等，对象头会有不同的设置方式。</li>
+<li><strong>执行init方法</strong>：在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从 Java 程序的视角来看，对象创建才刚开始，<strong>方法还没有执行，所有的字段都还为零。所以一般来说，执行 new 指令之后会接着执行</strong>方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</li>
+</ol>
+<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><ul>
+<li><strong>对象头</strong>：<strong>Hotspot 虚拟机的对象头包括两部分信息</strong>，<strong>第一部分用于存储对象自身的自身运行时数据</strong>（哈希码、GC 分代年龄、锁状态标志等等），<strong>另一部分是类型指针</strong>，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是那个类的实例。</li>
+<li><strong>实例数据</strong>：<strong>实例数据部分是对象真正存储的有效信息</strong>，也是在程序中所定义的各种类型的字段内容。</li>
+<li><strong>对齐填充</strong>：<strong>对齐填充部分不是必然存在的，也没有什么特别的含义，仅仅起占位作用。</strong> 因为 Hotspot 虚拟机的自动内存管理系统要求对象起始地址必须是 8 字节的整数倍，换句话说就是对象的大小必须是 8 字节的整数倍。而对象头部分正好是 8 字节的倍数（1 倍或 2 倍），因此，当对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</li>
 </ul>
 <h1 id="常见的VM堆栈参数"><a href="#常见的VM堆栈参数" class="headerlink" title="常见的VM堆栈参数"></a>常见的VM堆栈参数</h1><ul>
 <li>-Xms: 设置堆的最小值，如<code>-Xms20m</code></li>
@@ -482,7 +501,7 @@
 
     <div class="copyright">
     	
-        &copy; 2020 LSJ
+        &copy; 2021 LSJ
         
     </div>
 </footer>
