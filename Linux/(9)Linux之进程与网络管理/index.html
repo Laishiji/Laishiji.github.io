@@ -26,7 +26,7 @@
 <meta property="og:description" content="进程管理  ps  pgrep  kill  top    服务管理  内存  free  vmstat    系统监控工具  任务调度  网络配置  防火墙配置  firewall-cmd  开启一个端口  对某IP开放多个端口       进程管理 lscpu：显示cpu信息 pstree -p：打印进程树。需要安装yum intsall psmisc。 pstree -p PID：查看某进">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-12-09T05:54:57.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:20.959Z">
+<meta property="article:modified_time" content="2021-01-14T10:14:09.438Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程管理"><span class="toc-number">1.</span> <span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">1.1.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pgrep"><span class="toc-number">1.2.</span> <span class="toc-text">pgrep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kill"><span class="toc-number">1.3.</span> <span class="toc-text">kill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">1.4.</span> <span class="toc-text">top</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务管理"><span class="toc-number">2.</span> <span class="toc-text">服务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存"><span class="toc-number">3.</span> <span class="toc-text">内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-number">3.1.</span> <span class="toc-text">free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vmstat"><span class="toc-number">3.2.</span> <span class="toc-text">vmstat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统监控工具"><span class="toc-number">4.</span> <span class="toc-text">系统监控工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务调度"><span class="toc-number">5.</span> <span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络配置"><span class="toc-number">6.</span> <span class="toc-text">网络配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙配置"><span class="toc-number">6.1.</span> <span class="toc-text">防火墙配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#firewall-cmd"><span class="toc-number">6.1.1.</span> <span class="toc-text">firewall-cmd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启一个端口"><span class="toc-number">6.1.2.</span> <span class="toc-text">开启一个端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对某IP开放多个端口"><span class="toc-number">6.1.3.</span> <span class="toc-text">对某IP开放多个端口</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程管理"><span class="toc-number">1.</span> <span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ps"><span class="toc-number">1.1.</span> <span class="toc-text">ps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pgrep"><span class="toc-number">1.2.</span> <span class="toc-text">pgrep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kill"><span class="toc-number">1.3.</span> <span class="toc-text">kill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top"><span class="toc-number">1.4.</span> <span class="toc-text">top</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务管理"><span class="toc-number">2.</span> <span class="toc-text">服务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存"><span class="toc-number">3.</span> <span class="toc-text">内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-number">3.1.</span> <span class="toc-text">free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vmstat"><span class="toc-number">3.2.</span> <span class="toc-text">vmstat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统监控工具"><span class="toc-number">4.</span> <span class="toc-text">系统监控工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务调度"><span class="toc-number">5.</span> <span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络配置"><span class="toc-number">6.</span> <span class="toc-text">网络配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙配置"><span class="toc-number">6.1.</span> <span class="toc-text">防火墙配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#firewall-cmd"><span class="toc-number">6.1.1.</span> <span class="toc-text">firewall-cmd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启一个端口"><span class="toc-number">6.1.2.</span> <span class="toc-text">开启一个端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对某IP开放多个端口"><span class="toc-number">6.1.3.</span> <span class="toc-text">对某IP开放多个端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态IP配置"><span class="toc-number">6.2.</span> <span class="toc-text">静态IP配置</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Linux/(9)Linux%E4%B9%8B%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.4k(words)</span>
 	
 	
 
@@ -438,6 +438,15 @@
 <h4 id="对某IP开放多个端口"><a href="#对某IP开放多个端口" class="headerlink" title="对某IP开放多个端口"></a>对某IP开放多个端口</h4><ol>
 <li><code>firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;10.159.60.29&quot; port protocol=&quot;tcp&quot; port=&quot;1:65535&quot; accept&quot;</code></li>
 <li><code>firewall-cmd --reload</code></li>
+</ol>
+<h3 id="静态IP配置"><a href="#静态IP配置" class="headerlink" title="静态IP配置"></a>静态IP配置</h3><ol>
+<li><p>切入etc/sysconfig/network-scripts/目录，修改ifcfg-enp0s3或ifcfg-ens33文件。</p>
+</li>
+<li><p>插入如下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOTPROTO&#x3D;&quot;static&quot; &#x2F;&#x2F;启动协议：系统初始默认为dhcp协议，修改为静态</span><br><span class="line">IPADDR&#x3D;&quot;192.168.1.5&quot;&#x2F;&#x2F;打算指定的静态IP地址</span><br><span class="line">NETMASK&#x3D;&quot;255.255.255.0&quot;&#x2F;&#x2F;子网掩码</span><br><span class="line">GATEWAY&#x3D;&quot;192.168.1.1&quot;&#x2F;&#x2F;本地网关地址</span><br><span class="line">DNS1&#x3D;&quot;114.114.114.114&quot;&#x2F;&#x2F;DNS服务器</span><br><span class="line">....</span><br><span class="line">ONBOOT&#x3D;&quot;yes&quot;&#x2F;&#x2F;设置自启动</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启网络服务。</p>
+</li>
 </ol>
 <p>待补充。</p>
 

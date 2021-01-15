@@ -26,7 +26,7 @@
 <meta property="og:description" content="Spring概述 耦合度  概念  从高到低耦合可分为  需要低耦合的原因  降低耦合度的方法   工厂模式解耦例子  持久层  业务层  表现层  bean.properties配置文件  BeanFactory   控制反转Inversion of Control(IOC))  概念与作用  基于XML的IoC配置  基于注解的IoC配置  IoC案例  SpringIoC Doc   Spr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-14T13:36:18.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.091Z">
+<meta property="article:modified_time" content="2021-01-09T12:55:54.162Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -456,6 +456,7 @@
 <li><p>改变作用范围的注解：作用与bean标签的scope属性实现的功能一样。</p>
 <ul>
 <li><code>@Scope</code>，value属性常用取值为singleton，prototype</li>
+<li><code>@Lazy</code>：@Scope默认取值为Singleton，而该注解使得单例时并不在容器创建时立即创建bean对象，而是在第一次getBean时创建。</li>
 </ul>
 </li>
 <li><p>与生命周期相关的注解：作用与bean标签中的init-method属性、destroy-method属性实现的功能一样。</p>
