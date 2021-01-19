@@ -26,7 +26,7 @@
 <meta property="og:description" content="Spring概述 耦合度  概念  从高到低耦合可分为  需要低耦合的原因  降低耦合度的方法   工厂模式解耦例子  持久层  业务层  表现层  bean.properties配置文件  BeanFactory   控制反转Inversion of Control(IOC))  概念与作用  基于XML的IoC配置  基于注解的IoC配置  IoC案例  SpringIoC Doc   Spr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-14T13:36:18.000Z">
-<meta property="article:modified_time" content="2021-01-09T12:55:54.162Z">
+<meta property="article:modified_time" content="2021-01-19T09:16:06.329Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring概述"><span class="toc-number">1.</span> <span class="toc-text">Spring概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#耦合度"><span class="toc-number">2.</span> <span class="toc-text">耦合度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从高到低耦合可分为"><span class="toc-number">2.2.</span> <span class="toc-text">从高到低耦合可分为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需要低耦合的原因"><span class="toc-number">2.3.</span> <span class="toc-text">需要低耦合的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#降低耦合度的方法"><span class="toc-number">2.4.</span> <span class="toc-text">降低耦合度的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂模式解耦例子"><span class="toc-number">3.</span> <span class="toc-text">工厂模式解耦例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#持久层"><span class="toc-number">3.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#业务层"><span class="toc-number">3.2.</span> <span class="toc-text">业务层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表现层"><span class="toc-number">3.3.</span> <span class="toc-text">表现层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bean-properties配置文件"><span class="toc-number">3.4.</span> <span class="toc-text">bean.properties配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory"><span class="toc-number">3.5.</span> <span class="toc-text">BeanFactory</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制反转Inversion-of-Control-IOC"><span class="toc-number">4.</span> <span class="toc-text">控制反转Inversion of Control(IOC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念与作用"><span class="toc-number">4.1.</span> <span class="toc-text">概念与作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于XML的IoC配置"><span class="toc-number">4.2.</span> <span class="toc-text">基于XML的IoC配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于注解的IoC配置"><span class="toc-number">4.3.</span> <span class="toc-text">基于注解的IoC配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IoC案例"><span class="toc-number">4.4.</span> <span class="toc-text">IoC案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringIoC-Doc"><span class="toc-number">4.5.</span> <span class="toc-text">SpringIoC Doc</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring概述"><span class="toc-number">1.</span> <span class="toc-text">Spring概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#耦合度"><span class="toc-number">2.</span> <span class="toc-text">耦合度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">2.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从高到低耦合可分为"><span class="toc-number">2.2.</span> <span class="toc-text">从高到低耦合可分为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需要低耦合的原因"><span class="toc-number">2.3.</span> <span class="toc-text">需要低耦合的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#降低耦合度的方法"><span class="toc-number">2.4.</span> <span class="toc-text">降低耦合度的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂模式解耦例子"><span class="toc-number">3.</span> <span class="toc-text">工厂模式解耦例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#持久层"><span class="toc-number">3.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#业务层"><span class="toc-number">3.2.</span> <span class="toc-text">业务层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表现层"><span class="toc-number">3.3.</span> <span class="toc-text">表现层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bean-properties配置文件"><span class="toc-number">3.4.</span> <span class="toc-text">bean.properties配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory"><span class="toc-number">3.5.</span> <span class="toc-text">BeanFactory</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制反转Inversion-of-Control-IOC"><span class="toc-number">4.</span> <span class="toc-text">控制反转Inversion of Control(IOC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念与作用"><span class="toc-number">4.1.</span> <span class="toc-text">概念与作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于XML的IoC配置"><span class="toc-number">4.2.</span> <span class="toc-text">基于XML的IoC配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于注解的IoC配置"><span class="toc-number">4.3.</span> <span class="toc-text">基于注解的IoC配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#给容器中注册bean的方法"><span class="toc-number">4.4.</span> <span class="toc-text">给容器中注册bean的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IoC的案例"><span class="toc-number">4.5.</span> <span class="toc-text">IoC的案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringIoC-Doc"><span class="toc-number">4.6.</span> <span class="toc-text">SpringIoC Doc</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/SpringIOC/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.6k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.9k(words)</span>
 	
 	
 
@@ -387,8 +387,24 @@
 </li>
 <li><p><strong>bean对象的生命周期</strong></p>
 <ul>
-<li>单例对象：单例对象的生命周期与容器相同，容器创建则对象创建，容器销毁时对象销毁，可在bean标签中指定init-method与destroy-method属性来执行bean对象中的init方法和destroy方法。</li>
-<li>多例对象：使用对象时才创建对象，spring不能销毁，只能通过GC回收，因此无论如何都不会执行bean对象中的destroy方法。</li>
+<li><p>生命周期：bean创建 - 初始化 - 销毁的过程。</p>
+<p><strong>对象创建</strong></p>
+<p>单例：容器启动时创建bean对象。</p>
+<p>多例：每次调用getBean时创建bean对象。</p>
+<p><strong>初始化</strong></p>
+<p>对象创建完成，并赋值完毕，调用初始化方法。</p>
+<p><strong>销毁</strong></p>
+<p>单例：容器销毁时销毁对象，并执行销毁方法。</p>
+<p>多例：容器不会管理bean对象，对象只能通过GC回收，因此容器不会调用销毁方法。</p>
+</li>
+<li><p>指定初始化和销毁方法</p>
+<ol>
+<li>XML配置，bean标签中init-method和destroy-method属性指定。</li>
+<li>@Bean的initMethod和destroyMethod属性指定。</li>
+<li>Bean类实现InitialzingBean接口（定义初始化逻辑）和DisposableBean接口（定义销毁逻辑）。</li>
+<li>@PostConstruct注解与@PreDestroy注解，分别标记与init和destroy方法上。</li>
+</ol>
+</li>
 </ul>
 </li>
 </ul>
@@ -470,14 +486,31 @@
 <ul>
 <li><code>@Configuration</code>：创建一个代替bean.xml的配置类<code>SpringConfig.java</code>后，使用该注解标记该类为配置类。</li>
 <li><code>@Import</code>：标记<strong>主配置类</strong>，用于导入其他的从配置类。属性：<code>Class&lt;?&gt;[] value;</code>。使用该注解后可不再使用<code>@Configuration</code>注解。</li>
-<li><code>@ComponentScan</code>：指定spring在创建容器时需要扫描的包。</li>
+<li><code>@ComponentScan</code>：指定spring在创建容器时需要扫描的包。其includeFilters和excludeFilters属性可指定扫描规则。</li>
 <li><code>@Bean</code>：标记一个方法，将该方法的返回值作为bean对象存入IoC容器。其属性name用于指定bean对象的id，默认值为方法名，作为IOC容器的key。</li>
 <li><code>@PropertySource</code>：value属性指定properties配置文件的位置，关键字classpath表示类路径下。用于配置数据库等字符串信息。</li>
 <li>使用注解创建IOC容器时，使用<code>new AnnotationConfigApplicationContext(SpringConfig.class);</code>获取容器。</li>
 </ul>
 </li>
 </ul>
-<h2 id="IoC案例"><a href="#IoC案例" class="headerlink" title="IoC案例"></a>IoC案例</h2><ul>
+<h2 id="给容器中注册bean的方法"><a href="#给容器中注册bean的方法" class="headerlink" title="给容器中注册bean的方法"></a>给容器中注册bean的方法</h2><ol>
+<li><p>包扫描默认注册@Service/@Controller/@Repository/@Component注解的类，用于用户自定义类。</p>
+</li>
+<li><p>@Bean，常用于注册第三方组件。</p>
+</li>
+<li><p>@Import，给容器中快速注册大量组件。id默认为全类名。</p>
+<ol>
+<li>直接写类名，@Import(类名.class)。</li>
+<li>ImportSelector，该接口的方法selectImports返回需要导入的组件的全类名数组。@Import(ImportSelector.class)。</li>
+<li>ImportBeanDefinitionRegistrar：使用registerBeanDefinition方法手动注册bean到容器中。@Import(ImportBeanDefinitionRegistrar.class)。</li>
+</ol>
+</li>
+<li><p>使用FactoryBean结合@Bean。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ColorFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">Color</span>&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//返回一个Color对象，该对象会注册到容器中</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Color <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Color();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType()&#123;</span><br><span class="line">        <span class="keyword">return</span> Color<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ColorFactoryBean <span class="title">colorFactoryBean</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ColorFactoryBean();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//注意：如果调用getBean("colorFactoryBean")，获取到的是调用getObject返回的Color对象。</span></span><br><span class="line"><span class="comment">//要想获取ColorFactoryBean对象本身，则调用getBean("&amp;colorFactoryBean")。</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="IoC的案例"><a href="#IoC的案例" class="headerlink" title="IoC的案例"></a>IoC的案例</h2><ul>
 <li><p>使用xml配置，<strong>注解结合xml配置</strong>（推荐），纯注解配置三种方式</p>
 <ul>
 <li>Use “Sourcegraph” to view the code：<a href="https://github.com/Laishiji/SpringLearningDemo" target="_blank" rel="noopener">https://github.com/Laishiji/SpringLearningDemo</a></li>

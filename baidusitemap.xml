@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/JavaWeb/SpringIOC/</loc>
+    <lastmod>2021-01-19</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-01-15</lastmod>
+    <lastmod>2021-01-19</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/(9)Linux%E4%B9%8B%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2021-01-14</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Maven%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2021-01-14</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JavaWeb/SpringIOC/</loc>
-    <lastmod>2021-01-09</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/ThreadLocal%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/</loc>
     <lastmod>2021-01-09</lastmod>
