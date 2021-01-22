@@ -2,16 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://thmasterplan.cn/JavaWeb/Spring%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2021-01-21</lastmod>
+    <lastmod>2021-01-22</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/JavaWeb/SpringIOC/</loc>
+    <lastmod>2021-01-22</lastmod>
+  </url>  <url>
+    <loc>http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2021-01-22</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/SpringBoot/</loc>
     <lastmod>2021-01-21</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-01-21</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/JavaWeb/SpringIOC/</loc>
-    <lastmod>2021-01-19</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Linux/(9)Linux%E4%B9%8B%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2021-01-14</lastmod>
@@ -182,9 +185,6 @@
     <lastmod>2020-11-23</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2020-11-23</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-11-23</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
