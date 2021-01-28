@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/row_overflow.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/index_page.png">
 <meta property="article:published_time" content="2021-01-28T14:31:36.000Z">
-<meta property="article:modified_time" content="2021-01-28T14:33:01.662Z">
+<meta property="article:modified_time" content="2021-01-28T14:40:22.188Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -294,13 +294,97 @@
 <li><p><strong>NULL值列表</strong>：使用一个二进制位逆序存储当前记录中某列的NULL值，为NULL则置1，否则为0。</p>
 </li>
 <li><p><strong>记录头信息</strong>：由5个固定Byte组成，这40个bit的详细信息如下表：</p>
-<p>| 名称             | 大小（单位：bit） | 描述                                                         |<br>| ———————— | ————————- | —————————————————————————————— |<br>| 预留位1          | <code>1</code>               | 没有使用                                                     |<br>| 预留位2          | <code>1</code>               | 没有使用                                                     |<br>| <strong>delete_mask</strong>  | <code>1</code>               | 标记该记录是否被删除。1表示记录被删除，实际上记录依旧存储在磁盘上，之所以不立即删除该记录是因为删除后需要把其他记录在磁盘上重新排列，可能会涉及B+树的自平衡操作，需要性能消耗。被1标记的记录会组成一个<strong>垃圾链表</strong>，这些空间属于<strong>可重用空间</strong>，之后若插入新记录，可直接原地覆盖，若重新插入相同记录，则只需要把该标记位置0即可。 |<br>| <strong>min_rec_mask</strong> | <code>1</code>               | B+树的每层非叶子节点中的最小记录都会添加该标记。             |<br>| <strong>n_owned</strong>      | <code>4</code>               | 表示当前记录拥有的记录数。                                   |<br>| <strong>heap_no</strong>      | <code>13</code>              | 。表示当前记录在记录堆的位置信息。                           |<br>| <strong>record_type</strong>  | <code>3</code>               | 表示当前记录的类型，<code>0</code>表示叶子节点记录（数据页），<code>1</code>表示B+树非叶子节点记录，<code>2</code>表示最小记录，<code>3</code>表示最大记录。 |<br>| <strong>next_record</strong>  | <code>16</code>              | 表示下一条记录的相对位置。注意，<strong>下一条记录</strong>指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录。而且规定 <strong><em>Infimum记录（也就是最小记录）</em></strong> 的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是 <strong><em>Supremum记录（也就是最大记录）</em></strong>。因此一页中的记录是一个按主键值升序的单链表，where子句使用主键匹配时可使用二分查找定位记录。 |</p>
-</li>
-<li><p><strong>记录的真实数据</strong>：除了用户在表中显式定义的列，InnoDB还会添加如下三个隐藏列：</p>
-<p>| 列名        | 是否必须 | 占用空间 | 描述                   |<br>| —————- | ———— | ———— | ——————————— |<br>| DB_ROW_ID   | 否       | <code>6</code>Byte  | 行ID，唯一标识一条记录 |<br>| DB_TRX_ID   | 是       | <code>6</code>Byte  | 事务ID                 |<br>| DB_ROLL_PTR | 是       | <code>7</code>Byte  | 回滚指针               |</p>
-<p>InnoDB的表都是根据主键顺序组织存放的，而聚簇索引就是按照主键构造一棵B+树。如果用户创建表时没有指定主键，InnoDB会选择表中的<strong>第一个Not NULL Unique Index（非空唯一索引）</strong>作为主键，若这也没有，那么就会添加隐藏列DB_ROW_ID作为主键，这是一个隐式的自增ID。</p>
 </li>
 </ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>大小（单位：bit）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预留位1</td>
+<td>1</td>
+<td>没有使用</td>
+</tr>
+<tr>
+<td>预留位2</td>
+<td>1</td>
+<td>没有使用</td>
+</tr>
+<tr>
+<td><strong>delete_mask</strong></td>
+<td>1</td>
+<td>标记该记录是否被删除。1表示记录被删除，实际上记录依旧存储在磁盘上，之所以不立即删除该记录是因为删除后需要把其他记录在磁盘上重新排列，可能会涉及B+树的自平衡操作，需要性能消耗。被1标记的记录会组成一个<code>垃圾链表</code>，这些空间属于<code>可重用空间</code>，之后若插入新记录，可直接原地覆盖，若重新插入相同记录，则只需要把该标记位置0即可。</td>
+</tr>
+<tr>
+<td><strong>min_rec_mask</strong></td>
+<td>1</td>
+<td>B+树的每层非叶子节点中的最小记录都会添加该标记。</td>
+</tr>
+<tr>
+<td><strong>n_owned</strong></td>
+<td>4</td>
+<td>表示当前记录拥有的记录数。</td>
+</tr>
+<tr>
+<td><strong>heap_no</strong></td>
+<td>13</td>
+<td>。表示当前记录在记录堆的位置信息。</td>
+</tr>
+<tr>
+<td><strong>record_type</strong></td>
+<td>3</td>
+<td>表示当前记录的类型，<code>0</code>表示叶子节点记录（数据页），<code>1</code>表示B+树非叶子节点记录，<code>2</code>表示最小记录，<code>3</code>表示最大记录。</td>
+</tr>
+<tr>
+<td><strong>next_record</strong></td>
+<td>16</td>
+<td>表示下一条记录的相对位置。注意，下一条记录指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录。而且规定 Infimum记录（也就是最小记录） 的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是Supremum记录（也就是最大记录）。因此一页中的记录是一个按主键值升序的单链表，where子句使用主键匹配时可使用二分查找定位记录。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>记录的真实数据</strong>：除了用户在表中显式定义的列，InnoDB还会添加如下三个隐藏列：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>是否必须</th>
+<th>占用空间</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DB_ROW_ID</td>
+<td>否</td>
+<td>6Byte</td>
+<td>行ID，唯一标识一条记录</td>
+</tr>
+<tr>
+<td>DB_TRX_ID</td>
+<td>是</td>
+<td>6Byte</td>
+<td>事务ID</td>
+</tr>
+<tr>
+<td>DB_ROLL_PTR</td>
+<td>是</td>
+<td>7Byte</td>
+<td>回滚指针</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>  InnoDB的表都是根据主键顺序组织存放的，而聚簇索引就是按照主键构造一棵B+树。如果用户创建表时没有指定主键，InnoDB会选择表中的<strong>第一个Not NULL Unique Index（非空唯一索引）</strong>作为主键，若这也没有，那么就会添加隐藏列DB_ROW_ID作为主键，这是一个隐式的自增ID。</p>
 <h3 id="行溢出数据"><a href="#行溢出数据" class="headerlink" title="行溢出数据"></a>行溢出数据</h3><p>一行记录<strong>除去隐藏列和记录头信息</strong>，最多占用的Byte长度加起来不能超过65525。但是一个数据页只有16KB，因此对于占用存储空间非常大的列（VARCHAR/TEXT/BLOB等类型），在<strong>记录的真实数据</strong>处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中，然后<strong>记录的真实数据</strong>处用20个Byte存储指向这些页的地址，如图所示：</p>
 <p><img src="row_overflow.png" alt=""></p>
 <h3 id="其余行格式"><a href="#其余行格式" class="headerlink" title="其余行格式"></a>其余行格式</h3><p>Redundant行格式是MySQL5.0之前使用的一种行格式，而<strong>MySQL8.0默认使用的行格式为Dynamic</strong>。Dynamic和Compressed行格式与Compact行格式相似，但是在行溢出数据处理时不同，它们不会在记录的真实数据处存储字段真实数据的前<code>768</code>个Byte，而是把所有的数据都存储到其他页面中。而Compressed和Dynamic不同的一点是，Compressed行格式会采用压缩算法对页面进行压缩，以节省空间。</p>
