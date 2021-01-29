@@ -28,8 +28,9 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/compact.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/row_overflow.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/index_page.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/innodb_logic_storage_structure.png">
 <meta property="article:published_time" content="2021-01-28T14:31:36.000Z">
-<meta property="article:modified_time" content="2021-01-28T14:40:22.188Z">
+<meta property="article:modified_time" content="2021-01-29T10:46:41.973Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -267,7 +268,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.8k(words)</span>
 	
 	
 
@@ -404,10 +405,28 @@
 <li><strong>File Header</strong>：不同类型的页都会以<strong>File Header</strong>作为第一个组成部分，它描述了一些针对各种页都通用的一些信息，如校验和、上一页的页号和下一页的页号（由此可知，B+树每一层的所有节点连接成一个双向链表）、页面类型、当前页页号、LSN值(Log Sequence Number)等。</li>
 <li><strong>File Trailer</strong>：为了避免数据页同步过程中断电导致页没有同步完毕的情况，使用该部分进行校验页是否完整。前4个Byte代表页的校验和，后4个Byte代表页面最后修改时对应的日志序列位置（LSN）。若不匹配File Header中的校验和和LSN值说明数据页同步出错。</li>
 </ul>
-<h2 id="表空间"><a href="#表空间" class="headerlink" title="表空间"></a>表空间</h2><h1 id="MySQL存储目录"><a href="#MySQL存储目录" class="headerlink" title="MySQL存储目录"></a>MySQL存储目录</h1><p>使用<code>SHOW VARIABLES LIKE &#39;datadir&#39;;</code>查看数据库、表文件、视图、触发器等的存储目录。下面依次介绍它们在文件系统中的表示：</p>
+<h2 id="表空间"><a href="#表空间" class="headerlink" title="表空间"></a>表空间</h2><p>InnoDB的表空间由段（segment）、区（extent）、页（page）组成，其逻辑存储结构如下图所示：</p>
+<p><img src="innodb_logic_storage_structure.png" alt=""></p>
+<p>表空间可以看作InnoDB存储引擎结构的最高层，即存储引擎基于表。默认情况下InnoDB存储引擎有一个<strong>共享表空间ibdata1</strong>，这张表中存放了回滚（undo）信息、插入缓冲索引页、系统事务信息和二次写缓冲信息等系统信息，再MySQL8.0之后，用户创建表后则会创建一个<strong>独立表空间</strong>，存放数据、索引和插入缓冲Bitmap页。</p>
+<ul>
+<li><strong>段</strong>：由上图可知，常见的段有数据段（B+树叶子节点段）、索引段（B+树非叶子节点段）和回滚段等。对段的管理是由引擎自身完成的，DBA不能对其控制。</li>
+<li><strong>区</strong>：任何情况下一个区都占用<strong>1MB</strong>，默认一个区由64个连续的页组成，一页占16KB。创建的表默认大小是96KB，那创建的表的大小至少是1MB才对啊？其实这是因为在每个段开始时，先有32个页大小的碎片页（fragment page）来存放数据，当这些页使用完之后才是64个连续页的申请。如果存放一条记录就开辟1MB的空间，岂不是很浪费？</li>
+<li><strong>页</strong>：页是InnoDB磁盘管理的最小单位。默认每个页大小为16KB，可通过参数<code>innodb_page_size</code>修改。注意区的大小依旧是1MB，一个区的页的数量会产生变化。常见的页类型有：<ol>
+<li>数据页（B-tree Node）。</li>
+<li>Undo页（Undo Log Page）。</li>
+<li>系统页（System Page）。</li>
+<li>事务数据页（Transaction system Page）。</li>
+<li>插入缓冲位图页（Insert Buffer Bitmap）。</li>
+<li>插入缓冲空闲列表页（Insert Buffer Free List）。</li>
+<li>未压缩的二进制大对象页（Uncompressed BLOB Page）。</li>
+<li>压缩的二进制大对象页（Compressed BLOB Page）。</li>
+</ol>
+</li>
+</ul>
+<h1 id="MySQL存储目录"><a href="#MySQL存储目录" class="headerlink" title="MySQL存储目录"></a>MySQL存储目录</h1><p>使用<code>SHOW VARIABLES LIKE &#39;datadir&#39;;</code>查看数据库、表文件、视图、触发器等的存储目录。下面依次介绍它们在文件系统中的表示：</p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>每当我们使用<code>CREATE DATABASE 数据库名;</code>语句创建一个数据库的时候，文件系统中MySQL存储目录下就会创建一个以数据库名为文件名的子目录，并在该子目录下创建一个名为<code>db.opt</code>的文件，该文件包含了该数据库的各种属性，比如该数据库的字符集和比较规则。</p>
 <h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><p>表的信息可以分为两种：表结构的定义信息；表中的数据。</p>
-<p>对于InnoDB，每创建一个表都会建立一个独立表空间，这个表示独立表空间的文件就是<code>表名.ibd</code>，在MySQL8.0之后，表结构定义信息和表中的数据（索引）都存储在该文件中。</p>
+<p>对于InnoDB，每创建一个表都会建立一个<strong>独立表空间</strong>，这个表示独立表空间的文件就是<code>表名.ibd</code>，在MySQL8.0之后，表结构定义信息和表中的数据（索引）都存储在该文件中。</p>
 <p>对于MyISAM，其表结构信息存储在<code>表名.frm</code>这个二进制文件中，而且不像InnoDB的索引即数据，MyISAM中的索引全是二级索引（辅助索引），因此MyISAM的索引和数据是分开存放的。其中<code>表名.MYD</code>代表数据文件，<code>表名.MYI</code>代表索引文件</p>
 <h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>视图其实是虚拟的表，所以在存储视图的时候是不需要存储真实的数据的，只需要把它的结构存储起来就行了。和表一样，描述视图结构的文件也会被存储到所属数据库对应的子目录下边，只会存储一个<code>视图名.frm</code>的文件。</p>
 

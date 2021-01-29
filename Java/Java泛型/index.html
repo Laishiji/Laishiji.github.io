@@ -26,7 +26,7 @@
 <meta property="og:description" content="概述  为什么引入泛型   泛型的基本使用  泛型类  泛型接口  泛型方法  泛型的上下限     概述 在创建接口、类、方法时，为了代码复用和类型安全，使用泛型来作为类型。泛型可以看作形式参数，用于接受数据类型，当创建对象、实现接口、调用方法时才指定具体的类型。例如 123class List&lt;T&gt;&amp;#123;    private T element;  &amp;#125; 1234">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-04T11:06:21.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.019Z">
+<meta property="article:modified_time" content="2021-01-29T07:04:48.127Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么引入泛型"><span class="toc-number">1.1.</span> <span class="toc-text">为什么引入泛型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型的基本使用"><span class="toc-number">2.</span> <span class="toc-text">泛型的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型类"><span class="toc-number">2.1.</span> <span class="toc-text">泛型类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型接口"><span class="toc-number">2.2.</span> <span class="toc-text">泛型接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型方法"><span class="toc-number">2.3.</span> <span class="toc-text">泛型方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型的上下限"><span class="toc-number">2.4.</span> <span class="toc-text">泛型的上下限</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么引入泛型"><span class="toc-number">1.1.</span> <span class="toc-text">为什么引入泛型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型的基本使用"><span class="toc-number">2.</span> <span class="toc-text">泛型的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型类"><span class="toc-number">2.1.</span> <span class="toc-text">泛型类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型接口"><span class="toc-number">2.2.</span> <span class="toc-text">泛型接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型方法"><span class="toc-number">2.3.</span> <span class="toc-text">泛型方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型数组"><span class="toc-number">2.4.</span> <span class="toc-text">泛型数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型的上下限"><span class="toc-number">2.5.</span> <span class="toc-text">泛型的上下限</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -324,6 +324,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GenericMethod</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> method&lt;T t&gt;&#123;</span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestGenericMethod</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        GenericMethod gm = <span class="keyword">new</span> GenericMethod();</span><br><span class="line">        gm.method(<span class="string">"123"</span>);</span><br><span class="line">        gm.method(<span class="number">123</span>);</span><br><span class="line">        <span class="comment">//传递什么类型的参数，泛型就是什么类型</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="泛型数组"><a href="#泛型数组" class="headerlink" title="泛型数组"></a>泛型数组</h3><ol>
+<li><code>E[] arr = (E[]) new Object[len];</code>。</li>
+<li><code>E[] arr = (E[]) Array.newInstance(Class&lt;t&gt;type,int size)</code></li>
+</ol>
 <h3 id="泛型的上下限"><a href="#泛型的上下限" class="headerlink" title="泛型的上下限"></a>泛型的上下限</h3><ul>
 <li><p>有时候我们希望泛型只接收某些类型，而不是所有类型，那么我们就需要限定泛型的接收范围。</p>
 <ul>
