@@ -17,26 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JUC概述 | Blog Of TheMasterplan</title>
-  <meta name="description" content="OverView 原子包  基础类型  数组  引用  FieldUpdater  Adder和Accumulator   锁和工具类 并发集合 线程池 多线程开发的良好习惯 OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray">
+  <title>MySQL索引 | Blog Of TheMasterplan</title>
+  <meta name="description" content="B树与B+树B树B树是一种多路查找自平衡的树，它的所有叶子节点都位于同一层，即B树是绝对平衡的（就像2-3树一样）。与AVL树不同，B树适用于读写相对大的数据块的存储系统，如磁盘。B树有如下重要特点：  根结点至少有两个子女。 所有的叶子结点都位于同一层。 每个节点中的元素从小到大排列。 每个节点中都存储有数据。  B树图解：  AVL树、2-3树、红黑树链接 B+树在B树的基础上，为叶子结点增加">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JUC概述">
-<meta property="og:url" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:title" content="MySQL索引">
+<meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="OverView 原子包  基础类型  数组  引用  FieldUpdater  Adder和Accumulator   锁和工具类 并发集合 线程池 多线程开发的良好习惯 OverView 原子包基础类型AtomicBoolean，AtomicInteger，AtomicLong 数组AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray">
+<meta property="og:description" content="B树与B+树B树B树是一种多路查找自平衡的树，它的所有叶子节点都位于同一层，即B树是绝对平衡的（就像2-3树一样）。与AVL树不同，B树适用于读写相对大的数据块的存储系统，如磁盘。B树有如下重要特点：  根结点至少有两个子女。 所有的叶子结点都位于同一层。 每个节点中的元素从小到大排列。 每个节点中都存储有数据。  B树图解：  AVL树、2-3树、红黑树链接 B+树在B树的基础上，为叶子结点增加">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-1.png">
-<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-lock.png">
-<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java_collections_overview.png">
-<meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-executors-1.png">
-<meta property="article:published_time" content="2020-09-19T10:05:19.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:21.057Z">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/B-tree.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/Bplus-tree.png">
+<meta property="article:published_time" content="2021-01-29T14:48:41.000Z">
+<meta property="article:modified_time" content="2021-01-29T14:49:45.410Z">
 <meta property="article:author" content="LSJ">
-<meta property="article:tag" content="Java并发">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/java-thread-x-juc-overview-1.png">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/B-tree.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -224,21 +222,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OverView"><span class="toc-number">1.</span> <span class="toc-text">OverView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原子包"><span class="toc-number">2.</span> <span class="toc-text">原子包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础类型"><span class="toc-number">2.1.</span> <span class="toc-text">基础类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-number">2.2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">2.3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FieldUpdater"><span class="toc-number">2.4.</span> <span class="toc-text">FieldUpdater</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adder和Accumulator"><span class="toc-number">2.5.</span> <span class="toc-text">Adder和Accumulator</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#锁和工具类"><span class="toc-number">3.</span> <span class="toc-text">锁和工具类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发集合"><span class="toc-number">4.</span> <span class="toc-text">并发集合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程池"><span class="toc-number">5.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程开发的良好习惯"><span class="toc-number">6.</span> <span class="toc-text">多线程开发的良好习惯</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B树与B-树"><span class="toc-number">1.</span> <span class="toc-text">B树与B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#B树"><span class="toc-number">1.1.</span> <span class="toc-text">B树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-树"><span class="toc-number">1.2.</span> <span class="toc-text">B+树</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InnoDB索引"><span class="toc-number">2.</span> <span class="toc-text">InnoDB索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#聚簇索引"><span class="toc-number">2.0.1.</span> <span class="toc-text">聚簇索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二级索引"><span class="toc-number">2.0.2.</span> <span class="toc-text">二级索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联合索引"><span class="toc-number">2.0.3.</span> <span class="toc-text">联合索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项"><span class="toc-number">2.0.4.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行SQL时使用到索引的情形"><span class="toc-number">3.</span> <span class="toc-text">执行SQL时使用到索引的情形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#覆盖索引"><span class="toc-number">4.</span> <span class="toc-text">覆盖索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引优化"><span class="toc-number">5.</span> <span class="toc-text">索引优化</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JUC概述" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-MySQL索引" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JUC概述
+      MySQL索引
     </h1>
   
 
@@ -246,29 +244,29 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/" class="article-date">
-	  <time datetime="2020-09-19T10:05:19.000Z" itemprop="datePublished">2020-09-19</time>
+	<a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/" class="article-date">
+	  <time datetime="2021-01-29T14:48:41.000Z" itemprop="datePublished">2021-01-29</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java%E5%B9%B6%E5%8F%91/">Java并发</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Java%E5%B9%B6%E5%8F%91/" rel="tag">Java并发</a>
+	<a class="article-tag-link" href="/tags/MySQL/" rel="tag">MySQL</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 338(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.3k(words)</span>
 	
 	
 
@@ -276,45 +274,45 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><a href="#OverView">OverView</a></p>
-<p><a href="#原子包">原子包</a></p>
+        <h1 id="B树与B-树"><a href="#B树与B-树" class="headerlink" title="B树与B+树"></a>B树与B+树</h1><h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>B树是一种多路查找自平衡的树，它的所有叶子节点都位于同一层，即B树是绝对平衡的（就像2-3树一样）。与AVL树不同，B树适用于读写相对大的数据块的存储系统，如磁盘。B树有如下重要特点：</p>
 <ul>
-<li><p><a href="#基础类型">基础类型</a></p>
-</li>
-<li><p><a href="#数组">数组</a></p>
-</li>
-<li><p><a href="#引用">引用</a></p>
-</li>
-<li><p><a href="#FieldUpdater">FieldUpdater</a></p>
-</li>
-<li><p><a href="#Adder和Accumulator">Adder和Accumulator</a></p>
-</li>
+<li>根结点至少有两个子女。</li>
+<li>所有的叶子结点都位于同一层。</li>
+<li>每个节点中的元素从小到大排列。</li>
+<li>每个节点中都存储有数据。</li>
 </ul>
-<p><a href="#锁和工具类">锁和工具类</a></p>
-<p><a href="#并发集合">并发集合</a></p>
-<p><a href="#线程池">线程池</a></p>
-<p><a href="#多线程开发的良好习惯">多线程开发的良好习惯</a></p>
-<h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><p><img src="java-thread-x-juc-overview-1.png" alt=""></p>
-<h1 id="原子包"><a href="#原子包" class="headerlink" title="原子包"></a>原子包</h1><h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><p>AtomicBoolean，AtomicInteger，AtomicLong</p>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>AtomicIntegerArray，AtomicLongArray，AtomicReferenceArray</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>AtomicReference，AtomicMarkableReference，AtomicStampedReference</p>
-<h2 id="FieldUpdater"><a href="#FieldUpdater" class="headerlink" title="FieldUpdater"></a>FieldUpdater</h2><p>AtomicIntegerFieldUpdater, AtomicLongFieldUpdater，AtomicReferenceFieldUpdate</p>
-<h2 id="Adder和Accumulator"><a href="#Adder和Accumulator" class="headerlink" title="Adder和Accumulator"></a>Adder和Accumulator</h2><p>LongAdder, DoubleAdder, LongAccmulator, DoubleAccumulator</p>
-<h1 id="锁和工具类"><a href="#锁和工具类" class="headerlink" title="锁和工具类"></a>锁和工具类</h1><p><img src="java-thread-x-juc-overview-lock.png" alt=""></p>
-<h1 id="并发集合"><a href="#并发集合" class="headerlink" title="并发集合"></a>并发集合</h1><p><img src="java_collections_overview.png" alt=""></p>
-<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p><img src="java-thread-x-juc-executors-1.png" alt=""></p>
-<h1 id="多线程开发的良好习惯"><a href="#多线程开发的良好习惯" class="headerlink" title="多线程开发的良好习惯"></a>多线程开发的良好习惯</h1><ul>
-<li>给线程起个有意义的名字，这样可以方便找 Bug。</li>
-<li>缩小同步范围，从而减少锁争用。例如对于 synchronized，应该尽量使用同步块而不是同步方法。</li>
-<li>多用同步工具少用 wait() 和 notify()。首先，CountDownLatch, CyclicBarrier, Semaphore 和 Exchanger 这些同步类简化了编码操作，而用 wait() 和 notify() 很难实现复杂控制流；其次，这些同步类是由最好的企业编写和维护，在后续的 JDK 中还会不断优化和完善。</li>
-<li>使用 BlockingQueue 实现生产者消费者问题。</li>
-<li>多用并发集合少用同步集合，例如应该使用 ConcurrentHashMap 而不是 Hashtable。</li>
-<li>使用本地变量和不可变类来保证线程安全。</li>
-<li>使用线程池而不是直接创建线程，这是因为创建线程代价很高，线程池可以有效地利用有限的线程来启动任务。</li>
+<p>B树图解：</p>
+<p><img src="B-tree.png" alt=""></p>
+<p><a href="https://github.com/Laishiji/DataStructureAndAlgorithm/tree/master/DataStructures/src/tree" target="_blank" rel="noopener">AVL树、2-3树、红黑树链接</a></p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>在B树的基础上，为叶子结点增加链表指针(B树+叶子有序链表），且非叶子节点不保存数据，只有叶子节点保存数据，非叶子节点中保存的是孩子节点中的临界值（最大值或最小值），因此非叶子节点能存储更多的孩子节点地址信息，B+树相较于B树更加“矮胖”，I/O次数减少。B+树通常用于关系型数据库(如MySQL)和操作系统的文件系统中。</p>
+<p><img src="Bplus-tree.png" alt=""></p>
+<h1 id="InnoDB索引"><a href="#InnoDB索引" class="headerlink" title="InnoDB索引"></a>InnoDB索引</h1><h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h3><p>聚簇索引（Clustered Index）就是按照<strong>主键列</strong>构造一棵B+树，所有完整的用户记录都存放在这个聚簇索引的叶子节点处。聚簇索引并不需要我们在<code>MySQL</code>语句中显式的使用<code>INDEX</code>语句去创建，<code>InnoDB</code>存储引擎会自动的为我们创建。如果用户创建表时没有指定主键，InnoDB会选择表中的<strong>第一个Not NULL Unique Index（非空唯一索引）</strong>作为主键，若这也没有，那么就会添加隐藏列DB_ROW_ID作为主键，这是一个隐式的自增ID。聚簇索引有如下特点：</p>
+<ul>
+<li>页内的记录按照<code>主键列</code>的大小顺序排成一个<strong>单向链表</strong>。</li>
+<li>页之间按照<code>主键列</code>的大小顺序排成一个<strong>双向链表</strong>。</li>
+<li>同一层次的非叶子节点索引页之间根据<code>主键列</code>的大小顺序排成一个<strong>双向链表</strong>。</li>
+<li>叶子节点中存储了所有列的数据。</li>
 </ul>
-<p>图片来源均为：</p>
-<p><a href="https://www.pdai.tech/md/java/thread/java-thread-x-juc-overview.html" target="_blank" rel="noopener">https://www.pdai.tech/md/java/thread/java-thread-x-juc-overview.html</a></p>
-
+<h3 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h3><p>以非主键列（下面用<code>c列</code>代替）构建的B+树索引称为二级索引（Secondary Index）。二级索引的特点是：</p>
+<ul>
+<li>页内的记录按照<code>c列</code>的大小顺序排成一个<strong>单向链表</strong>。</li>
+<li>页之间按照<code>c列</code>的大小顺序排成一个<strong>双向链表</strong>。</li>
+<li>同一层次的非叶子节点索引页之间根据<code>c列</code>的大小顺序排成一个<strong>双向链表</strong>。</li>
+<li><strong>叶子节点中存储的并不是完整的记录，而是只存储了<code>c列和主键</code>这两个列的值</strong>。（重要）</li>
+</ul>
+<p>因此where子句的条件中使用二级索引匹配时：先在二级索引中匹配到对应的主键id，再根据主键id<strong>回表</strong>，到聚簇索引中查询其他列的数据，这里也就是用到了2棵B+树；若查询要求返回的列中只有索引列，甚至不需要进行<strong>回表</strong>操作。</p>
+<h3 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h3><p>我们也可以同时以多个列的大小作为排序规则，也就是同时为多个列建立索引，比方说我们想让B+树按照<code>c1</code>和<code>c2</code>列的大小进行排序，这个包含两层含义：</p>
+<ul>
+<li>先把各个记录和页按照<code>c1</code>列进行排序。</li>
+<li>在记录的<code>c1</code>列相同的情况下，采用<code>c2</code>列进行排序。</li>
+</ul>
+<p><code>(c1, c2)</code>就是一个联合索引，其本质上也是一个二级索引，只会建立一棵B+树</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>每当为某个表创建一个<code>B+</code>树索引（聚簇索引不是人为创建的，默认就有）的时候，都会为这个索引创建一个<code>根节点</code>页面。最开始表中没有数据的时候，每个<code>B+</code>树索引对应的<code>根节点</code>中既没有用户记录，也没有目录项记录。随后向表中插入用户记录时，先把用户记录存储到这个<code>根节点</code>中。当<code>根节点</code>中的可用空间用完时继续插入记录，此时会将<code>根节点</code>中的所有记录复制到一个新分配的页，比如<code>页a</code>中，然后对这个新页进行<code>页分裂</code>的操作，得到另一个新页，比如<code>页b</code>。这时新插入的记录根据键值（也就是聚簇索引中的主键值，二级索引中对应的索引列的值）的大小就会被分配到<code>页a</code>或者<code>页b</code>中，而<code>根节点</code>便升级为存储目录项记录的页。</li>
+<li>非叶子节点中目录项记录时唯一的，如果用户创建的二级索引不是唯一索引，那么一个非叶子节点中岂不是可能出现相同的记录？因此对于二级索引，目录项记录是由索引列+主键列构成的，保证了一条记录的唯一性。</li>
+<li>一个页面最少存储2条记录。</li>
+</ol>
+<h1 id="执行SQL时使用到索引的情形"><a href="#执行SQL时使用到索引的情形" class="headerlink" title="执行SQL时使用到索引的情形"></a>执行SQL时使用到索引的情形</h1><h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1><h1 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h1>
       
     </div>
     <div class="article-footer">
@@ -324,7 +322,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/JUC%E6%A6%82%E8%BF%B0/" title="JUC概述" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/" title="MySQL索引" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -373,13 +371,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/Java%E5%B9%B6%E5%8F%91/JUC%E4%B9%8B%E5%8E%9F%E5%AD%90%E5%8C%85/" title="JUC之原子包"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/Java%E5%B9%B6%E5%8F%91/ThreadLocal%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" title="ThreadLocal源码剖析"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/" title="InnoDB表结构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
