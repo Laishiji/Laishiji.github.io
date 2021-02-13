@@ -26,7 +26,7 @@
 <meta property="og:description" content="一.基础 二.增删改 三.查询  DISTINCT  LIMIT   四.排序 五.过滤 六.通配符 七.正则表达式 八.计算字段 九.函数 十.分组 十一.子查询 十二.JOIN  内连接  自连接  外部连接   十三.UNION 十四.视图 十五.事务管理 十六.安全管理 十七.范式 参考 一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 123">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-18T04:30:33.000Z">
-<meta property="article:modified_time" content="2020-11-25T05:49:17.125Z">
+<meta property="article:modified_time" content="2021-01-29T15:00:41.306Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 4k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.7k(words)</span>
 	
 	
 
@@ -616,15 +616,12 @@
 <p>实践：若存在相互依赖的字段，则它们应单独在一张表中，比如前面例子中字段A, B应单独在一张表中。</p>
 <p><strong>BCNF</strong></p>
 <p><strong>满足3NF，且每张表中只有一个唯一索引（一般为主键）。</strong></p>
-<p>实践：MySQL中一般不用。以user表为例，假设该user表有手机号tel字段，每个人的手机号都是唯一的，显然用手机号做主键是不合适的，此时一般还是需要自定义一个自增id。原因如下：</p>
-<p>由于InnoDB引擎是基于B+树的索引组织表，<strong>若使用自增主键</strong>，每次插入新的行记录，记录就会顺序添加到当前主键索引叶节点中页的后续位置，当一页写满，就会自动开辟一个新的页，当一个叶节点中不能再开辟新的页，则自动开辟一个新的叶节点。（一个叶节点是一个区（extent），一个区包含多个页，一个页包含多条行记录）。<strong>若使用非自增主键，如手机号、身份证号、学号等</strong>，由于每次插入主键的值近似于随机，因此每次新纪录都要被插到现有索引页得中间某个位置，此时MySQL不得不为了将新记录插到合适位置而移动数据，甚至目标页面可能已经被回写到磁盘上而从缓存中清掉，此时又要从磁盘上读回来，这增加了很多开销，同时频繁的移动、分页操作造成了大量的碎片，得到了不够紧凑的索引结构，后续不得不通过OPTIMIZE TABLE来重建表并优化填充页面。</p>
-<p>那么为了满足BCNF，我们需要单独建表存储一个id号和手机号tel字段，这样查询性能会降低。</p>
+<p>实践：MySQL中一般不用。以user表为例，假设该user表有手机号tel字段，每个人的手机号都是唯一的，显然用手机号做主键是不合适的，此时一般还是需要自定义一个自增id。这里就有两个唯一索引了，不满足BCNF。那么为了满足BCNF，我们需要单独建表存储一个id号和手机号tel字段，这样查询性能会降低。</p>
 <p><strong>4NF</strong></p>
 <p><strong>满足3NF，且消除表中字段的多值依赖。</strong></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>MySQL 必知必会 / (英) Forta, B 著；刘晓霞，钟铭译. -北京：人民邮电出版社，2009.1</li>
 <li><a href="www.cyc2018.xyz">CS-Notes</a></li>
-<li>索引：<a href="https://segmentfault.com/q/1010000003856705" target="_blank" rel="noopener">https://segmentfault.com/q/1010000003856705</a></li>
 </ol>
 
       
