@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2021-02-13T03:45:54.911Z</updated>
+  <updated>2021-02-14T08:31:22.164Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL连接与访问方法</title>
+    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AE%BF%E9%97%AE%E6%96%B9%E6%B3%95/"/>
+    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%AE%BF%E9%97%AE%E6%96%B9%E6%B3%95/</id>
+    <published>2021-02-13T03:59:31.000Z</published>
+    <updated>2021-02-14T08:31:22.164Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="访问方法"><a href="#访问方法" class="headerlink" title="访问方法"></a>访问方法</h1><p>访问方法：MySQL执行查询语句的方式。同一个查询语句可能可以使用多种不同的访问方法来执行，但是执行的时间相差甚远，因此查询优化器会根据SQL语句来选择合适的访问方法。访问方法有const、ref、ref_or_null、range、index、all六种。</p><p>首先建表如下：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> single_table (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    key1 <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    key2 <span class="built_in">INT</span>,</span><br><span class="line">    key3 <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    key_part1 <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    key_part2 <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    key_part3 <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    common_field <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    <span class="comment">-- id列主键，key1/key3为二级索引，key2为唯一二级索引</span></span><br><span class="line">    PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>),</span><br><span class="line">    <span class="keyword">KEY</span> idx_key1 (key1),</span><br><span class="line">    <span class="keyword">KEY</span> idx_key3 (key3),</span><br><span class="line">    <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> idx_key2 (key2),</span><br><span class="line">    <span class="keyword">KEY</span> idx_key_part(key_part1, key_part2, key_part3)</span><br><span class="line">) <span class="keyword">Engine</span>=<span class="keyword">InnoDB</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure><h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>使用<strong>主键或唯一二级索引等值查询</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1438</span>;</span><br></pre></td></tr></table></figure><p>或者：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key2 = <span class="number">3841</span>;</span><br></pre></td></tr></table></figure><p>通过这两种方式定位一条记录速度非常快，代价可忽略不计，因此称为<code>const</code>，意为常数级别。</p><h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p><strong>二级索引：等值查询</strong>；或者<strong>联合索引：左边连续索引列等值查询</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table</span><br><span class="line"><span class="keyword">WHERE</span> key1 = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure><p>或者：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key_part1 = <span class="string">'god like'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key_part1 = <span class="string">'god like'</span> </span><br><span class="line"><span class="keyword">AND</span> key_part2 = <span class="string">'legendary'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key_part1 = <span class="string">'god like'</span> </span><br><span class="line"><span class="keyword">AND</span> key_part2 = <span class="string">'legendary'</span> </span><br><span class="line"><span class="keyword">AND</span> key_part3 = <span class="string">'penta kill'</span>;</span><br></pre></td></tr></table></figure><p>对于非唯一二级索引的等值查询，如果需要回表的记录非常多，那么它的性能和全表扫描的性能相比是有待商榷的。如果匹配的记录较少，那么ref的速度依然很快。</p><h2 id="ref-or-null"><a href="#ref-or-null" class="headerlink" title="ref_or_null"></a>ref_or_null</h2><p><strong>在ref方法的基础上，允许查询索引列为null值的记录</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key1 = <span class="string">'abc'</span></span><br><span class="line"><span class="keyword">OR</span> key1 <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure><h2 id="range"><a href="#range" class="headerlink" title="range"></a>range</h2><p><strong>索引列需要匹配某个或某些范围的值</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> single_table</span><br><span class="line"><span class="keyword">WHERE</span> key2 <span class="keyword">IN</span> (<span class="number">1438</span>, <span class="number">6328</span>) </span><br><span class="line"><span class="keyword">OR</span> (key2 &gt;= <span class="number">38</span> <span class="keyword">AND</span> key2 &lt;= <span class="number">79</span>);</span><br></pre></td></tr></table></figure><h2 id="index"><a href="#index" class="headerlink" title="index"></a>index</h2><p><strong>遍历二级索引全部记录</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> key_part1, key_part2, key_part3 </span><br><span class="line"><span class="keyword">FROM</span> single_table </span><br><span class="line"><span class="keyword">WHERE</span> key_part2 = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure><p>以上这个SQL语句虽然查询列表中只有联合索引列，但是查询条件却没有key_part1，因此无法使用到联合索引进行搜索。MySQL考虑到直接遍历二级索引比直接遍历聚簇索引的成本要小很多，因此将<strong>遍历二级索引全部记录</strong>的方法称为<code>index</code>。</p><h2 id="all"><a href="#all" class="headerlink" title="all"></a>all</h2><p><strong>遍历聚簇索引，即全表扫描</strong>。例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> single_table</span><br><span class="line"><span class="keyword">WHERE</span> common_field = <span class="string">"test"</span>;</span><br></pre></td></tr></table></figure><h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> t1, t2 </span><br><span class="line"><span class="keyword">WHERE</span> t1.m1 &gt; <span class="number">1</span> </span><br><span class="line"><span class="keyword">AND</span> t1.m1 = t2.m2 </span><br><span class="line"><span class="keyword">AND</span> t2.n2 &lt; <span class="string">'d'</span>;</span><br></pre></td></tr></table></figure><p>以上SQL的执行过程为：先从t1表（驱动表，即第一个查询的表）找到满足t1.m1 &gt; 1的记录，再将所有符合条件的t1.m1的值赋给t2.m2，从t2表（被驱动表）中分别去查询符合条件的记录。也就是说，<strong>驱动表他只需要访问一次，而被驱动表很可能被访问多次</strong>，被驱动表的访问次数取决于驱动表单表查询后返回结果集的记录数。因此对于只有多表过滤条件的SQL语句，如t1.m1 = t2.m2，那么MySQL查询被驱动表的次数就是驱动表中的总记录数，这个代价就太大了。</p><h2 id="内连接与外连接"><a href="#内连接与外连接" class="headerlink" title="内连接与外连接"></a>内连接与外连接</h2><ul><li><p><strong>内连接</strong>：对于内连接的两个表，驱动表中的记录在被驱动表中找不到匹配的记录，该记录不会加入到最后的结果集。</p></li><li><p><strong>外连接</strong>：驱动表中的记录即使在被驱动表中没有匹配的记录，也仍然需要加入到结果集。左外连接的驱动表为<code>LEFT JOIN</code>左边的表，右外连接的驱动表为<code>RIGHT JOIN</code>右边的表。</p></li></ul><h2 id="WHERE与ON"><a href="#WHERE与ON" class="headerlink" title="WHERE与ON"></a>WHERE与ON</h2><p>内连接中的WHERE子句和ON子句是等价的。一般情况下，我们都把只涉及单表的过滤条件放到WHERE子句中，把涉及两表的过滤条件都放到ON子句中，我们也一般把放到ON子句中的过滤条件也称之为<code>连接条件</code>。</p><h2 id="块嵌套循环连接"><a href="#块嵌套循环连接" class="headerlink" title="块嵌套循环连接"></a>块嵌套循环连接</h2><p>普通的连接方式就像双重for循环一样，首先从驱动表中查询获取结果集，然后每一次从结果集中取出一条记录，从磁盘中加载被驱动表到内存进行匹配，我们称之为<strong>嵌套循环连接（Nested-Loop Join）</strong>。在被驱动表特别大的时候，我们的内存甚至可能不足以一次性加载整张表，需要先加载一部分与结果集中的一条记录匹配，接着释放内存，加载另一部分表进行匹配。这个周而复始的加载过程实在是太耗时了，严重影响了MySQL的查询性能，因此MySQL的设计者提出了<strong>基于块的嵌套循环连接（Block Nested-Loop Join）</strong>。</p><p>MySQL的设计者提出了一个<code>join buffer</code>的概念，它是一块执行连接查询前申请的一块固定大小的内存，先把若干条驱动表结果集中的记录装在这个<code>join buffer</code>中，然后开始扫描被驱动表，<strong>每一条被驱动表的记录一次性和<code>join buffer</code>中的多条驱动表结果集记录做匹配</strong>，因为匹配的过程都是在内存中完成的，所以这样可以显著减少被驱动表的<code>I/O</code>代价。</p><p><code>join buffer</code>的大小是可以通过启动参数或者系统变量<code>join_buffer_size</code>进行配置，默认大小为<code>262144字节</code>（也就是<code>256KB</code>），最小可以设置为<code>128字节</code>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;访问方法&quot;&gt;&lt;a href=&quot;#访问方法&quot; class=&quot;headerlink&quot; title=&quot;访问方法&quot;&gt;&lt;/a&gt;访问方法&lt;/h1&gt;&lt;p&gt;访问方法：MySQL执行查询语句的方式。同一个查询语句可能可以使用多种不同的访问方法来执行，但是执行的时间相差甚远，因此查询
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="http://thmasterplan.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="http://thmasterplan.cn/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL事务</title>
+    <link href="http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/"/>
+    <id>http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/</id>
+    <published>2021-02-13T03:56:29.000Z</published>
+    <updated>2021-02-13T03:56:29.677Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL查询优化</title>
+    <link href="http://thmasterplan.cn/uncategorized/MySQL%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+    <id>http://thmasterplan.cn/uncategorized/MySQL%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</id>
+    <published>2021-02-13T03:56:15.000Z</published>
+    <updated>2021-02-13T03:56:15.971Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>MySQL索引</title>
@@ -44,8 +100,8 @@
   
   <entry>
     <title>InnoDB表结构</title>
-    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/"/>
-    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/</id>
+    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL_InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/"/>
+    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL_InnoDB%E8%A1%A8%E7%BB%93%E6%9E%84/</id>
     <published>2021-01-28T14:31:36.000Z</published>
     <updated>2021-02-13T03:42:02.651Z</updated>
     
@@ -97,8 +153,8 @@
   
   <entry>
     <title>MySQL之锁</title>
-    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/"/>
-    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B9%8B%E9%94%81/</id>
+    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/"/>
+    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/</id>
     <published>2020-11-24T11:05:46.000Z</published>
     <updated>2021-01-22T14:52:38.196Z</updated>
     
@@ -513,96 +569,6 @@
     
     
       <category term="Spring" scheme="http://thmasterplan.cn/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CGLib动态代理</title>
-    <link href="http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
-    <id>http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</id>
-    <published>2020-10-16T02:50:22.000Z</published>
-    <updated>2020-11-23T14:23:20.987Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="#概述">概述</a></p><p><a href="#使用">使用</a></p><p><a href="#JDK与CGLib动态代理区别">JDK与CGLib动态代理区别</a></p><ul><li><p><a href="#区别">区别</a></p></li><li><p><a href="#使用注意">使用注意</a></p></li><li><p><a href="#Spring中如何选择代理机制？">Spring中如何选择代理机制？</a></p></li></ul><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>CGLib是一个强大、高性能的字节码生产类库，可以实现运行期动态扩展Java类和实现Java接口，Spring在运行期间通过 CGlib<strong>继承被代理类</strong>，重写父类的方法，实现AOP面向切面编程。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用Enhancer类的create方法得到代理对象，该方法的参数列表：</p><ul><li>Class ：被代理类的class对象</li><li>Callback：用于提供增强的代码，一般写该接口的实现类MethodInterceptor</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Object cgLibProxy = Enhancer.create(XXX.getClass(), <span class="keyword">new</span> MethodInterceptor()&#123;</span><br><span class="line">    <span class="comment">//执行被代理类的任何方法都会经过该方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h1 id="JDK与CGLib动态代理区别"><a href="#JDK与CGLib动态代理区别" class="headerlink" title="JDK与CGLib动态代理区别"></a>JDK与CGLib动态代理区别</h1><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul><li><p>JDK动态代理是面向接口，<strong>通过创建代理实现类实现</strong>，创建代理速度比CGLib快。</p></li><li><p><strong>CGLib动态代理是通过继承被代理类实现</strong>（如果被代理类被final关键字所修饰，那么会失败），创建代理没有JDK动态代理快，但是运行速度比JDK动态代理要快。</p></li></ul><h2 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h2><p>如果要被代理的对象是个实现类，那么Spring会使用JDK动态代理来完成操作（Spirng默认采用JDK动态代理实现机制）</p><p>如果被代理类不是实现类，Spring会强制使用CGLib来实现动态代理。</p><h2 id="Spring中如何选择代理机制？"><a href="#Spring中如何选择代理机制？" class="headerlink" title="Spring中如何选择代理机制？"></a>Spring中如何选择代理机制？</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure><p>通过配置Spring的中aop:config标签来显示的指定使用动态代理机制 proxy-target-class=true表示使用CGLib代理，如果为false就是默认使用JDK动态代理。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;a href=&quot;#概述&quot;&gt;概述&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#使用&quot;&gt;使用&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#JDK与CGLib动态代理区别&quot;&gt;JDK与CGLib动态代理区别&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;#区别&quot;&gt;区别&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="JavaWeb" scheme="http://thmasterplan.cn/categories/JavaWeb/"/>
-    
-    
-      <category term="JavaWeb" scheme="http://thmasterplan.cn/tags/JavaWeb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>开发原则</title>
-    <link href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/"/>
-    <id>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/</id>
-    <published>2020-10-13T07:23:38.000Z</published>
-    <updated>2020-11-23T14:23:21.122Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="#概述">概述</a></p><p><a href="#S：单一职责原则（Single-Responsibility Principle）">S：单一职责原则（Single-Responsibility Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#O：开闭原则（Open - Closed Principle）">O：开闭原则（Open - Closed Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#L：里氏替换原则（Liskov Substitution Principle）">L：里氏替换原则（Liskov Substitution Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#I：接口隔离原则（Interface Segregation Principle）">I：接口隔离原则（Interface Segregation Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#D：依赖倒置原则（Dependency-Inversion Principle）">D：依赖倒置原则（Dependency-Inversion Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#组合/聚合复用原则（Composite/Aggregate Reuse Principle）">组合/聚合复用原则（Composite/Aggregate Reuse Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#迪米特法则（Law of Demeter）">迪米特法则（Law of Demeter）</a></p><ul><li><a href="#例子">例子</a></li></ul><p><a href="#设计原则核心思想">设计原则核心思想</a></p><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在软件开发中，前人对软件系统的设计和开发总结了一些原则和模式， 不管用什么语言做开发，都将对我们系统设计和开发提供指导意义。</p><p>面向对象的基本原则(solid)是五个，但是在经常被提到的除了这五个之外还有 <code>迪米特法则</code>和<code>合成复用原则</code>。</p><h1 id="S：单一职责原则（Single-Responsibility-Principle）"><a href="#S：单一职责原则（Single-Responsibility-Principle）" class="headerlink" title="S：单一职责原则（Single-Responsibility Principle）"></a>S：单一职责原则（Single-Responsibility Principle）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>一个对象应该只包含单一的职责，并且该职责被完整地封装在一个类中</strong>。</p><h2 id="原则分析"><a href="#原则分析" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>一个<strong>类(或者大到模块，小到方法)</strong>承担的职责越多，它被复用的可能性越小；如果一个类承担的职责过多，就相当于将这些职责耦合在一起，当其中一个职责变化时，可能会影响其他职责的运作。</li><li>类的职责主要包括两个方面: 数据职责和行为职责，数据职责通过其属性来体现，而行为职责通过其方法来体现。</li><li>单一职责原则是实现高内聚、低耦合的指导方针，在很多代码重构手法中都能找到它的存在，它是最简单但又最难运用的原则，需要设计人员发现类的不同职责并将其分离，而发现类的多重职责需要设计人员具有较强的分析设计能力和相关重构经验。</li></ul><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或类设计得是否合理，但是“职责”和“变化原因”都是没有具体标准的，一个类到底要负责那些职责? 这些职责怎么细化? 细化后是否都要有一个接口或类? 这些都需从实际的情况考虑。因项目而异，因环境而异。</p><p>例：SpringMVC 中Entity, DAO, Service, Controller, Util等的分离。</p><h1 id="O：开闭原则（Open-Closed-Principle）"><a href="#O：开闭原则（Open-Closed-Principle）" class="headerlink" title="O：开闭原则（Open - Closed Principle）"></a>O：开闭原则（Open - Closed Principle）</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p><strong>一个软件实体(如类、模块和函数)应该对扩展开放，对修改关闭</strong>。</p><h2 id="原则分析-1"><a href="#原则分析-1" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>当软件实体因需求要变化时, 尽量通过扩展已有软件实体，可以提供新的行为，以满足对软件的新的需求，而不是修改已有的代码，使变化中的软件有一定的适应性和灵活性 。已有软件模块，特别是最重要的抽象层模块不能再修改，这使变化中的软件系统有一定的稳定性和延续性。</li><li><strong>实现开闭原则的关键就是抽象化</strong>：<strong>在开闭原则中，不允许修改抽象类或者接口，允许扩展的是具体的实现类。</strong>抽象类和接口在开闭原则中扮演着极其重要的角色，既要预知可能变化的需求，又要预见所有可能已知的扩展，所以在这里”抽象化”是关键!</li><li>可变性的封闭原则：找到系统的可变因素，将它封装起来。 不要把可变因素放在多个类中，或者散落在程序的各个角落，应该将可变因素封装起来，并且切忌不要把所有的可变因素封装在一起，应该分块封装可变因素。</li></ul><h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p>设计模式中模板方法模式和观察者模式都是开闭原则的极好体现。</p><h1 id="L：里氏替换原则（Liskov-Substitution-Principle）"><a href="#L：里氏替换原则（Liskov-Substitution-Principle）" class="headerlink" title="L：里氏替换原则（Liskov Substitution Principle）"></a>L：里氏替换原则（Liskov Substitution Principle）</h1><h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><p> <strong>所有引用父类的地方必须能透明地替换为其子类的对象</strong>。</p><h2 id="原则分析-2"><a href="#原则分析-2" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li><p>讲的是基类和子类的关系，只有这种关系存在时，里氏替换原则才存在。正方形是长方形是理解里氏替换原则的经典例子。</p></li><li><p>里氏替换原则可以<strong>通俗表述</strong>为： <strong>在软件中如果能够使用基类对象，那么一定能够使用其子类对象</strong>。把基类都替换成它的子类，程序将不会产生任何错误和异常，<strong>反之不成立</strong>，如果一个软件实体使用的是一个子类的话，那么它不一定能够使用基类。</p></li><li><p><strong>里氏替换原则是实现开闭原则的重要方式之一【抽象类和接口（不允许修改）看作基类，实现类（允许扩展）看作子类】，由于使用基类对象的地方都可以使用子类对象，因此<u>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</u>。</strong></p></li></ul><h1 id="I：接口隔离原则（Interface-Segregation-Principle）"><a href="#I：接口隔离原则（Interface-Segregation-Principle）" class="headerlink" title="I：接口隔离原则（Interface Segregation Principle）"></a>I：接口隔离原则（Interface Segregation Principle）</h1><h2 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h2><p><strong>客户端不应该依赖那些它不需要的接口。</strong></p><p>另一种定义：<strong>一旦一个接口太大，则需要将它分割成一些更细小的接口</strong>，使用该接口的客户端仅需知道与之相关的方法即可。 注意，在该定义中的接口指的是方法。例如调用某个类的public方法。这个方法对外就是接口。</p><h2 id="原则分析-3"><a href="#原则分析-3" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>使用多个专门的接口，而不使用单一的总接口。</li><li><strong>使用接口隔离原则拆分接口时，首先必须满足单一职责原则</strong>，将一组相关的操作定义在一个接口中，且在满足高内聚的前提下，接口中的方法越少越好。</li></ul><h1 id="D：依赖倒置原则（Dependency-Inversion-Principle）"><a href="#D：依赖倒置原则（Dependency-Inversion-Principle）" class="headerlink" title="D：依赖倒置原则（Dependency-Inversion Principle）"></a>D：依赖倒置原则（Dependency-Inversion Principle）</h1><h2 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h2><p><strong>高层模块不应该依赖（使用）低层模块</strong>，<strong>它们都应该依赖抽象</strong>。抽象不应该依赖（使用）具体，具体应该依赖（使用）抽象。</p><h2 id="原则分析-4"><a href="#原则分析-4" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li><p><strong>如果说开闭原则是面向对象设计的目标，依赖倒置原则则是手段</strong>。</p></li><li><p>依赖倒置原则的中心思想是面向接口编程。</p></li><li><p>依赖倒置原则是里氏替换原则的补充。</p></li></ul><h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><p>依赖倒置原则的常用实现方式之一是在代码中使用抽象，而将具体类放在配置文件中。</p><p>例：Spring中的依赖注入。</p><h1 id="组合-聚合复用原则（Composite-Aggregate-Reuse-Principle）"><a href="#组合-聚合复用原则（Composite-Aggregate-Reuse-Principle）" class="headerlink" title="组合/聚合复用原则（Composite/Aggregate Reuse Principle）"></a>组合/聚合复用原则（Composite/Aggregate Reuse Principle）</h1><h2 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h2><p>尽量使用对象组合，而不是继承来达到复用的目的。</p><h2 id="原则分析-5"><a href="#原则分析-5" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>组合/聚合可以使系统更加灵活，类与类之间的耦合度降低，一个类的变化对其他类造成的影响相对较少，因此一般首选使用组合/聚合来实现复用。</li><li>其次才考虑继承，在使用继承时，需要严格遵循里氏代换原则，有效使用继承会有助于对问题的理解，降低复杂度，而滥用继承反而会增加系统构建和维护的难度以及系统的复杂度，因此需要慎重使用继承复用。</li></ul><h1 id="迪米特法则（Law-of-Demeter）"><a href="#迪米特法则（Law-of-Demeter）" class="headerlink" title="迪米特法则（Law of Demeter）"></a>迪米特法则（Law of Demeter）</h1><p>系统中的类尽量不要与其他类互相作用，以减少类之间的耦合度。又叫最少知识原则(Least Knowledge Principle)。</p><p>目标：实现高内聚、低耦合。</p><h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><p>设计模式Facade模式、Mediator模式。</p><h1 id="设计原则核心思想"><a href="#设计原则核心思想" class="headerlink" title="设计原则核心思想"></a>设计原则核心思想</h1><ol><li><p><strong>找出应用中可能需要变化之处</strong>，把它们独立出来，不要和那些不需要变化的代码混在一起。 </p></li><li><p><strong>针对接口编程</strong>，而不是针对实现编程。</p></li><li><p>为了交互对象之间的<strong>松耦合</strong>设计而努力。</p></li></ol><p>参考：<a href="https://www.pdai.tech/md/dev-spec/spec/dev-th-solid.html" target="_blank" rel="noopener">https://www.pdai.tech/md/dev-spec/spec/dev-th-solid.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;a href=&quot;#概述&quot;&gt;概述&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#S：单一职责原则（Single-Responsibility Principle）&quot;&gt;S：单一职责原则（Single-Responsibility Principle）&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="软件工程" scheme="http://thmasterplan.cn/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
-    
-    
-      <category term="软件工程" scheme="http://thmasterplan.cn/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>软件开发过程模型</title>
-    <link href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/</id>
-    <published>2020-10-13T07:23:02.000Z</published>
-    <updated>2020-11-23T14:23:21.139Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><p><a href="#软件开发过程模型">软件开发过程模型</a></p><ul><li><p><a href="#瀑布模型（Waterfall Model）">瀑布模型（Waterfall Model）</a></p><ul><li><p><a href="#模型特点">模型特点</a></p></li><li><p><a href="#模型优点">模型优点</a></p></li><li><p><a href="#模型局限">模型局限</a></p></li><li><p><a href="#适用场景">适用场景</a></p></li></ul></li><li><p><a href="#演化模型（Evolutionary Model）">演化模型（Evolutionary Model）</a></p><ul><li><p><a href="#快速原型（Rapid Prototype）">快速原型（Rapid Prototype）</a></p><ul><li><p><a href="#模型特点">模型特点</a></p></li><li><p><a href="#模型优点">模型优点</a></p></li><li><p><a href="#模型局限">模型局限</a></p></li><li><p><a href="#适用场景">适用场景</a></p></li></ul></li><li><p><a href="#原型进化（ Prototype Evolution）">原型进化（ Prototype Evolution）</a></p></li></ul></li><li><p><a href="#增量模型（Incremental Model）">增量模型（Incremental Model）</a></p><ul><li><p><a href="#模型特点">模型特点</a></p></li><li><p><a href="#模型优点">模型优点</a></p></li><li><p><a href="#模型局限">模型局限</a></p></li><li><p><a href="#适用场景">适用场景</a></p></li></ul></li><li><p><a href="#螺旋模型（Spiral Model）">螺旋模型（Spiral Model）</a></p><ul><li><p><a href="#模型特点">模型特点</a></p></li><li><p><a href="#模型优点">模型优点</a></p></li><li><p><a href="#模型局限">模型局限</a></p></li><li><p><a href="#适用场景">适用场景</a></p></li></ul></li><li><p><a href="#喷泉模型（Water Fountain Model）">喷泉模型（Water Fountain Model）</a></p><ul><li><p><a href="#模型优点">模型优点</a></p></li><li><p><a href="#模型局限">模型局限</a></p></li></ul></li><li><p><a href="#基于构件的开发模型（Component-based Development Model）">基于构件的开发模型（Component-based Development Model）</a></p></li></ul></li><li><p><a href="#具体开发流程参考">具体开发流程参考</a></p></li></ul><h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><h3 id="瀑布模型（Waterfall-Model）"><a href="#瀑布模型（Waterfall-Model）" class="headerlink" title="瀑布模型（Waterfall Model）"></a>瀑布模型（Waterfall Model）</h3><p>瀑布模型（经典生命模型）提出了软件开发的系统化的、顺序的方法。其流程从用户需求规格说明开始，通过策划、建模、构建和部署过程，最终提供一个完整的软件并提供持续的技术支持。</p><p><img src="Waterfall.png" alt=""></p><h4 id="模型特点"><a href="#模型特点" class="headerlink" title="模型特点"></a>模型特点</h4><ul><li>必须等前一阶段的工作完成之后，才能开始后一段的工作。</li><li>每一阶段都必须完成规定的文档，没有交出合格的文档就是没有完成该阶段的任务。</li><li>前一阶段的输出文档就是后一阶段的输入文档，因此，只有前一阶段的输出文档正确，后一阶段的工作才能得到正确的结果。</li><li>每个阶段结束前都要对所完成的文档进行评审，以便及早发现问题，改正错误。事实上越是早期阶段犯下的错误，暴露出来的时间就越晚，排除故障改正错误所需付出的代价也越高。因此，及时审查，是保证软件质量，降低软件成本的重要措施。</li></ul><h4 id="模型优点"><a href="#模型优点" class="headerlink" title="模型优点"></a>模型优点</h4><ul><li>强调了开发的阶段性，各阶段具有顺序性和依赖性</li><li>强调早期调研和需求分析，推迟编码实现的观点</li><li>提供了一个模板，这个模板使得分析、设计、编码、测试和支持的方法可以在该模板下有一个共同的指导。</li></ul><h4 id="模型局限"><a href="#模型局限" class="headerlink" title="模型局限"></a>模型局限</h4><ul><li>瀑布模型是一种线性模型，要求项目严格按规程推进，必须等到所有开发工作全部完成以后才能获得可以交付的软件产品。不能对软件系统进行快速创建，对于一些急于交付的软件系统的开发很不方便。</li><li>瀑布模型适合于需求明确，且无大的需求变更的软件开发（编译系统、操作系统等）。而对于分析初期需求模糊的项目，瀑布模型也并不适合。</li></ul><h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><p>适用于需求确定，无大的需求变更，工作能够采用线性的方式完成的软件。</p><h3 id="演化模型（Evolutionary-Model）"><a href="#演化模型（Evolutionary-Model）" class="headerlink" title="演化模型（Evolutionary Model）"></a>演化模型（Evolutionary Model）</h3><h4 id="快速原型（Rapid-Prototype）"><a href="#快速原型（Rapid-Prototype）" class="headerlink" title="快速原型（Rapid Prototype）"></a>快速原型（Rapid Prototype）</h4><p>软件开发过程中，开发初期很难得到一个完整的、准确的需求规格说明，开发者往往对要解决的应用问题模糊不清，以至于形成的需求规格说明常常是不完整的、不准确的，有时甚至是有歧义的。此外，在整个开发过程中，用户可能会产生新的要求，导致需求的变更。为了适应这种需求的不确定性和变化，于是出现了快速原型（Rapid Prototype）开发方法。</p><h5 id="模型特点-1"><a href="#模型特点-1" class="headerlink" title="模型特点"></a>模型特点</h5><ul><li><strong>快速原型是用来获取用户需求的，或是用来试探设计是否有效的。一旦需求或设计确定下来了，原型就将被抛弃。</strong>因此，快速原型要求快速构件、容易修改，以节约原型创建的成本、加快开发速度。</li><li>快速原型是暂时适用使用的，因此并不要求完整。它往往针对某个局部问题建立专门原型，如界面原型、工作流原型等。</li><li>快速原型不能贯穿软件的整个生命周期，它需要和其他的过程模型相结合才能产生作用。例如，在瀑布模型中应用快速原型，以解决瀑布模型在需求分析时期存在的不足。</li></ul><h5 id="模型优点-1"><a href="#模型优点-1" class="headerlink" title="模型优点"></a>模型优点</h5><ul><li>能渐进地启发客户提出新的要求或任务，促使开发人员和用户达成共识。</li><li>减少了开发风险，避免了因为需求不确定而在开发过程中浪费了大量的资源。</li></ul><h5 id="模型局限-1"><a href="#模型局限-1" class="headerlink" title="模型局限"></a>模型局限</h5><ul><li>没有考虑到软件的整体和长期的可维护性。</li><li>可能由于达不到质量要求而导致产品被抛弃，从而采用新的模型重新设计。</li></ul><h5 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h5><p>原型方法比较适用于用户需求不清、需求经常变化的情况。当系统规模不是很大也不太复杂时，采用该方法比较好。</p><h4 id="原型进化（-Prototype-Evolution）"><a href="#原型进化（-Prototype-Evolution）" class="headerlink" title="原型进化（ Prototype Evolution）"></a>原型进化（ Prototype Evolution）</h4><p>原型进化对开发过程的考虑是，针对有待开发的软件系统，先开发一个原型系统给用户使用，然后根据用户使用情况的意见反馈，对原型系统不断修改，使它逐步接近并最终到达开发目标。<strong>跟快速原型不同的是，快速原型在完成需求定义后将被抛弃，而原型进化所要创建的原型则是一个今后将要投入应用的系统</strong>，只是所创建的原型系统在功能、性能等方面还有许多不 足，还没有达到最终开发目标，需要不断改进。 原型进化的工作流程如图 2-3 所示。</p><p><img src="PrototypeEvolution.png" alt=""></p><p>从图中可以看到，它具有以下两个特点：</p><ul><li>原型进化模型将软件的需求细部定义、产品开发和有效性验证放在同一个工作进程中交替或并行运作。因此，在获得了软件需求框架以后，例如软件的基本功能被确定以后，就可以直接进入到对软件的开发中。</li><li>原型进化模型是通过不断发布新的软件版本而使软件逐步完善的，因此，这种开发模式特别<strong>适合于那些用户急需的软件产品开发</strong>。它能够快速地向用户交付可以投入实际运行的软件成果，并能够很好地适应软件用户对需求规格的变更。 原型进化模型能够适应软件需求的中途变更，但在应用的时候，以下问题需要得到足够的重视：<ol><li>原型进化模型虽说使开发进程加快了，但不能像瀑布模型那样提供明确的里程碑管理，随着开发过程中版本的快速更新，项目管理、软件配置管理会变得复杂起来，管理者难以把握开发进度。因此，<strong>对于大型软件项目，原型进化模型缺乏有效的管理规程</strong>。</li><li><strong>开发过程中软件版本的快速变更，还可能损伤软件的内部结构，使其缺乏整体性和稳定性</strong>。另外，用于反映软件版本变更的文档也有可能跟不上软件的变更速度。这些问题必将影响到今后软件的维护。</li></ol></li></ul><h3 id="增量模型（Incremental-Model）"><a href="#增量模型（Incremental-Model）" class="headerlink" title="增量模型（Incremental Model）"></a>增量模型（Incremental Model）</h3><p>增量模型融合了瀑布模型的基本成分和原型进化模型的迭代特征，它对软件过程的考虑是：在整体上按照瀑布模型的流程实施项目开发，以方便对项目的管理；但在软件的实际开发中，则<strong>将软件系统按功能分解为许多增减构件，并以构件为单位逐个地创建与交付</strong>，直到全部增量构件创建完成，并都被集成到系统之中交付用户使用。</p><p><img src="Incremental.jpg" alt=""></p><p><img src="Incremental.png" alt=""></p><h4 id="模型特点-2"><a href="#模型特点-2" class="headerlink" title="模型特点"></a>模型特点</h4><ul><li>当使用增量模型时，第一个增量往往是核心的产品。</li><li>客户对每个增量的使用和评估都作为下一个增量发布的新特性和功能。</li><li>该模型采用随着日程时间的进展而交错的线性序列，每一个线性序列产生软件的一个可发布的“增量”。</li></ul><h4 id="模型优点-2"><a href="#模型优点-2" class="headerlink" title="模型优点"></a>模型优点</h4><ul><li>第一个可交付版本所需要的成本和时间很少。</li><li>开发由增量表示的小系统所承担的风险不大。</li><li>由于很快发布了第一个版本，因此可以减少用户需求的变更。</li><li>运行增量投资，即在项目开始时，可以仅对一个或两个增量投资。</li></ul><h4 id="模型局限-2"><a href="#模型局限-2" class="headerlink" title="模型局限"></a>模型局限</h4><ul><li>管理发生的成本、进度和配置的复杂性可能会超出组织的能力。</li><li>如果没有对用户的变更要求进行规划，那么产生的出事增量可能会造成后来增量的不稳定。</li><li>如果需求不想早期思考的那样稳定和完整，那么一些增量就可能需要重新开发，重新发布。</li></ul><h4 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h4><p>项目在既定的商业要求期限之前不可能找到足够的开发人员的情况。</p><h3 id="螺旋模型（Spiral-Model）"><a href="#螺旋模型（Spiral-Model）" class="headerlink" title="螺旋模型（Spiral Model）"></a>螺旋模型（Spiral Model）</h3><p>对于复杂的大型软件，开发一个原型往往达不到要求。<strong>螺旋模型将瀑布模型和演化模型结合起来，加入了两种模型均忽略的风险分析</strong>，弥补了这两种模型的不足。</p><p><img src="Spiral.png" alt=""></p><p>螺旋线中的每个回路都被分成为四个步骤：</p><ol><li>制定计划：确定软件的目标，选定实施方案，明确项目开发的限制条件；</li><li>风险评估：分析所选的方案，识别风险，消除风险；</li><li>实施工程：实施软件开发，验证阶段性产品；</li><li>用户评估：评价开发工作，提出修正建议，建立下一个周期的开发计划。</li></ol><h4 id="模型特点-3"><a href="#模型特点-3" class="headerlink" title="模型特点"></a>模型特点</h4><ul><li>与瀑布模型相比，螺旋模型支持用户需求的动态变化，为用户参与软件开发的所有关键决策提供了方便。</li><li>使用螺旋模型进行软件开发，需要开发人员具有相当丰富的风险评估经验和专门知识。</li></ul><h4 id="模型优点-3"><a href="#模型优点-3" class="headerlink" title="模型优点"></a>模型优点</h4><ul><li>关注软件的重用。</li><li>关注早期错误的消除。</li><li>将质量目标放在首位。</li><li>将开发阶段与维护阶段结合在一起。</li></ul><h4 id="模型局限-3"><a href="#模型局限-3" class="headerlink" title="模型局限"></a>模型局限</h4><ul><li>开发人员需要有较强的风险评估的经验。</li><li>契约开发通常需要事先指定过程模型和发布产品。</li></ul><h4 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h4><p>螺旋模型强调风险分析，使得开发人员和用户对每个演化层出现的风险有所了解，从而做出应有的反应。因此，该模型适合用于庞大、复杂并且具有高风险的系统。</p><h3 id="喷泉模型（Water-Fountain-Model）"><a href="#喷泉模型（Water-Fountain-Model）" class="headerlink" title="喷泉模型（Water Fountain Model）"></a>喷泉模型（Water Fountain Model）</h3><p>喷泉模型是专门<strong>针对面向对象软件开发方法而提出</strong>的。该模型认为软件开发过程自下而上周期的各阶段是相互迭代和无间隙的特性。</p><p>无间隙指在各项活动之间无明显边界，如分析和设计活动之间没有明显的界限，由于对象概念的引入，表达分析、设计、实现等活动只用对象类和关系，从而可以较为容易地实现活动的迭代和无间隙，使其开发自然地包括复用。</p><p>在面向对象方法中，对象既是对现实问题中实体的抽象，也是构造软件系统的基本元素。 因此，建立对象模型在面向对象方法中，既可以用于分析，也可以用于设计，而且分析阶段所获得的对象框架模型可以无缝过渡到设计阶段，以作为软件实现的依据。</p><p><img src="WaterFountain.jpg" alt=""></p><p>开发步骤：</p><ol><li>第一阶段软件开发的目标可以是软件的基本功能；</li><li>第二阶段可以是在第一阶段建立的软件 的基础上，对软件进行进一步的完善，并实现软件的主要功能；</li><li>第三阶段则是在第二阶段的基 础上，对软件进行更加完整的开发，并以实现软件全部功能作为创建目标。 应该说，喷泉模型能够较有效地平衡软件系统的近期需求与远期规划，因此能够较好地满足用户在软件应用上的发展需要。</li></ol><h4 id="模型优点-4"><a href="#模型优点-4" class="headerlink" title="模型优点"></a>模型优点</h4><p>喷泉模型不像瀑布模型那样，需要分析活动结束后才开始设计活动，设计活动结束后才开始编码活动。该模型的各个阶段没有明显的界限，开发人员可以同步进行开发。其优点是可以提高软件项目开发效率，节省开发时间，适应于面向对象的软件开发过程。</p><h4 id="模型局限-4"><a href="#模型局限-4" class="headerlink" title="模型局限"></a>模型局限</h4><p>由于喷泉模型在各个开发阶段是重叠的，因此在开发过程中需要大量的开发人员，因此不利于项目的管理。此外这种模型要求严格管理文档，使得审核的难度加大，尤其是面对可能随时加入各种信息、需求与资料的情况。 </p><h3 id="基于构件的开发模型（Component-based-Development-Model）"><a href="#基于构件的开发模型（Component-based-Development-Model）" class="headerlink" title="基于构件的开发模型（Component-based Development Model）"></a>基于构件的开发模型（Component-based Development Model）</h3><p>基于构件的开发方法是指利用预先包装的构件来构造应用系统。构件可以是组织内部开发的构件，也可以是商品化成品构件。基于构件的开发模型具有许多螺旋模型的特点，它本质上是演化模型，需要以迭代方式构件软件。其不同之处在于，基于构件的开发模型<strong>采用预先打包的软件构件开发应用</strong>。</p><h2 id="具体开发流程参考"><a href="#具体开发流程参考" class="headerlink" title="具体开发流程参考"></a>具体开发流程参考</h2><p>类似于螺旋模型，结合了瀑布模型和演化模型。</p><p><img src="dev_workflow.png" alt=""></p><p>本文参考：</p><ol><li><a href="https://www.cnblogs.com/jojop/p/11801241.html" target="_blank" rel="noopener">https://www.cnblogs.com/jojop/p/11801241.html</a></li><li><a href="https://www.cnblogs.com/youcong/p/9498489.html" target="_blank" rel="noopener">https://www.cnblogs.com/youcong/p/9498489.html</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;#软件开发过程模型&quot;&gt;软件开发过程模型&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;#瀑布模型（Waterfall Model）&quot;&gt;瀑布模型（Waterfall Model）&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a h
-      
-    
-    </summary>
-    
-    
-      <category term="软件工程" scheme="http://thmasterplan.cn/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
-    
-    
-      <category term="软件工程" scheme="http://thmasterplan.cn/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
     
   </entry>
   
