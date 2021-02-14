@@ -43,36 +43,6 @@
   </entry>
   
   <entry>
-    <title>MySQL事务</title>
-    <link href="http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/"/>
-    <id>http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/</id>
-    <published>2021-02-13T03:56:29.000Z</published>
-    <updated>2021-02-13T03:56:29.677Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL查询优化</title>
-    <link href="http://thmasterplan.cn/uncategorized/MySQL%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
-    <id>http://thmasterplan.cn/uncategorized/MySQL%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</id>
-    <published>2021-02-13T03:56:15.000Z</published>
-    <updated>2021-02-13T03:56:15.971Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>MySQL索引</title>
     <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/"/>
     <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/</id>
@@ -569,6 +539,65 @@
     
     
       <category term="Spring" scheme="http://thmasterplan.cn/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CGLib动态代理</title>
+    <link href="http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"/>
+    <id>http://thmasterplan.cn/JavaWeb/CGLib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</id>
+    <published>2020-10-16T02:50:22.000Z</published>
+    <updated>2020-11-23T14:23:20.987Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="#概述">概述</a></p><p><a href="#使用">使用</a></p><p><a href="#JDK与CGLib动态代理区别">JDK与CGLib动态代理区别</a></p><ul><li><p><a href="#区别">区别</a></p></li><li><p><a href="#使用注意">使用注意</a></p></li><li><p><a href="#Spring中如何选择代理机制？">Spring中如何选择代理机制？</a></p></li></ul><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>CGLib是一个强大、高性能的字节码生产类库，可以实现运行期动态扩展Java类和实现Java接口，Spring在运行期间通过 CGlib<strong>继承被代理类</strong>，重写父类的方法，实现AOP面向切面编程。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用Enhancer类的create方法得到代理对象，该方法的参数列表：</p><ul><li>Class ：被代理类的class对象</li><li>Callback：用于提供增强的代码，一般写该接口的实现类MethodInterceptor</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Object cgLibProxy = Enhancer.create(XXX.getClass(), <span class="keyword">new</span> MethodInterceptor()&#123;</span><br><span class="line">    <span class="comment">//执行被代理类的任何方法都会经过该方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h1 id="JDK与CGLib动态代理区别"><a href="#JDK与CGLib动态代理区别" class="headerlink" title="JDK与CGLib动态代理区别"></a>JDK与CGLib动态代理区别</h1><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul><li><p>JDK动态代理是面向接口，<strong>通过创建代理实现类实现</strong>，创建代理速度比CGLib快。</p></li><li><p><strong>CGLib动态代理是通过继承被代理类实现</strong>（如果被代理类被final关键字所修饰，那么会失败），创建代理没有JDK动态代理快，但是运行速度比JDK动态代理要快。</p></li></ul><h2 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h2><p>如果要被代理的对象是个实现类，那么Spring会使用JDK动态代理来完成操作（Spirng默认采用JDK动态代理实现机制）</p><p>如果被代理类不是实现类，Spring会强制使用CGLib来实现动态代理。</p><h2 id="Spring中如何选择代理机制？"><a href="#Spring中如何选择代理机制？" class="headerlink" title="Spring中如何选择代理机制？"></a>Spring中如何选择代理机制？</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure><p>通过配置Spring的中aop:config标签来显示的指定使用动态代理机制 proxy-target-class=true表示使用CGLib代理，如果为false就是默认使用JDK动态代理。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;#概述&quot;&gt;概述&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#使用&quot;&gt;使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#JDK与CGLib动态代理区别&quot;&gt;JDK与CGLib动态代理区别&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;#区别&quot;&gt;区别&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/categories/JavaWeb/"/>
+    
+    
+      <category term="JavaWeb" scheme="http://thmasterplan.cn/tags/JavaWeb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开发原则</title>
+    <link href="http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/"/>
+    <id>http://thmasterplan.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E5%BC%80%E5%8F%91%E5%8E%9F%E5%88%99/</id>
+    <published>2020-10-13T07:23:38.000Z</published>
+    <updated>2020-11-23T14:23:21.122Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="#概述">概述</a></p><p><a href="#S：单一职责原则（Single-Responsibility Principle）">S：单一职责原则（Single-Responsibility Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#O：开闭原则（Open - Closed Principle）">O：开闭原则（Open - Closed Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#L：里氏替换原则（Liskov Substitution Principle）">L：里氏替换原则（Liskov Substitution Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#I：接口隔离原则（Interface Segregation Principle）">I：接口隔离原则（Interface Segregation Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#D：依赖倒置原则（Dependency-Inversion Principle）">D：依赖倒置原则（Dependency-Inversion Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li><li><p><a href="#例子">例子</a></p></li></ul><p><a href="#组合/聚合复用原则（Composite/Aggregate Reuse Principle）">组合/聚合复用原则（Composite/Aggregate Reuse Principle）</a></p><ul><li><p><a href="#定义">定义</a></p></li><li><p><a href="#原则分析">原则分析</a></p></li></ul><p><a href="#迪米特法则（Law of Demeter）">迪米特法则（Law of Demeter）</a></p><ul><li><a href="#例子">例子</a></li></ul><p><a href="#设计原则核心思想">设计原则核心思想</a></p><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在软件开发中，前人对软件系统的设计和开发总结了一些原则和模式， 不管用什么语言做开发，都将对我们系统设计和开发提供指导意义。</p><p>面向对象的基本原则(solid)是五个，但是在经常被提到的除了这五个之外还有 <code>迪米特法则</code>和<code>合成复用原则</code>。</p><h1 id="S：单一职责原则（Single-Responsibility-Principle）"><a href="#S：单一职责原则（Single-Responsibility-Principle）" class="headerlink" title="S：单一职责原则（Single-Responsibility Principle）"></a>S：单一职责原则（Single-Responsibility Principle）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>一个对象应该只包含单一的职责，并且该职责被完整地封装在一个类中</strong>。</p><h2 id="原则分析"><a href="#原则分析" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>一个<strong>类(或者大到模块，小到方法)</strong>承担的职责越多，它被复用的可能性越小；如果一个类承担的职责过多，就相当于将这些职责耦合在一起，当其中一个职责变化时，可能会影响其他职责的运作。</li><li>类的职责主要包括两个方面: 数据职责和行为职责，数据职责通过其属性来体现，而行为职责通过其方法来体现。</li><li>单一职责原则是实现高内聚、低耦合的指导方针，在很多代码重构手法中都能找到它的存在，它是最简单但又最难运用的原则，需要设计人员发现类的不同职责并将其分离，而发现类的多重职责需要设计人员具有较强的分析设计能力和相关重构经验。</li></ul><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或类设计得是否合理，但是“职责”和“变化原因”都是没有具体标准的，一个类到底要负责那些职责? 这些职责怎么细化? 细化后是否都要有一个接口或类? 这些都需从实际的情况考虑。因项目而异，因环境而异。</p><p>例：SpringMVC 中Entity, DAO, Service, Controller, Util等的分离。</p><h1 id="O：开闭原则（Open-Closed-Principle）"><a href="#O：开闭原则（Open-Closed-Principle）" class="headerlink" title="O：开闭原则（Open - Closed Principle）"></a>O：开闭原则（Open - Closed Principle）</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p><strong>一个软件实体(如类、模块和函数)应该对扩展开放，对修改关闭</strong>。</p><h2 id="原则分析-1"><a href="#原则分析-1" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>当软件实体因需求要变化时, 尽量通过扩展已有软件实体，可以提供新的行为，以满足对软件的新的需求，而不是修改已有的代码，使变化中的软件有一定的适应性和灵活性 。已有软件模块，特别是最重要的抽象层模块不能再修改，这使变化中的软件系统有一定的稳定性和延续性。</li><li><strong>实现开闭原则的关键就是抽象化</strong>：<strong>在开闭原则中，不允许修改抽象类或者接口，允许扩展的是具体的实现类。</strong>抽象类和接口在开闭原则中扮演着极其重要的角色，既要预知可能变化的需求，又要预见所有可能已知的扩展，所以在这里”抽象化”是关键!</li><li>可变性的封闭原则：找到系统的可变因素，将它封装起来。 不要把可变因素放在多个类中，或者散落在程序的各个角落，应该将可变因素封装起来，并且切忌不要把所有的可变因素封装在一起，应该分块封装可变因素。</li></ul><h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p>设计模式中模板方法模式和观察者模式都是开闭原则的极好体现。</p><h1 id="L：里氏替换原则（Liskov-Substitution-Principle）"><a href="#L：里氏替换原则（Liskov-Substitution-Principle）" class="headerlink" title="L：里氏替换原则（Liskov Substitution Principle）"></a>L：里氏替换原则（Liskov Substitution Principle）</h1><h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><p> <strong>所有引用父类的地方必须能透明地替换为其子类的对象</strong>。</p><h2 id="原则分析-2"><a href="#原则分析-2" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li><p>讲的是基类和子类的关系，只有这种关系存在时，里氏替换原则才存在。正方形是长方形是理解里氏替换原则的经典例子。</p></li><li><p>里氏替换原则可以<strong>通俗表述</strong>为： <strong>在软件中如果能够使用基类对象，那么一定能够使用其子类对象</strong>。把基类都替换成它的子类，程序将不会产生任何错误和异常，<strong>反之不成立</strong>，如果一个软件实体使用的是一个子类的话，那么它不一定能够使用基类。</p></li><li><p><strong>里氏替换原则是实现开闭原则的重要方式之一【抽象类和接口（不允许修改）看作基类，实现类（允许扩展）看作子类】，由于使用基类对象的地方都可以使用子类对象，因此<u>在程序中尽量使用基类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象</u>。</strong></p></li></ul><h1 id="I：接口隔离原则（Interface-Segregation-Principle）"><a href="#I：接口隔离原则（Interface-Segregation-Principle）" class="headerlink" title="I：接口隔离原则（Interface Segregation Principle）"></a>I：接口隔离原则（Interface Segregation Principle）</h1><h2 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h2><p><strong>客户端不应该依赖那些它不需要的接口。</strong></p><p>另一种定义：<strong>一旦一个接口太大，则需要将它分割成一些更细小的接口</strong>，使用该接口的客户端仅需知道与之相关的方法即可。 注意，在该定义中的接口指的是方法。例如调用某个类的public方法。这个方法对外就是接口。</p><h2 id="原则分析-3"><a href="#原则分析-3" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>使用多个专门的接口，而不使用单一的总接口。</li><li><strong>使用接口隔离原则拆分接口时，首先必须满足单一职责原则</strong>，将一组相关的操作定义在一个接口中，且在满足高内聚的前提下，接口中的方法越少越好。</li></ul><h1 id="D：依赖倒置原则（Dependency-Inversion-Principle）"><a href="#D：依赖倒置原则（Dependency-Inversion-Principle）" class="headerlink" title="D：依赖倒置原则（Dependency-Inversion Principle）"></a>D：依赖倒置原则（Dependency-Inversion Principle）</h1><h2 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h2><p><strong>高层模块不应该依赖（使用）低层模块</strong>，<strong>它们都应该依赖抽象</strong>。抽象不应该依赖（使用）具体，具体应该依赖（使用）抽象。</p><h2 id="原则分析-4"><a href="#原则分析-4" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li><p><strong>如果说开闭原则是面向对象设计的目标，依赖倒置原则则是手段</strong>。</p></li><li><p>依赖倒置原则的中心思想是面向接口编程。</p></li><li><p>依赖倒置原则是里氏替换原则的补充。</p></li></ul><h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><p>依赖倒置原则的常用实现方式之一是在代码中使用抽象，而将具体类放在配置文件中。</p><p>例：Spring中的依赖注入。</p><h1 id="组合-聚合复用原则（Composite-Aggregate-Reuse-Principle）"><a href="#组合-聚合复用原则（Composite-Aggregate-Reuse-Principle）" class="headerlink" title="组合/聚合复用原则（Composite/Aggregate Reuse Principle）"></a>组合/聚合复用原则（Composite/Aggregate Reuse Principle）</h1><h2 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h2><p>尽量使用对象组合，而不是继承来达到复用的目的。</p><h2 id="原则分析-5"><a href="#原则分析-5" class="headerlink" title="原则分析"></a>原则分析</h2><ul><li>组合/聚合可以使系统更加灵活，类与类之间的耦合度降低，一个类的变化对其他类造成的影响相对较少，因此一般首选使用组合/聚合来实现复用。</li><li>其次才考虑继承，在使用继承时，需要严格遵循里氏代换原则，有效使用继承会有助于对问题的理解，降低复杂度，而滥用继承反而会增加系统构建和维护的难度以及系统的复杂度，因此需要慎重使用继承复用。</li></ul><h1 id="迪米特法则（Law-of-Demeter）"><a href="#迪米特法则（Law-of-Demeter）" class="headerlink" title="迪米特法则（Law of Demeter）"></a>迪米特法则（Law of Demeter）</h1><p>系统中的类尽量不要与其他类互相作用，以减少类之间的耦合度。又叫最少知识原则(Least Knowledge Principle)。</p><p>目标：实现高内聚、低耦合。</p><h2 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h2><p>设计模式Facade模式、Mediator模式。</p><h1 id="设计原则核心思想"><a href="#设计原则核心思想" class="headerlink" title="设计原则核心思想"></a>设计原则核心思想</h1><ol><li><p><strong>找出应用中可能需要变化之处</strong>，把它们独立出来，不要和那些不需要变化的代码混在一起。 </p></li><li><p><strong>针对接口编程</strong>，而不是针对实现编程。</p></li><li><p>为了交互对象之间的<strong>松耦合</strong>设计而努力。</p></li></ol><p>参考：<a href="https://www.pdai.tech/md/dev-spec/spec/dev-th-solid.html" target="_blank" rel="noopener">https://www.pdai.tech/md/dev-spec/spec/dev-th-solid.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;#概述&quot;&gt;概述&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#S：单一职责原则（Single-Responsibility Principle）&quot;&gt;S：单一职责原则（Single-Responsibility Principle）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="软件工程" scheme="http://thmasterplan.cn/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
+    
+    
+      <category term="软件工程" scheme="http://thmasterplan.cn/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
     
   </entry>
   
