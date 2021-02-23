@@ -26,7 +26,7 @@
 <meta property="og:description" content="查询优化基于成本的优化MySQL执行一个查询可以有不同的执行方案，它会选择其中成本最低的方案执行，这个成本最低的方案就是所谓的执行计划。这个成本主要包含I&#x2F;O成本和CPU成本两方面。 对于InnoDB存储引擎，页是磁盘和内存交互的基本单位，MySQL的设计者规定默认值：  I&#x2F;O成本：读取一个页的成本是1.0。 CPU成本：读取以及检测一条记录是否符合搜索条件的成本是0.1。  单表查询的成本对于">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-14T08:37:07.000Z">
-<meta property="article:modified_time" content="2021-02-15T13:49:53.612Z">
+<meta property="article:modified_time" content="2021-02-15T14:00:45.923Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -287,7 +287,7 @@
 <p><strong>查看表的统计信息</strong></p>
 <p>使用<code>SHOW TABLE STATUS LIKE &#39;single_table&#39;\G</code>查看表的统计信息，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW TABLE STATUS LIKE &#39;single_table&#39;\G</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">           Name: single_table</span><br><span class="line">         Engine: InnoDB</span><br><span class="line">        Version: 10</span><br><span class="line">     Row_format: Dynamic</span><br><span class="line">           Rows: 9693</span><br><span class="line"> Avg_row_length: 163</span><br><span class="line">    Data_length: 1589248</span><br><span class="line">Max_data_length: 0</span><br><span class="line">   Index_length: 2752512</span><br><span class="line">      Data_free: 4194304</span><br><span class="line"> Auto_increment: 10001</span><br><span class="line">    Create_time: 2018-12-10 13:37:23</span><br><span class="line">    Update_time: 2018-12-10 13:38:03</span><br><span class="line">     Check_time: NULL</span><br><span class="line">      Collation: utf8_general_ci</span><br><span class="line">       Checksum: NULL</span><br><span class="line"> Create_options:</span><br><span class="line">        Comment:</span><br><span class="line">1 row in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-<p>对于成本计算，最重要的信息是<code>Rows</code>和<code>Data_length</code>。以上表的统计信息为例，我们可以得到该表有9693条记录，1589248Byte/(16<em>1024Byte)即97页。那么全表扫描的的成本就是I/O成本(`97.0</em>1.0+1.1=98.1<code>)加上CPU成本(</code>9693*0.1+1.0=1939.6`)等于1068.4。1.1和1.0是硬编码的微调常数。</p>
+<p>对于成本计算，最重要的信息是<code>Rows</code>和<code>Data_length</code>。以上表的统计信息为例，我们可以得到该表有9693条记录，<code>1589248Byte/(16*1024Byte)</code>即97页。那么全表扫描的的成本就是I/O成本(<code>97.0*1.0+1.1=98.1</code>)加上CPU成本(<code>9693*0.1+1.0=1939.6</code>)等于1068.4。1.1和1.0是硬编码的微调常数。</p>
 <p>注：全表扫描B+树非叶子节点是不需要被访问的，这里计算成本时忽略了这点。</p>
 <p><strong>索引统计数据</strong></p>
 <p>当<strong>使用非唯一二级索引和<code>IN</code>关键字</strong>时，<code>IN</code>子句中可能存在许多单点区间，例如：</p>
@@ -455,6 +455,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/" title="MySQL事务"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
     
     
     <li class="next">
