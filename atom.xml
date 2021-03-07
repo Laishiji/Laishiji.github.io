@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thmasterplan.cn/"/>
-  <updated>2021-02-15T14:02:49.356Z</updated>
+  <updated>2021-03-07T13:56:29.019Z</updated>
   <id>http://thmasterplan.cn/</id>
   
   <author>
@@ -18,16 +18,28 @@
   
   <entry>
     <title>MySQL事务</title>
-    <link href="http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/"/>
-    <id>http://thmasterplan.cn/uncategorized/MySQL%E4%BA%8B%E5%8A%A1/</id>
+    <link href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/"/>
+    <id>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/</id>
     <published>2021-02-15T14:02:49.000Z</published>
-    <updated>2021-02-15T14:02:49.356Z</updated>
+    <updated>2021-03-07T13:56:29.019Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h1><ul><li><p><strong>原子性（Atomicity）</strong>：事务必须被视为不可分割的最小工作单元。<strong>事务中的所有操作要么全部提交成功，要么全部失败回滚</strong>。</p></li><li><p><strong>一致性（Consistency）</strong>：数据库在事务执行前后都保持一致性状态。在一致性状态下，<strong>所有事务对同一个数据的读取结果一致</strong>。</p><p>一致性可理解为最终目标，原子性与隔离性可理解为要满足的要求。</p></li><li><p><strong>隔离性（Isolation）：一个事务所做的修改在最终提交以前，对其它事务是不可见的。</strong></p></li><li><p><strong>持久性（Durability）：一旦事务提交，则其所做的修改将会永远保存到数据库中。</strong>即使系统发生崩溃，事务执行的结果也不会丢失。</p></li></ul><p>MySQL InnoDB存储引擎中的事务完全符合ACID的特性。</p><h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><h2 id="未提交读（READ-UNCOMMITTED）"><a href="#未提交读（READ-UNCOMMITTED）" class="headerlink" title="未提交读（READ UNCOMMITTED）"></a>未提交读（READ UNCOMMITTED）</h2><p><strong>在该级别下，事务中的修改即使没有提交，对其他事务也都是可见的。</strong></p><p>该级别不满足隔离性定义，实际应用中一般不用。</p><h2 id="提交读（READ-COMMITTED）"><a href="#提交读（READ-COMMITTED）" class="headerlink" title="提交读（READ COMMITTED）"></a>提交读（READ COMMITTED）</h2><p><strong>在该级别下，事务中的修改，只有提交后，对其他事务才可见。</strong></p><p>该级别不满足隔离性定义，是大多数数据库的默认隔离级别（MySQL不是）。</p><h2 id="可重复读（REPEATABLE-READ）"><a href="#可重复读（REPEATABLE-READ）" class="headerlink" title="可重复读（REPEATABLE READ）"></a>可重复读（REPEATABLE READ）</h2><p><strong>在该级别下，保证了同一事务中多次读取同样记录的结果是一致的。</strong></p><p>该级别不满足隔离性定义，因为理论上REPEATABLE READ依旧无法解决幻读问题。但是在RR级别下InnoDB和XtraDB通过MVCC和next-key Lock算法解决了幻读问题，因此对于这两个存储引擎而言该级别就满足了ACID定义了。另外，RR是InnoDB的默认隔离级别。</p><h2 id="可串行化（SERIALIZABLE）"><a href="#可串行化（SERIALIZABLE）" class="headerlink" title="可串行化（SERIALIZABLE）"></a>可串行化（SERIALIZABLE）</h2><p>可串行化是最高的隔离级别并满足隔离性定义。它通过<strong>强制事务串行执行</strong>，避免了幻读问题。简单来说，在该隔离级别下数据库会在读取的每一行数据上加锁，因此可能导致大量的超时和锁争用的问题。</p><p>实际应用中几乎不用。</p><h2 id="ASNI-SQL隔离级别"><a href="#ASNI-SQL隔离级别" class="headerlink" title="ASNI SQL隔离级别"></a>ASNI SQL隔离级别</h2><div class="table-container"><table><thead><tr><th style="text-align:center">隔离级别</th><th style="text-align:center">脏读可能性</th><th style="text-align:center">不可重复读可能性</th><th style="text-align:center">幻读可能性</th><th style="text-align:center">加锁读</th></tr></thead><tbody><tr><td style="text-align:center">未提交读</td><td style="text-align:center">Y</td><td style="text-align:center">Y</td><td style="text-align:center">Y</td><td style="text-align:center">N</td></tr><tr><td style="text-align:center">提交读</td><td style="text-align:center">N</td><td style="text-align:center">Y</td><td style="text-align:center">Y</td><td style="text-align:center">N</td></tr><tr><td style="text-align:center">可重复读</td><td style="text-align:center">N</td><td style="text-align:center">N</td><td style="text-align:center">Y</td><td style="text-align:center">N</td></tr><tr><td style="text-align:center">可串行化</td><td style="text-align:center">N</td><td style="text-align:center">N</td><td style="text-align:center">N</td><td style="text-align:center">Y</td></tr></tbody></table></div><h1 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h1><h1 id="事务的实现"><a href="#事务的实现" class="headerlink" title="事务的实现"></a>事务的实现</h1><h2 id="redo"><a href="#redo" class="headerlink" title="redo"></a>redo</h2><h2 id="undo"><a href="#undo" class="headerlink" title="undo"></a>undo</h2><h2 id="purge"><a href="#purge" class="headerlink" title="purge"></a>purge</h2><h2 id="group-commit"><a href="#group-commit" class="headerlink" title="group commit"></a>group commit</h2>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ACID&quot;&gt;&lt;a href=&quot;#ACID&quot; class=&quot;headerlink&quot; title=&quot;ACID&quot;&gt;&lt;/a&gt;ACID&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;原子性（Atomicity）&lt;/strong&gt;：事务必须被视为不可分割的最小工作单元。&lt;s
+      
     
     </summary>
     
     
+      <category term="数据库" scheme="http://thmasterplan.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="http://thmasterplan.cn/tags/MySQL/"/>
     
   </entry>
   
