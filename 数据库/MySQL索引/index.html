@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/Bplus-tree.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/exampledata.jpg">
 <meta property="article:published_time" content="2021-01-29T14:48:41.000Z">
-<meta property="article:modified_time" content="2021-02-15T02:32:47.886Z">
+<meta property="article:modified_time" content="2021-03-08T09:45:25.248Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -267,7 +267,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.1k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.2k(words)</span>
 	
 	
 
@@ -364,6 +364,9 @@
 <p>如果需要回表的记录非常多，这个代价还是很大的，还不如直接全表扫描聚簇索引来的快呢。因此使用二级索引查询时我们应该查询尽量少的数据，或者使用<code>LIMIT</code>限制查询数量。</p>
 <p>那么如果我们的<strong>查询列中只有索引列</strong>，就不需要回表了呗，即所谓的覆盖索引。比如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, birthday, phone_number </span><br><span class="line"><span class="keyword">FROM</span> person_info </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> &gt; <span class="string">'Asa'</span> </span><br><span class="line"><span class="keyword">AND</span> <span class="keyword">name</span> &lt; <span class="string">'Barlow'</span>;</span><br></pre></td></tr></table></figure>
+<p>注意事项：以如下SQL语句为例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, birthday</span><br><span class="line"><span class="keyword">FROM</span> person_info </span><br><span class="line"><span class="keyword">WHERE</span> phone_number = <span class="string">'15123983239'</span>;</span><br></pre></td></tr></table></figure>
+<p>注意这个SQL语句依旧使用到了索引，由于使用到了索引覆盖，因此单表访问方法是index，即扫描整个联合二级索引（在索引覆盖时扫描二级索引比全表扫描聚簇索引成本更低），而不像最左匹配那样使用到了具体的某一索引列进行搜索。</p>
 <h1 id="索引注意事项"><a href="#索引注意事项" class="headerlink" title="索引注意事项"></a>索引注意事项</h1><ol>
 <li><p><strong>只为用于搜索、排序或分组的列创建索引</strong>：即只为出现在<code>WHERE</code>子句中的列、连接子句中的连接列，或者出现在<code>ORDER BY</code>或<code>GROUP BY</code>子句中的列创建索引。</p>
 </li>
