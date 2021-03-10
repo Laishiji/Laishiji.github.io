@@ -26,7 +26,7 @@
 <meta property="og:description" content="查询优化基于成本的优化MySQL执行一个查询可以有不同的执行方案，它会选择其中成本最低的方案执行，这个成本最低的方案就是所谓的执行计划。这个成本主要包含I&#x2F;O成本和CPU成本两方面。 对于InnoDB存储引擎，页是磁盘和内存交互的基本单位，MySQL的设计者规定默认值：  I&#x2F;O成本：读取一个页的成本是1.0。 CPU成本：读取以及检测一条记录是否符合搜索条件的成本是0.1。  单表查询的成本对于">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-14T08:37:07.000Z">
-<meta property="article:modified_time" content="2021-03-08T14:12:57.004Z">
+<meta property="article:modified_time" content="2021-03-10T04:46:41.975Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.5k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.9k(words)</span>
 	
 	
 
@@ -542,7 +542,16 @@
 </ul>
 <h3 id="Json格式的执行计划（包含成本信息）"><a href="#Json格式的执行计划（包含成本信息）" class="headerlink" title="Json格式的执行计划（包含成本信息）"></a>Json格式的执行计划（包含成本信息）</h3><p>在<code>EXPLAIN</code>关键字后添加<code>FORMAT=JSON</code>即可，例如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">FORMAT</span>=<span class="keyword">JSON</span> </span><br><span class="line"><span class="keyword">SELECT</span> * </span><br><span class="line"><span class="keyword">FROM</span> s1 <span class="keyword">INNER</span> <span class="keyword">JOIN</span> s2 </span><br><span class="line"><span class="keyword">ON</span> s1.key1 = s2.key2 </span><br><span class="line"><span class="keyword">WHERE</span> s1.common_field = <span class="string">'a'</span>\G</span><br></pre></td></tr></table></figure>
-<h1 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h1>
+<h1 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h1><p>MySQL服务器启动的时候会向操作系统申请了一片连续的内存，即Buffer Pool（缓冲池），用于缓存磁盘中的页。默认情况下Buffer Pool只有128M，可通过参数<code>innodb_buffer_pool_size</code>设置，其单位是字节。</p>
+<ul>
+<li><strong>控制信息</strong>：每一个缓存页对应一些控制信息，包含页所属的表空间编号、页号、缓存页在Buffer Pool的地址、锁信息和LSN信息等等。控制信息约占Buffer Pool的5%左右，且并不在<code>innodb_buffer_pool_size</code>分配的范围之内。</li>
+<li><strong>free链表</strong>：把所有空闲的缓存页对应的控制块作为一个节点放到一个链表中，这个链表就是free链表（或者说空闲链表）。每当需要从磁盘中加载一个页到Buffer Pool中时，就从free链表中取一个空闲的缓存页，并且把该缓存页对应的控制块的信息填上，然后把该缓存页对应的free链表节点从链表中移除。</li>
+<li><strong>缓存页定位</strong>：使用哈希表，key是表空间号+页号，value是缓存页的内存地址。</li>
+<li><strong>flush链表</strong>：凡是修改过的缓存页对应的控制块都会作为一个节点加入到flush链表中，因为这个链表节点对应的缓存页都是需要在稍后一起被刷新到磁盘上的。</li>
+<li><strong>页面置换策略-LRU链表</strong>：将新加载进内存的缓存页和最近被访问的缓存页置于LRU链表的头部。（实际的LRU链表是划分区域的，热数据划为young区域，冷数据划为old区域）</li>
+<li>待补充。</li>
+</ul>
+
       
     </div>
     <div class="article-footer">
