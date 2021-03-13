@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/Exception.png">
 <meta property="article:published_time" content="2020-04-08T14:47:15.000Z">
-<meta property="article:modified_time" content="2021-01-22T06:11:34.375Z">
+<meta property="article:modified_time" content="2021-03-10T05:04:17.398Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -508,7 +508,7 @@
 <p>​        若子类不重写hashCode方法，那么子类对象的<strong>hash码是调用本地C++方法根据对象的内存地址生成的</strong>。</p>
 <ol>
 <li><p>结论：<strong>我们重写了一个类的equals和hashCode方法后，<code>a.equals(b) == true</code>是<code>a.hashCode() == b.hashCode()</code>的充分条件。</strong></p>
-<p>结论证明：若<code>a.equals(b)</code>，说明两个对象的字段值都相等。重写的hashCode方法中生成hash码的方式是根据对象的字段值采用相同的算法生成，因此两个对象的hashCode一定相等。</p>
+<p>结论证明：若<code>a.equals(b)</code>，说明两个对象的字段值都相等。重写的hashCode方法中生成hash码的方式是根据对象的字段值采用相同的算法（一般是对象属性值的线性组合）生成，因此两个对象的hashCode一定相等。</p>
 </li>
 <li><p><code>HashSet</code>是通过持有一个<code>HashMap</code>实例实现的。</p>
 </li>

@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/Waiting.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/Timed_Waiting.png">
 <meta property="article:published_time" content="2020-09-13T09:07:19.000Z">
-<meta property="article:modified_time" content="2021-03-07T06:13:57.015Z">
+<meta property="article:modified_time" content="2021-03-12T11:56:14.481Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java并发">
 <meta name="twitter:card" content="summary">
@@ -449,6 +449,7 @@
 <p>而要获取某个具体线程对象的中断标志，则应该用isInterrupted()方法。</p>
 <h1 id="Thread其他常见方法"><a href="#Thread其他常见方法" class="headerlink" title="Thread其他常见方法"></a>Thread其他常见方法</h1><h2 id="join-1"><a href="#join-1" class="headerlink" title="join"></a>join</h2><p>项目中经常会遇到“等待其他几个线程执行完毕后才能继续往下执行”的场景，比如多个线程加载资源，需要等待多个线程全部加载完毕再汇总处理。Thread的join()则可以满足该场景的需求。</p>
 <p>join()的作用：在线程A中调用线程B的join() 方法，线程A进入waiting状态，直到线程B执行完毕。</p>
+<p><strong>注意：join底层使用wait实现，故调用该方法会释放锁。</strong></p>
 <h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h2><p>sleep(long millis)是Thread类的static native方法，单位是毫秒。调用<code>Thread.sleep(1000)</code>并不会释放锁，进入<strong>timed waiting状态</strong>，1000毫秒过后该线程自动唤醒进入就绪态等待CPU调度。</p>
 <h2 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h2><p>Thread类的静态方法。当一个线程调用yield方法时，实际就是在暗示线程调度器当前线程请求让出自己的CPU使用，但是线程调度器可以无条件忽略该暗示。</p>
 <p>如果当前线程成功让出CPU使用权，会进入<strong>就绪态</strong>，甚至可能发生刚让出CPU使用权就又被调度到运行态的情况。</p>

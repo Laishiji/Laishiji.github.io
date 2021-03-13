@@ -26,7 +26,7 @@
 <meta property="og:description" content="会话 Cookie Session 会话会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一标识一个用户并记录其状态。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。 Cookie 概念：客户端会话技术，将数据保存到客户端。javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-01T12:55:36.000Z">
-<meta property="article:modified_time" content="2020-11-23T14:23:20.990Z">
+<meta property="article:modified_time" content="2021-03-13T10:57:25.688Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="JavaWeb">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/Cookie-Session/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.1k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
 	
 	
 
@@ -358,10 +358,14 @@
 </li>
 </ul>
 </li>
-<li><p>原理：<strong>Session的实现依赖于Cookie</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。</p>
-<ul>
+<li><p>原理：<strong>Session通过cookie实现，若客户端不支持cookie，则通过URL回写实现</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。（URL回写是指： 每次响应报文中都添加JSESSIONID键值对，这样客户端每次请求就可以携带上该键值对）</p>
+</li>
+<li><ul>
 <li>客户端发送请求-&gt;</li>
-<li>服务端创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</li>
+</ul>
+</li>
+<li><p>服务端创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</p>
+<ul>
 <li>客户端存储cookie数据 -&gt; </li>
 <li>客户端下一次请求http请求头设置cookie -&gt; </li>
 <li>服务器验证sessionID</li>

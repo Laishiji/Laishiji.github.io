@@ -26,7 +26,7 @@
 <meta property="og:description" content="一.基础 二.增删改 三.查询  DISTINCT  LIMIT   四.排序 五.过滤 六.通配符 七.正则表达式 八.计算字段 九.函数 十.分组 十一.子查询 十二.JOIN  内连接  自连接  外部连接   十三.UNION 十四.视图 十五.事务管理 十六.安全管理 十七.范式 参考 一.基础 注释： 1234## 注释-- 注释&#x2F;* 注释   注释*&#x2F;  查看数据库和表信息： 123">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-18T04:30:33.000Z">
-<meta property="article:modified_time" content="2021-01-29T15:00:41.306Z">
+<meta property="article:modified_time" content="2021-03-10T07:55:34.660Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.7k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 3.8k(words)</span>
 	
 	
 
@@ -560,7 +560,7 @@
 </li>
 </ul>
 <p>标识事务的开始：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 默认事务的访问模式为可读可写</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 当前事务只读</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span> <span class="keyword">READ</span> <span class="keyword">ONLY</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 当前事务可读可写</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span> <span class="keyword">READ</span> WRITE;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 启动一致性读</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span> <span class="keyword">WITH</span> <span class="keyword">CONSISTENT</span> <span class="keyword">SNAPSHOT</span>;</span><br></pre></td></tr></table></figure>
 <p>回退：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ROLLBACK</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>事务处理用来管理INSERT, UPDATE和DELETE，你不能回退SELECT语句，CREATE语句和DROP操作</strong>。</p>
