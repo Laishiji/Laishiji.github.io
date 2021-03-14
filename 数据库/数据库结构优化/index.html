@@ -17,21 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Cookie_Session | Blog Of TheMasterplan</title>
-  <meta name="description" content="会话 Cookie Session 会话会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一标识一个用户并记录其状态。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。 Cookie 概念：客户端会话技术，将数据保存到客户端。javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证">
+  <title>数据库结构优化 | Blog Of TheMasterplan</title>
+  <meta name="description" content="范式1NF 表的每一个字段都是最小单元，不可再分。 实践：数据库设计画ER图时对实体做好分析可满足1NF。 2NF 满足1NF，且表中的字段必须完全依赖于全部主键而非部分主键。 实践：一张表只设一个主键，若该表满足1NF，则一定满足2NF。 3NF 满足2NF，且非主键外的所有字段必须互不依赖，即消除了依赖传递，例如：主键决定字段A，字段A决定字段B，则主键可决定字段B，这就是依赖传递。 实践：若">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cookie_Session">
-<meta property="og:url" content="http://thmasterplan.cn/JavaWeb/Cookie-Session/index.html">
+<meta property="og:title" content="数据库结构优化">
+<meta property="og:url" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="TheMasterplan">
-<meta property="og:description" content="会话 Cookie Session 会话会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一标识一个用户并记录其状态。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。 Cookie 概念：客户端会话技术，将数据保存到客户端。javax.servlet.http.Cookie(类)。  主要作用：避免多次登录验证">
+<meta property="og:description" content="范式1NF 表的每一个字段都是最小单元，不可再分。 实践：数据库设计画ER图时对实体做好分析可满足1NF。 2NF 满足1NF，且表中的字段必须完全依赖于全部主键而非部分主键。 实践：一张表只设一个主键，若该表满足1NF，则一定满足2NF。 3NF 满足2NF，且非主键外的所有字段必须互不依赖，即消除了依赖传递，例如：主键决定字段A，字段A决定字段B，则主键可决定字段B，这就是依赖传递。 实践：若">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-01T12:55:36.000Z">
-<meta property="article:modified_time" content="2021-03-13T10:57:25.688Z">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/int.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/number.png">
+<meta property="article:published_time" content="2021-03-14T02:55:15.000Z">
+<meta property="article:modified_time" content="2021-03-14T08:49:33.789Z">
 <meta property="article:author" content="LSJ">
-<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/int.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://thmasterplan.cn/JavaWeb/Cookie-Session/index.html">
+  <link rel="canonical" href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/index.html">
   
     <link rel="alternate" href="/atom.xml" title="TheMasterplan" type="application/atom+xml">
   
@@ -219,21 +222,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#会话"><span class="toc-number">1.</span> <span class="toc-text">会话</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cookie"><span class="toc-number">2.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Session"><span class="toc-number">3.</span> <span class="toc-text">Session</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#范式"><span class="toc-number">1.</span> <span class="toc-text">范式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库结构设计流程"><span class="toc-number">2.</span> <span class="toc-text">数据库结构设计流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范式与反范式的优缺点"><span class="toc-number">3.</span> <span class="toc-text">范式与反范式的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#范式化设计"><span class="toc-number">3.1.</span> <span class="toc-text">范式化设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">3.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">3.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反范式化设计"><span class="toc-number">3.2.</span> <span class="toc-text">反范式化设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#物理设计-表结构设计"><span class="toc-number">4.</span> <span class="toc-text">物理设计(表结构设计)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型选择"><span class="toc-number">4.1.</span> <span class="toc-text">数据类型选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整数类型"><span class="toc-number">4.2.</span> <span class="toc-text">整数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实数类型"><span class="toc-number">4.3.</span> <span class="toc-text">实数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符类型"><span class="toc-number">4.4.</span> <span class="toc-text">字符类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期类型"><span class="toc-number">4.5.</span> <span class="toc-text">日期类型</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Cookie-Session" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-数据库结构优化" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Cookie_Session
+      数据库结构优化
     </h1>
   
 
@@ -241,29 +244,29 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/JavaWeb/Cookie-Session/" class="article-date">
-	  <time datetime="2020-04-01T12:55:36.000Z" itemprop="datePublished">2020-04-01</time>
+	<a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/" class="article-date">
+	  <time datetime="2021-03-14T02:55:15.000Z" itemprop="datePublished">2021-03-14</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JavaWeb/" rel="tag">JavaWeb</a>
+	<a class="article-tag-link" href="/tags/MySQL/" rel="tag">MySQL</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/JavaWeb/Cookie-Session/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.2k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.6k(words)</span>
 	
 	
 
@@ -271,142 +274,87 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><a href="#会话">会话</a></p>
-<p><a href="#Cookie">Cookie</a></p>
-<p><a href="#Session">Session</a></p>
-<h1 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h1><p>会话机制：会话机制的目的是帮助服务器记住客户端的状态，是为了唯一<strong>标识一个用户并记录其状态</strong>。由于HTTP协议是无状态的，也就是说浏览器的每一次请求都是独立的，服务器并不知道这个浏览器之前是否请求过，这才有了会话机制。</p>
-<h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><ul>
-<li><p>概念：客户端会话技术，将数据保存到客户端。<code>javax.servlet.http.Cookie</code>(类)。</p>
+        <h1 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h1><p><strong>1NF</strong></p>
+<p><strong>表的每一个字段都是最小单元，不可再分</strong>。</p>
+<p>实践：数据库设计画ER图时对实体做好分析可满足1NF。</p>
+<p><strong>2NF</strong></p>
+<p><strong>满足1NF，且表中的字段必须完全依赖于全部主键而非部分主键</strong>。</p>
+<p>实践：一张表只设一个主键，若该表满足1NF，则一定满足2NF。</p>
+<p><strong>3NF</strong></p>
+<p><strong>满足2NF，且非主键外的所有字段必须互不依赖，即消除了依赖传递</strong>，例如：主键决定字段A，字段A决定字段B，则主键可决定字段B，这就是依赖传递。</p>
+<p>实践：若存在相互依赖的字段，则它们应单独在一张表中，比如前面例子中字段A, B应单独在一张表中。</p>
+<p><strong>BCNF</strong></p>
+<p><strong>满足3NF，且每张表中只有一个唯一索引（一般为主键）。</strong></p>
+<p>实践：MySQL中一般不用。以user表为例，假设该user表有手机号tel字段，每个人的手机号都是唯一的，显然用手机号做主键是不合适的，此时一般还是需要自定义一个自增id。这里就有两个唯一索引了，不满足BCNF。那么为了满足BCNF，我们需要单独建表存储一个id号和手机号tel字段，这样查询性能会降低。</p>
+<p><strong>4NF</strong></p>
+<p><strong>满足3NF，且消除表中字段的多值依赖。</strong></p>
+<h1 id="数据库结构设计流程"><a href="#数据库结构设计流程" class="headerlink" title="数据库结构设计流程"></a>数据库结构设计流程</h1><ol>
+<li><strong>需求分析</strong>：全面了解产品设计的存储需求，数据处理需求，数据的安全性和完整性。</li>
+<li><strong>逻辑设计</strong>：设计数据的逻辑存储结构。数据实体之间的逻辑关系，解决数据冗余和数据维护异常。</li>
+<li><strong>物理设计</strong>：根据所使用的数据库特点进行表结构设计。</li>
+<li><strong>维护优化</strong>：根据实际情况对索引、存储结构等优化。</li>
+</ol>
+<p>注意：有时候完全符合范式化的设计并不能得到良好的SQL查询性能，因此需要反范式化设计。即为了性能和读取效率而适当对范式进行违反，允许存在少量的数据冗余（空间换时间）。在进行数据库逻辑设计时，应当考虑以后如何使用表，可能有哪些SQL语句，进而适当进行反范式化设计。</p>
+<h1 id="范式与反范式的优缺点"><a href="#范式与反范式的优缺点" class="headerlink" title="范式与反范式的优缺点"></a>范式与反范式的优缺点</h1><h2 id="范式化设计"><a href="#范式化设计" class="headerlink" title="范式化设计"></a>范式化设计</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>减少数据冗余，节约存储空间。</li>
+<li>消除插入、更新和删除异常。若表中的某个实体依赖于另一个实体而存在：<ul>
+<li>插入异常：那么插入数据时就会出现异常。</li>
+<li>更新异常：若更改表中某个实体的某一属性时，需要对多行进行更新。</li>
+<li>删除异常：若删除表中的某一实体则会导致其他实体的存在性出现问题。</li>
+</ul>
 </li>
-<li><p>主要作用：<strong>避免多次登录验证</strong>，一次登录后服务器便使用cookie验证身份。cookie的作用就像是身份凭证。</p>
-</li>
-<li><p>使用</p>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>范式化设计的表通常更多，查询需要对多个表进行关联。</li>
+<li>更难进行索引优化。</li>
+</ul>
+<h2 id="反范式化设计"><a href="#反范式化设计" class="headerlink" title="反范式化设计"></a>反范式化设计</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>可以减少表的关联，最差也是对聚簇索引的全表扫描（顺序IO），而范式化设计中对表的关联操作会用到临时表，性能差。</li>
+<li>可以更好的进行索引优化，比如使用覆盖索引。</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>存在数据冗余及数据维护异常。</li>
+<li>对数据的修改需要更多的成本。</li>
+</ul>
+<h1 id="物理设计-表结构设计"><a href="#物理设计-表结构设计" class="headerlink" title="物理设计(表结构设计)"></a>物理设计(表结构设计)</h1><p>主要包括：</p>
 <ul>
-<li><p>创建Cookie对象，绑定数据：<code>new Cookie(String name, String value)</code></p>
-</li>
-<li><p>发送Cookie对象到客户端：<code>response.addCookie(Cookie cookie)</code></p>
-</li>
-<li><p>获取Cookie，拿到数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies &#x3D; request.getCookies();</span><br><span class="line">if(cookies !&#x3D; null)&#123;</span><br><span class="line">   for(Cookie c : cookies)&#123;</span><br><span class="line">      String name &#x3D; c.getName();</span><br><span class="line">      String val &#x3D; c.getValue();</span><br><span class="line">      &#x2F;&#x2F;..........</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>定义数据库、表及字段的命名规范。</li>
+<li>为每张表选择合适的存储引擎。</li>
+<li>为表中的字段选择合适的数据类型。</li>
+<li>建立数据库结构。</li>
 </ul>
-</li>
-<li><p>原理</p>
+<h2 id="数据类型选择"><a href="#数据类型选择" class="headerlink" title="数据类型选择"></a>数据类型选择</h2><ul>
+<li>当一个列可以选择多种数据类型时，应该优先考虑数字类型，其次是日期或二进制类型，最后才是字符类型。这是因为字符串的比较比其他几种类型更慢。</li>
+<li>应该尽可能使数据类型占用的空间较小。数据类型越小，一页能够存储的行记录越多，磁盘IO越小，查找也越快。</li>
+</ul>
+<h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><p><img src="int.png" alt="int类型"></p>
+<h2 id="实数类型"><a href="#实数类型" class="headerlink" title="实数类型"></a>实数类型</h2><p>float和double并不完全精确，decimal是精确的，但是decimal占用存储空间会多一点。decimal应用于对数据精度要求高的场景，如价格。</p>
+<p><img src="number.png" alt="实数类型"></p>
+<h2 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h2><ul>
+<li><p>varchar：用于存储变长字符串，定义时以字符个数为单位，只占用必要的存储空间。当定义长度小于255时，行记录中只占用一个额外字节记录字符串长度，当大于255时则要占用两个额外字节记录字符串长度。适用场景：</p>
 <ul>
-<li>客户端发送请求-&gt;</li>
-<li>服务器创建Cookie并发送到客户端 -&gt; </li>
-<li>http响应头增加Set-Cookie：name=value字段 -&gt;</li>
-<li>客户端存储cookie数据 -&gt; </li>
-<li>客户端下一次请求http请求头设置cookie -&gt; </li>
-<li>服务器验证</li>
+<li>字符串的最大长度比平均长度大很多的场景。</li>
+<li>字符串很少被更新。因为varchar是变长的，经常更新字符串可能会导致频繁的页分裂。</li>
+<li>需要使用变长字符集如UTF-8时。</li>
 </ul>
 </li>
-<li><p>Tips</p>
+<li><p>char：定长字符串，最大宽度为255个字符。字符串存储在char类型的列中会自动删除末尾的空格。适用场景：</p>
 <ul>
-<li><p>一次可以创建多个Cookie并发送</p>
+<li>适合存储长度都差不多的字符串，例如MD5值、手机号等。</li>
+<li>短字符串。</li>
+<li>适合存储经常更新的字符串。</li>
+</ul>
 </li>
-<li><p>Cookie在浏览器中存活时间</p>
+</ul>
+<h2 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h2><ul>
+<li>datetime：以yyyy-mm-dd hh:mm:ss格式存储日期时间，占8个字节，<strong>与时区无关</strong>，时间范围从1000-01-01 00:00:00到9999-12-31 23:59:59。如果需要保存微秒，则需要指定宽度，最大为6，如datetime(6)。</li>
+<li>timestamp：存储了从格林尼治时间1970-01-01到当前时间的秒数，以yyyy-mm-dd hh:mm:ss[.fraction]格式显示，占用4个字节，时间范围到2038-01-19。timestamp类型显示依赖于所指定的时区。另外，在行数据更新时，timestamp列可以自动更新。</li>
+<li>date：只存储日期部分。占用3个字节，时间范围从1000-01-01到9999-12-31。</li>
+<li>time：只存储时间部分。</li>
+</ul>
+<p><strong>注意事项：</strong></p>
 <ul>
-<li>默认情况下，浏览器关闭后Cookie数据销毁</li>
-<li><strong>持久化存储</strong>：<code>cookie.setMaxAge(int seconds)</code><ul>
-<li>正数：将cookie数据写到硬盘的文件中，seconds时间之后文件被删除。</li>
-<li>负数：默认值</li>
-<li>0：删除已经存在于客户端的cookie数据</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Tomcat8之后Cookie支持中文</p>
-</li>
-<li><p><strong>Cookie共享问题</strong></p>
-<ul>
-<li><p>假设在一个Tomcat服务器中部署了多个web项目：</p>
-<ul>
-<li><p>默认情况下不同web项目的cookie不能共享</p>
-</li>
-<li><p><code>cookie.setPath(String path)</code>：设置Cookie的获取范围。默认情况下，设置当前的虚拟目录。如果要共享，可将path设置为”/“。</p>
-</li>
-</ul>
-</li>
-<li><p>服务器集群共享Cookie：</p>
-<ul>
-<li><code>setDomain(String path)</code>：设置一级域名</li>
-<li>例如<code>setDomain(&quot;.baidu.com&quot;)</code>，则tieba.baidu.com和news.baidu.com中cookie可以共享</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h1><ul>
-<li><p>概念：服务器端会话技术，在<strong>一次会话的多次请求间共享数据</strong>，将数据保存在服务器端的对象中。<code>javax.servlet.http.HttpSession</code>（接口）。</p>
-</li>
-<li><p>主要作用</p>
-<ul>
-<li>用于存储一次会话的多次请求的数据</li>
-<li>可以存储任意类型、任意大小的数据</li>
-</ul>
-</li>
-<li><p>使用</p>
-<ul>
-<li><p>获取session对象：<code>HttpSession session = request.getSession();</code></p>
-</li>
-<li><p>存储数据：<code>session.setAttribute(&quot;name&quot;, Object);</code></p>
-</li>
-<li><p>获取数据：<code>session.getAttribute(&quot;name&quot;);</code></p>
-</li>
-</ul>
-</li>
-<li><p>原理：<strong>Session通过cookie实现，若客户端不支持cookie，则通过URL回写实现</strong>，服务器通过Cookie确保多次请求获取的Session对象为同一个。（URL回写是指： 每次响应报文中都添加JSESSIONID键值对，这样客户端每次请求就可以携带上该键值对）</p>
-</li>
-<li><ul>
-<li>客户端发送请求-&gt;</li>
-</ul>
-</li>
-<li><p>服务端创建Session对象，若没有Cookie，则http响应头增加Set-Cookie：JSESSIONID=sessionID字段 -&gt;</p>
-<ul>
-<li>客户端存储cookie数据 -&gt; </li>
-<li>客户端下一次请求http请求头设置cookie -&gt; </li>
-<li>服务器验证sessionID</li>
-</ul>
-</li>
-<li><p>Tips</p>
-<ul>
-<li><p>浏览器关闭，服务器不关闭，浏览器重启，两次获取的session对象是否相同？</p>
-<ul>
-<li><p>默认情况下不是。</p>
-</li>
-<li><p>为避免这种情况，可手动设置持久化存储JSESSIONID</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie &#x3D; new Cookie(&quot;JSESSIONID&quot;, session.getId());</span><br><span class="line">cookie.setMaxAge(60*60);&#x2F;&#x2F;持久化存储cookie</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>浏览器不关闭，服务器关闭，服务器开启，两次获取的session对象是否相同？</p>
-<ul>
-<li>新对象地址与原对象不同</li>
-<li>为避免服务器重启数据丢失，采用<strong>session的钝化和活化技术</strong>。<ul>
-<li>session钝化：在服务器正常关闭前，将session对象序列化到硬盘上</li>
-<li>session活化：服务器启动后，将session文件转化为内存中的session对象，删除文件</li>
-<li>Tomcat已经集成了钝化与活化技术，正常关闭tomcat后，会在work工作目录的项目文件夹下生成一个SESSIONS.ser文件</li>
-<li>session钝化与活化不仅仅是服务器关闭时发生，当在线用户过多时，大量session对象存在于服务器内存中。为减轻服务器内存负担，当一个session长时间没有被访问，也会被序列号到磁盘上（注意<strong>session中存储的对象所在的类必须要实现序列化接口</strong>）。可在tomcat的<code>conf/context.xml</code>中配置。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>session何时被销毁？</p>
-<ul>
-<li><p>服务器关闭</p>
-</li>
-<li><p>session对象调用invalidate()方法</p>
-</li>
-<li><p>session默认失效时间为30分钟(可在tomcat的conf/web.xml中配置)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;&#x2F;session-timeout&gt;</span><br><span class="line">    &lt;&#x2F;session-config&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>不要使用字符串类型存储日期时间数据。因为使用日期类型占用空间比字符串类型更小，日期时间类型在查找过滤时比字符串比较更快，MySQL对日期时间类型配套了丰富的处理函数。</li>
 </ul>
 
       
@@ -418,7 +366,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://thmasterplan.cn/JavaWeb/Cookie-Session/" title="Cookie_Session" target="_blank" rel="external">Blog of TheMasterplan</a>
+      <a href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96/" title="数据库结构优化" target="_blank" rel="external">Blog of TheMasterplan</a>
     </li>
 
     
@@ -467,13 +415,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/JavaWeb/Filter-Listener/" title="Filter_Listener"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/JavaWeb/Servlet/" title="Servlet"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/" title="MySQL事务"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
