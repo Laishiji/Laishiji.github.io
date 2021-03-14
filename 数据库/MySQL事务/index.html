@@ -25,14 +25,14 @@
 <meta property="og:site_name" content="TheMasterplan">
 <meta property="og:description" content="ACID 原子性（Atomicity）：事务必须被视为不可分割的最小工作单元。事务中的所有操作要么全部提交成功，要么全部失败回滚。  一致性（Consistency）：数据库在事务执行前后都保持一致性状态，比如参与转账的两个账户的总余额在转账前后是不变的。  隔离性（Isolation）：一个事务所做的修改在最终提交以前，对其它事务是不可见的。  持久性（Durability）：一旦事务提交，则其">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/rx0.png">
+<meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/trx0.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/redo_log.png">
 <meta property="article:published_time" content="2021-02-15T14:02:49.000Z">
-<meta property="article:modified_time" content="2021-03-14T14:26:13.181Z">
+<meta property="article:modified_time" content="2021-03-14T15:15:29.553Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/rx0.png">
+<meta name="twitter:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/trx0.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1/index.html">
   
@@ -293,7 +293,7 @@
 <li><strong>提交（committed）</strong>：数据从buffer pool刷新到磁盘完毕。</li>
 </ul>
 <p>事务状态转换图如下：</p>
-<p><img src="rx0.png" alt=""></p>
+<p><img src="trx0.png" alt=""></p>
 <h1 id="事务的实现"><a href="#事务的实现" class="headerlink" title="事务的实现"></a>事务的实现</h1><h2 id="redo日志"><a href="#redo日志" class="headerlink" title="redo日志"></a>redo日志</h2><p>有时候我们只修改了一行记录或者一个字段，而由于InnoDB以页为单位存储数据，一页的大小为16KB，如果每次更改都立即刷新缓存页到磁盘，以此来保证持久性，那么这个性能开销就太大了。InnoDB使用redo log记录修改的操作，在事务提交时只刷新redo log到磁盘，大大减小了开销。</p>
 <h3 id="redo-log格式"><a href="#redo-log格式" class="headerlink" title="redo log格式"></a>redo log格式</h3><p>redo log通用格式：</p>
 <p><img src="redo_log.png" alt=""></p>
