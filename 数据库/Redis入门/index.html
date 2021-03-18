@@ -26,7 +26,7 @@
 <meta property="og:description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String)  哈希(Hash)  列表(List)  集合(Set)  有序集合(ZSet)   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式  配置文件  SAVE&#x2F;BGSAVE  FLUSHALL  复制">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-13T14:04:39.000Z">
-<meta property="article:modified_time" content="2020-11-24T11:30:49.389Z">
+<meta property="article:modified_time" content="2021-03-18T11:54:58.876Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -461,14 +461,14 @@
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串类型能存储任何形式的字符串，包括二进制数据，一个字符串的最大容量为512MB。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SETGET&#x2F;DEL&#x2F;APPEND&#x2F;STRLEN</span><br><span class="line">INCR&#x2F;DECR&#x2F;INCRBY&#x2F;DECRBY：整数的加减。</span><br><span class="line">GETRANGE&#x2F;SETRANGE key 0 5：获取&#x2F;设置字符串下标0到5的片段。</span><br><span class="line">SETEX&#x2F;SETNX：赋值的同时设置过期时间。</span><br><span class="line">MSET&#x2F;MGET&#x2F;MSETNX：同时获取&#x2F;设置多个键值对。</span><br><span class="line">GETSET：先GET再SET。</span><br></pre></td></tr></table></figure>
 <h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>散列类型是字段和字段值的映射，字段值只能是字符串，一个散列类型最多支持2³²-1个字段。</p>
-<p>散列类型适合存储对象。常用命令如下：</p>
+<p><strong>散列类型适合存储对象</strong>。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HSET&#x2F;HGET&#x2F;HMSET&#x2F;HMGET&#x2F;HGETALL&#x2F;HDEL</span><br><span class="line">HLEN：获取哈希表键值对个数。</span><br><span class="line">HEXISTS</span><br><span class="line">HKEYS&#x2F;HVALS</span><br><span class="line">HINCRBY&#x2F;HINCYBYFLOAT</span><br><span class="line">HSETNX</span><br></pre></td></tr></table></figure>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表类型内部实现为一个双向链表，常用操作是向两端添加元素或列表的一个片段，也可以把列表当作队列使用，一个列表类型最多支持2³²-1个元素。</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>列表类型<strong>内部实现为一个双向链表</strong>，常用操作是向两端添加元素或列表的一个片段，也可以把列表当作队列使用，一个列表类型最多支持2³²-1个元素。</p>
 <p>使用列表的代价是通过索引访问元素比较慢。</p>
 <p>另外可以通过<code>LRANGE</code>命令，就是从某个元素开始读取多少个元素，可以基于List实现分页查询，这个很棒的一个功能，基于Redis实现简单的高性能分页，可以做类似微博那种下拉不断分页的东西（一页一页的往下走），性能高。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LPUSH&#x2F;RPUSH&#x2F;LRANGE&#x2F;LPOP&#x2F;RPOP</span><br><span class="line">LINDEX&#x2F;LLEN&#x2F;LREM</span><br><span class="line">LTRIM key startindex endindex</span><br><span class="line">RPOPLPUSH 源列表 目的列表</span><br><span class="line">LSET key index value</span><br><span class="line">LINSERT key before&#x2F;after value</span><br></pre></td></tr></table></figure>
 <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合对外提供的功能与列表类似，特殊之处在于集合是可以<strong>自动排重</strong>的。当你需要存储一个列表数据，又不希望出现重复数据时，集合是一个很好的选择。多个集合之间可以进行并集、交集和差集运算。</p>
-<p>集合在Redis内部是使用值为空的哈希表实现的。</p>
+<p>集合在Redis内部是<strong>使用值为空的哈希表实现</strong>的。集合是无序的。</p>
 <p>比如：在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis可以非常方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SADD&#x2F;SMEMBERS&#x2F;SISMEMBER</span><br><span class="line">SCARD</span><br><span class="line">SREM</span><br><span class="line">SRANDMEMBER</span><br><span class="line">SPOP</span><br><span class="line">SMOVE</span><br><span class="line">SDIFF&#x2F;SINTER&#x2F;SUNION：差集&#x2F;交集&#x2F;并集。</span><br></pre></td></tr></table></figure>
 <h2 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h2><p>和集合相比，有序集合增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。</p>

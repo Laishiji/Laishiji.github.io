@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
 <meta property="og:image" content="http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/Exception.png">
 <meta property="article:published_time" content="2020-04-08T14:47:15.000Z">
-<meta property="article:modified_time" content="2021-03-10T05:04:17.398Z">
+<meta property="article:modified_time" content="2021-03-18T08:03:17.962Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -266,7 +266,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/Java/Java%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.6k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.8k(words)</span>
 	
 	
 
@@ -489,7 +489,7 @@
 <li>基本类型 -&gt; String：基本类型值+””</li>
 <li>String -&gt; 基本类型：使用包装类的静态方法<code>parseXXX(&quot;str&quot;)</code><ul>
 <li>Integer：<code>static int parseInt(String s)</code></li>
-<li>Double：<code>static double parseDouble(String s)</code></li>
+<li>Double：<code>static double parseDouble(String s)</code>。注意，double类型的数相加时会有精度缺失的问题，应该使用BigDecimal类。而BigDecimal(double val)构造依然存在精度缺失问题，应该使用BigDecimal(String val)构造，即将double类型转换为字符串计算。</li>
 </ul>
 </li>
 </ul>
@@ -611,6 +611,12 @@
 <ul>
 <li>继承自Exception：自定义异常为编译期异常，必须处理。</li>
 <li>继承自RuntimeException：运行期异常无需处理。</li>
+</ul>
+</li>
+<li><p>不会执行finally语句块的情况：</p>
+<ul>
+<li>在finally语句块之前执行了System.exit()方法，退出了虚拟机。</li>
+<li>finally语句块位于守护线程中，当所有非守护线程都执行完毕，那么虚拟机会kill掉守护线程，因此不会执行。</li>
 </ul>
 </li>
 </ul>

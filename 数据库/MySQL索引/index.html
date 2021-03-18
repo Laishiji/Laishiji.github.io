@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/Bplus-tree.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%B4%A2%E5%BC%95/exampledata.jpg">
 <meta property="article:published_time" content="2021-01-29T14:48:41.000Z">
-<meta property="article:modified_time" content="2021-03-14T02:36:39.167Z">
+<meta property="article:modified_time" content="2021-03-14T15:36:32.279Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -310,7 +310,7 @@
 <p><code>(c1, c2)</code>就是一个联合索引，其本质上也是一个二级索引，只会建立一棵B+树</p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li>每当为某个表创建一个<code>B+</code>树索引（聚簇索引不是人为创建的，默认就有）的时候，都会为这个索引创建一个<code>根节点</code>页面。最开始表中没有数据的时候，每个<code>B+</code>树索引对应的<code>根节点</code>中既没有用户记录，也没有目录项记录。随后向表中插入用户记录时，先把用户记录存储到这个<code>根节点</code>中。当<code>根节点</code>中的可用空间用完时继续插入记录，此时会将<code>根节点</code>中的所有记录复制到一个新分配的页，比如<code>页a</code>中，然后对这个新页进行<code>页分裂</code>的操作，得到另一个新页，比如<code>页b</code>。这时新插入的记录根据键值（也就是聚簇索引中的主键值，二级索引中对应的索引列的值）的大小就会被分配到<code>页a</code>或者<code>页b</code>中，而<code>根节点</code>便升级为存储目录项记录的页。</li>
-<li>非叶子节点中目录项记录时唯一的，如果用户创建的二级索引不是唯一索引，那么一个非叶子节点中岂不是可能出现相同的记录？因此对于二级索引，目录项记录是由索引列+主键列构成的，保证了一条记录的唯一性。</li>
+<li>非叶子节点中目录项记录是唯一的，如果用户创建的二级索引不是唯一索引，那么一个非叶子节点中岂不是可能出现相同的记录？因此对于二级索引，目录项记录是由索引列+主键列构成的，保证了一条记录的唯一性。</li>
 <li>一个页面最少存储2条记录。</li>
 </ol>
 <h2 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h2><p>Hash索引查询效率高于B+树索引，但其缺点也非常明显：</p>
