@@ -26,7 +26,7 @@
 <meta property="og:description" content="简介  启动Redis  基础命令  管理   数据类型  字符串(String)  哈希(Hash)  列表(List)  集合(Set)  有序集合(ZSet)   Redis进阶  事务  命令  事务中的错误处理    过期时间  命令  实现缓存    排序  管道   持久化  RDB(Redis DataBase)方式  配置文件  SAVE&#x2F;BGSAVE  FLUSHALL  复制">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-13T14:04:39.000Z">
-<meta property="article:modified_time" content="2021-03-18T11:54:58.876Z">
+<meta property="article:modified_time" content="2021-03-19T09:30:08.979Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 5.7k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 6.3k(words)</span>
 	
 	
 
@@ -471,7 +471,7 @@
 <p>集合在Redis内部是<strong>使用值为空的哈希表实现</strong>的。集合是无序的。</p>
 <p>比如：在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis可以非常方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SADD&#x2F;SMEMBERS&#x2F;SISMEMBER</span><br><span class="line">SCARD</span><br><span class="line">SREM</span><br><span class="line">SRANDMEMBER</span><br><span class="line">SPOP</span><br><span class="line">SMOVE</span><br><span class="line">SDIFF&#x2F;SINTER&#x2F;SUNION：差集&#x2F;交集&#x2F;并集。</span><br></pre></td></tr></table></figure>
-<h2 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h2><p>和集合相比，有序集合增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。</p>
+<h2 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h2><p>和集合相比，有序集合增加了一个<strong>权重参数score</strong>，使得集合中的元素能够按score进行有序排列。</p>
 <p>举例： 在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息，适合使用有序集合存储。常用命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZADD&#x2F;ZRANGE</span><br><span class="line">ZRANGEBYSCORE</span><br><span class="line">ZREM key e [e...]：删除一个或多个元素。</span><br><span class="line">ZCARD：获得集合中元素的数量</span><br><span class="line">ZCOUNT key min max：获得指定分数范围的元素个数。</span><br><span class="line">ZREVRANK</span><br><span class="line">ZREVRANGE</span><br><span class="line">ZREVRANGEBYSCORE</span><br></pre></td></tr></table></figure>
 <h1 id="Redis进阶"><a href="#Redis进阶" class="headerlink" title="Redis进阶"></a>Redis进阶</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>如下表所示：</p>
@@ -680,7 +680,32 @@
 <p>Redis 集群使用<strong>数据分片（sharding）</strong>而非一致性哈希（consistency hashing）来实现 。</p>
 <p>详细配置过程与原理见：<a href="http://doc.redisfans.com/topic/cluster-tutorial.html" target="_blank" rel="noopener">Redis集群教程</a>。</p>
 <h1 id="Spring-Data-Redis"><a href="#Spring-Data-Redis" class="headerlink" title="Spring Data Redis"></a>Spring Data Redis</h1><p>参考：<a href="https://docs.spring.io/spring-data/redis/docs/current/reference/html/#redis" target="_blank" rel="noopener">Spring官方文档</a>.</p>
-<h1 id="常见面试问题"><a href="#常见面试问题" class="headerlink" title="常见面试问题"></a>常见面试问题</h1><p>参考：<a href="http://dreamcat.ink/2020/03/31/ge-ren-tu-xie-xi-lie-zong-jie-redis/#Redis%E4%BA%8B%E5%8A%A1" target="_blank" rel="noopener">DreamCats</a>.</p>
+<h1 id="常见面试问题"><a href="#常见面试问题" class="headerlink" title="常见面试问题"></a>常见面试问题</h1><ol>
+<li><p>从海量key（比如1亿）中查询出某一固定前缀的key，如何实现？</p>
+<ol>
+<li>使用<code>KEYS [pattern]</code>。会一次性返回所有匹配的key，若返回结果数量过大，对内存消耗很大，会阻塞服务器，影响线上业务。</li>
+<li>使用<code>SCAN</code>命令，每次执行只返回少量元素，因此这些命令可用于生产环境。增量式迭代的缺点：迭代过程中键可能会被修改。<code>SCAN</code>是基于游标的增量式迭代器，每次被调用之后， 都会向用户返回一个新的游标， 用户在下次迭代时需要使用这个新游标作为 SCAN 命令的游标参数， 以此来延续之前的迭代过程。</li>
+</ol>
+</li>
+<li><p>如果通过Redis实现分布式锁？分布式锁需要解决的问题有：</p>
+<ul>
+<li>互斥性：同一时间只能有一个客户端获取锁。</li>
+<li>安全性：锁只能被持有锁的客户端删除，不能被其他客户端删除。</li>
+<li>死锁：获取锁的客户端在释放锁之前宕机了。</li>
+</ul>
+<p>使用<code>SETNX key value</code>：将 <code>key</code> 的值设为 <code>value</code> ，当且仅当 <code>key</code> 不存在。若给定的 <code>key</code> 已经存在，则 <code>SETNX</code>不做任何动作。</p>
+<p>该种方式的本质就是使用互斥量实现锁，客户端在访问资源之前先使用<code>SETNX lock val</code>，若返回值为1则设置成功，表示获取锁成功，现阶段没有其他客户端在访问资源，当该客户端访问资源完毕时，需要<code>DEL lock</code>删除锁。若访问资源时返回值为0，则表示已经有其他客户端正在访问资源，需要等待。</p>
+<p>如何解决互斥量长期有效的问题？比如当某个客户端持有锁后宕机了怎么办？</p>
+<p>方案一：获取锁后立马使用<code>EXPIRE</code>设置key的过期时间。该种方案的缺点是<code>SETNX</code>和<code>EXPIRE</code>合在一起不是原子的。</p>
+<p>方案二：Redis2.6.1版本之后，可以使用<code>SET key value [EX seconds][PX milliseconds][NX|XX]</code>原子的实现<code>SETNX</code>与<code>EXPIRE</code>。</p>
+<p>注意事项：大量key同时过期怎么办？清除大量key会出现暂时的卡顿现象，解决方案是在设置key的过期时间的时候，给每个key加上随机值。</p>
+</li>
+<li><p>如何实现异步队列？</p>
+</li>
+<li><p>缓存穿透？</p>
+</li>
+</ol>
+<p>参考：<a href="http://dreamcat.ink/2020/03/31/ge-ren-tu-xie-xi-lie-zong-jie-redis/#Redis%E4%BA%8B%E5%8A%A1" target="_blank" rel="noopener">DreamCats</a>.</p>
 
       
     </div>

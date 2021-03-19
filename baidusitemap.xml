@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/</loc>
+    <lastmod>2021-03-19</lastmod>
+  </url>  <url>
     <loc>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2021-03-18</lastmod>
+    <lastmod>2021-03-19</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/Java/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2021-03-18</lastmod>
@@ -45,9 +48,6 @@
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/MyBatis/</loc>
     <lastmod>2021-01-27</lastmod>
-  </url>  <url>
-    <loc>http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/</loc>
-    <lastmod>2021-01-22</lastmod>
   </url>  <url>
     <loc>http://thmasterplan.cn/JavaWeb/Spring%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2021-01-22</lastmod>

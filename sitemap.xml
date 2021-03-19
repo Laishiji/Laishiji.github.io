@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thmasterplan.cn/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593/MySQL%25E9%2594%2581/</loc>
+    
+    <lastmod>2021-03-19T09:46:09.776Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thmasterplan.cn/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593/Redis%25E5%2585%25A5%25E9%2597%25A8/</loc>
     
-    <lastmod>2021-03-18T11:54:58.876Z</lastmod>
+    <lastmod>2021-03-19T09:30:08.979Z</lastmod>
     
   </url>
   
@@ -103,13 +110,6 @@
     <loc>http://thmasterplan.cn/JavaWeb/MyBatis/</loc>
     
     <lastmod>2021-01-27T08:59:40.536Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thmasterplan.cn/%25E6%2595%25B0%25E6%258D%25AE%25E5%25BA%2593/MySQL%25E9%2594%2581/</loc>
-    
-    <lastmod>2021-01-22T14:52:38.196Z</lastmod>
     
   </url>
   

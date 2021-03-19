@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/next-key-lock3.png">
 <meta property="og:image" content="http://thmasterplan.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E9%94%81/next-key-lock4.png">
 <meta property="article:published_time" content="2020-11-24T11:05:46.000Z">
-<meta property="article:modified_time" content="2021-01-22T14:52:38.196Z">
+<meta property="article:modified_time" content="2021-03-19T09:46:09.776Z">
 <meta property="article:author" content="LSJ">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -393,8 +393,8 @@
 <p>在另一会话中执行<code>INSERT INTO z SELECT 11,11;</code>，那么显然可以插入成功，此时再次在事务T₁中执行<code>SELECT * FROM z WHERE b&gt;3 LOCK IN SHARE MODE;</code>，返回的结果比第一次多了一行数据(11,11)，这就是幻读问题（也是不可重复读问题）。而若隔离级别为RR，对于b而言锁定的是[3,+∞]，在另一个事务中根本无法插入数据。</p>
 <p><strong>InnoDB的RC和RR隔离级别都通过一致性非锁定读（乐观锁机制）实现，RR是InnoDB的默认隔离级别。</strong></p>
 <p><strong>在RC级别下，由于事务读的是最新版本的快照版本，有不可重复读和幻读问题。若改用悲观锁，由于RC级别采用Record Lock算法，因此只能解决读取一行情况下的不可重复读问题，若是读取多行依然会前后不一致，即不可重复读问题。至于幻读问题更是无法解决了。</strong></p>
-<p><strong>在RR级别下，事务A读取数据行DATA，其他事务可以修改行DATA，但事务A读的是其自身开始时行DATA的快照版本，不会有不可重复读问题和幻读问题。若改用悲观锁，那么数据的一致性比使用乐观锁时更高，由于采用Next-Key Lock算法锁住了DATA及其周围的数据，其它事务甚至根本不能修改DATA及其范围内的数据而会被阻塞，更不会有不可重复读和幻读问题了。</strong></p>
-<p>总结来说，<strong>InnoDB默认使用乐观锁机制，通过多版本并发控制（MVCC）解决了幻读问题；而人为使用悲观锁时，通过Next-Key Lock算法解决了幻读问题，并且相对乐观锁机制提高了数据一致性。</strong></p>
+<p><strong>在RR级别下，事务A读取数据行DATA，其他事务可以修改行DATA，但事务A读的是其自身开始时行DATA的快照版本，不会有不可重复读问题和幻读问题。若改用悲观锁，由于采用Next-Key Lock算法锁住了DATA及其周围的数据，因此只能解决这一部分锁住数据的不可重复读和幻读问题。</strong></p>
+<p>总结来说，<strong>InnoDB默认使用乐观锁机制，通过多版本并发控制（MVCC）解决了幻读问题；而人为使用悲观锁时，通过Next-Key Lock算法解决了部分幻读问题。</strong></p>
 <h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>当多个事务在同一资源上相互占用，并请求锁定对方占用的资源时，产生死锁。例如如下两个事务同时处理stock_price表并同时执行完第一条更新语句：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 事务1</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">45</span> <span class="keyword">WHERE</span> stock_id=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">20</span> <span class="keyword">WHERE</span> stock_id=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 事务2</span></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">100</span> <span class="keyword">WHERE</span> stock_id=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> stock_price <span class="keyword">SET</span> <span class="keyword">close</span>=<span class="number">10</span> <span class="keyword">WHERE</span> stock_id=<span class="number">4</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>死锁检测</strong>：超时机制，超时则回滚；等待图（wait-for graph）方式，InnoDB就采用这种方式。等待图是指：数据库保存锁的信息链表和事务等待链表，通过上述链表构造一张图，若存在回路就代表存在死锁。</p>
